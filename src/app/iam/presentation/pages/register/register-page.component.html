@@ -1,0 +1,91 @@
+<section class="auth-page">
+  <article class="auth-card">
+    <app-auth-visual-panel />
+
+    <div class="auth-card__content">
+      <p class="eyebrow">
+        <span aria-hidden="true"></span>
+        {{ 'auth.registerEyebrow' | translate }}
+      </p>
+
+      <h1>{{ 'auth.registerTitle' | translate }}</h1>
+
+      <p class="subtitle">
+        {{ 'auth.registerSubtitle' | translate }}
+      </p>
+
+      @if (selectedLandingPlan) {
+        <section class="selected-plan-summary">
+          <span>{{ 'billing.selectedPlan' | translate }}</span>
+          <strong>{{ selectedLandingPlan.name }}</strong>
+          <small>S/ {{ selectedLandingPlan.price }} / {{ 'billing.month' | translate }}</small>
+        </section>
+      }
+
+      <form class="auth-form" (ngSubmit)="onSubmit()">
+        <label>
+          <span class="field-label">
+            <svg lucideUserRound aria-hidden="true"></svg>
+            {{ 'auth.fullName' | translate }}
+          </span>
+          <input type="text" name="fullName" [(ngModel)]="fullName" autocomplete="name" required />
+        </label>
+
+        <label>
+          <span class="field-label">
+            <svg lucideMail aria-hidden="true"></svg>
+            {{ 'auth.email' | translate }}
+          </span>
+          <input type="email" name="email" [(ngModel)]="email" autocomplete="email" required />
+        </label>
+
+        <label>
+          <span class="field-label">
+            <svg lucideLockKeyhole aria-hidden="true"></svg>
+            {{ 'auth.password' | translate }}
+          </span>
+          <input
+            type="password"
+            name="password"
+            [(ngModel)]="password"
+            autocomplete="new-password"
+            required
+          />
+        </label>
+
+        <div class="password-rules">
+          @for (rule of passwordRequirements; track rule.label) {
+            <span [class.valid]="rule.valid">
+              @if (rule.valid) {
+                <svg lucideCircleCheck aria-hidden="true"></svg>
+              } @else {
+                <svg lucideCircle aria-hidden="true"></svg>
+              }
+              {{ rule.label }}
+            </span>
+          }
+        </div>
+
+        <app-button
+          type="submit"
+          variant="create"
+          [disabled]="registrationIsLoading || !passwordIsValid"
+          [block]="true"
+        >
+          @if (registrationIsLoading) {
+            {{ 'common.loading' | translate }}
+          } @else {
+            <svg lucideUserPlus aria-hidden="true"></svg>
+            {{ 'auth.signUp' | translate }}
+          }
+        </app-button>
+      </form>
+
+      <div class="links">
+        <a routerLink="/iam/login">
+          {{ 'auth.backToLogin' | translate }}
+        </a>
+      </div>
+    </div>
+  </article>
+</section>

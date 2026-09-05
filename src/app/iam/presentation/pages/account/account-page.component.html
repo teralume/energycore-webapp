@@ -1,0 +1,75 @@
+<section class="settings-page">
+    <header class="ec-page-heading">
+      <p class="ec-page-eyebrow">{{ 'settings.nav.account' | translate }}</p>
+      <h1 class="ec-page-title">{{ 'settings.account.title' | translate }}</h1>
+      <p class="ec-page-description">
+        {{ 'settings.account.pageDescription' | translate }}
+      </p>
+    </header>
+
+    <app-settings-section
+      [eyebrow]="'settings.nav.account' | translate"
+      [title]="'settings.nav.accountDescription' | translate"
+      [description]="'settings.account.identityDescription' | translate"
+      [stackedHeader]="true"
+    >
+      <div class="account-panel">
+        <div class="avatar" aria-hidden="true">{{ userInitials }}</div>
+
+        <div class="account-details">
+          <article>
+            <span>{{ 'devices.name' | translate }}</span>
+            <strong>{{ iamFacade.currentUser()?.fullName || ('settings.common.notAvailable' | translate) }}</strong>
+          </article>
+
+          <article>
+            <span>{{ 'settings.common.email' | translate }}</span>
+            <strong>{{ iamFacade.currentUser()?.email || ('settings.common.notAvailable' | translate) }}</strong>
+          </article>
+
+          <article>
+            <span>{{ 'settings.account.role' | translate }}</span>
+            <strong>{{ iamFacade.currentUser()?.accessProfileName || ('settings.account.userFallback' | translate) }}</strong>
+          </article>
+
+          <article>
+            <span>{{ 'settings.account.createdAt' | translate }}</span>
+            <strong>{{ formatDate(iamFacade.currentUser()?.createdAt) }}</strong>
+          </article>
+        </div>
+      </div>
+    </app-settings-section>
+
+    <app-settings-section
+      [eyebrow]="'settings.account.contextEyebrow' | translate"
+      [title]="'settings.account.operationalReadingTitle' | translate"
+      [description]="'settings.account.operationalReadingDescription' | translate"
+      [stackedHeader]="true"
+    >
+      <div class="insight-grid">
+        <article class="compact-card">
+          <span>{{ 'settings.account.session' | translate }}</span>
+          <h3>{{ 'settings.account.active' | translate }}</h3>
+          <p>
+            {{ 'settings.account.sessionDescription' | translate }}
+          </p>
+        </article>
+
+        <article class="compact-card">
+          <span>{{ 'settings.account.editableData' | translate }}</span>
+          <h3>{{ 'settings.account.separatedInProfile' | translate }}</h3>
+          <p>
+            {{ 'settings.account.editableDataDescription' | translate }}
+          </p>
+        </article>
+
+        <article class="compact-card">
+          <span>{{ 'settings.account.sensitiveActions' | translate }}</span>
+          <h3>{{ 'settings.account.separatedInSecurity' | translate }}</h3>
+          <p>
+            {{ 'settings.account.sensitiveActionsDescription' | translate }}
+          </p>
+        </article>
+      </div>
+    </app-settings-section>
+</section>

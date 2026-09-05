@@ -1,0 +1,27 @@
+.preferences-page {
+  display: grid;
+  gap: 24px;
+}
+
+h1,
+p {
+  margin: 0;
+}
+
+.preference-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.loading-wrapper {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+}
+
+@media (max-width: 920px) {
+  .preference-summary {
+    grid-template-columns: 1fr;
+  }
+}

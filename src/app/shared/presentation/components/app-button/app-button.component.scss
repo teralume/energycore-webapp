@@ -1,0 +1,192 @@
+:host {
+  display: inline-flex;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.app-button {
+  --app-button-glow-rgb: 125, 211, 252;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: max-content;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  color: var(--text-on-action);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 950;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: var(--ec-action-shadow);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    filter 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.app-button::before {
+  content: '';
+  position: absolute;
+  inset: -72% -54% -72% auto;
+  z-index: 0;
+  width: 46%;
+  transform: translateX(140%) skewX(-18deg);
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 36%,
+    rgba(255, 255, 255, 0.34) 50%,
+    rgba(255, 255, 255, 0.12) 64%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition:
+    transform 0.56s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.28s ease;
+}
+
+.app-button::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(var(--app-button-glow-rgb), 0.34), transparent 48%),
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+
+.app-button__content {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: inherit;
+  min-width: max-content;
+}
+
+.app-button:hover:not(:disabled):not([aria-disabled='true'])::before {
+  opacity: 1;
+  transform: translateX(-430%) skewX(-18deg);
+}
+
+.app-button:hover:not(:disabled):not([aria-disabled='true'])::after {
+  opacity: 1;
+}
+
+.app-button:active:not(:disabled):not([aria-disabled='true']) {
+  filter: brightness(0.94) saturate(1.04);
+}
+
+.app-button--sm {
+  min-height: 36px;
+  padding: 0 14px;
+  font-size: 0.78rem;
+}
+
+.app-button--md {
+  min-height: 44px;
+  padding: 0 20px;
+  font-size: 0.88rem;
+}
+
+.app-button--lg {
+  min-height: 52px;
+  padding: 0 26px;
+  font-size: 0.96rem;
+}
+
+.app-button--block {
+  width: 100%;
+  min-width: 0;
+}
+
+.app-button--primary,
+.app-button--action {
+  --app-button-glow-rgb: 56, 189, 248;
+
+  background: var(--ec-action-bg);
+  border-color: rgba(74, 222, 128, 0.18);
+}
+
+.app-button--create {
+  --app-button-glow-rgb: 34, 211, 238;
+
+  background: var(--ec-create-bg);
+  border-color: rgba(74, 222, 128, 0.24);
+  box-shadow: var(--ec-create-shadow);
+}
+
+.app-button--secondary,
+.app-button--neutral {
+  --app-button-glow-rgb: 125, 211, 252;
+
+  color: var(--text-primary);
+  background: var(--ec-neutral-bg);
+  border-color: var(--border-color);
+  box-shadow: var(--ec-shadow-soft);
+}
+
+.app-button--danger {
+  --app-button-glow-rgb: 248, 113, 113;
+
+  background: var(--ec-danger-bg);
+  border-color: rgba(254, 202, 202, 0.16);
+  box-shadow: var(--ec-danger-shadow);
+}
+
+.app-button--ghost {
+  --app-button-glow-rgb: 125, 211, 252;
+
+  color: var(--text-primary);
+  background: var(--ec-ghost-bg);
+  border-color: var(--border-color);
+  box-shadow: none;
+}
+
+.app-button--primary:hover:not(:disabled):not([aria-disabled='true']),
+.app-button--action:hover:not(:disabled):not([aria-disabled='true']) {
+  background: var(--ec-action-bg-hover);
+  box-shadow: var(--ec-action-shadow-hover);
+}
+
+.app-button--create:hover:not(:disabled):not([aria-disabled='true']) {
+  background: var(--ec-create-bg-hover);
+  box-shadow: var(--ec-create-shadow-hover);
+}
+
+.app-button--secondary:hover:not(:disabled):not([aria-disabled='true']),
+.app-button--neutral:hover:not(:disabled):not([aria-disabled='true']),
+.app-button--ghost:hover:not(:disabled):not([aria-disabled='true']) {
+  background: var(--ec-neutral-bg-hover);
+  border-color: var(--border-strong);
+  box-shadow:
+    0 0 0 1px rgba(var(--app-button-glow-rgb), 0.1),
+    0 0 20px rgba(var(--app-button-glow-rgb), 0.16);
+}
+
+.app-button--danger:hover:not(:disabled):not([aria-disabled='true']) {
+  background: var(--ec-danger-bg-hover);
+  box-shadow: var(--ec-danger-shadow-hover);
+}
+
+.app-button:disabled,
+.app-button[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.5;
+  filter: grayscale(0.2);
+}

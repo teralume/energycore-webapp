@@ -1,0 +1,98 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.setting-toggle {
+  width: 100%;
+  height: 100%;
+  min-height: 78px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 14px;
+  color: var(--text-primary);
+  background:
+    linear-gradient(135deg, var(--ec-status-danger-bg), transparent 46%),
+    var(--ec-surface-strong);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.setting-toggle:hover:not(:disabled) {
+  border-color: var(--ec-status-danger-border);
+  background:
+    linear-gradient(135deg, var(--ec-status-danger-bg), transparent 46%),
+    var(--ec-surface-hover);
+}
+
+.setting-toggle:disabled {
+  cursor: default;
+  opacity: 0.58;
+}
+
+.setting-toggle--active {
+  border-color: var(--ec-status-success-border);
+  background:
+    radial-gradient(circle at top left, var(--ec-status-success-bg), transparent 42%),
+    var(--ec-surface-muted);
+}
+
+.setting-toggle__content {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.setting-toggle strong {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 950;
+  line-height: 1.2;
+}
+
+.setting-toggle small {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.setting-toggle__switch {
+  align-self: center;
+  width: 48px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--ec-status-danger-solid);
+  transition:
+    background 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.setting-toggle__switch span {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--ec-control-thumb-bg);
+  box-shadow: var(--ec-control-thumb-shadow);
+  transition: transform 0.18s ease;
+}
+
+.setting-toggle--active .setting-toggle__switch {
+  background: var(--ec-status-success-solid);
+  box-shadow: 0 0 0 4px var(--ec-status-success-bg);
+}
+
+.setting-toggle--active .setting-toggle__switch span {
+  transform: translateX(20px);
+}

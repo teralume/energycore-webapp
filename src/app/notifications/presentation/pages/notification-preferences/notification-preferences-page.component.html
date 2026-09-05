@@ -1,0 +1,55 @@
+<section class="preferences-page ec-page">
+    <header class="ec-page-heading">
+      <p class="ec-page-eyebrow">{{ 'nav.preferences' | translate }}</p>
+      <h1 class="ec-page-title">{{ 'notificationPreferences.sensitivityTitle' | translate }}</h1>
+      <p class="ec-page-description">
+        {{ 'notificationPreferences.sensitivityDescription' | translate }}
+      </p>
+    </header>
+
+    <section class="preference-summary">
+      <app-section-card
+        [eyebrow]="'notificationPreferences.summary.rangesEyebrow' | translate"
+        [title]="'notificationPreferences.summary.rangesTitle' | translate"
+        [description]="'notificationPreferences.summary.rangesDescription' | translate"
+      />
+      <app-section-card
+        [eyebrow]="'alerts.levels.success' | translate"
+        [title]="'notificationPreferences.summary.successTitle' | translate"
+        [description]="'notificationPreferences.summary.successDescription' | translate"
+      />
+      <app-section-card
+        [eyebrow]="'notificationPreferences.summary.parametersEyebrow' | translate"
+        [title]="'notificationPreferences.summary.parametersTitle' | translate"
+        [description]="'notificationPreferences.summary.parametersDescription' | translate"
+      />
+    </section>
+
+    @if (notificationsFacade.loading()) {
+      <div class="loading-wrapper">
+        <app-loading-spinner />
+      </div>
+    } @else {
+      <app-settings-section
+        [eyebrow]="'notificationPreferences.currentPreference' | translate"
+        [title]="'notificationPreferences.editorTitle' | translate"
+        [description]="'notificationPreferences.editorDescription' | translate"
+        [stackedHeader]="true"
+      >
+        @if (notificationsFacade.notificationPreference()) {
+          <app-notification-preference-form
+            [preference]="notificationsFacade.notificationPreference()"
+            [classificationPolicy]="notificationsFacade.notificationClassificationPolicy()"
+            (classificationPolicyChanged)="notificationsFacade.updateNotificationClassificationPolicy($event)"
+            (saved)="savePreference($event)"
+          />
+        } @else {
+          <app-empty-state
+            [eyebrow]="'nav.notifications' | translate"
+            [title]="'notificationPreferences.emptyTitle' | translate"
+            [description]="'notificationPreferences.emptyDescription' | translate"
+          />
+        }
+      </app-settings-section>
+    }
+</section>

@@ -1,0 +1,235 @@
+<section class="workplace-page ec-page">
+  <header class="ec-page-heading">
+    <p class="ec-page-eyebrow">{{ 'nav.spaces' | translate }}</p>
+    <h1 class="ec-page-title">{{ 'nav.locations' | translate }}</h1>
+    <p class="ec-page-description">
+      {{ 'workplace.locations.pageDescription' | translate }}
+    </p>
+  </header>
+
+  <section class="workplace-summary">
+    <app-section-card
+      size="small"
+      [eyebrow]="'nav.locations' | translate"
+      [title]="'workplace.locations.summary.registeredTitle' | translate"
+    >
+      <strong>{{ workplaceFacade.locations().length }}</strong>
+      <p>{{ 'workplace.locations.summary.registeredDescription' | translate }}</p>
+    </app-section-card>
+
+    <app-section-card
+      size="small"
+      [eyebrow]="'nav.devices' | translate"
+      [title]="'workplace.locations.summary.assignedTitle' | translate"
+    >
+      <strong>{{ assignedDeviceCount }}</strong>
+      <p>{{ 'workplace.locations.summary.unassignedDevices' | translate: { count: unassignedDeviceCount } }}</p>
+    </app-section-card>
+
+    <app-section-card
+      size="small"
+      [eyebrow]="'workplace.locations.summary.coverageEyebrow' | translate"
+      [title]="'nav.rooms' | translate"
+    >
+      <strong>{{ energyCoverage }}%</strong>
+      <p>{{ 'workplace.locations.summary.unroomedDevices' | translate: { count: unroomedDeviceCount } }}</p>
+    </app-section-card>
+  </section>
+
+  <section class="workplace-toolbar">
+    <div>
+      <p class="section-eyebrow">{{ 'workplace.locations.toolbar.eyebrow' | translate }}</p>
+      <h2>{{ 'workplace.locations.toolbar.title' | translate }}</h2>
+      <p>{{ 'workplace.locations.toolbar.description' | translate }}</p>
+    </div>
+
+    <app-button variant="create" (pressed)="openCreateModal()">{{ 'onboarding.createLocationAction' | translate }}</app-button>
+  </section>
+
+  @if (workplaceFacade.loading()) {
+    <div class="loading-wrapper">
+      <app-loading-spinner />
+    </div>
+  } @else {
+    <section class="workplace-list">
+      @for (location of workplaceFacade.locations(); track location.id) {
+        <app-location-card
+          [location]="location"
+          [deviceCount]="deviceCountForLocation(location.id)"
+          [roomCount]="roomCountForLocation(location.id)"
+          [groupCount]="groupCountForLocation(location.id)"
+          [unroomedDeviceCount]="unroomedDeviceCountForLocation(location.id)"
+          [activeWatts]="activeWattsForLocation(location.id)"
+          [coverage]="coverageForLocation(location.id)"
+          (selected)="setActiveLocation($event)"
+          (remove)="deleteLocation($event)"
+        />
+      } @empty {
+        <app-empty-state
+          [eyebrow]="'nav.locations' | translate"
+          [title]="'workplace.locations.empty.title' | translate"
+          [description]="'workplace.locations.empty.description' | translate"
+          [actionLabel]="'onboarding.createLocationAction' | translate"
+          actionLink="/spaces/sites"
+        />
+      }
+    </section>
+  }
+
+  <app-modal-form-shell
+    [open]="createModalOpen"
+    [eyebrow]="'workplace.locations.form.eyebrow' | translate"
+    [title]="'onboarding.createLocationAction' | translate"
+    [description]="'workplace.locations.form.description' | translate"
+    (closed)="closeCreateModal()"
+  >
+    <form class="modal-form" (ngSubmit)="createLocation()">
+      <label>
+        <span>{{ 'workplace.locationName' | translate }}</span>
+        <input
+          type="text"
+          name="name"
+          [(ngModel)]="name"
+          [placeholder]="'workplace.locations.form.namePlaceholder' | translate"
+          required
+        />
+      </label>
+
+      <label>
+        <span>{{ 'workplace.locations.form.typeLabel' | translate }}</span>
+        <app-dropdown
+          [options]="typeOptions"
+          [value]="type"
+          [placeholder]="'workplace.locations.form.typePlaceholder' | translate"
+          (valueChange)="selectType($event)"
+        />
+      </label>
+
+      <label class="field-wide">
+        <span>{{ 'workplace.locations.form.addressLabel' | translate }}</span>
+        <div class="address-search">
+          <input
+            type="text"
+            name="address"
+            [ngModel]="address"
+            (ngModelChange)="onAddressChange($event)"
+            [placeholder]="'workplace.locations.form.addressPlaceholder' | translate"
+            autocomplete="off"
+            required
+          />
+
+          @if (addressSearchLoading || addressSuggestions.length > 0) {
+            <div class="address-search__suggestions">
+              @if (addressSearchLoading) {
+                <span class="address-search__status">
+                  {{ 'workplace.locations.map.searchingAddress' | translate }}
+                </span>
+              }
+
+              @for (suggestion of addressSuggestions; track suggestion.displayName) {
+                <button
+                  type="button"
+                  class="address-search__suggestion"
+                  (click)="selectAddressSuggestion(suggestion)"
+                >
+                  {{ suggestion.displayName }}
+                </button>
+              }
+            </div>
+          }
+        </div>
+      </label>
+
+      <section class="map-field field-wide">
+        <div class="map-field__copy">
+          <span>{{ 'workplace.locations.map.title' | translate }}</span>
+          <p>
+            {{ 'workplace.locations.map.description' | translate }}
+          </p>
+        </div>
+
+        <div
+          #mapViewport
+          class="map-picker"
+          [class.map-picker--dragging]="draggingMap"
+          role="button"
+          tabindex="0"
+          [attr.aria-label]="'workplace.locations.map.surfaceLabel' | translate"
+          (pointerdown)="onMapPointerDown($event)"
+          (pointermove)="onMapPointerMove($event)"
+          (pointerup)="onMapPointerUp($event)"
+          (pointercancel)="onMapPointerCancel($event)"
+          (wheel)="onMapWheel($event)"
+        >
+          <div class="map-picker__tiles">
+            @for (tile of mapTiles; track tile.key) {
+              <img
+                class="map-picker__tile"
+                [src]="tile.url"
+                [style.left.px]="tile.left"
+                [style.top.px]="tile.top"
+                alt=""
+                draggable="false"
+              />
+            }
+          </div>
+
+          <span
+            class="map-picker__marker"
+            [class.map-picker__marker--hidden]="!markerVisible()"
+            [style.left.px]="markerLeft()"
+            [style.top.px]="markerTop()"
+          ></span>
+
+          <div class="map-picker__crosshair" aria-hidden="true"></div>
+
+          <div class="map-picker__attribution">
+            OpenStreetMap contributors
+          </div>
+
+          <div
+            class="map-picker__controls"
+            aria-hidden="false"
+            (pointerdown)="$event.stopPropagation()"
+            (pointerup)="$event.stopPropagation()"
+            (wheel)="$event.stopPropagation()"
+          >
+            <button
+              type="button"
+              [attr.aria-label]="'workplace.locations.map.zoomIn' | translate"
+              (click)="zoomInMap()"
+            >
+              +
+            </button>
+            <button
+              type="button"
+              [attr.aria-label]="'workplace.locations.map.zoomOut' | translate"
+              (click)="zoomOutMap()"
+            >
+              -
+            </button>
+            <button
+              type="button"
+              class="map-picker__locate"
+              [disabled]="locatingUser"
+              (click)="locateUser()"
+            >
+              {{ 'workplace.locations.map.locateMe' | translate }}
+            </button>
+          </div>
+        </div>
+        <p class="coordinate-note">
+          {{ 'workplace.locations.map.selectedLabel' | translate }}:
+          <strong>{{ selectedCoordinateLabel }}</strong>
+        </p>
+      </section>
+
+      <div class="form-actions field-wide">
+        <app-button variant="neutral" (pressed)="closeCreateModal()">{{ 'common.cancel' | translate }}</app-button>
+        <app-button type="submit" variant="create" [disabled]="workplaceFacade.loading()">
+          {{ 'workplace.createLocation' | translate }}
+        </app-button>
+      </div>
+    </form>
+  </app-modal-form-shell>
+</section>

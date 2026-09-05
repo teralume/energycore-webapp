@@ -1,0 +1,60 @@
+<article
+  class="device-card"
+  [class.on]="device.isOn"
+  [class.removing]="removing"
+  [class.powering-on]="powerTransition === 'powering-on'"
+  [class.powering-off]="powerTransition === 'powering-off'"
+>
+  <div class="device-card__top">
+    <span class="device-card__icon" aria-hidden="true">{{ deviceIcon }}</span>
+
+    <div class="device-card__main">
+      <p class="type">{{ deviceTypeLabelKey | translate }}</p>
+      <h2 [title]="device.name">{{ device.name }}</h2>
+      <small>
+        {{ locationName || ('devices.activeSiteFallback' | translate) }} /
+        {{ roomName || device.room || ('devices.noRoom' | translate) }}
+      </small>
+    </div>
+
+    <span class="status">
+      {{ statusLabelKey | translate }}
+    </span>
+  </div>
+
+  <div class="device-card__power">
+    <div>
+      <span>{{ (device.isOn ? 'devices.card.activeConsumption' : 'devices.card.standby') | translate }}</span>
+      <p>{{ (device.isOn ? 'devices.card.currentConsumptionDescription' : 'devices.card.noActiveConsumption') | translate }}</p>
+    </div>
+
+    <strong>{{ device.isOn ? device.powerWatts : 0 }} W</strong>
+  </div>
+
+  <div class="device-card__actions">
+    <app-button
+      variant="action"
+      size="sm"
+      (pressed)="onToggle()"
+      [disabled]="removing || !canControlDevices || !device.canReceiveOperationalChanges"
+    >
+      @if (device.isOn) {
+        {{ 'devices.turnOff' | translate }}
+      } @else {
+        {{ 'devices.turnOn' | translate }}
+      }
+    </app-button>
+
+    @if (canManageDevices) {
+      <app-button variant="neutral" size="sm" [disabled]="removing" (pressed)="onRename()">
+        {{ 'devices.rename' | translate }}
+      </app-button>
+    }
+
+    @if (canManageDevices) {
+      <app-button variant="danger" size="sm" [disabled]="removing" (pressed)="onRemove()">
+        {{ 'common.delete' | translate }}
+      </app-button>
+    }
+  </div>
+</article>

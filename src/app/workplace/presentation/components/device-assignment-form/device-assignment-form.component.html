@@ -1,0 +1,26 @@
+<form class="assignment-form" (ngSubmit)="onSubmit()">
+  <app-dropdown
+    [options]="deviceOptions"
+    [value]="deviceValue"
+    [placeholder]="'workplace.selectDevice' | translate"
+    (valueChange)="selectDevice($event)"
+  />
+
+  <app-dropdown
+    [options]="locationOptions"
+    [value]="locationValue"
+    [placeholder]="'workplace.selectLocation' | translate"
+    (valueChange)="selectLocation($event)"
+  />
+
+  <app-dropdown
+    [options]="roomOptions"
+    [value]="roomValue"
+    [placeholder]="'workplace.assignments.noRoom' | translate"
+    (valueChange)="selectRoom($event)"
+  />
+
+  <app-button type="submit" variant="create" [disabled]="loading">
+    {{ 'workplace.assignDevice' | translate }}
+  </app-button>
+</form>

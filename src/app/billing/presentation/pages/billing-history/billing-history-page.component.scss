@@ -1,0 +1,299 @@
+.billing-settings-page {
+  display: grid;
+  gap: 24px;
+}
+
+h1,
+h2,
+h3,
+p,
+dl {
+  margin: 0;
+}
+
+.billing-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(260px, 0.8fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.plan-card,
+.summary-card,
+.summary-grid,
+.record-card {
+  border: 1px solid var(--border-color);
+  background:
+    var(--ec-card-highlight),
+    var(--surface-card);
+  box-shadow:
+    var(--ec-inset-highlight),
+    var(--ec-shadow-soft);
+}
+
+.plan-card {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+  padding: 22px;
+  border-radius: 24px;
+}
+
+.plan-card__header,
+.plan-actions,
+.record-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.plan-card__header,
+.plan-actions,
+.record-card {
+  gap: 14px;
+}
+
+.plan-card__header {
+  align-items: flex-start;
+}
+
+.plan-card__header span,
+.summary-card span,
+.summary-grid span,
+.record-card span {
+  color: var(--accent-color);
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.plan-card h2 {
+  margin-top: 8px;
+  color: var(--text-primary);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1;
+}
+
+.status-pill,
+.state-pill {
+  width: fit-content;
+  border-radius: 999px;
+  background: var(--ec-status-success-bg);
+  color: var(--ec-status-success-text);
+  font-size: 0.78rem;
+  font-weight: 950;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.status-pill {
+  padding: 8px 12px;
+}
+
+.state-pill {
+  padding: 7px 10px;
+}
+
+.plan-card__price {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  padding: 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  background: var(--ec-surface-subtle);
+}
+
+.plan-card__price strong {
+  color: var(--text-primary);
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 0.95;
+}
+
+.plan-card__price span {
+  color: var(--text-secondary);
+  font-weight: 850;
+}
+
+.plan-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(86px, 1fr));
+  gap: 10px;
+}
+
+.plan-facts div,
+.summary-grid div {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background: var(--ec-surface-subtle);
+  text-align: left;
+}
+
+.plan-facts dt {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.plan-facts dd {
+  margin: 0;
+}
+
+.plan-facts dd,
+.summary-grid strong,
+.record-card strong {
+  color: var(--text-primary);
+  font-weight: 950;
+}
+
+.plan-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  justify-content: stretch;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.plan-actions__left,
+.plan-actions__right {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.plan-actions__left {
+  justify-content: flex-start;
+}
+
+.plan-actions__right {
+  justify-content: flex-end;
+}
+
+.billing-side {
+  display: grid;
+  gap: 12px;
+}
+
+.summary-card,
+.summary-grid {
+  border-radius: 22px;
+}
+
+.summary-card {
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  min-height: 190px;
+  padding: 22px;
+}
+
+.summary-card strong {
+  color: var(--text-primary);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  line-height: 1;
+}
+
+.summary-card p,
+.record-card p {
+  color: var(--text-secondary);
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px;
+}
+
+.record-list {
+  display: grid;
+  gap: 12px;
+}
+
+.record-card {
+  min-width: 0;
+  padding: 16px;
+  border-radius: 18px;
+}
+
+.record-card__main,
+.record-card__meta {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.record-card__main {
+  flex: 1 1 auto;
+}
+
+.record-card__main strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.record-card__meta {
+  flex: 0 0 auto;
+  justify-items: end;
+  text-align: right;
+}
+
+.record-card__meta strong {
+  font-size: 1.15rem;
+}
+
+.loading-wrapper {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+}
+
+@media (max-width: 1080px) {
+  .billing-overview {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .plan-card__header,
+  .record-card {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .record-card__meta {
+    justify-items: start;
+    text-align: left;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-actions__left,
+  .plan-actions__right {
+    justify-content: stretch;
+  }
+}

@@ -1,0 +1,2468 @@
+{
+  "app": {
+    "name": "EnergyCore"
+  },
+  "nav": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "userSettings": "Ajustes",
+    "devices": "Dispositivos",
+    "routines": "Rutinas",
+    "energy": "Energía",
+    "history": "Historial",
+    "plans": "Planes",
+    "alerts": "Alertas",
+    "billing": "Facturación",
+    "deviceGroups": "Grupos",
+    "alertRules": "Reglas de alerta",
+    "notificationPreferences": "Preferencias de notificación",
+    "locations": "Sedes",
+    "rooms": "Habitaciones",
+    "assignments": "Asignaciones",
+    "reports": "Reportes",
+    "energyGoals": "Metas energéticas",
+    "supportTickets": "Soporte",
+    "maintenanceTickets": "Mantenimiento",
+    "operation": "Operación",
+    "energySection": "Energía",
+    "alertsSection": "Alertas",
+    "workplace": "Espacios",
+    "spaces": "Espacios",
+    "support": "Soporte",
+    "settings": "Settings",
+    "operationModes": "Modos",
+    "consumption": "Consumo",
+    "inbox": "Bandeja",
+    "rules": "Reglas",
+    "preferences": "Preferencias"
+  },
+  "onboarding": {
+    "locationRequiredEyebrow": "Sede requerida",
+    "locationRequiredTitle": "Crea una sede para empezar a usar esta funcion.",
+    "locationRequiredDescription": "Aun no tienes una sede configurada. Crea tu primera sede para organizar habitaciones, dispositivos, rutinas, metas, alertas y reportes.",
+    "createLocationAction": "Crear sede"
+  },
+  "auth": {
+    "loginEyebrow": "Bienvenido de nuevo",
+    "loginTitle": "Iniciar sesión",
+    "loginSubtitle": "Accede a tu panel de EnergyCore para gestionar dispositivos, rutinas y consumo de energía.",
+    "registerEyebrow": "Crear acceso",
+    "registerTitle": "Registrarse",
+    "registerSubtitle": "Crea tu cuenta de EnergyCore para empezar a gestionar dispositivos inteligentes de energía.",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "fullName": "Nombre completo",
+    "signIn": "Ingresar",
+    "signUp": "Crear cuenta",
+    "createAccount": "Crear cuenta",
+    "backToLogin": "Volver al login",
+    "logout": "Salir",
+    "sessionExpired": "Tu sesion expiro por inactividad.",
+    "signInError": "No se pudo iniciar sesión. Verifica tu correo y contraseña.",
+    "signUpError": "No se pudo registrar el usuario.",
+    "emailAlreadyExists": "Este correo ya está registrado.",
+    "fullNameRequired": "Ingresa tu nombre completo.",
+    "invalidEmail": "Ingresa un correo electrónico válido.",
+    "invalidEmailProvider": "Solo se permiten correos Gmail, Outlook o Hotmail.",
+    "passwordTooShort": "La contraseña debe tener al menos 8 caracteres.",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "recoverPasswordEyebrow": "Recuperación de cuenta",
+    "recoverPasswordTitle": "Recuperar contraseña",
+    "recoverPasswordSubtitle": "Ingresa tu correo y te enviaremos instrucciones de recuperación.",
+    "sendRecoveryEmail": "Enviar correo de recuperación",
+    "recoverPasswordSent": "Correo de recuperación enviado correctamente.",
+    "recoverPasswordError": "No se pudo enviar el correo de recuperación.",
+    "resetPasswordEyebrow": "Seguridad de cuenta",
+    "resetPasswordTitle": "Restablecer contrasena",
+    "resetPasswordSubtitle": "Crea una nueva contrasena usando el enlace seguro recibido.",
+    "newPassword": "Nueva contrasena",
+    "confirmPassword": "Confirmar contrasena",
+    "resetPasswordAction": "Guardar nueva contrasena",
+    "resetPasswordSuccess": "Contrasena actualizada correctamente.",
+    "resetPasswordError": "No se pudo restablecer la contrasena.",
+    "resetPasswordTokenRequired": "El enlace de recuperacion no es valido o esta incompleto.",
+    "passwordsDoNotMatch": "Las contrasenas no coinciden.",
+    "profileUpdated": "Perfil actualizado correctamente.",
+    "profileUpdateError": "No se pudo actualizar el perfil.",
+    "deleteAccountError": "No se pudo eliminar la cuenta.",
+    "deleteAccountConfirmationError": "El texto de confirmación no es válido."
+  },
+  "home": {
+    "eyebrow": "Energía inteligente",
+    "title": "Controla tu energía con EnergyCore",
+    "content": "Monitorea dispositivos, automatiza rutinas y revisa el consumo energético desde una plataforma moderna.",
+    "manageDevices": "Gestionar dispositivos",
+    "viewEnergy": "Ver energía",
+    "cardDevices": "Dispositivos",
+    "cardRoutines": "Rutinas",
+    "cardConsumption": "Consumo actual",
+    "cardAlerts": "Alertas",
+    "activeDevices": "dispositivos activos",
+    "enabledRoutines": "rutinas activas",
+    "averageConsumption": "Promedio",
+    "unreadAlerts": "alertas no leídas",
+    "energyOverview": "Resumen energético",
+    "subscriptionOverview": "Resumen de suscripción",
+    "alertOverview": "Resumen de alertas",
+    "openEnergyDashboard": "Abrir panel energético",
+    "openPlans": "Ver planes",
+    "openAlerts": "Ver alertas",
+    "noPlanDescription": "Selecciona un plan para activar los beneficios de EnergyCore.",
+    "alertDescription": "Revisa alertas de consumo, automatización y eventos importantes del sistema.",
+    "setupHint": "Selecciona o crea una sede para enfocar Inicio.",
+    "setupEmpty": "Inicio se activa cuando existe una sede.",
+    "setupGuide": {
+      "ariaLabel": "Guia de instalacion inicial",
+      "eyebrow": "Primer uso",
+      "title": "Guia de instalacion",
+      "description": "Completa estos pasos para que la cuenta quede lista con sede, ambiente, equipo, asignacion y rutina.",
+      "progressLabel": "completado",
+      "steps": {
+        "site": {
+          "title": "Crear sede",
+          "description": "Define la casa, local o sucursal donde se medira la operacion."
+        },
+        "room": {
+          "title": "Crear habitacion",
+          "description": "Organiza los equipos por ambientes reales antes de asignarlos."
+        },
+        "device": {
+          "title": "Conectar equipo",
+          "description": "Registra o empareja un dispositivo para comenzar el control."
+        },
+        "assignment": {
+          "title": "Asignar a ambiente",
+          "description": "Vincula el equipo con una sede y una habitacion activa."
+        },
+        "routine": {
+          "title": "Activar rutina",
+          "description": "Programa una accion automatica para validar la instalacion."
+        }
+      }
+    },
+    "operationalCenterTitle": "Centro operativo",
+    "operationalCenterDescription": "Vista resumida de la sede activa, sus espacios, operación, consumo, alertas y servicio.",
+    "loadingEyebrow": "Cargando",
+    "loadingTitle": "Sincronizando información operativa",
+    "loadingDescription": "Estamos leyendo sedes, habitaciones, dispositivos, energía, metas, alertas y servicio.",
+    "mainSummaryAria": "Resumen principal",
+    "activeSiteEyebrow": "Sede activa",
+    "noActiveSite": "Sin sede activa",
+    "noRegisteredLocation": "Sin ubicación registrada",
+    "go": "Ir",
+    "noSitesTitle": "No hay sedes configuradas",
+    "noSitesDescription": "Crea una sede para organizar habitaciones, dispositivos y consumo por contexto.",
+    "consumption": "Consumo",
+    "generalStatusEyebrow": "Estado general",
+    "siteSummaryTitle": "Resumen de la sede",
+    "noOperationalContextTitle": "Sin contexto operativo",
+    "siteSummaryDescription": "Datos calculados desde los elementos asignados a la sede activa.",
+    "missingSiteTitle": "Falta una sede",
+    "missingSiteDescription": "El resumen operativo necesita una sede activa.",
+    "criticalAlerts": "Alertas críticas",
+    "openSupport": "Soporte abierto",
+    "siteRoomsTitle": "Ambientes de la sede",
+    "roomsRegisteredDescription": "{{count}} habitación(es) registradas en el contexto activo.",
+    "noActiveSiteRoomsDescription": "Crea o selecciona una sede para ver habitaciones.",
+    "noRoomsTitle": "No hay habitaciones",
+    "noRoomsDescription": "Crea habitaciones para ubicar dispositivos por zonas reales.",
+    "withDevices": "Con equipos",
+    "withoutDevices": "Sin equipos",
+    "averageDevicesShort": "Prom. disp.",
+    "assignedEquipmentTitle": "Equipos asignados",
+    "assignedEquipmentDescription": "Total, activos y consumo salen de los dispositivos vinculados a la sede.",
+    "noAssignedDevicesTitle": "No hay dispositivos asignados",
+    "noAssignedDevicesDescription": "Registra o asigna equipos para alimentar consumo, grupos y rutinas.",
+    "groupSetsTitle": "Conjuntos",
+    "groupsDescription": "Dispositivos agrupados por uso o zona.",
+    "noGroupsTitle": "Sin grupos",
+    "noGroupsDescription": "Crea grupos para operar varios dispositivos juntos.",
+    "deviceCountShort": "{{count}} disp.",
+    "moreGroups": "+{{count}} más en grupos",
+    "scheduledAlarmsTitle": "Alarmas programadas",
+    "scheduledAlarmsDescription": "Acciones globales habilitadas para la sede.",
+    "noActiveRoutinesTitle": "Sin rutinas activas",
+    "noActiveRoutinesDescription": "Programa acciones por hora para dispositivos, grupos o habitaciones.",
+    "moreRoutines": "+{{count}} más en rutinas",
+    "activeModeTitle": "Modo activo",
+    "activeModeDescription": "Configuración operacional propia de la sede.",
+    "affectedDevices": "{{count}} dispositivo(s) afectados",
+    "noActiveModeTitle": "Sin modo activo",
+    "noActiveModeDescription": "Los modos activos de la sede aparecerán aquí.",
+    "createMode": "Crear modo",
+    "energyRecordedTitle": "Energía registrada",
+    "energyRecordedDescription": "Lecturas reales asociadas a dispositivos asignados.",
+    "noReadingsTitle": "Sin lecturas",
+    "noReadingsDescription": "Cuando haya lecturas de energía, el resumen aparecerá aquí.",
+    "today": "Hoy",
+    "readings": "Lecturas",
+    "peak": "Pico",
+    "goalsEyebrow": "Metas",
+    "activeGoalsTitle": "Objetivos activos",
+    "activeGoalsDescription": "Metas vigentes filtradas por sede, habitación, grupo o dispositivo.",
+    "noActiveGoalsTitle": "Sin metas activas",
+    "noActiveGoalsDescription": "Crea metas para comparar consumo contra objetivos reales.",
+    "recentInboxTitle": "Bandeja reciente",
+    "recentInboxDescription": "Alertas relacionadas con la sede y sus elementos.",
+    "noRecentAlertsTitle": "Sin alertas recientes",
+    "noRecentAlertsDescription": "No hay alertas para mostrar en esta sede.",
+    "criticalCount": "Críticas: {{count}}",
+    "accountSupportTitle": "Soporte de la cuenta",
+    "accountSupportDescription": "Tickets abiertos y mantenimientos relacionados con dispositivos de la sede.",
+    "noOpenTicketsTitle": "Sin tickets abiertos",
+    "noOpenTicketsDescription": "Los casos de soporte o mantenimiento aparecerán aquí cuando existan.",
+    "createSupport": "Crear soporte",
+    "noRoom": "Sin habitación",
+    "roomNumber": "Habitación #{{id}}",
+    "deviceStatusOn": "ON",
+    "deviceStatusOff": "OFF",
+    "locationTypes": {
+      "home": "Casa",
+      "business": "Empresa",
+      "branch": "Local"
+    },
+    "alertLevels": {
+      "success": "Éxito",
+      "stable": "Estable",
+      "info": "Neutral",
+      "warning": "Atención",
+      "critical": "Crítica"
+    }
+  },
+  "about": {
+    "eyebrow": "EnergyCore en contexto",
+    "title": "Una plataforma para ordenar energia, espacios y decisiones",
+    "subtitle": "EnergyCore ayuda a usar la energia con mas claridad: organiza sedes y habitaciones, controla dispositivos, automatiza rutinas y modos, revisa consumo, metas, alertas, servicio, facturacion y preferencias desde un mismo lugar.",
+    "actions": {
+      "home": "Ir a Inicio",
+      "spaces": "Ir a Espacios",
+      "energy": "Ir a Energia"
+    },
+    "heroSignals": {
+      "order": {
+        "label": "Orden",
+        "title": "Espacios antes que acciones",
+        "description": "La plataforma funciona mejor cuando primero defines sedes, habitaciones y asignaciones reales."
+      },
+      "control": {
+        "label": "Control",
+        "title": "Dispositivos con contexto",
+        "description": "Los dispositivos, grupos, rutinas y modos se entienden por el lugar y el uso diario que representan."
+      },
+      "clarity": {
+        "label": "Claridad",
+        "title": "Energia visible",
+        "description": "El consumo, los reportes y las metas dependen de lecturas reales para orientar mejores decisiones."
+      }
+    },
+    "what": {
+      "eyebrow": "Que es",
+      "title": "EnergyCore conecta espacios, dispositivos y energia",
+      "description": "No es una pantalla decorativa ni una lista aislada de acciones. Es una plataforma para administrar espacios, controlar equipos, crear automatizaciones utiles, revisar consumo, recibir alertas y dar seguimiento a soporte, mantenimiento, facturacion y preferencias.",
+      "points": {
+        "spaces": "Sedes, habitaciones y asignaciones como base del sistema.",
+        "control": "Dispositivos, grupos, rutinas y modos para operar el dia a dia.",
+        "energy": "Consumo, historial, reportes y metas basados en informacion disponible.",
+        "care": "Alertas, reglas, servicio y preferencias para actuar con orden."
+      }
+    },
+    "values": {
+      "mission": {
+        "eyebrow": "Mision",
+        "title": "Ayudar a usar energia con orden, control y claridad",
+        "description": "EnergyCore esta pensado para hogares, sedes pequenas y espacios medianos que necesitan saber donde estan sus equipos, como se usan y que decisiones tomar para consumir mejor."
+      },
+      "vision": {
+        "eyebrow": "Vision",
+        "title": "Una plataforma energetica inteligente, ordenada y preventiva",
+        "description": "La vision es crecer como una herramienta que conecte operacion, consumo, alertas y servicio de forma cada vez mas precisa, sin perder transparencia sobre lo que realmente esta disponible."
+      }
+    },
+    "daily": {
+      "eyebrow": "Uso diario",
+      "title": "Un flujo practico para operar EnergyCore",
+      "description": "El uso recomendado empieza por el espacio fisico y avanza hacia control, automatizacion, revision energetica y seguimiento.",
+      "items": {
+        "site": {
+          "title": "Elige o crea una sede activa",
+          "description": "Trabaja desde una sede clara para que habitaciones, dispositivos y acciones tengan contexto."
+        },
+        "rooms": {
+          "title": "Organiza habitaciones",
+          "description": "Usa habitaciones reales para ubicar equipos y mantener el mapa operativo entendible."
+        },
+        "devices": {
+          "title": "Revisa dispositivos",
+          "description": "Enciende, apaga y valida el estado de los equipos desde vistas de operacion."
+        },
+        "groups": {
+          "title": "Agrupa por uso",
+          "description": "Crea grupos semanticos como iluminacion, climatizacion o equipos criticos para actuar por conjunto."
+        },
+        "routines": {
+          "title": "Programa rutinas repetibles",
+          "description": "Usa rutinas para horarios frecuentes y evita duplicar acciones manuales cada dia."
+        },
+        "mode": {
+          "title": "Aplica modos completos",
+          "description": "Los modos ayudan a activar situaciones completas, como ahorro, noche o trabajo, con rutinas internas."
+        },
+        "energy": {
+          "title": "Revisa consumo",
+          "description": "Consulta el dashboard y el historial para entender el comportamiento energetico disponible."
+        },
+        "goals": {
+          "title": "Compara metas",
+          "description": "Usa metas energeticas para medir avance contra objetivos definidos por alcance."
+        },
+        "alerts": {
+          "title": "Atiende alertas",
+          "description": "Lee alertas visibles y usa reglas claras para prevenir problemas o consumos fuera de rango."
+        },
+        "service": {
+          "title": "Da seguimiento a servicio",
+          "description": "Registra soporte o mantenimiento cuando necesitas dejar constancia y avanzar por estado."
+        },
+        "billing": {
+          "title": "Revisa facturacion y preferencias",
+          "description": "Consulta plan, pagos, perfil y preferencias disponibles sin asumir funciones externas no visibles."
+        }
+      }
+    },
+    "recommendations": {
+      "eyebrow": "Recomendaciones reales",
+      "title": "Como sacarle valor sin sobreconfigurar",
+      "description": "EnergyCore funciona mejor cuando los nombres, alcances y reglas reflejan la operacion real.",
+      "items": {
+        "site": {
+          "title": "Crea primero la sede",
+          "description": "La sede activa evita que los demas datos queden sueltos o dificiles de leer."
+        },
+        "rooms": {
+          "title": "Define habitaciones antes de operar",
+          "description": "Una habitacion bien nombrada ayuda a encontrar dispositivos, rutinas y mantenimiento."
+        },
+        "assignments": {
+          "title": "Asigna dispositivos con cuidado",
+          "description": "La asignacion correcta mejora el control y evita confusiones cuando hay muchos equipos."
+        },
+        "groups": {
+          "title": "Usa grupos semanticos",
+          "description": "Agrupa por funcion real, no solo por comodidad momentanea."
+        },
+        "routines": {
+          "title": "Rutinas para horarios repetidos",
+          "description": "Si una accion ocurre con frecuencia, una rutina suele ser mejor que repetirla manualmente."
+        },
+        "modes": {
+          "title": "Modos para situaciones completas",
+          "description": "Un modo debe representar una escena operativa completa, no una accion suelta."
+        },
+        "energy": {
+          "title": "Revisa energia y metas juntas",
+          "description": "El consumo explica el presente; las metas ayudan a decidir que cambiar."
+        },
+        "alerts": {
+          "title": "Usa alertas para prevenir",
+          "description": "Las alertas son mas utiles cuando se revisan a tiempo y se relacionan con una accion clara."
+        },
+        "rules": {
+          "title": "No exageres las reglas",
+          "description": "Pocas reglas bien definidas suelen ser mas utiles que muchas reglas dificiles de mantener."
+        },
+        "names": {
+          "title": "Nombres claros",
+          "description": "Evita nombres ambiguos. Un buen nombre reduce errores en operacion y seguimiento."
+        }
+      }
+    },
+    "capabilities": {
+      "eyebrow": "Lo que ya hace bien",
+      "title": "Capacidades conectadas en la experiencia",
+      "description": "Estas areas ya existen en la plataforma y se presentan como funciones disponibles, no como promesas futuras.",
+      "items": {
+        "spaces": {
+          "eyebrow": "Espacios",
+          "title": "Sedes, habitaciones y asignaciones",
+          "description": "Permite ordenar la base fisica sobre la que se controla la operacion."
+        },
+        "control": {
+          "eyebrow": "Operacion",
+          "title": "Dispositivos, grupos y rutinas",
+          "description": "Permite operar equipos, agruparlos y programar acciones repetibles."
+        },
+        "modes": {
+          "eyebrow": "Modos",
+          "title": "Situaciones con rutinas internas",
+          "description": "Permite organizar acciones completas para momentos concretos del dia."
+        },
+        "energy": {
+          "eyebrow": "Energia",
+          "title": "Consumo, historial, reportes y metas",
+          "description": "Permite leer informacion energetica disponible y contrastarla con objetivos."
+        },
+        "alerts": {
+          "eyebrow": "Alertas",
+          "title": "Bandeja, reglas y preferencias visibles",
+          "description": "Permite revisar alertas y ajustar reglas o preferencias visibles de la experiencia."
+        },
+        "service": {
+          "eyebrow": "Servicio",
+          "title": "Soporte y mantenimiento",
+          "description": "Permite crear solicitudes y avanzar su estado sin agregar acciones no disponibles."
+        },
+        "settings": {
+          "eyebrow": "Cuenta",
+          "title": "Perfil, facturacion y ajustes",
+          "description": "Permite revisar informacion de usuario, plan, pagos y preferencias disponibles."
+        }
+      }
+    },
+    "careful": {
+      "eyebrow": "Uso con criterio",
+      "title": "Donde conviene ser transparente",
+      "description": "Algunas partes dependen de datos reales, reglas claras o informacion disponible por plan. Por eso se muestran con alcance honesto.",
+      "items": {
+        "automation": {
+          "title": "Automatizaciones",
+          "description": "Deben crearse con horarios y alcances claros para evitar acciones inesperadas."
+        },
+        "alerts": {
+          "title": "Alertas y reglas",
+          "description": "Funcionan mejor con rangos comprensibles y pocas reglas faciles de revisar."
+        },
+        "reports": {
+          "title": "Reportes",
+          "description": "El valor de los reportes depende de lecturas reales y filtros bien elegidos."
+        },
+        "billing": {
+          "title": "Facturacion",
+          "description": "La informacion visible depende del plan, pagos e historial disponible dentro de la plataforma."
+        }
+      }
+    }
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "content": "La ruta ingresada no existe o fue movida.",
+    "goHome": "Ir al inicio"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados."
+  },
+  "devices": {
+    "eyebrow": "Control de dispositivos",
+    "title": "Control inteligente de dispositivos",
+    "subtitle": "Gestiona enchufes, interruptores y luces inteligentes desde una vista centralizada.",
+    "total": "Total",
+    "active": "Activos",
+    "currentWatts": "Consumo actual",
+    "addTitle": "Agregar dispositivo",
+    "name": "Nombre",
+    "room": "Habitacion",
+    "type": "Tipo",
+    "power": "Potencia en watts",
+    "create": "Crear dispositivo",
+    "connect": "Conectar equipo",
+    "rename": "Editar",
+    "renameTitle": "Editar nombre del dispositivo",
+    "turnOn": "Encender",
+    "turnOff": "Apagar",
+    "emptyTitle": "Todavía no hay dispositivos",
+    "emptyContent": "Agrega tu primer enchufe, interruptor o luz inteligente para comenzar.",
+    "loadError": "No se pudieron cargar los dispositivos.",
+    "createError": "No se pudo crear el dispositivo.",
+    "pairError": "No se pudo conectar el equipo.",
+    "updateError": "No se pudo actualizar el dispositivo.",
+    "deleteError": "No se pudo eliminar el dispositivo.",
+    "planLimitReached": "Has alcanzado el límite de dispositivos permitido por tu plan.",
+    "createSuccess": "Dispositivo creado correctamente.",
+    "pageDescription": "Controla los equipos asignados a la sede activa y registra nuevos dispositivos operativos por habitacion.",
+    "activeSiteFallback": "sede activa",
+    "noRoom": "Sin habitacion",
+    "go": "Ir",
+    "summary": {
+      "assignedTitle": "Asignados",
+      "onTitle": "Encendidos",
+      "offDevices": "{{count}} apagado(s).",
+      "consumptionEyebrow": "Consumo",
+      "currentTitle": "Actual",
+      "activePowerDescription": "Potencia activa de esta sede."
+    },
+    "toolbar": {
+      "eyebrow": "Control diario",
+      "title": "Equipos por habitacion",
+      "description": "Enciende, apaga o elimina dispositivos con advertencias de impacto real."
+    },
+    "emptyRooms": {
+      "title": "No hay habitaciones en la sede activa",
+      "description": "Crea una habitacion antes de registrar dispositivos operativos."
+    },
+    "emptyAssigned": {
+      "title": "No hay dispositivos asignados",
+      "description": "Registra un dispositivo nuevo o revisa las asignaciones de la sede activa."
+    },
+    "form": {
+      "eyebrow": "Nuevo dispositivo",
+      "description": "Registra un equipo real, su habitacion y su potencia nominal.",
+      "namePlaceholder": "Ej. Luz principal",
+      "wattsLabel": "Watts del dispositivo"
+    },
+    "pair": {
+      "eyebrow": "Emparejamiento",
+      "description": "Ingresa el codigo del equipo y EnergyCore lo registrara en la habitacion seleccionada.",
+      "code": "Codigo del equipo",
+      "codePlaceholder": "EC-PLUG-100",
+      "alias": "Nombre visible",
+      "aliasPlaceholder": "Ej. Enchufe cafetera",
+      "availableTitle": "Equipos disponibles",
+      "options": {
+        "plug": "Enchufe inteligente",
+        "light": "Luz inteligente",
+        "sensor": "Sensor de movimiento",
+        "switch": "Interruptor inteligente"
+      }
+    },
+    "renameForm": {
+      "eyebrow": "Dispositivo existente",
+      "description": "Actualiza el nombre visible del dispositivo sin cambiar su habitacion, tipo ni potencia."
+    },
+    "powerAdvice": {
+      "highTitle": "Consumo alto",
+      "normalTitle": "Monitoreo controlado",
+      "highMessage": "Para {{type}}, este valor se considera elevado. Si el dispositivo reporta un uso igual o mayor a {{watts}} W, EnergyCore debe marcarlo como consumo alto y podra generar una alerta.",
+      "normalMessage": "Ingresa solo los watts nominales de {{type}}. EnergyCore calcula kWh y costo con esos W y el tiempo real encendido."
+    },
+    "status": {
+      "on": "Encendido",
+      "off": "Apagado",
+      "maintenance": "Mantenimiento",
+      "removed": "Retirado",
+      "unknown": "Sin estado"
+    },
+    "card": {
+      "activeConsumption": "Consumo activo",
+      "standby": "En espera",
+      "currentConsumptionDescription": "Consumo actual del dispositivo",
+      "noActiveConsumption": "Sin consumo activo"
+    },
+    "validation": {
+      "nameRequired": "Escribe el nombre del dispositivo.",
+      "nameMinLength": "El nombre del dispositivo debe tener al menos 3 caracteres.",
+      "pairingCodeRequired": "Ingresa el codigo del equipo.",
+      "roomRequired": "Selecciona una habitacion de la sede activa.",
+      "powerRequired": "La potencia del dispositivo debe ser mayor a 0 W.",
+      "roomRequiredBeforePreset": "Crea una habitacion en la sede activa antes de agregar dispositivos."
+    },
+    "toasts": {
+      "createdAndAssigned": "Dispositivo creado y asignado a {{room}}.",
+      "createdWithoutAssignment": "Dispositivo creado, pero no se pudo asignar a la habitacion activa.",
+      "pairedAndAssigned": "{{device}} conectado y asignado a {{room}}.",
+      "pairedWithoutAssignment": "Equipo conectado, pero no se pudo asignar a la habitacion activa.",
+      "presetCreatedAndAssigned": "{{device}} agregado y asignado a {{room}}.",
+      "presetCreatedWithoutAssignment": "{{device}} fue creado, pero no se pudo asignar a la habitacion activa.",
+      "presetCreateError": "No se pudo agregar {{device}}.",
+      "turnedOn": "Dispositivo encendido.",
+      "turnedOff": "Dispositivo apagado.",
+      "renamed": "Nombre del dispositivo actualizado.",
+      "deletedHistoryKept": "Dispositivo eliminado; el historial se conserva.",
+      "removedRoutineSingular": "Su rutina asociada tambien desaparecio.",
+      "removedRoutinePlural": "{{count}} rutinas asociadas tambien desaparecieron."
+    },
+    "deleteFallbackDevice": "Este dispositivo",
+    "deleteWarnings": {
+      "groupsTitle": "Revisar grupos",
+      "groupSingular": "{{device}} forma parte del grupo {{group}}. Si lo eliminas, ese grupo perdera este dispositivo.",
+      "groupPlural": "{{device}} forma parte de {{count}} grupos. Si lo eliminas, esos grupos perderan este dispositivo.",
+      "routinesTitle": "Revisar rutinas",
+      "routineSingular": "{{device}} tiene una rutina asociada. Si eliminas {{device}}, su rutina desaparecera.",
+      "routinePlural": "{{device}} tiene {{count}} rutinas asociadas. Si eliminas {{device}}, sus rutinas desapareceran.",
+      "modesTitle": "Revisar modos",
+      "modeSingular": "{{device}} esta relacionado con un modo existente. Eliminarlo puede afectar esa configuracion.",
+      "modePlural": "{{device}} esta relacionado con {{count}} modos existentes. Eliminarlo puede afectar esas configuraciones.",
+      "deleteTitle": "Eliminar dispositivo",
+      "deleteMessage": "Se eliminara {{device}}. Esta accion no afecta datos historicos ya registrados."
+    }
+  },
+  "routines": {
+    "eyebrow": "Automatización",
+    "title": "Rutinas automáticas",
+    "subtitle": "Programa acciones para encender o apagar dispositivos inteligentes según horarios definidos.",
+    "total": "Total",
+    "active": "Activas",
+    "inactive": "Inactiva",
+    "addTitle": "Crear rutina",
+    "name": "Nombre",
+    "device": "Dispositivo",
+    "selectDevice": "Selecciona un dispositivo",
+    "action": "Acción",
+    "time": "Horario",
+    "create": "Crear rutina",
+    "enable": "Activar",
+    "disable": "Desactivar",
+    "emptyTitle": "Todavía no hay rutinas",
+    "emptyContent": "Crea una rutina para automatizar tus dispositivos.",
+    "loadError": "No se pudieron cargar las rutinas.",
+    "createError": "No se pudo crear la rutina.",
+    "updateError": "No se pudo actualizar la rutina.",
+    "deleteError": "No se pudo eliminar la rutina.",
+    "conflictError": "Ya existe una rutina activa para ese dispositivo en el mismo horario.",
+    "planLimitReached": "Has alcanzado el límite de rutinas permitido por tu plan.",
+    "createSuccess": "Rutina creada correctamente.",
+    "pageDescription": "Programa alarmas operativas para dispositivos, grupos, habitaciones o sedes.",
+    "createOperationalSuccess": "Rutina creada como alarma operativa.",
+    "summary": {
+      "scheduled": "Programadas",
+      "inActiveSite": "en la sede activa.",
+      "pausedCount": "{{count}} pausada(s).",
+      "newRoutine": "Nueva rutina"
+    },
+    "toolbar": {
+      "eyebrow": "Alarmas programadas",
+      "title": "Rutinas globales",
+      "description": "Estas rutinas son independientes de las rutinas internas de modos."
+    },
+    "emptyScheduledTitle": "No hay rutinas programadas",
+    "emptyScheduledDescription": "Crea una alarma operativa para encender o apagar objetivos en un horario definido.",
+    "targetTypes": {
+      "device": "Dispositivo",
+      "group": "Grupo",
+      "room": "Habitacion",
+      "workplace": "Sede"
+    },
+    "targetTypeDescriptions": {
+      "device": "Rutina para un solo equipo",
+      "group": "Rutina para varios dispositivos",
+      "room": "Rutina para los equipos de una habitacion",
+      "workplace": "Rutina para un centro energetico completo"
+    },
+    "targetOptions": {
+      "deviceCount": "{{count}} dispositivos"
+    },
+    "actions": {
+      "turnOn": "Encender",
+      "turnOff": "Apagar"
+    },
+    "actionDescriptions": {
+      "turnOn": "Activar automaticamente",
+      "turnOff": "Desactivar automaticamente"
+    },
+    "repeat": {
+      "once": "Una vez",
+      "daily": "Diario",
+      "weekly": "Semanal",
+      "customInterval": "Cada X dias"
+    },
+    "repeatDescriptions": {
+      "once": "Activar solo en la fecha elegida",
+      "daily": "Repetir todos los dias",
+      "weekly": "Elegir dias especificos",
+      "customInterval": "Repetir por intervalo"
+    },
+    "weekDays": {
+      "mon": "Lunes",
+      "tue": "Martes",
+      "wed": "Miercoles",
+      "thu": "Jueves",
+      "fri": "Viernes",
+      "sat": "Sabado",
+      "sun": "Domingo",
+      "monShort": "Lun",
+      "tueShort": "Mar",
+      "wedShort": "Mie",
+      "thuShort": "Jue",
+      "friShort": "Vie",
+      "satShort": "Sab",
+      "sunShort": "Dom"
+    },
+    "placeholders": {
+      "device": "Selecciona un dispositivo",
+      "group": "Selecciona un grupo",
+      "room": "Selecciona una habitacion",
+      "workplace": "Selecciona una sede"
+    },
+    "form": {
+      "description": "Define objetivo, accion, horario y repeticion como una alarma global.",
+      "namePlaceholder": "Ej. Apagar luces de noche",
+      "target": "Objetivo",
+      "targetTypePlaceholder": "Tipo de objetivo",
+      "repetition": "Repeticion",
+      "scheduledTime": "Hora programada",
+      "days": "Dias",
+      "weeklyDaysAria": "Dias de repeticion semanal",
+      "everyDays": "Cada cuantos dias",
+      "daysSuffix": "dias"
+    },
+    "status": {
+      "active": "Activa",
+      "inactive": "Inactiva",
+      "paused": "Pausada"
+    },
+    "card": {
+      "time": "Hora",
+      "detailsAria": "Detalles de la rutina",
+      "applicable": "Aplicables",
+      "blocked": "Bloqueados",
+      "onceWithDate": "Una vez - {{date}}",
+      "everyDays": "Cada {{count}} dia(s)",
+      "weeklyWithDays": "Semanal - {{days}}",
+      "weeklyGeneric": "semanalmente",
+      "weeklyDaysText": "los dias {{days}}",
+      "waitingOnceDate": "Programada para el {{date}} a las {{time}}.",
+      "waitingOnce": "Programada para una ejecucion unica a las {{time}}.",
+      "waitingWeekly": "Se activara {{days}} a las {{time}}.",
+      "waitingInterval": "Se repetira cada {{count}} dia(s) a las {{time}}.",
+      "waitingDaily": "Se repetira todos los dias a las {{time}}.",
+      "pausedOnceDate": "Pausada. No se activara el {{date}}.",
+      "pausedWeekly": "Pausada. Repeticion semanal suspendida.",
+      "pausedInterval": "Pausada. Intervalo suspendido.",
+      "pausedDaily": "Pausada. Repeticion diaria suspendida."
+    },
+    "validation": {
+      "activeSiteRequired": "Selecciona una sede activa antes de crear rutinas.",
+      "weeklyDayRequired": "Selecciona al menos un dia para la rutina semanal."
+    },
+    "conflict": {
+      "title": "Revisar rutina",
+      "message": "Ya existe una rutina activa con el mismo objetivo, horario y accion. Puedes continuar si buscas repetir esa programacion."
+    },
+    "delete": {
+      "title": "Eliminar rutina",
+      "message": "Se eliminara {{name}}. La programacion dejara de activarse.",
+      "fallbackName": "esta rutina"
+    },
+    "toasts": {
+      "activated": "Rutina activada.",
+      "paused": "Rutina pausada.",
+      "deleted": "Rutina eliminada."
+    },
+    "list": {
+      "empty": "Todavia no tienes rutinas creadas.",
+      "groupFallback": "Grupo #{{id}}",
+      "deviceFallback": "Dispositivo #{{id}}"
+    }
+  },
+  "energy": {
+    "eyebrow": "Energy monitoring",
+    "title": "Monitoreo de consumo energético",
+    "subtitle": "Visualiza el consumo de tus dispositivos, filtra el historial y exporta tus lecturas para análisis.",
+    "exportCsv": "Exportar CSV",
+    "totalWatts": "Watts totales",
+    "averageWatts": "Promedio",
+    "highestReading": "Pico máximo",
+    "startDate": "Fecha inicial",
+    "endDate": "Fecha final",
+    "filter": "Filtrar",
+    "reset": "Restablecer",
+    "recommendationTitle": "Recomendación de ahorro",
+    "analytics": "Analítica",
+    "chartTitle": "Historial de consumo",
+    "emptyReadings": "No hay lecturas energéticas disponibles.",
+    "loadError": "No se pudieron cargar las lecturas energéticas.",
+    "noDataRecommendation": "Aún no hay datos suficientes para generar una recomendación.",
+    "highRecommendation": "Tu consumo energético es alto. Revisa tus dispositivos de mayor consumo.",
+    "moderateRecommendation": "Tu consumo energético es moderado. Revisa las horas pico para mejorar el ahorro.",
+    "lowRecommendation": "Tu consumo energético se mantiene bajo. Continúa optimizando tus rutinas.",
+    "exportNotAllowed": "Tu plan actual no permite exportar reportes CSV.",
+    "highReadings": "Lecturas altas",
+    "invalidDateRange": "El rango de fechas seleccionado no es válido.",
+    "exportSuccess": "CSV exportado correctamente."
+  },
+  "history": {
+    "eyebrow": "Historial energético",
+    "title": "Historial de consumo",
+    "subtitle": "Revisa las lecturas registradas, detecta picos de consumo y exporta la información para reportes.",
+    "registeredReadings": "Lecturas registradas",
+    "records": "registros",
+    "device": "Dispositivo",
+    "watts": "Watts",
+    "date": "Fecha",
+    "status": "Estado",
+    "high": "Alto",
+    "normal": "Normal",
+    "filterTitle": "Filtrar lecturas",
+    "filterDescription": "Selecciona un rango de fechas para revisar el consumo energético registrado.",
+    "registeredReadingsDescription": "Historial de lecturas energéticas ordenadas por fecha de registro.",
+    "advancedFiltersAria": "Filtros avanzados del historial",
+    "scope": {
+      "label": "Alcance",
+      "active": "Sede activa",
+      "activeDescription": "Solo lecturas de {{site}}",
+      "activeFallbackDescription": "Usa la sede seleccionada en Inicio",
+      "global": "Global",
+      "globalDescription": "Todas las lecturas conservadas del usuario"
+    },
+    "scopeSummary": {
+      "global": "Historial global de todas tus sedes.",
+      "noActiveSite": "Selecciona una sede activa para ver sus lecturas.",
+      "activeSite": "Historial aislado por sede activa: {{site}}."
+    },
+    "deviceNamePlaceholder": "Nombre del dispositivo",
+    "deviceId": "ID dispositivo",
+    "deviceIdPlaceholder": "Ej. 3",
+    "readingId": "ID lectura",
+    "readingIdPlaceholder": "Ej. 15",
+    "minWatts": "Watts mín.",
+    "maxWatts": "Watts máx.",
+    "sortBy": "Ordenar por",
+    "clearFilters": "Limpiar filtros",
+    "emptyEyebrow": "Sin lecturas",
+    "emptyTitle": "No se encontraron lecturas",
+    "emptyDescription": "Ajusta los filtros para revisar otros registros de consumo energético.",
+    "energy": "Energía",
+    "estimatedCost": "Costo estimado",
+    "time": "Hora",
+    "interval": "Intervalo",
+    "readingMeta": "ID #{{deviceId}} - Lectura #{{readingId}}",
+    "showing": "Mostrando",
+    "of": "de",
+    "readings": "lecturas",
+    "pageOf": "Página {{page}} de {{total}}",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "startDate": "Fecha inicial",
+    "endDate": "Fecha final",
+    "reset": "Restablecer",
+    "statusOptions": {
+      "all": "Todos",
+      "normal": "Normal",
+      "high": "Alto"
+    },
+    "sortOptions": {
+      "newest": "Más recientes",
+      "oldest": "Más antiguas",
+      "wattsDesc": "Mayor consumo",
+      "wattsAsc": "Menor consumo",
+      "costDesc": "Mayor costo"
+    },
+    "toasts": {
+      "exportSuccess": "Historial exportado.",
+      "exportError": "No se pudo exportar el historial."
+    },
+    "emptyValues": {
+      "noDate": "Sin fecha",
+      "noTime": "Sin hora",
+      "undefined": "No definido"
+    }
+  },
+  "billing": {
+    "eyebrow": "Billing",
+    "title": "Planes de servicio",
+    "subtitle": "Elige el plan que mejor se adapta a tu hogar, negocio o múltiples locales. No existe plan gratuito; todos los planes están orientados a operación real.",
+    "month": "mes",
+    "subscribe": "Suscribirme",
+    "selected": "Seleccionado",
+    "currentPlan": "Plan actual",
+    "activeSubscription": "Suscripción activa",
+    "noPlan": "Sin plan",
+    "cancel": "Cancelar plan",
+    "loadError": "No se pudo cargar la información de planes.",
+    "subscribeError": "No se pudo procesar la suscripción.",
+    "cancelError": "No se pudo cancelar la suscripción.",
+    "alreadySubscribed": "Ya estás suscrito a este plan.",
+    "paymentEyebrow": "Confirmación de pago",
+    "paymentTitle": "Confirmar método de pago",
+    "selectedPlan": "Plan seleccionado",
+    "amountToPay": "Monto a pagar",
+    "holderName": "Nombre del titular",
+    "cardNumber": "Número de tarjeta",
+    "expirationDate": "Fecha de vencimiento",
+    "cvv": "CVV",
+    "confirmPayment": "Confirmar pago",
+    "cancelPayment": "Cancelar",
+    "invalidCardNumber": "El número de tarjeta no es válido.",
+    "invalidCvv": "El CVV no es válido.",
+    "invalidHolderName": "Ingresa el nombre del titular.",
+    "lastPayment": "Último pago",
+    "recommended": "RECOMENDADO",
+    "choosePlan": "Elegir plan",
+    "activePlanBadge": "Plan activo",
+    "summaryStarterLabel": "Hogares pequeños",
+    "summaryStarterText": "Ideal para comenzar con monitoreo básico y alertas simples.",
+    "summaryProfessionalLabel": "Recomendado",
+    "summaryProfessionalText": "La mejor opción para hogares avanzados y pequeños negocios.",
+    "summaryEnterpriseLabel": "Múltiples locales",
+    "summaryEnterpriseText": "Pensado para equipos, sedes y operación empresarial.",
+    "maxDevices": "Hasta {{ count }} dispositivos",
+    "maxRoutines": "Hasta {{ count }} rutinas",
+    "reportExportEnabled": "Exportación de reportes",
+    "planUsage": {
+      "STARTER": "Para hogares pequeños",
+      "PROFESSIONAL": "Para hogares avanzados y negocios pequeños",
+      "ENTERPRISE": "Para múltiples locales comerciales"
+    },
+    "planDescriptions": {
+      "STARTER": "Gestión básica de energía para hogares pequeños.",
+      "PROFESSIONAL": "Control avanzado para hogares y pequeños negocios.",
+      "ENTERPRISE": "Plataforma completa para múltiples locales o empresas."
+    },
+    "planFeatures": {
+      "STARTER": {
+        "devices": "Hasta 5 dispositivos inteligentes",
+        "dashboard": "Panel energético básico",
+        "alerts": "Alertas por correo"
+      },
+      "PROFESSIONAL": {
+        "devices": "Hasta 20 dispositivos inteligentes",
+        "analytics": "Analítica energética avanzada",
+        "routines": "Rutinas de automatización",
+        "reports": "Reportes mensuales"
+      },
+      "ENTERPRISE": {
+        "locations": "Múltiples locales comerciales",
+        "accessProfiles": "Perfiles de acceso para el equipo",
+        "alerts": "Alertas avanzadas",
+        "support": "Soporte prioritario"
+      }
+    },
+    "historyEyebrow": "Historial de facturación",
+    "historyTitle": "Historial de facturación",
+    "historySubtitle": "Revisa tus pagos, facturas y estado actual de suscripción.",
+    "invoices": "Facturas",
+    "invoice": "Factura",
+    "issuedAt": "Emitida el",
+    "status": "Estado",
+    "downloadInvoice": "Descargar factura",
+    "emptyInvoicesTitle": "Todavía no hay facturas",
+    "emptyInvoicesContent": "Tus facturas aparecerán aquí después de procesar tus pagos.",
+    "subscribeSuccess": "Suscripción activada correctamente.",
+    "cancelSuccess": "Suscripción cancelada correctamente.",
+    "invalidExpirationDate": "La fecha de vencimiento no es válida.",
+    "invoiceNotFound": "Factura no encontrada."
+  },
+  "alerts": {
+    "eyebrow": "Centro de alertas",
+    "title": "Alertas del sistema",
+    "subtitle": "Visualiza eventos importantes, alertas de consumo y notificaciones operativas de EnergyCore.",
+    "total": "Total",
+    "unreadCount": "No leídas",
+    "createTitle": "Crear alerta",
+    "alertTitle": "Título",
+    "message": "Mensaje",
+    "level": "Nivel",
+    "create": "Crear alerta",
+    "unread": "No leída",
+    "markAsRead": "Marcar como leída",
+    "emptyTitle": "No hay alertas",
+    "emptyContent": "Cuando ocurra un evento importante, aparecerá en esta sección.",
+    "loadError": "No se pudieron cargar las alertas.",
+    "createError": "No se pudo crear la alerta.",
+    "markAsReadError": "No se pudo marcar la alerta como leída.",
+    "planLimitReached": "Has alcanzado el límite de alertas permitido por tu plan.",
+    "criticalCount": "Críticas",
+    "createSuccess": "Alerta creada correctamente.",
+    "deleteError": "No se pudo eliminar la alerta.",
+    "inboxSubtitle": "Revisa alertas activas, eventos importantes y notificaciones permitidas por tus preferencias.",
+    "summaryAria": "Resumen de alertas visibles",
+    "refresh": "Actualizar",
+    "hiddenByPreferences": "{{count}} alertas quedan fuera de la bandeja por tus preferencias actuales.",
+    "markAsReadSuccess": "Alerta marcada como leida.",
+    "deleteSuccess": "Alerta eliminada.",
+    "dismissSuccess": "Alerta silenciada por {{minutes}} minutos.",
+    "dismissError": "No se pudo silenciar la alerta.",
+    "read": "Leida",
+    "dismissForMinutes": "Silenciar {{minutes}} min",
+    "severityCalibration": "Calibracion de gravedad",
+    "calibration": "Calibracion",
+    "viewDetails": "Ver detalles",
+    "recommendedAction": "Accion sugerida",
+    "summary": {
+      "visibleInboxOnly": "Solo bandeja visible",
+      "withoutSilenced": "Sin silenciadas"
+    },
+    "toolbar": {
+      "title": "Alertas reales",
+      "description": "Se muestran alertas activas guardadas para tu usuario y permitidas por tus preferencias de salida."
+    },
+    "filters": {
+      "all": "Todas",
+      "unread": "No leidas",
+      "stable": "Estables",
+      "success": "Logros",
+      "info": "Informativas",
+      "warning": "Atencion",
+      "critical": "Criticas"
+    },
+    "levels": {
+      "stable": "Stable",
+      "success": "Exito",
+      "info": "Info",
+      "warning": "Atencion",
+      "critical": "Critico"
+    },
+    "severityDescriptions": {
+      "stable": "Dentro de rango",
+      "success": "Bajo impacto",
+      "info": "Seguimiento normal",
+      "warning": "Atencion preventiva",
+      "critical": "Atencion inmediata",
+      "default": "Seguimiento"
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "saveChanges": "Guardar cambios",
+    "delete": "Eliminar",
+    "cancel": "Cancelar",
+    "continue": "Continuar",
+    "keep": "Conservar",
+    "ok": "OK"
+  },
+  "profile": {
+    "eyebrow": "Perfil de usuario",
+    "title": "Mi perfil",
+    "subtitle": "Gestiona tu información personal y la configuración de tu cuenta.",
+    "personalData": "Datos personales",
+    "saveChanges": "Guardar cambios",
+    "deleteAccount": "Eliminar cuenta",
+    "deleteAccountWarning": "Esta acción es permanente y no se puede deshacer.",
+    "deleteConfirmation": "Escribe ELIMINAR para confirmar."
+  },
+  "deviceGroups": {
+    "eyebrow": "Grupos de dispositivos",
+    "title": "Grupos de dispositivos",
+    "subtitle": "Organiza dispositivos en grupos y ejecuta acciones sobre ellos en conjunto.",
+    "addTitle": "Crear grupo de dispositivos",
+    "name": "Nombre",
+    "description": "Descripción",
+    "create": "Crear grupo",
+    "createSuccess": "Grupo de dispositivos creado correctamente.",
+    "createError": "No se pudo crear el grupo de dispositivos.",
+    "updateError": "No se pudo actualizar el grupo de dispositivos.",
+    "deleteError": "No se pudo eliminar el grupo de dispositivos.",
+    "executeSuccess": "Acción del grupo ejecutada correctamente.",
+    "executeError": "No se pudo ejecutar la acción del grupo.",
+    "pageDescription": "Organiza dispositivos por intencion de uso dentro de la sede activa.",
+    "noSelection": "Sin seleccion",
+    "deleteSuccess": "Grupo eliminado.",
+    "summary": {
+      "createdTitle": "Creados",
+      "availableTitle": "Disponibles",
+      "multiGroupDescription": "pueden pertenecer a varios grupos.",
+      "selectionEyebrow": "Seleccion",
+      "selectedDevices": "{{count}} dispositivo(s) seleccionados."
+    },
+    "toolbar": {
+      "eyebrow": "Grupos semanticos",
+      "title": "Control por intencion",
+      "description": "Un grupo puede representar iluminacion, ahorro, noche o cualquier forma real de uso."
+    },
+    "emptyDevices": {
+      "title": "No hay dispositivos asignados",
+      "description": "Asigna dispositivos a la sede activa antes de crear grupos."
+    },
+    "emptyGroups": {
+      "title": "No hay grupos en esta sede",
+      "description": "Crea un grupo semantico con dispositivos de una misma habitacion."
+    },
+    "form": {
+      "eyebrow": "Nuevo grupo",
+      "description": "Selecciona dispositivos de una misma habitacion. Un dispositivo puede pertenecer a varios grupos.",
+      "namePlaceholder": "Ej. Iluminacion sala",
+      "descriptionPlaceholder": "Proposito del grupo",
+      "pickerDescription": "Marca equipos asignados a {{location}}.",
+      "selectedCount": "{{count}} seleccionados",
+      "availableCount": "{{count}} disponibles",
+      "alsoBelongsTo": "Tambien pertenece a"
+    },
+    "selection": {
+      "select": "Seleccionar",
+      "selected": "Seleccionado"
+    },
+    "state": {
+      "on": "Encendido",
+      "off": "Apagado",
+      "mixed": "Mixto"
+    },
+    "card": {
+      "defaultDescription": "Grupo semantico para organizar dispositivos por intencion de uso.",
+      "assignedDevices": "Dispositivos asignados",
+      "noAssignedDevices": "Sin dispositivos asignados.",
+      "createdAt": "Creado",
+      "noDate": "Sin fecha registrada"
+    },
+    "validation": {
+      "sameRoom": "Un grupo debe pertenecer a una sola habitacion. Selecciona dispositivos de la misma habitacion.",
+      "activeLocationRequired": "Selecciona una sede activa antes de crear un grupo.",
+      "nameRequired": "Escribe un nombre para el grupo antes de crearlo.",
+      "deviceRequired": "Selecciona al menos un dispositivo para crear el grupo."
+    },
+    "deleteFallbackGroup": "Este grupo",
+    "deleteWarnings": {
+      "devicesTitle": "Revisar dispositivos",
+      "devicesMessage": "{{group}} contiene {{count}} dispositivo(s). Al eliminar el grupo, los dispositivos seguiran existiendo.",
+      "routinesTitle": "Revisar rutinas",
+      "routineSingular": "{{group}} participa en una rutina activa. Revisa si deseas continuar.",
+      "routinePlural": "{{group}} participa en {{count}} rutinas activas. Revisa si deseas continuar.",
+      "modesTitle": "Revisar modos",
+      "modeSingular": "{{group}} esta relacionado con un modo existente. Eliminarlo puede afectar esa configuracion.",
+      "modePlural": "{{group}} esta relacionado con {{count}} modos existentes. Eliminarlo puede afectar esas configuraciones.",
+      "deleteTitle": "Eliminar grupo",
+      "deleteMessage": "Se eliminara {{group}}. Los dispositivos no se eliminan."
+    }
+  },
+  "alertRules": {
+    "eyebrow": "Reglas de alerta",
+    "title": "Reglas de alerta",
+    "subtitle": "Configura reglas automáticas para generar alertas según umbrales de consumo.",
+    "total": "Total",
+    "enabled": "Activas",
+    "createTitle": "Crear regla de alerta",
+    "name": "Nombre",
+    "threshold": "Umbral",
+    "create": "Crear regla",
+    "enable": "Activar",
+    "disable": "Desactivar",
+    "createSuccess": "Regla de alerta creada correctamente.",
+    "createError": "No se pudo crear la regla de alerta.",
+    "updateError": "No se pudo actualizar la regla de alerta.",
+    "deleteError": "No se pudo eliminar la regla de alerta.",
+    "pageDescription": "Define criterios persistentes para clasificar eventos operativos. La evaluacion usa las reglas activas guardadas para tu usuario.",
+    "summaryAria": "Resumen de reglas",
+    "savedRules": "Reglas guardadas",
+    "pausedCount": "{{count}} pausadas",
+    "activeWeight": "Peso activo",
+    "usedWhenEvaluating": "Usado al evaluar",
+    "realScoreRanges": "Rangos reales del score",
+    "realScoreRangesDescription": "Estos rangos vienen de Preferencias. Estable empieza en 0 y Critica termina en 100.",
+    "newRule": "Nueva regla",
+    "createPersistentRule": "Crear regla persistente",
+    "createPersistentRuleDescription": "La regla se guarda y puede participar en la evaluacion mientras este activa.",
+    "namePlaceholder": "Ej. Pico de potencia en sala",
+    "metric": "Metrica",
+    "condition": "Condicion",
+    "scope": "Alcance",
+    "criterion": "Criterio",
+    "weight": "Peso",
+    "savedRulesDescription": "Activar, pausar o eliminar impacta la lista persistida y la siguiente evaluacion.",
+    "emptyTitle": "No hay reglas guardadas",
+    "emptyDescription": "Crea una regla para que la evaluacion tenga criterios persistidos.",
+    "evaluation": "Evaluacion",
+    "testActiveRules": "Probar reglas activas",
+    "testActiveRulesDescription": "La prueba usa el servicio de evaluacion y las reglas activas guardadas.",
+    "observedValue": "Valor observado",
+    "evaluate": "Evaluar",
+    "testedNotification": "Notificacion probada",
+    "score": "Score",
+    "criteria": "Criterios",
+    "readingsValue": "{{count}} lecturas",
+    "validation": {
+      "nameRequired": "Escribe un nombre para la regla."
+    },
+    "toasts": {
+      "paused": "Regla pausada.",
+      "activated": "Regla activada.",
+      "deleted": "Regla eliminada.",
+      "evaluateError": "No se pudo evaluar las reglas.",
+      "evaluated": "Reglas evaluadas."
+    },
+    "metrics": {
+      "watts": "Potencia instantanea",
+      "highReadingCount": "Cantidad de lecturas altas",
+      "averageWatts": "Promedio de watts"
+    },
+    "metricDescriptions": {
+      "watts": "Watts medidos en el evento.",
+      "highReadingCount": "Numero de eventos marcados como altos en el periodo evaluado.",
+      "averageWatts": "Promedio observado para el periodo."
+    },
+    "conditions": {
+      "greaterOrEqual": "Alcanza o supera",
+      "greaterThan": "Supera",
+      "greaterOrEqualLower": "alcanza o supera",
+      "greaterThanLower": "supera"
+    },
+    "scopes": {
+      "general": "General"
+    },
+    "evaluators": {
+      "activePower": "Potencia activa",
+      "dailyKwh": "Consumo diario",
+      "averageWatts": "Promedio watts",
+      "highReadingCount": "Cantidad de lecturas altas",
+      "sustainedConsumption": "Consumo sostenido",
+      "deviceCount": "Cantidad de dispositivos",
+      "goalUsage": "Uso de meta",
+      "goalDeadline": "Vencimiento de meta",
+      "routineContext": "Contexto de rutina",
+      "costEstimate": "Costo estimado",
+      "configurationCoverage": "Cobertura configurada"
+    },
+    "severityRanges": {
+      "stableDescription": "Operacion dentro del rango esperado.",
+      "infoDescription": "Evento util para seguimiento, sin urgencia.",
+      "warningDescription": "Conviene revisar antes de que escale.",
+      "criticalDescription": "Requiere accion inmediata."
+    }
+  },
+  "notificationPreferences": {
+    "eyebrow": "Preferencias de notificación",
+    "title": "Preferencias de notificación",
+    "subtitle": "Configura cómo y cuándo quieres recibir notificaciones de EnergyCore.",
+    "emailEnabled": "Notificaciones por correo",
+    "pushEnabled": "Notificaciones push",
+    "criticalOnly": "Solo alertas críticas",
+    "minimumLevel": "Nivel mínimo",
+    "save": "Guardar preferencias",
+    "updateSuccess": "Preferencias de notificación actualizadas correctamente.",
+    "updateError": "No se pudieron actualizar las preferencias de notificación.",
+    "sensitivityTitle": "Sensibilidad de alertas",
+    "sensitivityDescription": "Ajusta categorias visibles, ruido, pesos preliminares y salida de alertas para tu usuario.",
+    "currentPreference": "Preferencia actual",
+    "editorTitle": "Editor preliminar",
+    "editorDescription": "Los canales, fuentes y silencios se guardan; los pesos y rangos quedan listos para el siguiente contrato.",
+    "emptyTitle": "Sin preferencias cargadas",
+    "emptyDescription": "Cuando la preferencia del usuario este disponible, podras editar la visibilidad de la bandeja.",
+    "summary": {
+      "rangesEyebrow": "Rangos",
+      "rangesTitle": "Stable a Critical",
+      "rangesDescription": "Los limites se mantienen contiguos para evitar cruces.",
+      "successTitle": "Positivo aparte",
+      "successDescription": "Los eventos buenos no compiten con el riesgo.",
+      "parametersEyebrow": "Parametros",
+      "parametersTitle": "Pesos y ruido",
+      "parametersDescription": "Controla prioridad, repeticion, horarios y fuentes."
+    },
+    "sensitivity": "Sensibilidad",
+    "weightedClassification": "Clasificacion ponderada",
+    "weightedClassificationDescription": "Success queda fuera del riesgo. Stable, Neutral, Warning y Critical se calculan por rangos contiguos.",
+    "stableCeiling": "Tope Stable",
+    "neutralCeiling": "Tope Info",
+    "warningCeiling": "Tope Warning",
+    "preview": "Preview",
+    "sensitiveResult": "Resultado sensible",
+    "previewDescription": "El puntaje tecnico no necesita verse en bandeja; aqui solo sirve para calibrar la categoria.",
+    "context": "Contexto",
+    "baseSignal": "Senal base",
+    "finalCategory": "Categoria final",
+    "weightedPercent": "{{value}}% ponderado",
+    "positiveEvents": "Eventos positivos",
+    "positiveEventsDescription": "Acciones correctas, recuperaciones, metas cumplidas y aplicaciones exitosas.",
+    "showSuccess": "Mostrar Success",
+    "showSuccessDescription": "Mantiene visible lo bueno sin mezclarlo con riesgo.",
+    "visibleCategories": "Categorias visibles",
+    "allowedLevels": "Niveles permitidos",
+    "allowedLevelsDescription": "El contrato actual guarda estos niveles; Neutral se persiste como INFO.",
+    "criticalOnlyLabel": "Solo Critical",
+    "criticalOnlyDescription": "Reduce ruido y deja pasar unicamente eventos urgentes.",
+    "weighting": "Ponderacion",
+    "contextParameters": "Parametros por contexto",
+    "contextParametersDescription": "Estos pesos son preliminares: ajustan la preview y dejan listo el siguiente contrato.",
+    "weightDescription": "{{weight}}% de peso",
+    "output": "Salida",
+    "channelsAndNoise": "Canales y ruido",
+    "channelsAndNoiseDescription": "Estos parametros ya se guardan en la preferencia actual.",
+    "deliveryMode": "Modo de entrega",
+    "cooldown": "Cooldown",
+    "minutes": "minutos",
+    "maxPerHour": "Maximo por hora",
+    "alertsUnit": "alertas",
+    "silences": "Silencios",
+    "scheduleAndExceptions": "Horario y excepciones",
+    "scheduleAndExceptionsDescription": "Critical puede romper silencio si lo permites.",
+    "quietStart": "Inicio silencio",
+    "quietEnd": "Fin silencio",
+    "levelDescriptions": {
+      "stable": "Mostrar todo desde estado estable.",
+      "info": "Recibir eventos relevantes y superiores.",
+      "warning": "Recibir solo preventivas y criticas.",
+      "critical": "Recibir solo eventos urgentes."
+    },
+    "deliveryModes": {
+      "banner": "Banner",
+      "quiet": "Silencioso",
+      "inboxOnly": "Solo bandeja",
+      "muted": "Silenciado"
+    },
+    "deliveryModeDescriptions": {
+      "banner": "Salida visible normal.",
+      "quiet": "Sin ruido invasivo.",
+      "inboxOnly": "Sin aviso emergente.",
+      "muted": "Sin salida invasiva."
+    },
+    "sources": {
+      "device": "Dispositivos",
+      "group": "Grupos",
+      "room": "Habitaciones",
+      "workplace": "Sedes",
+      "routine": "Rutinas",
+      "goal": "Metas",
+      "report": "Reportes",
+      "rule": "Reglas",
+      "mode": "Modos",
+      "system": "Sistema"
+    },
+    "sourceDescriptions": {
+      "device": "Estado, respuesta y consumo directo de equipos.",
+      "group": "Cambios agregados por intencion de uso.",
+      "routine": "Ejecucion, fallos o silencios de automatizacion.",
+      "goal": "Progreso, riesgo de exceder o cumplimiento.",
+      "rule": "Umbrales automaticos y evaluaciones activas.",
+      "mode": "Aplicacion de perfiles operativos.",
+      "system": "Recomendaciones y eventos propios de plataforma."
+    },
+    "toggles": {
+      "inAppDescription": "Mostrar alertas dentro de la app.",
+      "toastTitle": "Toast",
+      "toastDescription": "Avisos emergentes dentro de la sesion.",
+      "dashboardTitle": "Dashboard",
+      "dashboardDescription": "Reflejar alertas en paneles.",
+      "emailTitle": "Correo",
+      "emailDescription": "Canal preparado para avisos externos.",
+      "pushTitle": "Push",
+      "pushDescription": "Canal preparado para avisos del dispositivo.",
+      "groupSimilarTitle": "Agrupar similares",
+      "groupSimilarDescription": "Reduce repeticion por hilo de alerta.",
+      "quietHoursTitle": "Horario silencioso",
+      "quietHoursDescription": "Usa una ventana sin ruido.",
+      "criticalBreaksTitle": "Critical rompe silencio",
+      "criticalBreaksDescription": "Eventos urgentes siguen visibles.",
+      "remindersTitle": "Recordatorios",
+      "remindersDescription": "Permite avisos posteriores.",
+      "nightRoutinesTitle": "Rutinas nocturnas",
+      "nightRoutinesDescription": "Baja ruido por automatizacion nocturna.",
+      "goalDeadlineTitle": "Metas con fecha",
+      "goalDeadlineDescription": "Prioriza metas cerca del limite.",
+      "maintenanceDescription": "Incluye equipos en revision.",
+      "recommendationsTitle": "Recomendaciones",
+      "recommendationsDescription": "Muestra sugerencias del sistema.",
+      "dailySummaryTitle": "Resumen diario",
+      "dailySummaryDescription": "Agrupa actividad del dia.",
+      "weeklySummaryTitle": "Resumen semanal",
+      "weeklySummaryDescription": "Agrupa tendencias semanales.",
+      "monthlyReportTitle": "Reporte mensual",
+      "monthlyReportDescription": "Genera y avisa el reporte mensual por correo preparado."
+    }
+  },
+  "workplace": {
+    "locationsEyebrow": "Espacio de trabajo",
+    "locationsTitle": "Sedes",
+    "locationsSubtitle": "Gestiona los locales donde se instalan dispositivos de EnergyCore.",
+    "roomsEyebrow": "Habitaciones",
+    "roomsTitle": "Habitaciones",
+    "roomsSubtitle": "Organiza habitaciones dentro de cada sede.",
+    "assignmentsEyebrow": "Asignaciones de dispositivos",
+    "assignmentsTitle": "Asignaciones de dispositivos",
+    "assignmentsSubtitle": "Asigna dispositivos a una sede y habitacion para que puedan participar en grupos, rutinas, modos, metas y reportes.",
+    "totalLocations": "Total de sedes",
+    "businessLocations": "Locales comerciales",
+    "branchLocations": "Sucursales",
+    "totalRooms": "Total de habitaciones",
+    "totalAssignments": "Total de asignaciones",
+    "totalDevices": "Total de dispositivos",
+    "createLocation": "Crear sede",
+    "createRoom": "Crear habitacion",
+    "assignDevice": "Asignar dispositivo",
+    "locationName": "Nombre de la sede",
+    "roomName": "Nombre de la habitacion",
+    "address": "Dirección",
+    "floor": "Piso",
+    "selectLocation": "Selecciona una sede",
+    "selectRoom": "Selecciona una habitacion",
+    "selectDevice": "Selecciona un dispositivo",
+    "create": "Crear",
+    "loadError": "No se pudo cargar la información del espacio de trabajo.",
+    "locationCreateSuccess": "Sede creada correctamente.",
+    "locationCreateError": "No se pudo crear la sede.",
+    "locationUpdateSuccess": "Sede actualizada correctamente.",
+    "locationUpdateError": "No se pudo actualizar la sede.",
+    "locationDeleteError": "No se pudo eliminar la sede.",
+    "roomCreateSuccess": "Habitacion creada correctamente.",
+    "roomCreateError": "No se pudo crear la habitacion.",
+    "roomUpdateSuccess": "Habitacion actualizada correctamente.",
+    "roomUpdateError": "No se pudo actualizar la habitacion.",
+    "roomDeleteError": "No se pudo eliminar la habitacion.",
+    "assignmentCreateSuccess": "Dispositivo asignado correctamente.",
+    "assignmentCreateError": "No se pudo asignar el dispositivo.",
+    "assignmentMoveSuccess": "Asignación de dispositivo movida correctamente.",
+    "assignmentMoveError": "No se pudo mover la asignación del dispositivo.",
+    "assignmentDeleteError": "No se pudo eliminar la asignación del dispositivo.",
+    "deviceAlreadyAssigned": "Este dispositivo ya está asignado.",
+    "locationTypes": {
+      "home": "Casa",
+      "business": "Empresa",
+      "branch": "Local"
+    },
+    "locations": {
+      "pageDescription": "Administra los lugares fisicos donde EnergyCore organiza habitaciones, dispositivos y consumo.",
+      "summary": {
+        "registeredTitle": "Registradas",
+        "registeredDescription": "Casas, oficinas o locales operativos.",
+        "assignedTitle": "Con sede",
+        "unassignedDevices": "{{count}} dispositivo(s) sin sede.",
+        "coverageEyebrow": "Cobertura",
+        "unroomedDevices": "{{count}} dispositivo(s) sin habitacion."
+      },
+      "toolbar": {
+        "eyebrow": "Gestion de sedes",
+        "title": "Crea y selecciona centros operativos",
+        "description": "La ubicacion puede guardarse como referencia escrita o como coordenadas aproximadas."
+      },
+      "empty": {
+        "title": "No hay sedes",
+        "description": "Crea una sede para organizar habitaciones, dispositivos, grupos y consumo por lugar fisico."
+      },
+      "form": {
+        "eyebrow": "Nueva sede",
+        "description": "Define el nombre, tipo y una ubicacion de referencia para este espacio operativo.",
+        "namePlaceholder": "Ej. Oficina central",
+        "typeLabel": "Tipo",
+        "typePlaceholder": "Tipo de sede",
+        "addressLabel": "Direccion o referencia",
+        "addressPlaceholder": "Direccion, referencia o coordenadas"
+      },
+      "map": {
+        "title": "Selector aproximado",
+        "description": "Arrastra el mapa, usa la rueda para acercar o busca una direccion para ubicar el marcador.",
+        "iframeTitle": "Mapa OpenStreetMap de referencia",
+        "surfaceLabel": "Seleccionar punto en el mapa",
+        "selectedLabel": "Ubicacion seleccionada",
+        "selectedAddress": "Ubicacion seleccionada ({{coordinates}})",
+        "searchingAddress": "Buscando direcciones...",
+        "zoomIn": "Acercar",
+        "zoomOut": "Alejar",
+        "locateMe": "Usar mi ubicacion",
+        "locationUnavailable": "La ubicacion no esta disponible en este navegador.",
+        "locationDenied": "El permiso de ubicacion fue denegado o no se pudo resolver."
+      },
+      "deleteTitle": "Eliminar sede",
+      "deleteMessage": "Vas a eliminar {{name}}. Las habitaciones y asignaciones asociadas pueden dejar de aparecer en Espacios.",
+      "deleteSuccess": "Sede eliminada.",
+      "card": {
+        "createdAt": "Creada",
+        "noDate": "Sin fecha registrada",
+        "activePower": "Potencia activa",
+        "withoutRoom": "Sin habitacion",
+        "coverage": "Cobertura",
+        "goToRooms": "Ir",
+        "goToRoomsAria": "Ir a habitaciones de esta sede"
+      }
+    },
+    "rooms": {
+      "pageDescription": "Organiza la sede activa por habitaciones para entender donde estan los dispositivos y como se distribuye el consumo.",
+      "activeLocationFallback": "sede activa",
+      "summary": {
+        "activeLocationEyebrow": "Sede activa",
+        "availableRooms": "habitacion(es) disponibles para organizar movimientos.",
+        "registeredTitle": "Registradas",
+        "registeredDescription": "Zonas fisicas disponibles para asignar dispositivos.",
+        "assignedTitle": "Asignados",
+        "linkedGroups": "{{count}} grupo(s) vinculados en la sede."
+      },
+      "toolbar": {
+        "eyebrow": "Gestion de habitaciones",
+        "title": "Agrega zonas a {{location}}",
+        "description": "Las habitaciones ayudan a mover dispositivos y revisar consumo por lugar."
+      },
+      "empty": {
+        "title": "No hay habitaciones en esta sede",
+        "description": "Crea una habitacion para ubicar dispositivos y moverlos entre zonas reales."
+      },
+      "form": {
+        "eyebrow": "Nueva habitacion",
+        "description": "La habitacion se agregara a la sede activa y quedara disponible para movimientos de dispositivos.",
+        "namePlaceholder": "Ej. Sala principal",
+        "siteLabel": "Sede"
+      },
+      "status": {
+        "noDevices": "Sin dispositivos",
+        "active": "Con actividad",
+        "idle": "Sin actividad"
+      },
+      "card": {
+        "createdAt": "Creada",
+        "noDate": "Sin fecha registrada",
+        "activeDevices": "Encendidos",
+        "consumption": "Consumo",
+        "relatedGroup": "Grupo relacionado",
+        "noLinkedGroup": "Sin grupo vinculado",
+        "relatedRoutines": "Rutinas relacionadas",
+        "goToAssignments": "Ir",
+        "goToAssignmentsAria": "Ir a asignaciones de esta habitacion"
+      },
+      "toasts": {
+        "loadError": "No se pudo cargar la informacion de habitaciones.",
+        "locationRequired": "Crea una sede antes de crear habitaciones.",
+        "deleteSuccess": "Habitacion eliminada correctamente."
+      },
+      "deleteTitle": "Eliminar habitacion",
+      "deleteMessageWithDevices": "Esta habitacion tiene {{count}} dispositivo(s) asignado(s). Si la eliminas, esas referencias pueden quedar sin habitacion.",
+      "deleteMessageEmpty": "Vas a eliminar esta habitacion de la sede activa."
+    },
+    "deviceTypes": {
+      "plug": "Enchufe",
+      "light": "Luz",
+      "switch": "Interruptor",
+      "sensor": "Sensor",
+      "other": "Otro"
+    },
+    "assignments": {
+      "pageDescription": "Arrastra dispositivos entre dos habitaciones y confirma cuando el cambio afecte grupos, rutinas o modos.",
+      "activeLocationFallback": "sede activa",
+      "noRoom": "Sin habitacion",
+      "noSecondRoomOption": "No hay otra habitacion disponible",
+      "noSecondRoomAvailable": "No hay una segunda habitacion disponible.",
+      "panelItemCount": "{{count}} elemento(s) en esta habitacion.",
+      "go": "Ir",
+      "summary": {
+        "activeLocationEyebrow": "Sede activa",
+        "availableRooms": "habitacion(es) disponibles para organizar movimientos.",
+        "movableTitle": "Movibles",
+        "connectedDevices": "dispositivo(s) conectados a esta sede.",
+        "interactionEyebrow": "Interaccion",
+        "dragTitle": "Arrastre directo",
+        "directValue": "Directo",
+        "dragDescription": "arrastra dispositivos entre Habitacion 1 y Habitacion 2."
+      },
+      "movement": {
+        "eyebrow": "Movimiento entre habitaciones",
+        "title": "Nueva asignacion",
+        "description": "Arrastra cada dispositivo de un panel al otro. Las confirmaciones de grupo, rutina y modo aparecen antes de aplicar el cambio."
+      },
+      "panels": {
+        "roomOne": "Habitacion 1",
+        "roomTwo": "Habitacion 2"
+      },
+      "emptyRooms": {
+        "title": "No hay habitaciones",
+        "description": "Crea habitaciones en la sede activa para poder mover dispositivos o grupos."
+      },
+      "emptyAssignments": {
+        "title": "No hay dispositivos asignados",
+        "description": "Cuando una sede tenga dispositivos conectados, podras moverlos entre habitaciones desde esta vista."
+      },
+      "emptyPanel": {
+        "title": "Sin dispositivos",
+        "description": "Arrastra aqui un dispositivo para moverlo a esta habitacion."
+      },
+      "unavailablePanel": {
+        "title": "Habitacion no disponible",
+        "description": "Agrega otra habitacion para habilitar este panel."
+      },
+      "device": {
+        "noPowerInfo": "Sin informacion de potencia",
+        "notAvailable": "No disponible",
+        "on": "Encendido",
+        "off": "Apagado",
+        "maintenance": "Mantenimiento"
+      },
+      "form": {
+        "operationalSite": "Sede operativa",
+        "siteOnly": "Asignar solo a la sede",
+        "availableRoom": "Habitacion disponible"
+      },
+      "toasts": {
+        "loadError": "No se pudo cargar la informacion de asignaciones.",
+        "moveSuccess": "Movimiento aplicado correctamente.",
+        "moveError": "No se pudo completar el movimiento."
+      },
+      "warnings": {
+        "groupTitle": "Revisar grupo",
+        "groupMessage": "Este dispositivo forma parte del grupo {{group}}. Si lo mueves, ese grupo puede quedar incompleto.",
+        "routinesTitle": "Revisar rutinas",
+        "routinesMessage": "Este dispositivo participa en rutinas activas. Revisa si deseas continuar.",
+        "modesTitle": "Revisar modos",
+        "modesMessage": "Este dispositivo esta relacionado con un modo. Moverlo puede afectar ese modo."
+      }
+    }
+  },
+  "reporting": {
+    "reportsEyebrow": "Reportes",
+    "reportsTitle": "Reportes de consumo",
+    "reportsSubtitle": "Genera y revisa reportes de consumo energético.",
+    "goalsEyebrow": "Metas energéticas",
+    "goalsTitle": "Metas energéticas",
+    "goalsSubtitle": "Define metas de ahorro y monitorea tu progreso.",
+    "totalReports": "Total de reportes",
+    "totalGoals": "Total de metas",
+    "activeGoals": "Metas activas",
+    "completedGoals": "Metas completadas",
+    "totalReportedWatts": "Watts reportados totales",
+    "averageReportedWatts": "Promedio de watts reportados",
+    "monthlyComparison": "Comparación de reportes",
+    "monthlyComparisonSubtitle": "Compara reportes del mismo periodo:",
+    "createReport": "Crear reporte",
+    "createGoal": "Crear meta",
+    "reportTitle": "Título del reporte",
+    "goalTitle": "Título de la meta",
+    "generate": "Generar",
+    "export": "Exportar",
+    "totalWatts": "Watts totales",
+    "averageWatts": "Watts promedio",
+    "highestWatts": "Watts máximos",
+    "targetWatts": "Watts objetivo",
+    "deadline": "Fecha límite",
+    "createdAt": "Creado el",
+    "generatedAt": "Generado el",
+    "emptyReportsTitle": "Todavía no hay reportes",
+    "emptyReportsContent": "Genera tu primer reporte de consumo para analizar tu uso energético.",
+    "emptyGoalsTitle": "Todavía no hay metas",
+    "emptyGoalsContent": "Crea una meta energética para empezar a medir el ahorro.",
+    "loadError": "No se pudo cargar la información de reportes.",
+    "reportCreateSuccess": "Reporte creado correctamente.",
+    "reportCreateError": "No se pudo crear el reporte.",
+    "reportDeleteError": "No se pudo eliminar el reporte.",
+    "exportNotAllowed": "Tu plan actual no permite exportar reportes.",
+    "reportNotFound": "Reporte no encontrado.",
+    "goalCreateSuccess": "Meta energética creada correctamente.",
+    "goalCreateError": "No se pudo crear la meta energética.",
+    "goalUpdateSuccess": "Meta energética actualizada correctamente.",
+    "goalUpdateError": "No se pudo actualizar la meta energética.",
+    "goalDeleteError": "No se pudo eliminar la meta energética.",
+    "createReportDescription": "Elige el tipo de reporte y mueve la rueda para seleccionar el rango exacto.",
+    "period": "Periodo",
+    "periods": {
+      "daily": "Diario",
+      "weekly": "Semanal",
+      "monthly": "Mensual",
+      "yearly": "Anual"
+    },
+    "periodOptions": {
+      "daily": "Diarios",
+      "weekly": "Semanales",
+      "monthly": "Mensuales",
+      "yearly": "Anuales"
+    },
+    "reportRangeEyebrow": "Rango del reporte",
+    "reportRangeHint": "Arrastra hacia la derecha para ir al pasado. El rango actual es el límite final.",
+    "rangeTitles": {
+      "daily": "Selecciona el día",
+      "weekly": "Selecciona la semana",
+      "monthly": "Selecciona el mes",
+      "yearly": "Selecciona el año"
+    },
+    "rangeLabels": {
+      "currentWeek": "Semana en curso",
+      "currentYearCycle": "{{year}} - en curso",
+      "currentYear": "Año en curso",
+      "fullYear": "Año completo"
+    },
+    "generatedReportsTitle": "Reportes generados",
+    "generatedReportsDescription": "Revisa los reportes creados y abre cada detalle desde su resumen.",
+    "activityTitle": "Historial de actividad",
+    "activityDescription": "Consulta las acciones recientes registradas por la plataforma para mantener trazabilidad operativa.",
+    "activityEmptyEyebrow": "Sin actividad",
+    "activityEmptyTitle": "Todavia no hay eventos registrados",
+    "activityEmptyContent": "Las acciones importantes apareceran aqui cuando uses cuenta, control, energia, soporte o facturacion.",
+    "activitySources": {
+      "account": "Cuenta",
+      "billing": "Facturacion",
+      "control": "Control",
+      "workplace": "Espacios",
+      "energy": "Energia",
+      "support": "Soporte",
+      "general": "Operacion"
+    },
+    "emptyReportsEyebrow": "Sin reportes",
+    "from": "Desde",
+    "to": "Hasta",
+    "generated": "Generado",
+    "emptyValue": "-",
+    "reportFallbackTitle": "Reporte",
+    "reportFallbackTitleWithId": "Reporte #{{id}}",
+    "averageDetail": "{{value}} promedio",
+    "reportChartAria": "{{title}}, {{total}}, {{start}} - {{end}}",
+    "reportNameRequired": "Escribe el nombre del reporte.",
+    "reportNameMinLength": "El nombre del reporte debe tener al menos 4 caracteres.",
+    "reportRangeRequired": "Selecciona un rango de fechas para el reporte.",
+    "reportRangeInvalid": "El rango del reporte no es válido.",
+    "reportUpdateSuccess": "Reporte actualizado.",
+    "reportUnchanged": "Ese reporte ya existe para el ciclo seleccionado.",
+    "reportExportSuccess": "Reporte exportado.",
+    "reportExportError": "No se pudo exportar el reporte.",
+    "reportDeleteSuccess": "Reporte eliminado.",
+    "duration": {
+      "hoursMinutes": "{{hours}}h {{minutes}}m",
+      "minutesOnly": "{{minutes}}m"
+    },
+    "invoice": {
+      "eyebrow": "Factura energética profesional",
+      "title": "Reporte EnergyCore #{{id}}",
+      "close": "Cerrar factura",
+      "totalEnergy": "Energía total",
+      "exactReadings": "{{count}} lecturas exactas dentro del rango",
+      "totalToPay": "Total a pagar",
+      "realKwhCalculation": "Calculado desde kWh reales por dispositivo",
+      "monitoredDuration": "{{duration}} monitoreados",
+      "technicalSummary": "Resumen técnico",
+      "averagePower": "Potencia promedio",
+      "detectedPeak": "Pico detectado",
+      "criticalReadings": "Lecturas críticas",
+      "costPerKwh": "Costo por kWh",
+      "billedEnergy": "Energía facturada",
+      "energySubtotal": "Subtotal energía",
+      "measuredDevices": "Dispositivos medidos",
+      "totalOnTime": "Tiempo ON total",
+      "topConsumption": "Top consumo",
+      "devicesCount": "{{count}} equipos",
+      "noDevicesInRange": "No hay dispositivos en este rango.",
+      "deviceExactDetail": "Detalle exacto por dispositivo",
+      "readings": "Lecturas",
+      "onTime": "Tiempo ON",
+      "exactKwh": "kWh exactos",
+      "peak": "Pico",
+      "share": "Participación",
+      "subtotal": "Subtotal",
+      "noReadingsForReport": "No hay lecturas para este reporte."
+    },
+    "goals": {
+      "summary": {
+        "created": "Metas creadas",
+        "tracking": "En seguimiento",
+        "atRisk": "Metas en riesgo",
+        "needAttention": "Requieren atención",
+        "averageCompliance": "Cumplimiento promedio"
+      },
+      "createStripTitle": "Crear meta inteligente",
+      "createStripDescription": "Define alcance, límite y ventana de seguimiento con datos reales.",
+      "modalEyebrow": "Meta energética",
+      "modalDescription": "Selecciona el alcance de seguimiento y define el límite energético.",
+      "scope": "Alcance",
+      "goalName": "Nombre de la meta",
+      "goalNamePlaceholder": "Ej. Reducir consumo de sala principal",
+      "consumptionLimit": "Límite de consumo",
+      "emptyEyebrow": "Sin metas",
+      "generalOperation": "Operación general",
+      "fullDay": "Todo el día",
+      "deviceCountDescription": "{{count}} equipos",
+      "availableKwh": "{{value}} kWh disponibles",
+      "daysRemaining": "{{count}} días restantes",
+      "limitLabel": "Límite: {{value}} kWh",
+      "deadlineLabel": "Vence: {{date}}",
+      "measured": "Medido",
+      "usedPercentage": "{{value}}% usado",
+      "devices": "Equipos",
+      "projection": "Proyección",
+      "scopeOptions": {
+        "workplace": "Una sede",
+        "room": "Una habitación",
+        "group": "Un grupo",
+        "device": "Un dispositivo"
+      },
+      "scopeDescriptions": {
+        "workplace": "Mide dispositivos asignados a un centro energético.",
+        "room": "Mide dispositivos asignados a una habitación.",
+        "group": "Mide los dispositivos incluidos en un grupo.",
+        "device": "Mide solo las lecturas de un equipo."
+      },
+      "scopeTargetLabels": {
+        "general": "Alcance",
+        "workplace": "Sede",
+        "room": "Habitación",
+        "device": "Dispositivo",
+        "group": "Grupo"
+      },
+      "scopeTargetPlaceholders": {
+        "general": "Seleccionar alcance",
+        "workplace": "Seleccionar sede",
+        "room": "Seleccionar habitación",
+        "device": "Seleccionar dispositivo",
+        "group": "Seleccionar grupo"
+      },
+      "status": {
+        "inControl": "En control",
+        "outOfGoal": "Fuera de meta",
+        "atRisk": "En riesgo",
+        "goodPace": "Buen ritmo",
+        "noReadings": "Sin lecturas"
+      },
+      "recommendations": {
+        "inControl": "La meta avanza dentro del ritmo esperado.",
+        "outOfGoal": "El consumo superó el límite definido para esta meta.",
+        "atRisk": "El ritmo actual podría superar el límite. Revisa los equipos con mayor actividad.",
+        "goodPace": "Mantienes margen suficiente frente al avance esperado.",
+        "noReadings": "Aún no hay lecturas dentro del periodo de esta meta."
+      },
+      "toasts": {
+        "loadError": "No se pudo cargar la información de metas energéticas.",
+        "nameRequired": "Escribe el nombre de la meta.",
+        "nameMinLength": "El nombre de la meta debe tener al menos 4 caracteres.",
+        "targetRequired": "Define un límite de consumo mayor a 0 kWh.",
+        "deadlineRequired": "Selecciona una fecha límite para la meta.",
+        "deadlinePast": "La fecha límite no puede estar en el pasado.",
+        "timeWindowInvalid": "La ventana horaria debe tener una hora de inicio y fin diferentes.",
+        "scopeTargetRequired": "Selecciona el objetivo de la meta.",
+        "deleteSuccess": "Meta energética eliminada."
+      },
+      "deleteDialog": {
+        "title": "Eliminar meta energética",
+        "message": "Esta acción quitará la meta del seguimiento actual.",
+        "confirm": "Eliminar",
+        "cancel": "Conservar"
+      }
+    }
+  },
+  "serviceManagement": {
+    "supportEyebrow": "Soporte",
+    "supportTitle": "Soporte",
+    "supportSubtitle": "Crea y da seguimiento a solicitudes de soporte del usuario.",
+    "maintenanceEyebrow": "Mantenimiento",
+    "maintenanceTitle": "Mantenimiento",
+    "maintenanceSubtitle": "Programa y monitorea tareas de mantenimiento de dispositivos.",
+    "totalSupportTickets": "Total de tickets de soporte",
+    "openTickets": "Tickets abiertos",
+    "urgentTickets": "Tickets urgentes",
+    "totalMaintenanceTickets": "Total de tickets de mantenimiento",
+    "pendingMaintenance": "Mantenimientos pendientes",
+    "scheduledMaintenance": "Mantenimientos programados",
+    "completedMaintenance": "Mantenimientos completados",
+    "createSupportTicket": "Crear ticket de soporte",
+    "createMaintenanceTicket": "Crear ticket de mantenimiento",
+    "subject": "Asunto",
+    "description": "Descripción",
+    "scheduledDate": "Fecha programada",
+    "selectDevice": "Selecciona un dispositivo",
+    "create": "Crear",
+    "emptySupportTitle": "No hay tickets de soporte",
+    "emptySupportContent": "Los tickets de soporte creados por el usuario aparecerán aquí.",
+    "emptyMaintenanceTitle": "No hay tickets de mantenimiento",
+    "emptyMaintenanceContent": "Los tickets de mantenimiento programados aparecerán aquí.",
+    "loadError": "No se pudo cargar la información de gestión de servicios.",
+    "supportCreateSuccess": "Ticket de soporte creado correctamente.",
+    "supportCreateError": "No se pudo crear el ticket de soporte.",
+    "supportUpdateSuccess": "Ticket de soporte actualizado correctamente.",
+    "supportUpdateError": "No se pudo actualizar el ticket de soporte.",
+    "supportDeleteError": "No se pudo eliminar el ticket de soporte.",
+    "maintenanceCreateSuccess": "Ticket de mantenimiento creado correctamente.",
+    "maintenanceCreateError": "No se pudo crear el ticket de mantenimiento.",
+    "maintenanceUpdateSuccess": "Ticket de mantenimiento actualizado correctamente.",
+    "maintenanceUpdateError": "No se pudo actualizar el ticket de mantenimiento.",
+    "maintenanceDeleteError": "No se pudo eliminar el ticket de mantenimiento.",
+    "supportPageDescription": "Centraliza solicitudes del usuario, prioriza casos abiertos y conserva el seguimiento con estados reales.",
+    "supportSummaryTitle": "Resumen de soporte",
+    "supportSummaryDescription": "Solicitudes registradas con trazabilidad en la plataforma.",
+    "openTicketsShort": "Abiertas",
+    "urgentTicketsShort": "Urgentes",
+    "newSupportRequest": "Nueva solicitud",
+    "supportAttentionTitle": "Atencion de soporte",
+    "supportAttentionDescription": "Registra un caso con asunto, descripcion y prioridad para atenderlo desde Servicio.",
+    "createSupportRequest": "Crear solicitud",
+    "cases": "Casos",
+    "supportCasesTitle": "Solicitudes activas e historicas",
+    "emptySupportRequestsTitle": "No hay solicitudes",
+    "emptySupportRequestsDescription": "Cuando alguien registre un caso de soporte, aparecera aqui con prioridad, estado y fecha.",
+    "supportModalDescription": "Registra un caso de soporte con prioridad real.",
+    "supportSubjectPlaceholder": "Ej. Equipo sin respuesta",
+    "supportDescriptionPlaceholder": "Describe que ocurre, donde sucede y que impacto tiene.",
+    "priority": "Prioridad",
+    "saveSupportRequest": "Guardar solicitud",
+    "supportLoadError": "No se pudo cargar la informacion de soporte.",
+    "supportDeleteSuccess": "Solicitud de soporte eliminada.",
+    "confirmDeleteSupportTitle": "Eliminar solicitud",
+    "confirmDeleteSupportMessage": "Esta solicitud saldra de la bandeja de soporte. La accion no se puede deshacer.",
+    "createdOn": "Creada el {{date}}",
+    "maintenancePageDescription": "Programa intervenciones sobre dispositivos reales y sigue su estado sin inventar fechas, equipos ni tareas.",
+    "maintenanceSummaryTitle": "Resumen de mantenimiento",
+    "maintenanceSummaryDescription": "Ordenes creadas desde Servicio para dispositivos existentes.",
+    "pendingMaintenanceShort": "Pendientes",
+    "completedMaintenanceShort": "Completados",
+    "scheduleEyebrow": "Programar",
+    "technicalScheduleTitle": "Agenda tecnica",
+    "technicalScheduleDescription": "Selecciona un dispositivo existente, motivo y fecha para crear una orden.",
+    "scheduleMaintenance": "Programar mantenimiento",
+    "goToDevices": "Ir a dispositivos",
+    "orders": "Ordenes",
+    "maintenanceAgendaTitle": "Agenda de mantenimiento",
+    "emptyMaintenanceDescription": "Cuando programes una intervencion, aparecera aqui con dispositivo, fecha y estado.",
+    "maintenanceModalDescription": "Usa un dispositivo real y una fecha valida.",
+    "maintenanceType": "Tipo de mantenimiento",
+    "reason": "Motivo",
+    "maintenanceDescriptionPlaceholder": "Describe el trabajo requerido o el motivo de la revision.",
+    "saveMaintenance": "Guardar mantenimiento",
+    "maintenanceLoadError": "No se pudo cargar la informacion de mantenimiento.",
+    "maintenanceDeleteSuccess": "Mantenimiento eliminado.",
+    "confirmCancelMaintenanceTitle": "Cancelar mantenimiento",
+    "confirmCancelMaintenanceMessage": "El mantenimiento quedara marcado como cancelado. Confirma solo si ya no debe ejecutarse.",
+    "cancelMaintenance": "Cancelar mantenimiento",
+    "back": "Volver",
+    "confirmDeleteMaintenanceTitle": "Eliminar mantenimiento",
+    "confirmDeleteMaintenanceMessage": "Esta programacion saldra de la lista de mantenimiento. La accion no se puede deshacer.",
+    "scheduledFor": "Programado para {{date}}",
+    "priorities": {
+      "low": "Baja",
+      "medium": "Media",
+      "high": "Alta",
+      "urgent": "Urgente"
+    },
+    "supportStatuses": {
+      "open": "Abierto",
+      "inProgress": "En progreso",
+      "resolved": "Resuelto",
+      "closed": "Cerrado"
+    },
+    "maintenanceTypes": {
+      "inspection": "Inspeccion",
+      "repair": "Reparacion",
+      "replacement": "Reemplazo",
+      "installation": "Instalacion"
+    },
+    "maintenanceStatuses": {
+      "pending": "Pendiente",
+      "scheduled": "Programado",
+      "completed": "Completado",
+      "canceled": "Cancelado"
+    },
+    "validation": {
+      "supportSubjectRequired": "Escribe el asunto de la solicitud.",
+      "supportSubjectMinLength": "El asunto debe tener al menos 4 caracteres.",
+      "supportDescriptionRequired": "Describe el problema o la solicitud.",
+      "descriptionMinLength": "La descripcion debe tener al menos 10 caracteres.",
+      "deviceRequiredBeforeMaintenance": "Registra un dispositivo antes de programar mantenimiento.",
+      "maintenanceDeviceRequired": "Selecciona un dispositivo para mantenimiento.",
+      "maintenanceDescriptionRequired": "Describe el mantenimiento requerido.",
+      "maintenanceDateRequired": "Selecciona una fecha de mantenimiento.",
+      "maintenanceDatePast": "La fecha de mantenimiento no puede estar en el pasado.",
+      "maintenanceDeviceUnknown": "No se pudo identificar el dispositivo seleccionado."
+    }
+  },
+  "security": {
+    "deleteAccount": "Eliminar cuenta"
+  },
+  "energyDashboard": {
+    "eyebrow": "Monitoreo energético",
+    "title": "Consumo energético",
+    "description": "Controla el consumo real de los dispositivos encendidos, revisa kWh, costos estimados y oportunidades de ahorro por equipo y habitación.",
+    "liveConsumptionEyebrow": "Consumo en vivo",
+    "liveConsumptionTitle": "Gasto calculado desde potencia y tiempo real",
+    "liveConsumptionDescription": "Los W son potencia nominal. El gasto real sale de kWh, segundos encendidos y tarifa energética.",
+    "automaticRecord": "Registro automático",
+    "secondsAbbr": "seg",
+    "apply": "Aplicar",
+    "sampleEveryPrefix": "Se registrará una lectura cada",
+    "sampleEveryValue": "{{seconds}} segundos",
+    "exportCsv": "Exportar CSV",
+    "loading": "Cargando información energética...",
+    "consumptionEyebrow": "Consumo",
+    "readings": "lecturas",
+    "equipment": "equipos",
+    "energy": "energía",
+    "cost": "costo",
+    "accumulatedUse": "uso acumulado",
+    "period": "Periodo",
+    "noReadingsEyebrow": "Sin lecturas",
+    "noConsumptionTitle": "No hay consumo para este periodo",
+    "noConsumptionDescription": "Cuando existan lecturas reales dentro del periodo seleccionado, el gráfico se construirá automáticamente.",
+    "generalStatusEyebrow": "Estado general",
+    "operationalSummaryTitle": "Resumen operativo",
+    "normalReadings": "normales",
+    "highReadingsShort": "altas",
+    "activeDevicesShort": "activos",
+    "activeDevicesNowTitle": "Dispositivos encendidos ahora",
+    "costPerHourValue": "S/ {{cost}} por hora",
+    "moreActiveDevices": "+{{count}} más en activos",
+    "noActivityEyebrow": "Sin actividad",
+    "noActiveDevicesTitle": "No hay equipos encendidos",
+    "noActiveDevicesDescription": "El consumo actual está en cero porque no hay dispositivos ON.",
+    "rankingEyebrow": "Ranking",
+    "highestCostByDeviceTitle": "Mayor gasto por dispositivo",
+    "moreInRanking": "+{{count}} más en ranking",
+    "noCostEyebrow": "Sin gasto",
+    "noDeviceConsumptionTitle": "No hay dispositivos con consumo",
+    "noDeviceConsumptionDescription": "Las lecturas con kWh aparecerán durante el uso.",
+    "roomsEyebrow": "Ambientes",
+    "consumptionByRoomTitle": "Consumo por habitación",
+    "activeDevicesValue": "{{count}} activos",
+    "moreInRooms": "+{{count}} más en ambientes",
+    "noRoomsEyebrow": "Sin habitaciones",
+    "noRoomDataTitle": "Sin datos por habitación",
+    "noRoomDataDescription": "Asigna habitaciones a tus dispositivos para ver este desglose.",
+    "recentHighConsumptionEventsTitle": "Eventos recientes de alto consumo",
+    "moreInAlerts": "+{{count}} más en alertas",
+    "noAlertsEyebrow": "Sin alertas",
+    "noRecentEventsTitle": "No hay eventos recientes",
+    "noRecentEventsDescription": "No se detectaron lecturas altas en el periodo visible.",
+    "latestReadingsTitle": "Últimas lecturas energéticas",
+    "power": "Potencia",
+    "moreInHistory": "+{{count}} más en historial",
+    "noHistoryEyebrow": "Sin historial",
+    "noReadingsAvailableTitle": "No hay lecturas disponibles",
+    "noReadingsAvailableDescription": "Cuando el sistema registre consumo, aquí verás las últimas lecturas.",
+    "intervalValue": "Intervalo {{duration}}",
+    "chartItemAria": "{{energy}}, {{emoji}} {{device}}, {{watts}} W, {{date}}, intervalo {{duration}}",
+    "highConsumptionRegistered": "{{device}} registró consumo alto",
+    "noActiveAlerts": "Sin alertas activas",
+    "selectActiveSiteRecommendation": "Selecciona una sede activa para ver su consumo.",
+    "noReadingsForSiteRecommendation": "Aún no hay lecturas energéticas para {{site}}.",
+    "highReadingsForSiteRecommendation": "Revisa los equipos de {{site}} con lecturas altas.",
+    "stableConsumptionRecommendation": "Consumo estable en {{site}}.",
+    "noRoom": "Sin habitación",
+    "periods": {
+      "daily": "Diario",
+      "weekly": "Semanal",
+      "monthly": "Mensual"
+    },
+    "periodDescriptions": {
+      "daily": "Lecturas reales registradas hoy.",
+      "weekly": "Lecturas reales de los últimos 7 días.",
+      "monthly": "Lecturas reales del mes actual."
+    },
+    "chartTitles": {
+      "daily": "Consumo diario",
+      "weekly": "Consumo semanal",
+      "monthly": "Consumo mensual"
+    },
+    "chartSubtitles": {
+      "daily": "Lecturas reales de hoy. El uso acumulado suma tiempo por equipo.",
+      "weekly": "Lecturas reales de los últimos 7 días. El uso acumulado suma tiempo por equipo.",
+      "monthly": "Lecturas reales del mes actual. El uso acumulado suma tiempo por equipo."
+    },
+    "operationalStatus": {
+      "review": "Revisar consumo",
+      "attention": "Atención",
+      "optimal": "Óptimo"
+    },
+    "metrics": {
+      "activePower": "Potencia activa",
+      "energyToday": "Energía hoy",
+      "costToday": "Gasto hoy",
+      "costPerHour": "Costo por hora",
+      "monthlyProjection": "Proyección mensual",
+      "activeAlerts": "Alertas activas"
+    },
+    "metricHints": {
+      "activePower": "Base actual para calcular kWh mientras hay equipos encendidos.",
+      "energyToday": "Acumulado por intervalos reales registrados hoy.",
+      "costToday": "Costo estimado desde kWh reales.",
+      "costPerHour": "Proyección si el consumo actual se mantiene.",
+      "monthlyProjection": "Estimado desde los kWh reales acumulados del mes.",
+      "activeAlerts": "{{count}} críticas - {{level}} - {{title}}"
+    },
+    "readingStatuses": {
+      "high": "Alta",
+      "normal": "Normal"
+    },
+    "toasts": {
+      "loadError": "No se pudo cargar la información energética.",
+      "exportSuccess": "CSV exportado correctamente.",
+      "exportError": "No se pudo exportar el CSV.",
+      "intervalUpdated": "Intervalo actualizado a {{seconds}} segundos.",
+      "intervalUpdateError": "No se pudo actualizar el intervalo de registro.",
+      "samplingLoadFallback": "No se pudo cargar el intervalo de registro. Se usarán 15 segundos.",
+      "refreshError": "No se pudo actualizar la información energética."
+    }
+  },
+  "shared": {
+    "numberStepper": {
+      "increase": "Aumentar valor",
+      "decrease": "Reducir valor"
+    },
+    "datePicker": {
+      "placeholder": "Seleccionar fecha",
+      "calendarAria": "Selector de fecha",
+      "previousMonth": "Mes anterior",
+      "nextMonth": "Mes siguiente",
+      "clear": "Limpiar",
+      "today": "Hoy"
+    },
+    "timePicker": {
+      "panelAria": "Selector de hora",
+      "hoursAria": "Horas",
+      "minutesAria": "Minutos"
+    },
+    "modal": {
+      "closeForm": "Cerrar formulario"
+    }
+  },
+  "operationModes": {
+    "pageDescription": "Configura modos con rutinas internas propias para una sede o una habitacion.",
+    "site": "Sede",
+    "internalRoutines": "Rutinas internas",
+    "summary": {
+      "context": "Contexto",
+      "availableDevices": "{{count}} dispositivo(s) disponibles.",
+      "saved": "Guardados",
+      "hasActiveMode": "Hay un modo activo.",
+      "noActiveMode": "Sin modo activo.",
+      "current": "Actual",
+      "selectMode": "Selecciona un modo."
+    },
+    "toolbar": {
+      "eyebrow": "Configuracion operativa",
+      "title": "Modos con rutinas propias",
+      "description": "Las rutinas de un modo viven dentro del modo y se aplican solo al activar ese modo."
+    },
+    "actions": {
+      "create": "Crear modo",
+      "reapply": "Reaplicar",
+      "archive": "Archivar",
+      "add": "Agregar",
+      "remove": "Quitar"
+    },
+    "empty": {
+      "title": "No hay modos en esta sede",
+      "description": "Crea un modo con rutinas internas para aplicar una configuracion operativa real."
+    },
+    "impact": {
+      "title": "Impacto",
+      "applicationTitle": "Aplicacion del modo",
+      "affectedDevices": "{{count}} dispositivo(s)",
+      "ignored": "Ignorados",
+      "emptyTitle": "Selecciona un modo",
+      "emptyDescription": "Revisa que dispositivos y rutinas internas aplicara antes de activar."
+    },
+    "form": {
+      "newMode": "Nuevo modo",
+      "description": "Define identidad, aplicacion, horario y rutinas internas propias.",
+      "identityTitle": "Identidad",
+      "identityDescription": "Nombre y descripcion controlada del modo.",
+      "namePlaceholder": "Ej. Noche segura",
+      "descriptionPlaceholder": "Uso operativo del modo",
+      "applicationTitle": "Aplicacion",
+      "applicationDescription": "El modo puede cubrir una sede completa o una habitacion.",
+      "selectSite": "Selecciona sede",
+      "selectRoom": "Selecciona habitacion",
+      "scheduleType": "Tipo de horario",
+      "end": "Fin",
+      "modeRoutinesTitle": "Rutinas del modo",
+      "modeRoutinesDescription": "Estas rutinas pertenecen solo a este modo.",
+      "label": "Etiqueta",
+      "routineNamePlaceholder": "Ej. Apagar luces",
+      "selectTarget": "Selecciona objetivo",
+      "noTargetsInScope": "No hay objetivos disponibles en este alcance.",
+      "noInternalRoutinesTitle": "Aun no hay rutinas internas",
+      "noInternalRoutinesDescription": "Agrega al menos una rutina interna para guardar el modo."
+    },
+    "applicationOptions": {
+      "workplace": "Sede completa",
+      "room": "Habitacion especifica"
+    },
+    "applicationDescriptions": {
+      "workplace": "El modo aplica a toda la sede activa",
+      "room": "El modo aplica solo a una habitacion"
+    },
+    "scheduleOptions": {
+      "allDay": "Todo el dia",
+      "custom": "Personalizado"
+    },
+    "scheduleDescriptions": {
+      "allDay": "El modo mantiene su configuracion sin ventana horaria",
+      "custom": "Define inicio y fin"
+    },
+    "routineTargetTypes": {
+      "device": "Dispositivo",
+      "group": "Grupo"
+    },
+    "routineTargetDescriptions": {
+      "device": "Accion sobre un equipo",
+      "group": "Accion sobre un grupo"
+    },
+    "routineActionDescriptions": {
+      "turnOn": "Activar objetivo",
+      "turnOff": "Desactivar objetivo"
+    },
+    "routineTargets": {
+      "deviceCount": "{{count}} dispositivo(s)"
+    },
+    "goals": {
+      "description": "Referencia metas reales sin prometer control adicional.",
+      "emptyTitle": "Sin metas aplicables",
+      "emptyDescription": "El modo puede guardarse sin metas asociadas.",
+      "fallback": "Meta {{id}}"
+    },
+    "alertsRules": {
+      "title": "Alertas/Reglas",
+      "description": "Usa reglas y preferencias existentes."
+    },
+    "rules": {
+      "available": "Reglas disponibles",
+      "none": "Sin reglas",
+      "noneDescription": "El modo no aplicara reglas"
+    },
+    "preferences": {
+      "current": "Preferencia actual",
+      "useRegistered": "Usar preferencia registrada",
+      "noneRegistered": "Sin preferencia registrada",
+      "numbered": "Preferencia {{id}}",
+      "applyThis": "Aplicar esta preferencia"
+    },
+    "toggles": {
+      "applyRulesTitle": "Aplicar reglas",
+      "applyRulesDescription": "Usa reglas existentes.",
+      "applyPreferencesTitle": "Aplicar preferencias",
+      "applyPreferencesDescription": "Usa preferencias existentes.",
+      "criticalSoundTitle": "Sonido critico",
+      "criticalSoundDescription": "Respeta alertas criticas si aplica."
+    },
+    "validation": {
+      "siteRequired": "Selecciona una sede antes de crear el modo.",
+      "nameRequired": "Escribe un nombre para el modo.",
+      "roomRequired": "Selecciona una habitacion para el modo.",
+      "noTargets": "No hay dispositivos o grupos disponibles en el alcance seleccionado.",
+      "routineRequired": "Agrega una rutina interna o completa la rutina en edicion.",
+      "routineDraftRequired": "Completa nombre y objetivo de la rutina del modo.",
+      "minimumRequired": "Define sede, nombre y al menos una rutina interna."
+    },
+    "confirm": {
+      "replaceTitle": "Reemplazar modo activo",
+      "replaceMessage": "Ya hay un modo activo en esta sede. Si activas este modo, el anterior se desactivara.",
+      "archiveTitle": "Archivar modo",
+      "archiveMessage": "Se archivara {{name}}. Sus rutinas internas dejaran de actuar."
+    },
+    "toasts": {
+      "createError": "No se pudo crear el modo.",
+      "createSuccess": "Modo creado con rutinas internas.",
+      "activateError": "No se pudo activar el modo.",
+      "archived": "Modo archivado."
+    },
+    "status": {
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "archived": "Archivado"
+    },
+    "fallbacks": {
+      "noSelectedSite": "Sin sede seleccionada",
+      "siteUnavailable": "Sede no disponible",
+      "operationalSite": "Sede operativa",
+      "roomUnavailable": "Habitacion no disponible",
+      "groupUnavailable": "Grupo no disponible",
+      "deviceUnavailable": "Dispositivo no disponible",
+      "noDescription": "Sin descripcion registrada."
+    }
+  },
+  "settings": {
+    "shell": {
+      "ariaLabel": "Configuracion de cuenta",
+      "eyebrow": "Cuenta",
+      "description": "Preferencias reales de usuario y plataforma."
+    },
+    "nav": {
+      "profile": "Perfil",
+      "profileDescription": "Datos personales",
+      "account": "Cuenta",
+      "accountDescription": "Identidad y estado",
+      "security": "Seguridad",
+      "securityDescription": "Acceso y recuperacion",
+      "billing": "Facturacion",
+      "billingDescription": "Plan, pagos y facturas",
+      "access": "Accesos",
+      "accessDescription": "Perfiles y permisos",
+      "platform": "Plataforma",
+      "platformDescription": "Preferencias locales"
+    },
+    "common": {
+      "email": "Correo",
+      "notAvailable": "No disponible"
+    },
+    "profile": {
+      "title": "Datos personales",
+      "pageDescription": "Administra el nombre y correo que se guardan en tu cuenta de EnergyCore.",
+      "basicInfoTitle": "Informacion basica",
+      "basicInfoDescription": "Estos datos se guardan en tu cuenta de EnergyCore.",
+      "saveProfile": "Guardar perfil",
+      "previewEyebrow": "Vista previa",
+      "dataUsageTitle": "Uso de estos datos",
+      "dataUsageDescription": "Referencia rapida de como se reflejan nombre y correo dentro de EnergyCore.",
+      "visibleName": "Nombre visible",
+      "visibleNameDescription": "Se usa para identificar tu cuenta en el panel lateral y en las vistas de usuario.",
+      "accountEmail": "Correo de cuenta",
+      "accountEmailDescription": "Es la referencia para recuperacion de acceso y datos principales del perfil.",
+      "unsavedChanges": "Cambios sin guardar",
+      "noPendingChanges": "Sin cambios pendientes",
+      "statusDescription": "Guarda el perfil para sincronizar los datos con la sesion actual.",
+      "updateSuccess": "Perfil actualizado.",
+      "updateError": "No se pudo actualizar el perfil."
+    },
+    "account": {
+      "title": "Estado de cuenta",
+      "pageDescription": "Revisa la identidad, rol y estado general del usuario autenticado.",
+      "identityDescription": "Resumen compacto del usuario autenticado.",
+      "role": "Rol",
+      "userFallback": "Usuario",
+      "createdAt": "Creada",
+      "contextEyebrow": "Contexto",
+      "operationalReadingTitle": "Lectura operativa",
+      "operationalReadingDescription": "Elementos que ayudan a entender el alcance de esta cuenta sin mezclar acciones sensibles.",
+      "session": "Sesion",
+      "active": "Activa",
+      "sessionDescription": "Esta vista solo se muestra para un usuario autenticado por el guard de acceso.",
+      "editableData": "Datos editables",
+      "separatedInProfile": "Separados en Perfil",
+      "editableDataDescription": "Nombre y correo se actualizan desde Perfil para mantener esta pagina como resumen de cuenta.",
+      "sensitiveActions": "Acciones sensibles",
+      "separatedInSecurity": "Separadas en Seguridad",
+      "sensitiveActionsDescription": "Recuperacion y eliminacion de cuenta viven en una pantalla independiente para reducir errores."
+    },
+    "security": {
+      "title": "Acceso y recuperacion",
+      "pageDescription": "Gestiona acciones sensibles de acceso con llamadas reales disponibles.",
+      "accessActionsTitle": "Acciones de acceso",
+      "accessActionsDescription": "Solo se muestran acciones con llamada real disponible.",
+      "recovery": "Recuperacion",
+      "sendRecoveryTitle": "Enviar enlace al correo actual",
+      "sendRecoveryDescription": "Usa el flujo real de recuperacion de acceso para el correo guardado en el perfil.",
+      "sendRecoveryButton": "Enviar recuperacion",
+      "dangerZone": "Zona delicada",
+      "deleteAccountDescription": "Abre una confirmacion estricta antes de borrar la cuenta actual.",
+      "protectionsEyebrow": "Protecciones",
+      "securityStatusTitle": "Estado de seguridad",
+      "securityStatusDescription": "Resumen de controles activos antes de ejecutar acciones sensibles.",
+      "recoveryEmail": "Correo de recuperacion",
+      "recoveryEmailDescription": "El enlace de recuperacion se solicita para el correo actual de la cuenta autenticada.",
+      "writtenConfirmation": "Confirmacion escrita",
+      "writtenConfirmationDescription": "La eliminacion queda bloqueada hasta que el texto de confirmacion coincida exactamente.",
+      "finalConfirmation": "Confirmacion final",
+      "dialogRequired": "Dialogo requerido",
+      "finalConfirmationDescription": "La cuenta solo se elimina despues de aceptar el dialogo de confirmacion con tono de peligro.",
+      "noRecoveryEmail": "No hay correo registrado para recuperar acceso.",
+      "recoverySent": "Solicitud de recuperacion enviada.",
+      "recoveryError": "No se pudo enviar la recuperacion.",
+      "deleteDialogTitle": "Eliminar permanentemente tu cuenta",
+      "deleteDialogMessage": "Esta accion elimina tu cuenta de EnergyCore, cierra tu sesion y no puede deshacerse desde la interfaz.",
+      "deleteDialogDetail": "Antes de continuar, revisa que no necesites recuperar acceso a datos, facturas o preferencias asociadas a esta cuenta.",
+      "deleteDialogConfirm": "Eliminar cuenta permanentemente",
+      "deleteDialogCancel": "No eliminar",
+      "requiredTextLabel": "Para confirmar, escribe exactamente esta palabra:",
+      "requiredTextHint": "El boton de eliminacion permanecera bloqueado hasta que la confirmacion coincida exactamente.",
+      "deleteAccountError": "No se pudo eliminar la cuenta."
+    },
+    "access": {
+      "title": "Perfiles de acceso",
+      "pageDescription": "Revisa que acciones puede ejecutar cada perfil dentro de EnergyCore.",
+      "currentProfileEyebrow": "Perfil actual",
+      "currentProfileTitle": "Alcance de tu cuenta",
+      "currentProfileDescription": "El perfil asignado controla las rutas, acciones y secciones disponibles para esta sesion.",
+      "profile": "Perfil",
+      "currentProfileBadge": "Asignado",
+      "assignmentEyebrow": "Usuarios",
+      "assignmentTitle": "Asignacion de perfiles",
+      "assignmentDescription": "Cambia el alcance de cada usuario para compartir acceso con administradores, miembros o invitados.",
+      "status": "Estado",
+      "profileSelector": "Seleccionar perfil",
+      "matrixEyebrow": "Permisos",
+      "matrixTitle": "Matriz de perfiles",
+      "matrixDescription": "Catalogo real de perfiles obtenido desde IAM para evidenciar control de acceso.",
+      "permissionCount": "{{count}} permisos habilitados",
+      "emptyEyebrow": "Sin datos",
+      "emptyTitle": "No hay perfiles disponibles",
+      "emptyDescription": "El catalogo de perfiles aparecera cuando el servicio de IAM responda.",
+      "usersEmptyEyebrow": "Sin usuarios",
+      "usersEmptyTitle": "No hay usuarios disponibles",
+      "usersEmptyDescription": "Los usuarios activos apareceran aqui cuando tu cuenta tenga permiso para gestionar accesos.",
+      "loadError": "No se pudieron cargar los perfiles de acceso.",
+      "loadUsersError": "No se pudieron cargar los usuarios.",
+      "assignError": "No se pudo cambiar el perfil del usuario.",
+      "statuses": {
+        "active": "Activo",
+        "inactive": "Inactivo"
+      },
+      "profiles": {
+        "owner": {
+          "title": "Propietario",
+          "description": "Administra la cuenta completa, facturacion, usuarios y configuracion operativa."
+        },
+        "admin": {
+          "title": "Administrador",
+          "description": "Opera sedes, dispositivos, rutinas, alertas, soporte y reportes sin gestionar facturacion."
+        },
+        "member": {
+          "title": "Miembro",
+          "description": "Usa la plataforma diaria con control operativo y lectura de energia y reportes."
+        },
+        "guest": {
+          "title": "Invitado",
+          "description": "Accede solo a la vista principal y controles basicos autorizados."
+        }
+      },
+      "permissions": {
+        "VIEW_HOME": "Ver inicio",
+        "CONTROL_DEVICES": "Controlar dispositivos",
+        "MANAGE_DEVICES": "Gestionar dispositivos",
+        "MANAGE_ROUTINES": "Gestionar rutinas y modos",
+        "MANAGE_SPACES": "Gestionar sedes y ambientes",
+        "VIEW_ENERGY": "Ver energia",
+        "VIEW_REPORTS": "Ver reportes",
+        "MANAGE_ALERTS": "Gestionar alertas",
+        "MANAGE_SUPPORT": "Gestionar soporte",
+        "MANAGE_BILLING": "Gestionar facturacion",
+        "MANAGE_ACCESS": "Gestionar accesos"
+      }
+    },
+    "platform": {
+      "title": "Preferencias locales",
+      "pageDescription": "Ajusta la apariencia e idioma de EnergyCore en este navegador.",
+      "browserExperienceTitle": "Experiencia del navegador",
+      "browserExperienceDescription": "Se aplican en este navegador y se sincronizan con tu cuenta.",
+      "darkMode": "Modo oscuro",
+      "lightMode": "Modo claro",
+      "darkModeDescription": "Cambia la apariencia de la interfaz en este navegador.",
+      "language": "Idioma",
+      "languages": {
+        "es": "Espanol",
+        "esDescription": "Idioma local de la interfaz.",
+        "en": "English",
+        "enDescription": "Local interface language.",
+        "pt": "Portugues",
+        "ptDescription": "Idioma local da interface."
+      },
+      "languageApplied": "Idioma aplicado en este navegador.",
+      "appearanceApplied": "Apariencia aplicada en este navegador.",
+      "localStatusEyebrow": "Estado de cuenta",
+      "preferencesSummaryTitle": "Resumen de preferencias",
+      "preferencesSummaryDescription": "Confirma como esta configurada la experiencia en este navegador.",
+      "appearance": "Apariencia",
+      "appearanceDescription": "La preferencia visual se aplica al shell y componentes compartidos de la interfaz.",
+      "activeLanguage": "Idioma activo",
+      "activeLanguageDescription": "El idioma seleccionado se conserva en tu cuenta para mantener la navegacion consistente.",
+      "scope": "Alcance",
+      "local": "Cuenta",
+      "scopeDescription": "Estos ajustes se guardan en tu cuenta y se reflejan en este navegador."
+    },
+    "billing": {
+      "title": "Plan y pagos",
+      "pageDescription": "Administra tu suscripcion activa, revisa pagos registrados y descarga facturas emitidas para tu cuenta.",
+      "subscriptionEyebrow": "Suscripcion",
+      "planStatusTitle": "Estado del plan",
+      "planStatusDescription": "Informacion real del plan activo, limites operativos y actividad de pago.",
+      "perMonth": "al mes",
+      "choosePlanDescription": "Elige un plan para activar la plataforma completa.",
+      "exports": "Exportes",
+      "activeExports": "Activos",
+      "notIncluded": "No incluidos",
+      "cycleStarted": "Inicio de ciclo",
+      "nextBillingDate": "Proxima renovacion",
+      "cycleEnded": "Fin de ciclo",
+      "viewPlans": "Ver planes",
+      "lastPayment": "Ultimo pago",
+      "noPaymentsRegistered": "No hay pagos registrados.",
+      "payments": "Pagos",
+      "registeredMovements": "Movimientos registrados",
+      "registeredMovementsDescription": "Pagos recibidos desde el flujo real de suscripcion.",
+      "paymentNumber": "Pago #{{id}}",
+      "method": "Metodo",
+      "noPaymentsTitle": "No hay pagos",
+      "noPaymentsDescription": "Los pagos apareceran cuando actives o renueves un plan.",
+      "issuedDocuments": "Documentos emitidos",
+      "issuedDocumentsDescription": "Descarga solo facturas existentes en tu cuenta.",
+      "invoiceNumber": "Factura #{{id}}",
+      "issuedOn": "Emitida el {{date}}",
+      "download": "Descargar",
+      "noInvoicesTitle": "No hay facturas",
+      "noInvoicesDescription": "Cuando exista una factura emitida para tu cuenta, aparecera aqui.",
+      "loadError": "No se pudo cargar el historial de facturacion.",
+      "invoiceNotFound": "No se encontro la factura.",
+      "downloadSuccess": "Factura descargada correctamente.",
+      "downloadError": "No se pudo descargar la factura.",
+      "cancelPlanTitle": "Cancelar plan",
+      "cancelPlanMessage": "Tu suscripcion activa quedara cancelada. Confirma solo si ya no quieres continuar con el plan.",
+      "cancelPlanConfirm": "Cancelar plan",
+      "keepPlan": "Conservar plan",
+      "cancelSuccess": "Plan cancelado.",
+      "cancelError": "No se pudo cancelar el plan.",
+      "unlimited": "Ilimitado",
+      "noActivePlan": "Sin plan activo",
+      "subscriptionStatuses": {
+        "active": "Activo",
+        "cancelled": "Cancelado",
+        "expired": "Vencido"
+      },
+      "paymentStatuses": {
+        "approved": "Aprobado",
+        "rejected": "Rechazado",
+        "pending": "Pendiente"
+      },
+      "invoiceIssued": "Emitida",
+      "invoiceRegistered": "Registrada",
+      "goToPlans": "Ir a planes"
+    }
+  }
+}

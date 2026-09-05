@@ -1,0 +1,126 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.time-picker {
+  position: relative;
+  display: grid;
+  gap: 8px;
+}
+
+.time-picker__label {
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  font-weight: 950;
+}
+
+.time-picker__trigger {
+  width: 100%;
+  min-height: var(--time-picker-trigger-height, 62px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  color: var(--text-primary);
+  background: var(--field-bg);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 900;
+  text-align: left;
+  outline: none;
+}
+
+.time-picker__trigger:hover,
+.time-picker__trigger:focus-visible {
+  border-color: var(--border-strong);
+  box-shadow: var(--ec-focus-ring);
+}
+
+.time-picker__icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--accent-color);
+  border-radius: 50%;
+}
+
+.time-picker__icon::before,
+.time-picker__icon::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  border-radius: 999px;
+  background: var(--accent-color);
+  transform-origin: bottom center;
+}
+
+.time-picker__icon::before {
+  height: 5px;
+  transform: translate(-50%, -100%);
+}
+
+.time-picker__icon::after {
+  height: 6px;
+  transform: translate(-50%, -100%) rotate(90deg);
+}
+
+.time-panel {
+  position: fixed;
+  inset: auto;
+  z-index: 1000;
+  width: 172px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: 18px;
+  margin: 0;
+  background: var(--menu-bg);
+  box-shadow:
+    var(--ec-shadow-panel),
+    var(--ec-inset-highlight);
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+.time-panel::backdrop {
+  background: transparent;
+}
+
+.time-panel__column {
+  max-height: 220px;
+  display: grid;
+  gap: 4px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.time-panel button {
+  min-height: 34px;
+  border: 0;
+  border-radius: 10px;
+  color: var(--text-secondary);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.time-panel button:hover {
+  color: var(--text-primary);
+  background: var(--ec-accent-soft);
+}
+
+.time-panel button.selected {
+  color: var(--accent-color);
+  background: var(--ec-accent-soft);
+}

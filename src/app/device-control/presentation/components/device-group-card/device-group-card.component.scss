@@ -1,0 +1,393 @@
+:host {
+  display: block;
+  overflow-anchor: none;
+}
+
+.group-card {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+  border: 1px solid var(--border-color);
+  border-radius: 26px;
+  background: var(--ec-card-highlight), var(--surface-card);
+  box-shadow: var(--ec-shadow-soft), var(--ec-inset-highlight);
+  contain: paint;
+  overflow: hidden;
+  transition:
+    border-color 0.24s ease,
+    box-shadow 0.24s ease,
+    background 0.3s ease,
+    opacity 0.24s ease,
+    transform 0.24s ease;
+}
+
+.group-card::before,
+.group-card::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.group-card::before {
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 38%);
+  opacity: 0.72;
+}
+
+.group-card::after {
+  inset: -42%;
+  opacity: 0;
+  transform: translateX(-36%) rotate(10deg);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(74, 222, 128, 0.36), transparent 30%),
+    linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.32), transparent);
+  filter: blur(2px);
+}
+
+.group-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--ec-shadow-panel), var(--ec-inset-highlight);
+}
+
+.group-card.on {
+  border-color: var(--ec-status-success-border);
+  background:
+    radial-gradient(circle at 14% 8%, var(--ec-status-success-bg), transparent 36%),
+    var(--ec-card-highlight), var(--surface-card);
+}
+
+.group-card.mixed {
+  border-color: var(--ec-status-warning-border);
+  background:
+    radial-gradient(circle at 14% 8%, var(--ec-status-warning-bg), transparent 36%),
+    var(--ec-card-highlight), var(--surface-card);
+}
+
+.group-card.powering-on::after {
+  animation: energy-sweep-on 0.76s ease both;
+}
+
+.group-card.powering-off::after {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(148, 163, 184, 0.32), transparent 30%),
+    linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.24), transparent);
+  animation: energy-sweep-off 0.68s ease both;
+}
+
+.group-card.removing {
+  pointer-events: none;
+  animation: group-card-remove 0.52s cubic-bezier(0.55, 0, 0.1, 1) both;
+}
+
+.group-card__top {
+  display: grid;
+  grid-template-columns: 50px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: start;
+  min-width: 0;
+}
+
+.group-card__icon {
+  display: grid;
+  width: 50px;
+  height: 50px;
+  place-items: center;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(34, 197, 94, 0.16), rgba(245, 158, 11, 0.14));
+  box-shadow:
+    0 14px 28px rgba(3, 7, 18, 0.22),
+    0 1px 0 rgba(255, 255, 255, 0.06) inset;
+  font-size: 1.28rem;
+  line-height: 1;
+}
+
+.group-card.on .group-card__icon {
+  background: linear-gradient(145deg, rgba(34, 197, 94, 0.28), rgba(20, 184, 166, 0.2));
+  box-shadow:
+    0 16px 32px rgba(34, 197, 94, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.08) inset;
+}
+
+.group-card.powering-on .group-card__icon {
+  animation: icon-charge 0.56s ease both;
+}
+
+.group-card.powering-off .group-card__icon {
+  animation: icon-discharge 0.5s ease both;
+}
+
+.group-card__identity {
+  min-width: 0;
+}
+
+.group-card__room {
+  width: fit-content;
+  margin: 0 0 8px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: var(--accent-color);
+  background: var(--ec-accent-soft);
+  font-size: 0.68rem;
+  font-weight: 950;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.group-card h3 {
+  display: -webkit-box;
+  min-height: 2.25em;
+  margin: 0;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 1.35rem;
+  line-height: 1.12;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+}
+
+.group-card__status {
+  align-self: start;
+  padding: 7px 11px;
+  border-radius: 999px;
+  color: var(--text-primary);
+  background: var(--ec-surface-muted);
+  box-shadow:
+    0 10px 20px rgba(3, 7, 18, 0.24),
+    0 1px 0 rgba(255, 255, 255, 0.05) inset;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.group-card.on .group-card__status {
+  color: var(--ec-status-success-text);
+  background: var(--ec-status-success-bg);
+}
+
+.group-card.mixed .group-card__status {
+  color: var(--ec-status-warning-text);
+  background: var(--ec-status-warning-bg);
+}
+
+.group-card.powering-on .group-card__status {
+  animation: status-pop 0.42s ease both;
+}
+
+.group-card.powering-off .group-card__status {
+  animation: status-dim 0.38s ease both;
+}
+
+.group-card__description {
+  min-height: 2.7em;
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.group-card__description--muted {
+  color: var(--text-muted);
+}
+
+.group-card__metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.group-card__metrics article {
+  padding: 13px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background: var(--ec-surface-subtle);
+}
+
+.group-card__metrics span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-weight: 950;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.group-card__metrics strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.group-card__devices {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  background: var(--ec-surface-subtle);
+}
+
+.group-card__devices header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.group-card__devices header span {
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.group-card__devices header strong {
+  min-width: 30px;
+  min-height: 30px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--accent-color);
+  background: var(--ec-accent-soft);
+  font-size: 0.8rem;
+  font-weight: 950;
+}
+
+.group-card__empty-devices {
+  margin: 0;
+  color: var(--text-muted);
+  font-weight: 800;
+}
+
+.group-card__device-list {
+  display: grid;
+  gap: 9px;
+}
+
+.group-card__device {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  gap: 11px;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
+  background: var(--ec-surface-subtle);
+}
+
+.group-card__device.on {
+  border-color: var(--ec-status-success-border);
+  background: var(--ec-status-success-bg);
+}
+
+.group-card__device-icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--ec-accent-soft);
+  font-size: 1.08rem;
+  line-height: 1;
+}
+
+.group-card__device-main {
+  min-width: 0;
+}
+
+.group-card__device-main strong {
+  display: block;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 950;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.group-card__device-main small {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 780;
+}
+
+.group-card__device em {
+  padding: 5px 8px;
+  border-radius: 999px;
+  color: var(--text-primary);
+  background: var(--ec-surface-muted);
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 950;
+}
+
+.group-card__device.on em {
+  color: var(--ec-status-success-text);
+  background: var(--ec-status-success-bg);
+}
+
+.group-card__footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.group-card__created {
+  width: fit-content;
+  padding: 7px 10px;
+  border-radius: 999px;
+  color: var(--text-secondary);
+  background: var(--ec-surface-subtle);
+  font-size: 0.76rem;
+  font-weight: 850;
+}
+
+.group-card__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.group-card__actions app-button {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 940px) {
+  .group-card__footer {
+    grid-template-columns: 1fr;
+  }
+
+  .group-card__actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 680px) {
+  .group-card {
+    padding: 18px;
+  }
+
+  .group-card__top,
+  .group-card__footer {
+    grid-template-columns: 1fr;
+  }
+
+  .group-card__metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .group-card__actions {
+    flex-direction: column;
+  }
+}

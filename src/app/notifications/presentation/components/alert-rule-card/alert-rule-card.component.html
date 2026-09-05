@@ -1,0 +1,39 @@
+<article class="rule-card" [class.disabled]="!rule.enabled">
+  <div class="rule-main">
+    <div class="rule-heading">
+      <p class="level">{{ levelLabel() }}</p>
+      <span>{{ statusLabelKey | translate }}</span>
+    </div>
+
+    <h2>{{ rule.name }}</h2>
+    <p>{{ metricLabel() }} {{ conditionLabel() }} {{ thresholdLabel() }}</p>
+
+    <div class="rule-details">
+      <span>{{ rule.metric }}</span>
+      <span>{{ rule.condition }}</span>
+      <span>{{ thresholdLabel() }}</span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <app-button
+      [variant]="rule.enabled ? 'secondary' : 'primary'"
+      size="sm"
+      (pressed)="toggle.emit(rule)"
+    >
+      @if (rule.enabled) {
+        {{ 'alertRules.disable' | translate }}
+      } @else {
+        {{ 'alertRules.enable' | translate }}
+      }
+    </app-button>
+
+    <app-button
+      variant="danger"
+      size="sm"
+      (pressed)="remove.emit(rule.id)"
+    >
+      {{ 'common.delete' | translate }}
+    </app-button>
+  </div>
+</article>

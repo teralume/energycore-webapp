@@ -1,0 +1,17 @@
+<section class="settings-section" [class.settings-section--stacked]="stackedHeader">
+  <header class="settings-section__heading">
+    @if (eyebrow) {
+      <span>{{ eyebrow }}</span>
+    }
+
+    <h2>{{ title }}</h2>
+
+    @if (description) {
+      <p>{{ description }}</p>
+    }
+  </header>
+
+  <div class="settings-section__content">
+    <ng-content />
+  </div>
+</section>

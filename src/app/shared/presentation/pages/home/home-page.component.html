@@ -1,0 +1,382 @@
+<section class="home-dashboard ec-page">
+  <header class="ec-page-heading home-heading">
+    <p class="ec-page-eyebrow">{{ 'nav.home' | translate }}</p>
+    <h1 class="ec-page-title">{{ 'home.operationalCenterTitle' | translate }}</h1>
+    <p class="ec-page-description">
+      {{ 'home.operationalCenterDescription' | translate }}
+    </p>
+  </header>
+
+  @if (loading()) {
+    <app-section-card class="home-status-card" size="large">
+      <p class="home-eyebrow">{{ 'home.loadingEyebrow' | translate }}</p>
+      <h2>{{ 'home.loadingTitle' | translate }}</h2>
+      <p>{{ 'home.loadingDescription' | translate }}</p>
+    </app-section-card>
+  } @else {
+    @if (!setupGuideComplete()) {
+      <section class="setup-guide" [attr.aria-label]="'home.setupGuide.ariaLabel' | translate">
+        <header class="setup-guide__header">
+          <div>
+            <p class="home-eyebrow">{{ 'home.setupGuide.eyebrow' | translate }}</p>
+            <h2>{{ 'home.setupGuide.title' | translate }}</h2>
+            <p>{{ 'home.setupGuide.description' | translate }}</p>
+          </div>
+          <div class="setup-guide__progress">
+            <strong>{{ setupProgress().completed }}/{{ setupProgress().total }}</strong>
+            <span>{{ 'home.setupGuide.progressLabel' | translate }}</span>
+            <div class="setup-guide__bar" aria-hidden="true">
+              <span [style.width.%]="setupProgress().percent"></span>
+            </div>
+          </div>
+        </header>
+
+        <div class="setup-guide__steps">
+          @for (step of setupSteps(); track step.id) {
+            <article class="setup-step" [class.setup-step--complete]="step.completed">
+              <div class="setup-step__marker" aria-hidden="true">
+                @if (step.completed) {
+                  <span>OK</span>
+                } @else {
+                  <span>{{ $index + 1 }}</span>
+                }
+              </div>
+              <div>
+                <strong>{{ step.titleKey | translate }}</strong>
+                <p>{{ step.descriptionKey | translate }}</p>
+              </div>
+              <app-button
+                variant="ghost"
+                size="sm"
+                [link]="step.actionLink"
+                [label]="step.actionLabelKey | translate"
+              />
+            </article>
+          }
+        </div>
+      </section>
+    }
+
+    <section class="home-top-grid" [attr.aria-label]="'home.mainSummaryAria' | translate">
+      <app-section-card class="home-card home-card--site" size="large">
+        <div class="home-card__header">
+          <div>
+            <p class="home-eyebrow">{{ 'home.activeSiteEyebrow' | translate }}</p>
+            <h2>{{ activeLocation()?.name ?? ('home.noActiveSite' | translate) }}</h2>
+            <p>
+              @if (activeLocation()) {
+                {{ getLocationSubtitle(activeLocation()!) || ('home.noRegisteredLocation' | translate) }}
+              } @else {
+                {{ 'home.setupHint' | translate }}
+              }
+            </p>
+          </div>
+          <app-button variant="ghost" size="sm" [link]="'/spaces/sites'" [label]="'home.go' | translate" />
+        </div>
+
+        @if (workplaceFacade.locations().length === 0) {
+            <app-empty-state
+            [compact]="true"
+            [title]="'home.noSitesTitle' | translate"
+            [description]="'home.noSitesDescription' | translate"
+            [actionLabel]="'onboarding.createLocationAction' | translate"
+            actionVariant="create"
+            actionLink="/spaces/sites"
+          />
+        } @else {
+          <div class="site-selector">
+            <app-wheel-selector
+              [options]="locationWheelOptions()"
+              [value]="activeLocationValue()"
+              title=""
+              (valueChange)="onActiveLocationChange($event)"
+            />
+          </div>
+
+          <dl class="home-metrics home-metrics--four">
+            <div>
+              <dt>{{ 'nav.rooms' | translate }}</dt>
+              <dd>{{ activeRooms().length }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'nav.devices' | translate }}</dt>
+              <dd>{{ activeDevices().length }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'devices.active' | translate }}</dt>
+              <dd>{{ activeOnDevices().length }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'home.consumption' | translate }}</dt>
+              <dd>{{ formatNumber(currentWatts(), 0) }} W</dd>
+            </div>
+          </dl>
+        }
+      </app-section-card>
+
+      <app-section-card class="home-card home-card--status" size="medium">
+        <div class="home-card__header">
+          <div>
+            <p class="home-eyebrow">{{ 'home.generalStatusEyebrow' | translate }}</p>
+            <h2>{{ (activeLocation() ? 'home.siteSummaryTitle' : 'home.noOperationalContextTitle') | translate }}</h2>
+            <p>
+              @if (activeLocation()) {
+                {{ 'home.siteSummaryDescription' | translate }}
+              } @else {
+                {{ 'home.setupEmpty' | translate }}
+              }
+            </p>
+          </div>
+        </div>
+
+        @if (!activeLocation()) {
+          <app-empty-state
+            [compact]="true"
+            [title]="'home.missingSiteTitle' | translate"
+            [description]="'home.missingSiteDescription' | translate"
+            [actionLabel]="'onboarding.createLocationAction' | translate"
+            actionVariant="create"
+            actionLink="/spaces/sites"
+          />
+        } @else {
+          <div class="status-list">
+            <div>
+              <span>{{ 'home.criticalAlerts' | translate }}</span>
+              <strong>{{ criticalAlerts().length }}</strong>
+            </div>
+            <div>
+              <span>{{ 'reporting.activeGoals' | translate }}</span>
+              <strong>{{ activeGoals().length }}</strong>
+            </div>
+            <div>
+              <span>{{ 'home.openSupport' | translate }}</span>
+              <strong>{{ openSupportTickets().length }}</strong>
+            </div>
+          </div>
+        }
+      </app-section-card>
+    </section>
+
+    <section class="home-zone">
+      <div class="home-card-grid home-card-grid--operations">
+        <app-section-card class="home-card home-card--rooms home-card--action-empty" size="medium">
+          <div class="home-card__header">
+            <div>
+              <p class="home-eyebrow">{{ 'nav.rooms' | translate }}</p>
+              <h3>{{ 'home.siteRoomsTitle' | translate }}</h3>
+              <p>{{ 'home.roomsRegisteredDescription' | translate: { count: activeRooms().length } }}</p>
+            </div>
+            <app-button variant="ghost" size="sm" [link]="'/spaces/rooms'" [label]="'home.go' | translate" />
+          </div>
+
+          @if (!activeLocation()) {
+            <app-empty-state [compact]="true" [title]="'home.noActiveSite' | translate" [description]="'home.noActiveSiteRoomsDescription' | translate" [actionLabel]="'onboarding.createLocationAction' | translate" actionVariant="create" actionLink="/spaces/sites" />
+          } @else if (activeRooms().length === 0) {
+            <app-empty-state [compact]="true" [title]="'home.noRoomsTitle' | translate" [description]="'home.noRoomsDescription' | translate" [actionLabel]="'workplace.createRoom' | translate" actionVariant="create" actionLink="/spaces/rooms" />
+          } @else {
+            <dl class="home-metrics home-metrics--four">
+              <div><dt>{{ 'devices.total' | translate }}</dt><dd>{{ activeRooms().length }}</dd></div>
+              <div><dt>{{ 'home.withDevices' | translate }}</dt><dd>{{ roomsWithDevicesCount() }}</dd></div>
+              <div><dt>{{ 'home.withoutDevices' | translate }}</dt><dd>{{ roomsWithoutDevicesCount() }}</dd></div>
+              <div><dt>{{ 'home.averageDevicesShort' | translate }}</dt><dd>{{ formatNumber(averageDevicesPerRoom(), 1) }}</dd></div>
+            </dl>
+          }
+        </app-section-card>
+
+        <app-section-card class="home-card home-card--devices home-card--action-empty" size="medium">
+          <div class="home-card__header">
+            <div>
+              <p class="home-eyebrow">{{ 'nav.devices' | translate }}</p>
+              <h3>{{ 'home.assignedEquipmentTitle' | translate }}</h3>
+              <p>{{ 'home.assignedEquipmentDescription' | translate }}</p>
+            </div>
+            <app-button variant="ghost" size="sm" [link]="'/operation/devices'" [label]="'home.go' | translate" />
+          </div>
+
+          @if (!activeLocation() || activeDevices().length === 0) {
+            <app-empty-state [compact]="true" [title]="'home.noAssignedDevicesTitle' | translate" [description]="'home.noAssignedDevicesDescription' | translate" [actionLabel]="'devices.create' | translate" actionVariant="create" actionLink="/operation/devices" />
+          } @else {
+            <dl class="home-metrics home-metrics--three">
+              <div><dt>{{ 'devices.total' | translate }}</dt><dd>{{ activeDevices().length }}</dd></div>
+              <div><dt>{{ 'devices.active' | translate }}</dt><dd>{{ activeOnDevices().length }}</dd></div>
+              <div><dt>{{ 'history.watts' | translate }}</dt><dd>{{ formatNumber(currentWatts(), 0) }}</dd></div>
+            </dl>
+          }
+        </app-section-card>
+
+        <app-section-card class="home-card home-card--action-empty home-card--compact-action-empty" size="small">
+          <div class="home-card__header">
+            <div>
+              <p class="home-eyebrow">{{ 'nav.deviceGroups' | translate }}</p>
+              <h3>{{ 'home.groupSetsTitle' | translate }}</h3>
+              <p>{{ 'home.groupsDescription' | translate }}</p>
+            </div>
+            <app-button variant="ghost" size="sm" [link]="'/operation/groups'" [label]="'home.go' | translate" />
+          </div>
+
+          @if (activeGroups().length === 0) {
+            <app-empty-state [compact]="true" [title]="'home.noGroupsTitle' | translate" [description]="'home.noGroupsDescription' | translate" [actionLabel]="'deviceGroups.create' | translate" actionVariant="create" actionLink="/operation/groups" />
+          } @else {
+            <div
+              class="home-list-wrap"
+              [class.home-list-wrap--has-more]="hiddenGroupCount() > 0"
+              [style.--home-list-fade-opacity]="listFadeOpacity(visibleGroups().length)"
+            >
+              <ul class="home-list">
+                @for (group of visibleGroups(); track group.id) {
+                  <li><span>{{ group.name }}</span><strong>{{ 'home.deviceCountShort' | translate: { count: group.deviceCount } }}</strong></li>
+                }
+              </ul>
+              @if (hiddenGroupCount() > 0) {
+                <p class="home-more-note">{{ 'home.moreGroups' | translate: { count: hiddenGroupCount() } }}</p>
+              }
+            </div>
+          }
+        </app-section-card>
+
+        <app-section-card class="home-card home-card--action-empty home-card--compact-action-empty" size="small">
+          <div class="home-card__header">
+            <div>
+              <p class="home-eyebrow">{{ 'nav.routines' | translate }}</p>
+              <h3>{{ 'home.scheduledAlarmsTitle' | translate }}</h3>
+              <p>{{ 'home.scheduledAlarmsDescription' | translate }}</p>
+            </div>
+            <app-button variant="ghost" size="sm" [link]="'/operation/routines'" [label]="'home.go' | translate" />
+          </div>
+
+          @if (enabledRoutines().length === 0) {
+            <app-empty-state [compact]="true" [title]="'home.noActiveRoutinesTitle' | translate" [description]="'home.noActiveRoutinesDescription' | translate" [actionLabel]="'routines.addTitle' | translate" actionVariant="create" actionLink="/operation/routines" />
+          } @else {
+            <div
+              class="home-list-wrap"
+              [class.home-list-wrap--has-more]="hiddenRoutineCount() > 0"
+              [style.--home-list-fade-opacity]="listFadeOpacity(visibleRoutines().length)"
+            >
+              <ul class="home-list">
+                @for (routine of visibleRoutines(); track routine.id) {
+                  <li><span>{{ routine.name }}</span><strong>{{ routine.time }}</strong></li>
+                }
+              </ul>
+              @if (hiddenRoutineCount() > 0) {
+                <p class="home-more-note">{{ 'home.moreRoutines' | translate: { count: hiddenRoutineCount() } }}</p>
+              }
+            </div>
+          }
+        </app-section-card>
+
+        <app-section-card class="home-card home-card--action-empty home-card--compact-action-empty" size="small">
+          <div class="home-card__header">
+            <div>
+              <p class="home-eyebrow">{{ 'about.capabilities.items.modes.eyebrow' | translate }}</p>
+              <h3>{{ 'home.activeModeTitle' | translate }}</h3>
+              <p>{{ 'home.activeModeDescription' | translate }}</p>
+            </div>
+            <app-button variant="ghost" size="sm" [link]="'/operation/modes'" [label]="'home.go' | translate" />
+          </div>
+
+          @if (activeMode()) {
+            <div class="single-metric">
+              <strong>{{ activeMode()?.name }}</strong>
+              <span>{{ 'home.affectedDevices' | translate: { count: activeModeAffectedDeviceIds().length } }}</span>
+            </div>
+          } @else {
+            <app-empty-state [compact]="true" [title]="'home.noActiveModeTitle' | translate" [description]="'home.noActiveModeDescription' | translate" [actionLabel]="'home.createMode' | translate" actionVariant="create" actionLink="/operation/modes" />
+          }
+        </app-section-card>
+      </div>
+    </section>
+
+    <section class="home-zone">
+      <div class="home-card-grid home-card-grid--insight">
+        <app-section-card class="home-card home-card--insight-empty" size="medium">
+          <div class="home-card__header">
+            <div>
+              <p class="home-eyebrow">{{ 'home.consumption' | translate }}</p>
+              <h3>{{ 'home.energyRecordedTitle' | translate }}</h3>
+              <p>{{ 'home.energyRecordedDescription' | translate }}</p>
+            </div>
+            <app-button variant="ghost" size="sm" [link]="'/energy/consumption'" [label]="'home.go' | translate" />
+          </div>
+
+          @if (workplaceReadings().length === 0) {
+            <app-empty-state [compact]="true" [title]="'home.noReadingsTitle' | translate" [description]="'home.noReadingsDescription' | translate" />
+          } @else {
+            <dl class="home-metrics home-metrics--two home-metrics--matrix">
+              <div><dt>{{ 'home.today' | translate }}</dt><dd>{{ formatNumber(todayKilowattHours(), 3) }} kWh</dd></div>
+              <div><dt>{{ 'home.readings' | translate }}</dt><dd>{{ workplaceReadings().length }}</dd></div>
+              <div><dt>{{ 'home.averageConsumption' | translate }}</dt><dd>{{ formatNumber(averageReadingWatts(), 0) }} W</dd></div>
+              <div><dt>{{ 'home.peak' | translate }}</dt><dd>{{ formatNumber(peakReadingWatts(), 0) }} W</dd></div>
+            </dl>
+          }
+        </app-section-card>
+
+        <app-section-card class="home-card home-card--insight-empty" size="medium">
+          <div class="home-card__header">
+            <div>
+              <p class="home-eyebrow">{{ 'home.goalsEyebrow' | translate }}</p>
+              <h3>{{ 'home.activeGoalsTitle' | translate }}</h3>
+              <p>{{ 'home.activeGoalsDescription' | translate }}</p>
+            </div>
+            <app-button variant="ghost" size="sm" [link]="'/energy/goals'" [label]="'home.go' | translate" />
+          </div>
+
+          @if (activeGoals().length === 0) {
+            <app-empty-state [compact]="true" [title]="'home.noActiveGoalsTitle' | translate" [description]="'home.noActiveGoalsDescription' | translate" [actionLabel]="'reporting.createGoal' | translate" actionVariant="create" actionLink="/energy/goals" />
+          } @else {
+            <ul class="home-list">
+              @for (goal of activeGoals().slice(0, 3); track goal.id) {
+                <li><span>{{ goal.title }}</span><strong>{{ formatNumber(goal.progressPercentage, 1) }}%</strong></li>
+              }
+            </ul>
+          }
+        </app-section-card>
+
+        <app-section-card class="home-card" size="medium">
+          <div class="home-card__header">
+            <div>
+              <p class="home-eyebrow">{{ 'nav.alerts' | translate }}</p>
+              <h3>{{ 'home.recentInboxTitle' | translate }}</h3>
+              <p>{{ 'home.recentInboxDescription' | translate }}</p>
+            </div>
+            <app-button variant="ghost" size="sm" [link]="'/alerts/inbox'" [label]="'home.go' | translate" />
+          </div>
+
+          @if (workplaceAlerts().length === 0) {
+            <app-empty-state [compact]="true" [title]="'home.noRecentAlertsTitle' | translate" [description]="'home.noRecentAlertsDescription' | translate" [actionLabel]="'home.openAlerts' | translate" actionLink="/alerts/inbox" />
+          } @else {
+            <div class="alert-summary">
+              <span>{{ 'home.criticalCount' | translate: { count: criticalAlerts().length } }}</span>
+              <ul class="home-list home-list--alerts">
+                @for (alert of workplaceAlerts().slice(0, 3); track alert.id) {
+                  <li><span>{{ alert.title }}</span><strong>{{ alertLevelLabel(alert.level) }}</strong></li>
+                }
+              </ul>
+            </div>
+          }
+        </app-section-card>
+      </div>
+    </section>
+
+    <section class="home-zone">
+      <app-section-card class="home-card home-card--service" size="description">
+          <div class="home-card__header">
+            <div>
+              <p class="home-eyebrow">{{ 'about.capabilities.items.service.eyebrow' | translate }}</p>
+            <h3>{{ 'home.accountSupportTitle' | translate }}</h3>
+            <p>{{ 'home.accountSupportDescription' | translate }}</p>
+          </div>
+          <app-button variant="ghost" size="sm" [link]="'/service/support'" [label]="'home.go' | translate" />
+        </div>
+
+        @if (openSupportTickets().length === 0 && pendingMaintenanceForActiveDevices().length === 0) {
+          <app-empty-state [compact]="true" [title]="'home.noOpenTicketsTitle' | translate" [description]="'home.noOpenTicketsDescription' | translate" [actionLabel]="'home.createSupport' | translate" actionVariant="create" actionLink="/service/support" />
+        } @else {
+          <dl class="home-metrics home-metrics--two">
+            <div><dt>{{ 'nav.supportTickets' | translate }}</dt><dd>{{ openSupportTickets().length }}</dd></div>
+            <div><dt>{{ 'nav.maintenanceTickets' | translate }}</dt><dd>{{ pendingMaintenanceForActiveDevices().length }}</dd></div>
+          </dl>
+        }
+      </app-section-card>
+    </section>
+  }
+</section>

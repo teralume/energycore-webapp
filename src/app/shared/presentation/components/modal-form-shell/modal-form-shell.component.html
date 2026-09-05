@@ -1,0 +1,36 @@
+@if (open) {
+  <section class="modal-shell" [class.closing]="closing" role="dialog" aria-modal="true">
+    <button
+      type="button"
+      class="modal-shell__backdrop"
+      [attr.aria-label]="'shared.modal.closeForm' | translate"
+      (click)="close()"
+    ></button>
+
+    <article class="modal-shell__panel" [class.closing]="closing">
+      <header class="modal-shell__header">
+        <div>
+          @if (eyebrow) {
+            <p>{{ eyebrow }}</p>
+          }
+          <h2>{{ title }}</h2>
+          @if (description) {
+            <span>{{ description }}</span>
+          }
+        </div>
+
+        <button type="button" class="modal-shell__close" (click)="close()">
+          &times;
+        </button>
+      </header>
+
+      <div class="modal-shell__body">
+        <ng-content />
+      </div>
+
+      <footer class="modal-shell__actions">
+        <ng-content select="[modal-actions]" />
+      </footer>
+    </article>
+  </section>
+}

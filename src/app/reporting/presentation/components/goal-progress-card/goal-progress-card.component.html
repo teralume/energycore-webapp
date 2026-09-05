@@ -1,0 +1,73 @@
+<article
+  class="goal-card"
+  [class.completed]="goal.isCompleted"
+  [class.failed]="goal.isFailed"
+  [class.warning]="insight.statusTone === 'warning'"
+  [class.danger]="insight.statusTone === 'danger'"
+>
+  <header class="goal-card__header">
+    <p class="badge">{{ insight.statusLabel }}</p>
+
+    <h2>{{ goal.title }}</h2>
+
+    <div class="goal-meta">
+      <span>{{ goal.scopeName }}</span>
+      <span>{{ activeWindowLabel() }}</span>
+      <span>{{ 'reporting.goals.limitLabel' | translate: { value: formatNumber(goal.targetKilowattHours, 2) } }}</span>
+      <span>{{ 'reporting.goals.deadlineLabel' | translate: { date: formatDate(goal.deadline) } }}</span>
+      <span>{{ daysRemainingLabel() }}</span>
+    </div>
+  </header>
+
+  <section class="goal-progress">
+    <div class="progress-text">
+      <span>{{ 'reporting.goals.measured' | translate }}</span>
+      <strong>{{ formatNumber(insight.measuredKilowattHours, 4) }} kWh</strong>
+    </div>
+
+    <div class="progress-bar">
+      <span class="progress-bar__actual" [style.width.%]="progressPercentage"></span>
+      <i [style.left.%]="insight.expectedProgressPercentage"></i>
+    </div>
+
+    <div class="progress-scale">
+      <span>{{ 'reporting.goals.usedPercentage' | translate: { value: formatNumber(progressPercentage, 1) } }}</span>
+      <strong>{{ 'reporting.goals.availableKwh' | translate: { value: formatNumber(remainingKilowattHours, 2) } }}</strong>
+    </div>
+  </section>
+
+  <section class="goal-facts">
+    <div>
+      <span>{{ 'about.capabilities.items.energy.eyebrow' | translate }}</span>
+      <strong>{{ formatNumber(insight.measuredKilowattHours, 4) }} kWh</strong>
+    </div>
+
+    <div>
+      <span>{{ 'energyDashboard.cost' | translate }}</span>
+      <strong>S/ {{ formatNumber(insight.estimatedCost, 2) }}</strong>
+    </div>
+
+    <div>
+      <span>{{ 'reporting.goals.devices' | translate }}</span>
+      <strong>{{ insight.devicesMeasured }}</strong>
+    </div>
+
+    <div>
+      <span>{{ 'reporting.goals.projection' | translate }}</span>
+      <strong>{{ formatNumber(projectedPercentage, 1) }}%</strong>
+    </div>
+  </section>
+
+  <footer class="goal-card__footer">
+    <p>{{ insight.recommendation }}</p>
+
+    <app-button
+      class="danger-action"
+      variant="danger"
+      size="sm"
+      (pressed)="onRemove()"
+    >
+      {{ 'common.delete' | translate }}
+    </app-button>
+  </footer>
+</article>

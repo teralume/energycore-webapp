@@ -1,0 +1,82 @@
+<section class="settings-page">
+    <header class="ec-page-heading">
+      <p class="ec-page-eyebrow">{{ 'settings.nav.security' | translate }}</p>
+      <h1 class="ec-page-title">{{ 'settings.security.title' | translate }}</h1>
+      <p class="ec-page-description">
+        {{ 'settings.security.pageDescription' | translate }}
+      </p>
+    </header>
+
+    <app-settings-section
+      [eyebrow]="'settings.nav.security' | translate"
+      [title]="'settings.security.accessActionsTitle' | translate"
+      [description]="'settings.security.accessActionsDescription' | translate"
+      [stackedHeader]="true"
+    >
+      <div class="split-grid">
+        <article class="compact-card">
+          <span>{{ 'settings.security.recovery' | translate }}</span>
+          <h3>{{ 'settings.security.sendRecoveryTitle' | translate }}</h3>
+          <p>
+            {{ 'settings.security.sendRecoveryDescription' | translate }}
+          </p>
+          <app-button
+            variant="secondary"
+            [disabled]="iamFacade.loading() || !email"
+            (pressed)="sendRecovery()"
+          >
+            {{ 'settings.security.sendRecoveryButton' | translate }}
+          </app-button>
+        </article>
+
+        <article class="compact-card compact-card--danger">
+          <span>{{ 'settings.security.dangerZone' | translate }}</span>
+          <h3>{{ 'profile.deleteAccount' | translate }}</h3>
+          <p>
+            {{ 'settings.security.deleteAccountDescription' | translate }}
+          </p>
+
+          <app-button
+            variant="danger"
+            [disabled]="iamFacade.loading()"
+            (pressed)="onDeleteAccount()"
+          >
+            {{ 'security.deleteAccount' | translate }}
+          </app-button>
+        </article>
+      </div>
+    </app-settings-section>
+
+    <app-settings-section
+      [eyebrow]="'settings.security.protectionsEyebrow' | translate"
+      [title]="'settings.security.securityStatusTitle' | translate"
+      [description]="'settings.security.securityStatusDescription' | translate"
+      [stackedHeader]="true"
+    >
+      <div class="insight-grid">
+        <article class="compact-card">
+          <span>{{ 'settings.security.recoveryEmail' | translate }}</span>
+          <h3>{{ email || ('settings.common.notAvailable' | translate) }}</h3>
+          <p>
+            {{ 'settings.security.recoveryEmailDescription' | translate }}
+          </p>
+        </article>
+
+        <article class="compact-card">
+          <span>{{ 'settings.security.writtenConfirmation' | translate }}</span>
+          <h3>ELIMINAR</h3>
+          <p>
+            {{ 'settings.security.writtenConfirmationDescription' | translate }}
+          </p>
+        </article>
+
+        <article class="compact-card">
+          <span>{{ 'settings.security.finalConfirmation' | translate }}</span>
+          <h3>{{ 'settings.security.dialogRequired' | translate }}</h3>
+          <p>
+            {{ 'settings.security.finalConfirmationDescription' | translate }}
+          </p>
+        </article>
+      </div>
+    </app-settings-section>
+</section>

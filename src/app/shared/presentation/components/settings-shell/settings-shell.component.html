@@ -1,0 +1,31 @@
+<section class="settings-shell">
+  <aside class="settings-sidebar" [attr.aria-label]="'settings.shell.ariaLabel' | translate">
+    <div class="settings-sidebar__brand">
+      <span>{{ 'settings.shell.eyebrow' | translate }}</span>
+      <strong>{{ 'app.name' | translate }}</strong>
+      <small>{{ 'settings.shell.description' | translate }}</small>
+    </div>
+
+    <nav class="settings-nav">
+      @for (item of visibleNavItems(); track item.id) {
+        <a
+          [routerLink]="item.link"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          ariaCurrentWhenActive="page"
+        >
+          <span class="settings-nav__marker" aria-hidden="true"></span>
+          <span class="settings-nav__content">
+            <strong class="settings-nav__title">{{ item.labelKey | translate }}</strong>
+            <span class="settings-nav__description">{{ item.descriptionKey | translate }}</span>
+          </span>
+        </a>
+      }
+    </nav>
+  </aside>
+
+  <main class="settings-content">
+    <ng-content />
+    <router-outlet />
+  </main>
+</section>

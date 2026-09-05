@@ -1,0 +1,21 @@
+<article class="empty-state" [class.empty-state--compact]="compact">
+  @if (eyebrow) {
+    <span class="empty-state__eyebrow">{{ eyebrow }}</span>
+  }
+  <h2>{{ title }}</h2>
+
+  @if (description) {
+    <p>{{ description }}</p>
+  }
+
+  @if (actionLabel && actionLink) {
+    <app-button
+      [variant]="actionVariant"
+      size="sm"
+      [link]="actionLink"
+      [label]="actionLabel"
+    />
+  }
+
+  <ng-content />
+</article>

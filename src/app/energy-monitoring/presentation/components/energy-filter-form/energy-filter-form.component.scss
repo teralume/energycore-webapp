@@ -1,0 +1,30 @@
+.filter-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 22px;
+  background: var(--surface-color);
+}
+
+app-button {
+  align-self: end;
+  margin-bottom: 0;
+}
+
+:host ::ng-deep app-button .app-button {
+  min-height: 50px;
+  padding-inline: 18px;
+}
+
+@media (max-width: 820px) {
+  .filter-form {
+    grid-template-columns: 1fr;
+  }
+
+  app-button {
+    margin-bottom: 0;
+  }
+}

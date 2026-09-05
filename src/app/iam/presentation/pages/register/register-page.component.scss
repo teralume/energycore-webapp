@@ -1,0 +1,53 @@
+@use '../login/login-page.component.scss';
+
+.password-rules {
+  display: grid;
+  gap: 7px;
+  margin-top: -6px;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background: var(--ec-surface-subtle);
+}
+
+.password-rules span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.password-rules svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+.password-rules span.valid {
+  color: var(--ec-status-success-text);
+}
+
+.selected-plan-summary {
+  display: grid;
+  gap: 6px;
+  margin: 18px 0;
+  padding: 14px 16px;
+  border: 1px solid var(--accent-color);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--accent-color) 13%, transparent);
+}
+
+.selected-plan-summary span,
+.selected-plan-summary small {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.selected-plan-summary strong {
+  color: var(--text-primary);
+  font-size: 1.05rem;
+  font-weight: 900;
+}

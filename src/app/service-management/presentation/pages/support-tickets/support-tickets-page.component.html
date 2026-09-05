@@ -1,0 +1,134 @@
+<section class="service-page ec-page">
+  <header class="ec-page-heading">
+    <p class="ec-page-eyebrow">{{ 'about.capabilities.items.service.eyebrow' | translate }}</p>
+    <h1 class="ec-page-title">{{ 'nav.supportTickets' | translate }}</h1>
+    <p class="ec-page-description">
+      {{ 'serviceManagement.supportPageDescription' | translate }}
+    </p>
+  </header>
+
+  <section class="service-summary">
+    <article class="summary-card">
+      <span>{{ 'serviceManagement.supportSummaryTitle' | translate }}</span>
+      <strong>{{ serviceManagementFacade.supportTickets().length }}</strong>
+      <p>{{ 'serviceManagement.supportSummaryDescription' | translate }}</p>
+    </article>
+
+    <article class="summary-card">
+      <span>{{ 'serviceManagement.openTicketsShort' | translate }}</span>
+      <strong>{{ serviceManagementFacade.openSupportTickets().length }}</strong>
+    </article>
+
+    <article class="summary-card">
+      <span>{{ 'serviceManagement.urgentTicketsShort' | translate }}</span>
+      <strong>{{ serviceManagementFacade.urgentSupportTickets().length }}</strong>
+    </article>
+  </section>
+
+  <section class="operation-toolbar">
+    <div>
+      <p class="section-eyebrow">{{ 'serviceManagement.newSupportRequest' | translate }}</p>
+      <h2>{{ 'serviceManagement.supportAttentionTitle' | translate }}</h2>
+      <p>{{ 'serviceManagement.supportAttentionDescription' | translate }}</p>
+    </div>
+
+    <app-button variant="create" (pressed)="openSupportModal()">
+      {{ 'serviceManagement.createSupportRequest' | translate }}
+    </app-button>
+  </section>
+
+  @if (serviceManagementFacade.loading()) {
+    <div class="loading-wrapper">
+      <app-loading-spinner />
+    </div>
+  } @else {
+    <section class="ticket-section">
+      <header class="section-heading">
+        <div>
+          <span>{{ 'serviceManagement.cases' | translate }}</span>
+          <h2>{{ 'serviceManagement.supportCasesTitle' | translate }}</h2>
+        </div>
+      </header>
+
+      <div class="list">
+        @for (ticket of serviceManagementFacade.sortedSupportTickets(); track ticket.id) {
+          <app-support-ticket-card
+            [ticket]="ticket"
+            (statusChanged)="updateStatus($event)"
+            (remove)="deleteTicket($event)"
+          />
+        } @empty {
+          <app-empty-state
+            [eyebrow]="'nav.supportTickets' | translate"
+            [title]="'serviceManagement.emptySupportRequestsTitle' | translate"
+            [description]="'serviceManagement.emptySupportRequestsDescription' | translate"
+          >
+            <app-button variant="create" size="sm" (pressed)="openSupportModal()">
+              {{ 'serviceManagement.createSupportRequest' | translate }}
+            </app-button>
+          </app-empty-state>
+        }
+      </div>
+    </section>
+  }
+
+  <app-modal-form-shell
+    [open]="isSupportModalOpen"
+    [eyebrow]="'about.capabilities.items.service.eyebrow' | translate"
+    [title]="'serviceManagement.createSupportRequest' | translate"
+    [description]="'serviceManagement.supportModalDescription' | translate"
+    (closed)="closeSupportModal()"
+  >
+    <form class="modal-form" (ngSubmit)="createTicket()">
+      <label>
+        <span>{{ 'serviceManagement.subject' | translate }}</span>
+        <input
+          type="text"
+          name="subject"
+          [(ngModel)]="subject"
+          [placeholder]="'serviceManagement.supportSubjectPlaceholder' | translate"
+          required
+        />
+      </label>
+
+      <label>
+        <span>{{ 'serviceManagement.description' | translate }}</span>
+        <textarea
+          name="description"
+          [(ngModel)]="description"
+          rows="5"
+          [placeholder]="'serviceManagement.supportDescriptionPlaceholder' | translate"
+          required
+        ></textarea>
+      </label>
+
+      <label>
+        <span>{{ 'serviceManagement.priority' | translate }}</span>
+        <app-dropdown
+          [options]="priorityOptions"
+          [value]="priority"
+          [placeholder]="'serviceManagement.priority' | translate"
+          (valueChange)="selectPriority($event)"
+        />
+      </label>
+
+      <div class="form-actions">
+        <app-button
+          variant="secondary"
+          type="button"
+          (pressed)="closeSupportModal()"
+        >
+          {{ 'common.cancel' | translate }}
+        </app-button>
+
+        <app-button
+          variant="create"
+          type="submit"
+          [disabled]="serviceManagementFacade.loading()"
+        >
+          {{ 'serviceManagement.saveSupportRequest' | translate }}
+        </app-button>
+      </div>
+    </form>
+  </app-modal-form-shell>
+</section>

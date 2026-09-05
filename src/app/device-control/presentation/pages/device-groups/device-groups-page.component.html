@@ -1,0 +1,232 @@
+<section class="device-groups-page ec-page">
+  <header class="ec-page-heading">
+    <p class="ec-page-eyebrow">{{ 'nav.operation' | translate }}</p>
+    <h1 class="ec-page-title">{{ 'nav.deviceGroups' | translate }}</h1>
+    <p class="ec-page-description">
+      {{ 'deviceGroups.pageDescription' | translate }}
+    </p>
+  </header>
+
+  <section class="operation-summary">
+    <app-section-card
+      size="small"
+      [eyebrow]="'nav.deviceGroups' | translate"
+      [title]="'deviceGroups.summary.createdTitle' | translate"
+    >
+      <strong>{{ activeGroups.length }}</strong>
+      <p>{{ activeLocationName }}</p>
+    </app-section-card>
+
+    <app-section-card
+      size="small"
+      [eyebrow]="'nav.devices' | translate"
+      [title]="'deviceGroups.summary.availableTitle' | translate"
+    >
+      <strong>{{ assignedDeviceCount }}</strong>
+      <p>{{ 'deviceGroups.summary.multiGroupDescription' | translate }}</p>
+    </app-section-card>
+
+    <app-section-card
+      size="small"
+      [eyebrow]="'deviceGroups.summary.selectionEyebrow' | translate"
+      [title]="'devices.room' | translate"
+    >
+      <strong>{{ selectedRoomName }}</strong>
+      <p>{{ 'deviceGroups.summary.selectedDevices' | translate: { count: selectedCount } }}</p>
+    </app-section-card>
+  </section>
+
+  <section class="operation-toolbar">
+    <div>
+      <p class="section-eyebrow">{{ 'deviceGroups.toolbar.eyebrow' | translate }}</p>
+      <h2>{{ 'deviceGroups.toolbar.title' | translate }}</h2>
+      <p>{{ 'deviceGroups.toolbar.description' | translate }}</p>
+    </div>
+
+    <app-button
+      variant="create"
+      [disabled]="sortedDevices.length === 0"
+      (pressed)="openCreateModal()"
+    >
+      {{ 'deviceGroups.create' | translate }}
+    </app-button>
+  </section>
+
+  @if (showInitialLoading) {
+    <div class="loading-wrapper">
+      <app-loading-spinner />
+    </div>
+  } @else if (sortedDevices.length === 0) {
+    <app-empty-state
+      [eyebrow]="'nav.devices' | translate"
+      [title]="'deviceGroups.emptyDevices.title' | translate"
+      [description]="'deviceGroups.emptyDevices.description' | translate"
+      [actionLabel]="'devices.go' | translate"
+      actionLink="/spaces/assignments"
+      actionVariant="neutral"
+    />
+  } @else if (groupRoomSections.length === 0) {
+    <app-empty-state
+      [eyebrow]="'nav.deviceGroups' | translate"
+      [title]="'deviceGroups.emptyGroups.title' | translate"
+      [description]="'deviceGroups.emptyGroups.description' | translate"
+    />
+  } @else {
+    <section class="group-room-list">
+      @for (section of groupRoomSections; track section.roomName) {
+        <app-section-card class="group-room-section" size="large">
+          <header class="group-room-section__header">
+            <div>
+              <p>{{ 'devices.room' | translate }}</p>
+              <h3>{{ displayRoomName(section.roomName) }}</h3>
+            </div>
+
+            <dl class="group-room-section__stats">
+              <div>
+                <dt>{{ 'nav.deviceGroups' | translate }}</dt>
+                <dd>{{ section.groupCount }}</dd>
+              </div>
+
+              <div>
+                <dt>{{ 'nav.devices' | translate }}</dt>
+                <dd>{{ section.deviceCount }}</dd>
+              </div>
+
+              <div>
+                <dt>{{ 'devices.active' | translate }}</dt>
+                <dd>{{ section.activeDeviceCount }}</dd>
+              </div>
+
+              <div>
+                <dt>{{ 'devices.currentWatts' | translate }}</dt>
+                <dd>{{ section.currentWatts }} W</dd>
+              </div>
+            </dl>
+          </header>
+
+          <div class="groups-list">
+            @for (item of section.groups; track item.group.id) {
+              <div
+                class="group-card-shell"
+                [class.group-card-shell--removing]="isGroupRemoving(item.group.id)"
+              >
+                <app-device-group-card
+                  [group]="item.group"
+                  [roomName]="displayRoomName(item.roomName)"
+                  [devices]="item.devices"
+                  [removing]="isGroupRemoving(item.group.id)"
+                  (execute)="executeGroupAction($event)"
+                  (remove)="deleteGroup($event)"
+                />
+              </div>
+            }
+          </div>
+        </app-section-card>
+      }
+    </section>
+  }
+
+  <app-modal-form-shell
+    [open]="createModalOpen"
+    [eyebrow]="'deviceGroups.form.eyebrow' | translate"
+    [title]="'deviceGroups.create' | translate"
+    [description]="'deviceGroups.form.description' | translate"
+    (closed)="closeCreateModal()"
+  >
+    <form class="group-form" (ngSubmit)="createGroup()">
+      <div class="fields-row">
+        <label class="field">
+          <span>{{ 'devices.name' | translate }}</span>
+          <input
+            type="text"
+            name="name"
+            [(ngModel)]="name"
+            [placeholder]="'deviceGroups.form.namePlaceholder' | translate"
+            required
+          />
+        </label>
+
+        <label class="field">
+          <span>{{ 'deviceGroups.description' | translate }}</span>
+          <input
+            type="text"
+            name="description"
+            [(ngModel)]="description"
+            [placeholder]="'deviceGroups.form.descriptionPlaceholder' | translate"
+          />
+        </label>
+      </div>
+
+      <section class="picker-card">
+        <div class="picker-card__header">
+          <div>
+            <h3>{{ 'nav.devices' | translate }}</h3>
+            <p>{{ 'deviceGroups.form.pickerDescription' | translate: { location: activeLocationName } }}</p>
+          </div>
+          <span>{{ 'deviceGroups.form.selectedCount' | translate: { count: selectedCount } }}</span>
+        </div>
+
+        <div class="picker-room-list">
+          @for (section of selectableDeviceRoomSections; track section.roomName) {
+            <article class="picker-room-section">
+              <header class="picker-room-section__header">
+                <div>
+                  <p>{{ 'devices.room' | translate }}</p>
+                  <h4>{{ displayRoomName(section.roomName) }}</h4>
+                </div>
+
+                <div class="picker-room-section__stats">
+                  <span>{{ 'deviceGroups.form.availableCount' | translate: { count: section.availableCount } }}</span>
+                  <span>{{ 'deviceGroups.form.selectedCount' | translate: { count: section.selectedCount } }}</span>
+                </div>
+              </header>
+
+              <div class="checkbox-grid">
+                @for (device of section.devices; track device.id) {
+                  <label
+                    class="device-option"
+                    [class.selected]="isDeviceSelected(device.id)"
+                  >
+                    <input
+                      class="device-option__native-input"
+                      type="checkbox"
+                      [checked]="isDeviceSelected(device.id)"
+                      (change)="toggleDeviceSelection(device.id, $any($event.target).checked)"
+                    />
+
+                    <span class="device-option__check">
+                      <span class="device-option__check-icon">{{ 'common.ok' | translate }}</span>
+                    </span>
+
+                    <span class="device-option__icon">
+                      {{ getDeviceIcon(device.type) }}
+                    </span>
+
+                    <span class="device-option__content">
+                      <strong>{{ device.name }}</strong>
+                      <small>{{ displayRoomName(section.roomName) }} - {{ device.powerWatts }} W</small>
+                      @if (getGroupMembershipLabel(device.id); as membershipLabel) {
+                        <em>{{ 'deviceGroups.form.alsoBelongsTo' | translate }}: {{ membershipLabel }}</em>
+                      }
+                    </span>
+
+                    <span class="device-option__tag">
+                      {{ getDeviceSelectionLabel(device.id) }}
+                    </span>
+                  </label>
+                }
+              </div>
+            </article>
+          }
+        </div>
+      </section>
+
+      <div class="form-actions">
+        <app-button variant="neutral" (pressed)="closeCreateModal()">{{ 'common.cancel' | translate }}</app-button>
+        <app-button type="submit" variant="create" [disabled]="groupSubmitDisabled">
+          {{ 'deviceGroups.create' | translate }}
+        </app-button>
+      </div>
+    </form>
+  </app-modal-form-shell>
+</section>

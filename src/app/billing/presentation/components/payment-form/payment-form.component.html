@@ -1,0 +1,92 @@
+<app-modal-form-shell
+  [open]="true"
+  [eyebrow]="'about.careful.items.billing.title' | translate"
+  title="Confirmar plan"
+  description="Registra el pago para activar el plan seleccionado."
+  (closed)="onCancel()"
+>
+  <section class="amount-card">
+    <span>{{ 'billing.selectedPlan' | translate }}</span>
+    <strong>{{ plan.name }}</strong>
+    <p>S/ {{ plan.monthlyPrice }}</p>
+  </section>
+
+  <form class="payment-form ec-scrollbar" (ngSubmit)="onConfirm()">
+    <label>
+      {{ 'billing.holderName' | translate }}
+      <input
+        type="text"
+        name="holderName"
+        [(ngModel)]="holderName"
+        autocomplete="cc-name"
+        required
+      />
+    </label>
+
+    <label>
+      {{ 'billing.cardNumber' | translate }}
+      <input
+        type="text"
+        name="cardNumber"
+        [ngModel]="cardNumber"
+        (ngModelChange)="onCardNumberChange($event)"
+        autocomplete="cc-number"
+        inputmode="numeric"
+        maxlength="19"
+        minlength="19"
+        pattern="[0-9 ]{19}"
+        placeholder="0000 0000 0000 0000"
+        required
+      />
+    </label>
+
+    <div class="row">
+      <label>
+        {{ 'billing.expirationDate' | translate }}
+        <input
+          type="text"
+          name="expirationDate"
+          [ngModel]="expirationDate"
+          (ngModelChange)="onExpirationDateChange($event)"
+          autocomplete="cc-exp"
+          inputmode="numeric"
+          maxlength="5"
+          minlength="5"
+          pattern="(0[1-9]|1[0-2])/[0-9]{2}"
+          placeholder="MM/YY"
+          required
+        />
+      </label>
+
+      <label>
+        {{ 'billing.cvv' | translate }}
+        <input
+          type="password"
+          name="cvv"
+          [ngModel]="cvv"
+          (ngModelChange)="onCvvChange($event)"
+          autocomplete="cc-csc"
+          inputmode="numeric"
+          maxlength="3"
+          minlength="3"
+          pattern="[0-9]{3}"
+          required
+        />
+      </label>
+    </div>
+
+    <div class="actions">
+      <app-button type="submit" variant="create" [disabled]="loading">
+        @if (loading) {
+          {{ 'common.loading' | translate }}
+        } @else {
+          {{ 'billing.confirmPayment' | translate }}
+        }
+      </app-button>
+
+      <app-button type="button" variant="secondary" (pressed)="onCancel()">
+        {{ 'billing.cancelPayment' | translate }}
+      </app-button>
+    </div>
+  </form>
+</app-modal-form-shell>

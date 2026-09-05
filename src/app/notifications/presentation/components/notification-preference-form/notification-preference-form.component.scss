@@ -1,0 +1,330 @@
+.preference-form {
+  display: grid;
+  gap: 18px;
+}
+
+.preference-block {
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 22px;
+  background:
+    var(--ec-card-highlight),
+    var(--surface-card);
+  box-shadow:
+    var(--ec-inset-highlight),
+    var(--ec-shadow-soft);
+}
+
+.preference-block--hero {
+  gap: 20px;
+}
+
+.block-heading {
+  display: grid;
+  gap: 6px;
+}
+
+.block-heading span,
+.level-field > span,
+.number-field > span,
+.preview-field > span,
+.preview-slider > span,
+.threshold-controls span,
+.summary-label {
+  color: var(--accent-color);
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.block-heading h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  line-height: 1.1;
+}
+
+.block-heading p,
+.number-field small,
+.weight-row small,
+.preview-result p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-weight: 780;
+  line-height: 1.45;
+}
+
+.severity-workbench {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.15fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.severity-rail-card {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 14px;
+  min-height: 360px;
+  padding: 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  background: var(--ec-surface-subtle);
+}
+
+.severity-rail {
+  --stable-stop: 25%;
+  --neutral-stop: 55%;
+  --warning-stop: 80%;
+
+  position: relative;
+  width: 34px;
+  min-height: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background:
+    linear-gradient(
+      to top,
+      var(--ec-status-stable-bg) 0 var(--stable-stop),
+      var(--ec-status-info-bg) var(--stable-stop) var(--neutral-stop),
+      var(--ec-status-warning-bg) var(--neutral-stop) var(--warning-stop),
+      var(--ec-status-danger-bg) var(--warning-stop) 100%
+    ),
+    var(--surface-card);
+  box-shadow: var(--ec-inset-highlight);
+}
+
+.rail-marker {
+  position: absolute;
+  left: 50%;
+  width: 46px;
+  height: 12px;
+  border: 2px solid var(--surface-elevated-solid);
+  border-radius: 999px;
+  background: var(--accent-color);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--accent-color) 28%, transparent);
+  transform: translate(-50%, 50%);
+}
+
+.rail-marker--stable {
+  background: var(--ec-status-stable-text);
+}
+
+.rail-marker--neutral {
+  background: var(--ec-status-info-text);
+}
+
+.rail-marker--warning {
+  background: var(--ec-status-warning-text);
+}
+
+.severity-readout,
+.threshold-controls,
+.weight-list,
+.record-stack {
+  display: grid;
+  gap: 10px;
+}
+
+.band-card {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background: var(--ec-surface-subtle);
+}
+
+.band-card span,
+.preview-result span {
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.band-card strong,
+.preview-result strong,
+.threshold-controls strong,
+.weight-row strong {
+  color: var(--text-primary);
+  font-weight: 950;
+}
+
+.level-stable span {
+  color: var(--ec-status-stable-text);
+}
+
+.level-info span {
+  color: var(--ec-status-info-text);
+}
+
+.level-warning span {
+  color: var(--ec-status-warning-text);
+}
+
+.level-critical span {
+  color: var(--ec-status-danger-text);
+}
+
+.level-success span {
+  color: var(--ec-status-success-text);
+}
+
+.threshold-controls label,
+.preview-slider,
+.weight-row label {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 12px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  background: var(--ec-surface-subtle);
+}
+
+.threshold-controls input,
+.preview-slider input,
+.weight-row input {
+  grid-column: 1 / -1;
+  width: 100%;
+  accent-color: var(--accent-color);
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(220px, 1fr) minmax(180px, 0.7fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.preview-field,
+.level-field,
+.number-field {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.preview-result {
+  display: grid;
+  gap: 7px;
+  align-content: center;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  background: var(--ec-surface-subtle);
+}
+
+.preview-result strong {
+  font-size: 1.45rem;
+}
+
+.toggle-grid,
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.toggle-grid--single {
+  grid-template-columns: minmax(0, 420px);
+}
+
+.control-grid--compact {
+  grid-template-columns: repeat(2, minmax(0, 220px));
+}
+
+.chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+:host ::ng-deep .chip-grid .app-button {
+  min-width: 112px;
+}
+
+.weight-list {
+  display: grid;
+  gap: 12px;
+}
+
+.weight-row {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(220px, 1fr);
+  gap: 12px;
+  align-items: stretch;
+}
+
+.weight-row__toggle {
+  display: grid;
+  gap: 5px;
+  align-content: center;
+  width: 100%;
+  min-height: 82px;
+  padding: 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  color: var(--text-primary);
+  background: var(--ec-surface-subtle);
+  cursor: pointer;
+  text-align: left;
+}
+
+.weight-row__toggle span {
+  font-weight: 950;
+}
+
+.weight-row__toggle--active {
+  border-color: var(--border-strong);
+  background:
+    radial-gradient(circle at top left, var(--ec-accent-soft), transparent 46%),
+    var(--ec-surface-muted);
+}
+
+.weight-row--disabled {
+  opacity: 0.72;
+}
+
+.number-field input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: var(--field-bg);
+  color: var(--text-primary);
+  font: inherit;
+  font-weight: 850;
+  padding: 12px;
+  outline: none;
+}
+
+.number-field input:focus {
+  border-color: var(--border-strong);
+  box-shadow: var(--ec-focus-ring);
+}
+
+@media (max-width: 1040px) {
+  .severity-workbench,
+  .preview-grid,
+  .weight-row {
+    grid-template-columns: 1fr;
+  }
+
+  .severity-rail-card {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 920px) {
+  .toggle-grid,
+  .control-grid,
+  .control-grid--compact {
+    grid-template-columns: 1fr;
+  }
+}

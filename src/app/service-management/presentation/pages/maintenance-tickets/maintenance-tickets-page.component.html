@@ -1,0 +1,152 @@
+<section class="service-page ec-page">
+  <header class="ec-page-heading">
+    <p class="ec-page-eyebrow">{{ 'about.capabilities.items.service.eyebrow' | translate }}</p>
+    <h1 class="ec-page-title">{{ 'nav.maintenanceTickets' | translate }}</h1>
+    <p class="ec-page-description">
+      {{ 'serviceManagement.maintenancePageDescription' | translate }}
+    </p>
+  </header>
+
+  <section class="service-summary">
+    <article class="summary-card">
+      <span>{{ 'serviceManagement.maintenanceSummaryTitle' | translate }}</span>
+      <strong>{{ serviceManagementFacade.maintenanceTickets().length }}</strong>
+      <p>{{ 'serviceManagement.maintenanceSummaryDescription' | translate }}</p>
+    </article>
+
+    <article class="summary-card">
+      <span>{{ 'serviceManagement.pendingMaintenanceShort' | translate }}</span>
+      <strong>{{ serviceManagementFacade.pendingMaintenanceTickets().length }}</strong>
+    </article>
+
+    <article class="summary-card">
+      <span>{{ 'serviceManagement.completedMaintenanceShort' | translate }}</span>
+      <strong>{{ serviceManagementFacade.completedMaintenanceTickets().length }}</strong>
+    </article>
+  </section>
+
+  <section class="operation-toolbar">
+    <div>
+      <p class="section-eyebrow">{{ 'serviceManagement.scheduleEyebrow' | translate }}</p>
+      <h2>{{ 'serviceManagement.technicalScheduleTitle' | translate }}</h2>
+      <p>{{ 'serviceManagement.technicalScheduleDescription' | translate }}</p>
+    </div>
+
+    @if (hasDevices) {
+      <app-button variant="create" (pressed)="openMaintenanceModal()">
+        {{ 'serviceManagement.scheduleMaintenance' | translate }}
+      </app-button>
+    } @else {
+      <app-button variant="create" link="/operation/devices">
+        {{ 'serviceManagement.goToDevices' | translate }}
+      </app-button>
+    }
+  </section>
+
+  @if (serviceManagementFacade.loading()) {
+    <div class="loading-wrapper">
+      <app-loading-spinner />
+    </div>
+  } @else {
+    <section class="ticket-section">
+      <header class="section-heading">
+        <div>
+          <span>{{ 'serviceManagement.orders' | translate }}</span>
+          <h2>{{ 'serviceManagement.maintenanceAgendaTitle' | translate }}</h2>
+        </div>
+      </header>
+
+      <div class="list">
+        @for (ticket of serviceManagementFacade.sortedMaintenanceTickets(); track ticket.id) {
+          <app-maintenance-ticket-card
+            [ticket]="ticket"
+            (statusChanged)="updateStatus($event)"
+            (remove)="deleteTicket($event)"
+          />
+        } @empty {
+          <app-empty-state
+            [eyebrow]="'nav.maintenanceTickets' | translate"
+            [title]="'serviceManagement.emptyMaintenanceTitle' | translate"
+            [description]="'serviceManagement.emptyMaintenanceDescription' | translate"
+          >
+            @if (hasDevices) {
+              <app-button variant="create" size="sm" (pressed)="openMaintenanceModal()">
+                {{ 'serviceManagement.scheduleMaintenance' | translate }}
+              </app-button>
+            } @else {
+              <app-button variant="create" size="sm" link="/operation/devices">
+                {{ 'serviceManagement.goToDevices' | translate }}
+              </app-button>
+            }
+          </app-empty-state>
+        }
+      </div>
+    </section>
+  }
+
+  <app-modal-form-shell
+    [open]="isMaintenanceModalOpen"
+    [eyebrow]="'about.capabilities.items.service.eyebrow' | translate"
+    [title]="'serviceManagement.scheduleMaintenance' | translate"
+    [description]="'serviceManagement.maintenanceModalDescription' | translate"
+    (closed)="closeMaintenanceModal()"
+  >
+    <form class="modal-form" (ngSubmit)="createTicket()">
+      <label>
+        <span>{{ 'routines.device' | translate }}</span>
+        <app-dropdown
+          [options]="deviceOptions"
+          [value]="deviceValue"
+          [placeholder]="'routines.selectDevice' | translate"
+          (valueChange)="selectDevice($event)"
+        />
+      </label>
+
+      <label>
+        <span>{{ 'devices.type' | translate }}</span>
+        <app-dropdown
+          [options]="typeOptions"
+          [value]="type"
+          [placeholder]="'serviceManagement.maintenanceType' | translate"
+          (valueChange)="selectType($event)"
+        />
+      </label>
+
+      <label>
+        <span>{{ 'serviceManagement.reason' | translate }}</span>
+        <textarea
+          name="description"
+          [(ngModel)]="description"
+          rows="5"
+          [placeholder]="'serviceManagement.maintenanceDescriptionPlaceholder' | translate"
+          required
+        ></textarea>
+      </label>
+
+      <app-date-picker
+        [label]="'serviceManagement.scheduledDate' | translate"
+        [value]="scheduledDate"
+        [min]="todayInput"
+        (valueChange)="selectDate($event)"
+      />
+
+      <div class="form-actions">
+        <app-button
+          variant="secondary"
+          type="button"
+          (pressed)="closeMaintenanceModal()"
+        >
+          {{ 'common.cancel' | translate }}
+        </app-button>
+
+        <app-button
+          variant="create"
+          type="submit"
+          [disabled]="serviceManagementFacade.loading()"
+        >
+          {{ 'serviceManagement.saveMaintenance' | translate }}
+        </app-button>
+      </div>
+    </form>
+  </app-modal-form-shell>
+</section>

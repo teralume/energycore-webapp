@@ -1,0 +1,68 @@
+<section class="settings-page">
+    <header class="ec-page-heading">
+      <p class="ec-page-eyebrow">{{ 'settings.nav.platform' | translate }}</p>
+      <h1 class="ec-page-title">{{ 'settings.platform.title' | translate }}</h1>
+      <p class="ec-page-description">
+        {{ 'settings.platform.pageDescription' | translate }}
+      </p>
+    </header>
+
+    <app-settings-section
+      [eyebrow]="'settings.nav.platform' | translate"
+      [title]="'settings.platform.browserExperienceTitle' | translate"
+      [description]="'settings.platform.browserExperienceDescription' | translate"
+      [stackedHeader]="true"
+    >
+      <div class="platform-grid">
+        <app-setting-toggle
+          [title]="'settings.platform.darkMode' | translate"
+          [description]="'settings.platform.darkModeDescription' | translate"
+          [checked]="uiPreferences.isDarkMode()"
+          (checkedChange)="setDarkMode($event)"
+        />
+
+        <label class="language-field">
+          <span>{{ 'settings.platform.language' | translate }}</span>
+          <app-dropdown
+            [options]="languageOptions"
+            [value]="currentLanguage"
+            [placeholder]="'settings.platform.language' | translate"
+            (valueChange)="selectLanguage($event)"
+          />
+        </label>
+      </div>
+    </app-settings-section>
+
+    <app-settings-section
+      [eyebrow]="'settings.platform.localStatusEyebrow' | translate"
+      [title]="'settings.platform.preferencesSummaryTitle' | translate"
+      [description]="'settings.platform.preferencesSummaryDescription' | translate"
+      [stackedHeader]="true"
+    >
+      <div class="insight-grid">
+        <article class="compact-card">
+          <span>{{ 'settings.platform.appearance' | translate }}</span>
+          <h3>{{ currentThemeLabel }}</h3>
+          <p>
+            {{ 'settings.platform.appearanceDescription' | translate }}
+          </p>
+        </article>
+
+        <article class="compact-card">
+          <span>{{ 'settings.platform.activeLanguage' | translate }}</span>
+          <h3>{{ currentLanguageLabel }}</h3>
+          <p>
+            {{ 'settings.platform.activeLanguageDescription' | translate }}
+          </p>
+        </article>
+
+        <article class="compact-card">
+          <span>{{ 'settings.platform.scope' | translate }}</span>
+          <h3>{{ 'settings.platform.local' | translate }}</h3>
+          <p>
+            {{ 'settings.platform.scopeDescription' | translate }}
+          </p>
+        </article>
+      </div>
+    </app-settings-section>
+</section>

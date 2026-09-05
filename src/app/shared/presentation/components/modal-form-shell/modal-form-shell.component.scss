@@ -1,0 +1,205 @@
+:host {
+  position: fixed;
+  inset: 0;
+  z-index: 980;
+  display: block;
+  pointer-events: none;
+}
+
+.modal-shell {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  padding: clamp(18px, 4vw, 40px);
+  pointer-events: auto;
+  animation: modalShellEnter 0.22s ease both;
+}
+
+.modal-shell.closing {
+  animation: modalShellExit 0.18s ease both;
+}
+
+.modal-shell__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background:
+    var(--ec-overlay-glow),
+    var(--ec-overlay-bg);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+}
+
+.modal-shell__panel {
+  position: relative;
+  z-index: 1;
+  width: min(680px, calc(100vw - 36px));
+  max-height: min(86dvh, 760px);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 20px;
+  color: var(--text-primary);
+  background: var(--ec-modal-bg);
+  box-shadow:
+    var(--ec-shadow-modal),
+    0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+  animation: modalPanelEnter 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.modal-shell__panel.closing {
+  animation: modalPanelExit 0.18s ease both;
+}
+
+.modal-shell__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 22px 18px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-shell__header div {
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.modal-shell__header p,
+.modal-shell__header h2,
+.modal-shell__header span {
+  margin: 0;
+}
+
+.modal-shell__header p {
+  width: fit-content;
+  padding: 7px 10px;
+  border-radius: 999px;
+  color: var(--accent-color);
+  background: var(--ec-accent-soft);
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.modal-shell__header h2 {
+  color: var(--text-primary);
+  font-size: clamp(1.16rem, 3vw, 1.55rem);
+  line-height: 1.14;
+}
+
+.modal-shell__header span {
+  max-width: 62ch;
+  color: var(--ec-copy-color);
+  font-weight: var(--ec-copy-weight);
+  line-height: var(--ec-copy-line-height);
+}
+
+.modal-shell__close {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 0;
+  color: var(--text-primary);
+  background: var(--ec-ghost-bg);
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.modal-shell__close:hover {
+  border-color: var(--border-strong);
+  background: var(--ec-ghost-bg-hover);
+}
+
+.modal-shell__body {
+  min-height: 0;
+  overflow: auto;
+  padding: 22px;
+}
+
+.modal-shell__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 22px 22px;
+  border-top: 1px solid var(--border-color);
+}
+
+.modal-shell__actions:empty {
+  display: none;
+}
+
+@keyframes modalShellEnter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalShellExit {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes modalPanelEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes modalPanelExit {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+    filter: blur(3px);
+  }
+}
+
+@media (max-width: 560px) {
+  .modal-shell__header,
+  .modal-shell__body,
+  .modal-shell__actions {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .modal-shell__actions {
+    flex-direction: column-reverse;
+  }
+}

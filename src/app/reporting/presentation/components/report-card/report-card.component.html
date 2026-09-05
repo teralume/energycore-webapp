@@ -1,0 +1,54 @@
+<article class="report-card">
+  <div class="report-cell report-cell--identity">
+    <div class="report-kicker">
+      <p class="badge">{{ periodLabel(report.period) }}</p>
+      <span class="report-id">#{{
+        report.id.toString().padStart(4, '0')
+      }}</span>
+    </div>
+
+    <h2>{{ getCleanTitle() }}</h2>
+  </div>
+
+  <div class="report-cell report-cell--date">
+    <span>{{ 'reporting.from' | translate }}</span>
+    <strong>{{ formatDate(report.startDate) }}</strong>
+  </div>
+
+  <div class="report-cell report-cell--date">
+    <span>{{ 'reporting.to' | translate }}</span>
+    <strong>{{ formatDate(report.endDate) }}</strong>
+  </div>
+
+  <div class="report-cell report-cell--date">
+    <span>{{ 'reporting.generated' | translate }}</span>
+    <strong>{{ formatDate(report.generatedAt) }}</strong>
+  </div>
+
+  <div class="metrics">
+    <div class="report-cell">
+      <span>{{ 'reporting.totalWatts' | translate }}</span>
+      <strong>{{ formatWatts(report.totalWatts) }}</strong>
+    </div>
+
+    <div class="report-cell">
+      <span>{{ 'reporting.averageWatts' | translate }}</span>
+      <strong>{{ formatWatts(report.averageWatts) }}</strong>
+    </div>
+
+    <div class="report-cell">
+      <span>{{ 'reporting.highestWatts' | translate }}</span>
+      <strong>{{ formatWatts(report.highestWatts) }}</strong>
+    </div>
+  </div>
+
+  <div class="actions">
+    <app-button variant="secondary" size="sm" (pressed)="onExport()">
+      {{ 'reporting.export' | translate }}
+    </app-button>
+
+    <app-button variant="danger" size="sm" (pressed)="onRemove()">
+      {{ 'common.delete' | translate }}
+    </app-button>
+  </div>
+</article>

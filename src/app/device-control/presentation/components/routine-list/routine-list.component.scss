@@ -1,0 +1,137 @@
+:host {
+  display: block;
+}
+
+.routine-list {
+  display: grid;
+  gap: 20px;
+}
+
+.routine-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 18px;
+  align-items: center;
+  padding: 24px;
+  border: 1px solid var(--border-color);
+  border-radius: 26px;
+  background: var(--surface-card);
+  box-shadow: var(--ec-shadow-soft);
+}
+
+.routine-item__icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: var(--ec-accent-soft);
+  color: var(--accent-color);
+  font-weight: 950;
+}
+
+.routine-item__content {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.routine-item__top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.routine-item h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.35rem;
+  line-height: 1.1;
+}
+
+.routine-item p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.routine-item strong {
+  color: var(--text-primary);
+}
+
+.routine-status {
+  width: fit-content;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: var(--ec-status-danger-bg);
+  color: var(--ec-status-danger-text);
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.routine-status.enabled {
+  background: var(--ec-accent-soft);
+  color: var(--accent-color);
+}
+
+.routine-item__meta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.routine-item__meta span {
+  width: fit-content;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: var(--ec-surface-subtle);
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.routine-item__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.routine-action {
+  min-width: 118px;
+}
+
+.empty-routines {
+  padding: 20px;
+  border: 1px dashed var(--border-color);
+  border-radius: 20px;
+  background: var(--ec-surface-subtle);
+  color: var(--text-secondary);
+  font-weight: 800;
+}
+
+@media (max-width: 860px) {
+  .routine-item {
+    grid-template-columns: auto 1fr;
+  }
+
+  .routine-item__actions {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .routine-item {
+    grid-template-columns: 1fr;
+  }
+
+  .routine-item__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .routine-action {
+    width: 100%;
+  }
+}

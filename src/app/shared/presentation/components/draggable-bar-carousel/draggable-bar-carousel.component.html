@@ -1,0 +1,82 @@
+<div
+  class="draggable-bar-carousel"
+  [class.draggable-bar-carousel--dragging]="dragging()"
+  [class.draggable-bar-carousel--momentum]="momentum()"
+  [class.draggable-bar-carousel--auto-advancing]="autoAdvancing()"
+  (pointerdown)="onPointerDown($event)"
+  (pointermove)="onPointerMove($event)"
+  (pointerup)="onPointerUp($event)"
+  (pointercancel)="onPointerCancel($event)"
+  (pointerleave)="onPointerCancel($event)"
+>
+  <div class="draggable-bar-carousel__glow"></div>
+
+  <div class="draggable-bar-carousel__rail" [style.transform]="railTransform()">
+    @for (item of visibleItems(); track item.key) {
+      <article
+        class="draggable-bar-carousel__item"
+        [class.draggable-bar-carousel__item--active]="isActive(item.index)"
+        [style.transform]="itemTransform(item.index)"
+        [style.opacity]="itemOpacity(item.index)"
+        [style.z-index]="itemZIndex(item.index)"
+      >
+        <span class="draggable-bar-carousel__track">
+          <span
+            class="draggable-bar-carousel__bar"
+            [class.draggable-bar-carousel__bar--high]="item.tone === 'warning'"
+            [style.height.%]="item.percentage"
+          ></span>
+        </span>
+
+        @if (selectable) {
+          <button
+            class="draggable-bar-carousel__chip"
+            type="button"
+            [attr.aria-label]="item.ariaLabel || item.title || item.value"
+            (pointerdown)="onChipPointerDown($event)"
+            (click)="selectItem(item, $event)"
+          >
+            <strong>{{ item.value }}</strong>
+            <small>{{ item.caption }}</small>
+          </button>
+        } @else {
+          <div
+            class="draggable-bar-carousel__chip"
+            tabindex="0"
+            role="group"
+            [attr.aria-label]="item.ariaLabel || item.title || item.value"
+          >
+            <strong>{{ item.value }}</strong>
+            <small>{{ item.caption }}</small>
+
+            @if (item.title || item.subtitle || item.detail || item.meta) {
+              <span class="draggable-bar-carousel__tooltip" aria-hidden="true">
+                @if (item.eyebrow) {
+                  <span class="draggable-bar-carousel__tooltip-emoji">
+                    {{ item.eyebrow }}
+                  </span>
+                }
+
+                @if (item.title) {
+                  <strong>{{ item.title }}</strong>
+                }
+
+                @if (item.subtitle) {
+                  <small>{{ item.subtitle }}</small>
+                }
+
+                @if (item.detail) {
+                  <small>{{ item.detail }}</small>
+                }
+
+                @if (item.meta) {
+                  <small>{{ item.meta }}</small>
+                }
+              </span>
+            }
+          </div>
+        }
+      </article>
+    }
+  </div>
+</div>

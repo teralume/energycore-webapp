@@ -1,0 +1,71 @@
+:host {
+  display: block;
+}
+
+.report-comparison-card {
+  display: block;
+}
+
+:host ::ng-deep .report-comparison-card .section-card {
+  position: relative;
+  overflow: visible;
+}
+
+:host ::ng-deep .report-comparison-card .section-card > h3 {
+  max-width: min(100%, 620px);
+}
+
+.chart-description {
+  max-width: min(100%, 620px);
+  margin: -4px 0 20px;
+  color: var(--ec-copy-color);
+  font-weight: var(--ec-copy-weight);
+  line-height: var(--ec-copy-line-height);
+}
+
+.chart-description strong {
+  color: var(--text-primary);
+  font-weight: 900;
+}
+
+.chart-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 3;
+}
+
+.chart-controls span {
+  color: var(--ec-copy-color);
+  font-weight: var(--ec-copy-weight);
+  white-space: nowrap;
+}
+
+.chart-period-dropdown {
+  width: 170px;
+}
+
+.report-carousel {
+  display: block;
+}
+
+.report-comparison-card app-empty-state {
+  display: block;
+  margin-top: 12px;
+}
+
+@media (max-width: 760px) {
+  .chart-controls {
+    position: static;
+    align-items: stretch;
+    flex-direction: column;
+    margin: 0 0 18px;
+  }
+
+  .chart-period-dropdown {
+    width: 100%;
+  }
+}

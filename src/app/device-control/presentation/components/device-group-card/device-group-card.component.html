@@ -1,0 +1,106 @@
+<article
+  class="group-card"
+  [class.on]="hasActiveDevices"
+  [class.mixed]="hasActiveDevices && !allDevicesOn"
+  [class.removing]="removing"
+  [class.powering-on]="powerTransition === 'powering-on'"
+  [class.powering-off]="powerTransition === 'powering-off'"
+>
+  <div class="group-card__top">
+    <span class="group-card__icon" aria-hidden="true">🧩</span>
+
+    <div class="group-card__identity">
+      <p class="group-card__room">{{ roomName }}</p>
+      <h3 [title]="group.name">{{ group.name }}</h3>
+    </div>
+
+    <span class="group-card__status">{{ groupStateLabelKey | translate }}</span>
+  </div>
+
+  <p
+    class="group-card__description"
+    [class.group-card__description--muted]="!group.description"
+  >
+    @if (group.description) {
+      {{ group.description }}
+    } @else {
+      {{ 'deviceGroups.card.defaultDescription' | translate }}
+    }
+  </p>
+
+  <section class="group-card__metrics">
+    <article>
+      <span>{{ 'nav.devices' | translate }}</span>
+      <strong>{{ devices.length }}</strong>
+    </article>
+
+    <article>
+      <span>{{ 'devices.active' | translate }}</span>
+      <strong>{{ activeDeviceCount }}</strong>
+    </article>
+
+    <article>
+      <span>{{ 'devices.currentWatts' | translate }}</span>
+      <strong>{{ currentWatts }} W</strong>
+    </article>
+  </section>
+
+  <section class="group-card__devices">
+    <header>
+      <span>{{ 'deviceGroups.card.assignedDevices' | translate }}</span>
+      <strong>{{ devices.length }}</strong>
+    </header>
+
+    @if (devices.length === 0) {
+      <p class="group-card__empty-devices">{{ 'deviceGroups.card.noAssignedDevices' | translate }}</p>
+    } @else {
+      <div class="group-card__device-list">
+        @for (device of devices; track device.id) {
+          <article class="group-card__device" [class.on]="device.isOn">
+            <span class="group-card__device-icon">{{ getDeviceIcon(device.type) }}</span>
+
+            <span class="group-card__device-main">
+              <strong [title]="device.name">{{ device.name }}</strong>
+              <small>{{ getDeviceTypeLabelKey(device.type) | translate }} - {{ device.powerWatts }} W</small>
+            </span>
+
+            <em>{{ getDeviceStatusLabelKey(device) | translate }}</em>
+          </article>
+        }
+      </div>
+    }
+  </section>
+
+  <div class="group-card__footer">
+    <span class="group-card__created">{{ 'deviceGroups.card.createdAt' | translate }}: {{ formattedCreatedAt }}</span>
+
+    <div class="group-card__actions">
+      <app-button
+        variant="action"
+        size="sm"
+        [disabled]="!canExecute"
+        (pressed)="turnOn()"
+      >
+        {{ 'devices.turnOn' | translate }}
+      </app-button>
+
+      <app-button
+        variant="neutral"
+        size="sm"
+        [disabled]="!canExecute"
+        (pressed)="turnOff()"
+      >
+        {{ 'devices.turnOff' | translate }}
+      </app-button>
+
+      <app-button
+        variant="danger"
+        size="sm"
+        [disabled]="removing"
+        (pressed)="onRemove()"
+      >
+        {{ 'common.delete' | translate }}
+      </app-button>
+    </div>
+  </div>
+</article>

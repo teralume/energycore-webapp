@@ -1,0 +1,83 @@
+<article
+  class="routine-card"
+  [class.enabled]="routine.enabled"
+  [class.paused]="!routine.enabled"
+  [class.activating]="powerTransition === 'activating'"
+  [class.deactivating]="powerTransition === 'deactivating'"
+  [class.removing]="removing"
+>
+  <header class="routine-card__header">
+    <div class="routine-card__identity">
+      <span class="routine-card__icon" aria-hidden="true">&#9200;</span>
+
+      <div class="routine-card__title-block">
+        <div class="routine-card__title-row">
+          <h3 [title]="routine.name">{{ routine.name }}</h3>
+
+          <span class="routine-status" [class.enabled]="routine.enabled">
+            {{ statusLabelKey | translate }}
+          </span>
+        </div>
+
+        <p>
+          {{ actionLabelKey | translate }} {{ targetTypeLabelKey | translate }}
+        </p>
+      </div>
+    </div>
+
+    <div class="routine-card__time">
+      <span>{{ 'routines.card.time' | translate }}</span>
+      <strong>{{ routine.time }}</strong>
+    </div>
+  </header>
+
+  <section class="routine-card__details" [attr.aria-label]="'routines.card.detailsAria' | translate">
+    <article>
+      <span>{{ 'routines.form.target' | translate }}</span>
+      <strong>{{ targetTypeLabelKey | translate }}: {{ targetName }}</strong>
+    </article>
+
+    <article>
+      <span>{{ 'routines.form.repetition' | translate }}</span>
+      <strong>{{ repeatDisplay }}</strong>
+    </article>
+
+    <article>
+      <span>{{ 'routines.card.applicable' | translate }}</span>
+      <strong>{{ routine.applicableDeviceCount }}</strong>
+    </article>
+
+    @if (routine.blockedDeviceCount > 0) {
+      <article class="warning">
+        <span>{{ 'routines.card.blocked' | translate }}</span>
+        <strong>{{ routine.blockedDeviceCount }}</strong>
+      </article>
+    }
+  </section>
+
+  <footer class="routine-card__footer">
+    <span class="routine-card__waiting">
+      {{ waitingLabel }}
+    </span>
+
+    <div class="routine-card__actions">
+      <app-button
+        class="routine-action"
+        variant="action"
+        [disabled]="removing"
+        (pressed)="onToggle()"
+      >
+        {{ toggleLabelKey | translate }}
+      </app-button>
+
+      <app-button
+        class="routine-action"
+        variant="danger"
+        [disabled]="removing"
+        (pressed)="onRemove()"
+      >
+        {{ 'common.delete' | translate }}
+      </app-button>
+    </div>
+  </footer>
+</article>

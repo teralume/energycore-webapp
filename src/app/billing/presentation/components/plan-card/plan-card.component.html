@@ -1,0 +1,67 @@
+<article
+  class="plan-card"
+  [class.recommended]="isRecommended"
+  [class.active]="isSelected"
+>
+  @if (isRecommended) {
+    <div class="recommend-chip">
+      {{ 'billing.recommended' | translate }}
+    </div>
+  }
+
+  @if (isSelected) {
+    <div class="active-chip">
+      {{ 'billing.activePlanBadge' | translate }}
+    </div>
+  }
+
+  <div class="plan-header">
+    <h2>{{ plan.name }}</h2>
+    <p class="usage">{{ usageKey | translate }}</p>
+    <p class="description">
+      {{ descriptionKey | translate }}
+    </p>
+  </div>
+
+  <div class="price">
+    <span>{{ plan.currency === 'PEN' ? 'S/' : plan.currency }}</span>
+    <strong>{{ plan.monthlyPrice | number: '1.2-2' }}</strong>
+    <small>/{{ 'billing.month' | translate }}</small>
+  </div>
+
+  <ul class="features">
+    @for (featureKey of featureKeys; track featureKey) {
+      <li>
+        <span class="feature-icon">✓</span>
+        <span>{{ featureKey | translate }}</span>
+      </li>
+    }
+  </ul>
+
+  <div class="limits">
+    @if (plan.maxDevices !== null) {
+      <span>{{ 'billing.maxDevices' | translate: { count: plan.maxDevices } }}</span>
+    }
+
+    @if (plan.maxRoutines !== null) {
+      <span>{{ 'billing.maxRoutines' | translate: { count: plan.maxRoutines } }}</span>
+    }
+
+    @if (plan.reportExportEnabled) {
+      <span>{{ 'billing.reportExportEnabled' | translate }}</span>
+    }
+  </div>
+
+  <app-button
+    variant="create"
+    [disabled]="isSelected"
+    [block]="true"
+    (pressed)="onSelect()"
+  >
+    @if (isSelected) {
+      {{ 'billing.selected' | translate }}
+    } @else {
+      {{ 'billing.choosePlan' | translate }}
+    }
+  </app-button>
+</article>

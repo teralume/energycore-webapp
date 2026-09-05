@@ -1,0 +1,29 @@
+<article class="calibration-card" [class.calibration-card--off]="!enabled">
+  <div class="calibration-card__top">
+    <div>
+      <span>{{ source }}</span>
+      <h3>{{ title }}</h3>
+    </div>
+
+    <app-setting-toggle
+      class="calibration-card__toggle"
+      [title]="enabled ? 'Activo' : 'Apagado'"
+      [checked]="enabled"
+      (checkedChange)="enabledChange.emit($event)"
+    />
+  </div>
+
+  <p>{{ description }}</p>
+
+  <div class="calibration-card__meta">
+    <small>{{ metric }}</small>
+  </div>
+
+  <app-weight-slider
+    label="Peso operativo"
+    [value]="weight"
+    [percent]="percent"
+    [active]="enabled"
+    (valueChange)="weightChange.emit($event)"
+  />
+</article>

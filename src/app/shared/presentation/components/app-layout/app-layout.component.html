@@ -1,0 +1,102 @@
+<div class="app-shell">
+  <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+  <app-header
+    [showPrivateNavigation]="!isAuthScreen() && isAuthenticated()"
+    [isDarkMode]="uiPreferences.isDarkMode()"
+    [userInitial]="currentUserInitial()"
+    (themeToggled)="toggleTheme()"
+    (userMenuToggled)="toggleUserSidebar()"
+  />
+
+  @if (!isAuthScreen() && isAuthenticated()) {
+    <aside class="user-sidebar ec-scrollbar" [class.open]="isUserSidebarOpen()">
+      <div class="user-sidebar-header">
+        <div class="profile-avatar">
+          @if (currentUserPhotoUrl()) {
+            <img [src]="currentUserPhotoUrl()" alt="User profile photo" />
+          } @else {
+            <span>{{ currentUserInitial() }}</span>
+          }
+        </div>
+
+        <div class="profile-info">
+          <strong>{{ currentUserName() }}</strong>
+          <span>{{ currentUserEmail() }}</span>
+          <small>{{ currentUserRole() }}</small>
+        </div>
+      </div>
+
+      <nav class="private-nav">
+        <a routerLink="/settings/profile" routerLinkActive="active" (click)="closeUserSidebar()">
+          <svg lucideSettings aria-hidden="true"></svg>
+          {{ 'nav.userSettings' | translate }}
+        </a>
+
+        <a routerLink="/about" routerLinkActive="active" (click)="closeUserSidebar()">
+          <svg lucideInfo aria-hidden="true"></svg>
+          {{ 'nav.about' | translate }}
+        </a>
+
+        <a routerLink="/plans" routerLinkActive="active" (click)="closeUserSidebar()">
+          <svg lucideCreditCard aria-hidden="true"></svg>
+          {{ 'nav.plans' | translate }}
+        </a>
+      </nav>
+
+      <div class="user-sidebar-footer">
+        <button type="button" class="logout-button" (click)="signOut()">
+          <svg lucideLogOut aria-hidden="true"></svg>
+          {{ 'auth.logout' | translate }}
+        </button>
+      </div>
+    </aside>
+
+    @if (isUserSidebarOpen()) {
+      <button
+        type="button"
+        class="sidebar-backdrop"
+        aria-label="Close user panel"
+        (click)="closeUserSidebar()"
+      ></button>
+    }
+  }
+
+  <main id="main-content" class="content ec-scrollbar" tabindex="-1">
+    @if (requiresLocationSetup()) {
+      <section class="location-required-panel">
+        <p class="location-required-panel__eyebrow">
+          {{ 'onboarding.locationRequiredEyebrow' | translate }}
+        </p>
+        <h1>{{ 'onboarding.locationRequiredTitle' | translate }}</h1>
+        <p>{{ 'onboarding.locationRequiredDescription' | translate }}</p>
+        <a routerLink="/spaces/sites">
+          {{ 'onboarding.createLocationAction' | translate }}
+        </a>
+      </section>
+    } @else {
+      <router-outlet />
+    }
+  </main>
+
+  <app-footer />
+
+  @if (confirmDialog.dialog(); as dialog) {
+    <app-confirm-dialog
+      [open]="true"
+      [title]="dialog.title"
+      [message]="dialog.message"
+      [detail]="dialog.detail"
+      [confirmLabel]="dialog.confirmLabel"
+      [cancelLabel]="dialog.cancelLabel"
+      [tone]="dialog.tone"
+      [requiredText]="dialog.requiredText"
+      [requiredTextLabel]="dialog.requiredTextLabel"
+      [requiredTextHint]="dialog.requiredTextHint"
+      (confirmed)="confirmDialog.confirmCurrent()"
+      (cancelled)="confirmDialog.cancelCurrent()"
+    />
+  }
+
+  <app-toast-container />
+</div>

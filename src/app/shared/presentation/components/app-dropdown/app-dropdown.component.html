@@ -1,0 +1,102 @@
+<div
+  class="dropdown"
+  [class.open]="isOpen"
+  [class.closing]="isClosing"
+  [class.has-selection]="selectedOption"
+  [class.nav]="variant === 'nav'"
+  [class.info]="tone === 'info'"
+  [class.success]="tone === 'success'"
+  [class.warning]="tone === 'warning'"
+  [class.critical]="tone === 'critical'"
+  (mouseenter)="onNavMouseEnter()"
+  (mouseleave)="onNavMouseLeave($event)"
+>
+  <button
+    #dropdownTrigger
+    type="button"
+    class="dropdown__trigger"
+    aria-haspopup="listbox"
+    [attr.aria-expanded]="shouldRenderMenu"
+    (click)="toggleDropdown()"
+  >
+    <span>
+      @if (selectedLabelKey) {
+        {{ selectedLabelKey | translate }}
+      } @else {
+        {{ labelToShow }}
+      }
+    </span>
+    <span class="dropdown__arrow"></span>
+  </button>
+
+  @if (shouldRenderMenu) {
+    <div
+      #dropdownMenu
+      class="dropdown__menu"
+      role="listbox"
+      [attr.popover]="isNavVariant ? null : 'manual'"
+    >
+      @for (option of options; track option.value) {
+        @if (option.route) {
+          <a
+            class="dropdown__option"
+            role="option"
+            [class.selected]="option.value === value"
+            [class.disabled]="option.disabled"
+            [class.dropdown__option--empty-state]="option.emptyState"
+            [attr.aria-selected]="option.value === value"
+            [routerLink]="option.route"
+            (click)="selectOption(option)"
+          >
+            <span>
+              @if (option.labelKey) {
+                {{ option.labelKey | translate }}
+              } @else {
+                {{ option.label }}
+              }
+            </span>
+
+            @if ((option.description || option.descriptionKey) && variant !== 'nav') {
+              <small>
+                @if (option.descriptionKey) {
+                  {{ option.descriptionKey | translate }}
+                } @else {
+                  {{ option.description }}
+                }
+              </small>
+            }
+          </a>
+        } @else {
+          <button
+            type="button"
+            class="dropdown__option"
+            role="option"
+            [class.selected]="option.value === value"
+            [class.disabled]="option.disabled"
+            [class.dropdown__option--empty-state]="option.emptyState"
+            [attr.aria-selected]="option.value === value"
+            (click)="selectOption(option)"
+          >
+            <span>
+              @if (option.labelKey) {
+                {{ option.labelKey | translate }}
+              } @else {
+                {{ option.label }}
+              }
+            </span>
+
+            @if ((option.description || option.descriptionKey) && variant !== 'nav') {
+              <small>
+                @if (option.descriptionKey) {
+                  {{ option.descriptionKey | translate }}
+                } @else {
+                  {{ option.description }}
+                }
+              </small>
+            }
+          </button>
+        }
+      }
+    </div>
+  }
+</div>

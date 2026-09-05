@@ -1,0 +1,90 @@
+<section class="settings-page">
+    <header class="ec-page-heading">
+      <p class="ec-page-eyebrow">{{ 'settings.nav.profile' | translate }}</p>
+      <h1 class="ec-page-title">{{ 'settings.profile.title' | translate }}</h1>
+      <p class="ec-page-description">
+        {{ 'settings.profile.pageDescription' | translate }}
+      </p>
+    </header>
+
+    <app-settings-section
+      id="profile"
+      [eyebrow]="'settings.nav.profile' | translate"
+      [title]="'settings.profile.basicInfoTitle' | translate"
+      [description]="'settings.profile.basicInfoDescription' | translate"
+      [stackedHeader]="true"
+    >
+      <form class="settings-form" (ngSubmit)="onUpdateProfile()">
+        <label>
+          <span>{{ 'auth.fullName' | translate }}</span>
+          <input
+            type="text"
+            name="fullName"
+            [(ngModel)]="fullName"
+            autocomplete="name"
+            required
+          />
+        </label>
+
+        <label>
+          <span>{{ 'settings.common.email' | translate }}</span>
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="email"
+            autocomplete="email"
+            required
+          />
+        </label>
+
+        <div class="form-actions">
+          <app-button
+            type="submit"
+            variant="create"
+            [disabled]="iamFacade.loading()"
+          >
+            {{ 'settings.profile.saveProfile' | translate }}
+          </app-button>
+        </div>
+      </form>
+    </app-settings-section>
+
+    <app-settings-section
+      [eyebrow]="'settings.profile.previewEyebrow' | translate"
+      [title]="'settings.profile.dataUsageTitle' | translate"
+      [description]="'settings.profile.dataUsageDescription' | translate"
+      [stackedHeader]="true"
+    >
+      <div class="insight-grid">
+        <article class="compact-card">
+          <span>{{ 'settings.profile.visibleName' | translate }}</span>
+          <h3>{{ fullName || ('settings.common.notAvailable' | translate) }}</h3>
+          <p>
+            {{ 'settings.profile.visibleNameDescription' | translate }}
+          </p>
+        </article>
+
+        <article class="compact-card">
+          <span>{{ 'settings.profile.accountEmail' | translate }}</span>
+          <h3>{{ email || ('settings.common.notAvailable' | translate) }}</h3>
+          <p>
+            {{ 'settings.profile.accountEmailDescription' | translate }}
+          </p>
+        </article>
+
+        <article class="compact-card">
+          <span>{{ 'history.status' | translate }}</span>
+          <h3>
+            @if (hasPendingChanges()) {
+              {{ 'settings.profile.unsavedChanges' | translate }}
+            } @else {
+              {{ 'settings.profile.noPendingChanges' | translate }}
+            }
+          </h3>
+          <p>
+            {{ 'settings.profile.statusDescription' | translate }}
+          </p>
+        </article>
+      </div>
+    </app-settings-section>
+</section>

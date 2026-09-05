@@ -1,0 +1,263 @@
+:host {
+  display: block;
+  overflow-anchor: none;
+}
+
+.device-card {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: auto minmax(86px, auto) auto;
+  gap: 16px;
+  min-height: 232px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  background: var(--ec-card-highlight), var(--surface-card);
+  box-shadow: var(--ec-shadow-soft), var(--ec-inset-highlight);
+  box-sizing: border-box;
+  contain: paint;
+  overflow: hidden;
+  overflow-anchor: none;
+  transition:
+    border-color 0.24s ease,
+    box-shadow 0.24s ease,
+    background 0.3s ease;
+}
+
+.device-card::before,
+.device-card::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.device-card::before {
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 38%);
+  opacity: 0.72;
+}
+
+.device-card::after {
+  inset: -42%;
+  opacity: 0;
+  transform: translateX(-36%) rotate(10deg);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(74, 222, 128, 0.36), transparent 30%),
+    linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.32), transparent);
+  filter: blur(2px);
+}
+
+.device-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--ec-shadow-panel), var(--ec-inset-highlight);
+}
+
+.device-card.on {
+  border-color: var(--ec-status-success-border);
+  background:
+    radial-gradient(circle at 14% 8%, var(--ec-status-success-bg), transparent 36%),
+    var(--ec-card-highlight), var(--surface-card);
+  box-shadow:
+    0 24px 58px var(--ec-status-success-bg),
+    var(--ec-inset-highlight);
+}
+
+.device-card.powering-on::after {
+  animation: energy-sweep-on 0.76s ease both;
+}
+
+.device-card.powering-off::after {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(148, 163, 184, 0.32), transparent 30%),
+    linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.24), transparent);
+  animation: energy-sweep-off 0.68s ease both;
+}
+
+.device-card.removing {
+  pointer-events: none;
+  animation: device-card-remove 0.52s cubic-bezier(0.55, 0, 0.1, 1) both;
+}
+
+.device-card__top {
+  display: grid;
+  grid-template-columns: 50px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: start;
+  min-width: 0;
+}
+
+.device-card__icon {
+  display: grid;
+  width: 50px;
+  height: 50px;
+  place-items: center;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(34, 197, 94, 0.16), rgba(245, 158, 11, 0.14));
+  box-shadow:
+    0 14px 28px rgba(3, 7, 18, 0.22),
+    0 1px 0 rgba(255, 255, 255, 0.06) inset;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.device-card.on .device-card__icon {
+  background: linear-gradient(145deg, rgba(34, 197, 94, 0.28), rgba(20, 184, 166, 0.2));
+  box-shadow:
+    0 16px 32px rgba(34, 197, 94, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.08) inset;
+}
+
+.device-card.powering-on .device-card__icon {
+  animation: icon-charge 0.56s ease both;
+}
+
+.device-card.powering-off .device-card__icon {
+  animation: icon-discharge 0.5s ease both;
+}
+
+.device-card__main {
+  min-width: 0;
+}
+
+.type {
+  width: fit-content;
+  margin: 0 0 8px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: var(--text-on-action);
+  background: var(--ec-action-bg);
+  font-size: 0.68rem;
+  font-weight: 950;
+}
+
+h2 {
+  display: -webkit-box;
+  min-height: 2.34em;
+  margin: 0;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  line-height: 1.17;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+}
+
+.device-card__main small {
+  display: block;
+  margin-top: 6px;
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+.status {
+  align-self: start;
+  padding: 7px 11px;
+  border-radius: 999px;
+  color: var(--text-primary);
+  background: var(--ec-surface-muted);
+  box-shadow:
+    0 10px 20px rgba(3, 7, 18, 0.24),
+    0 1px 0 rgba(255, 255, 255, 0.05) inset;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.device-card.on .status {
+  color: var(--ec-status-success-text);
+  background: var(--ec-status-success-bg);
+  box-shadow:
+    0 14px 28px rgba(34, 197, 94, 0.25),
+    0 0 0 1px rgba(187, 247, 208, 0.12) inset;
+}
+
+.device-card.powering-on .status {
+  animation: status-pop 0.42s ease both;
+}
+
+.device-card.powering-off .status {
+  animation: status-dim 0.38s ease both;
+}
+
+.device-card__power {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  background: var(--ec-surface-subtle);
+  transition:
+    border-color 0.24s ease,
+    box-shadow 0.24s ease,
+    background 0.24s ease;
+}
+
+.device-card.on .device-card__power {
+  border-color: var(--ec-status-success-border);
+  background: linear-gradient(135deg, var(--ec-status-success-bg), transparent);
+}
+
+.device-card.powering-on .device-card__power {
+  animation: power-panel-on 0.58s ease both;
+}
+
+.device-card.powering-off .device-card__power {
+  animation: power-panel-off 0.54s ease both;
+}
+
+.device-card__power span {
+  display: block;
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-weight: 950;
+  line-height: 1.2;
+}
+
+.device-card__power p {
+  margin: 5px 0 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 760;
+  line-height: 1.35;
+}
+
+.device-card__power strong {
+  color: var(--text-primary);
+  font-size: 1.85rem;
+  font-weight: 950;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.device-card.on .device-card__power strong {
+  text-shadow: 0 0 24px rgba(34, 197, 94, 0.34);
+}
+
+.device-card__actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 10px;
+  align-items: center;
+}
+
+app-button {
+  justify-self: start;
+}
+
+@media (max-width: 520px) {
+  .device-card__actions {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .device-card__actions app-button:first-child {
+    grid-column: 1 / -1;
+  }
+}

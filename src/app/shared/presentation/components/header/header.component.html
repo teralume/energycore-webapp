@@ -1,0 +1,92 @@
+<header class="topbar">
+  <a class="brand" routerLink="/home" aria-label="EnergyCore">
+    <span class="brand-icon" aria-hidden="true">
+      <img src="assets/branding/energycore-mascot-mark.svg" alt="" width="40" height="40" />
+    </span>
+    <span>{{ 'app.name' | translate }}</span>
+  </a>
+
+  @if (showPrivateNavigation) {
+    <nav class="nav">
+      <a routerLink="/home" routerLinkActive="active">
+        {{ 'nav.home' | translate }}
+      </a>
+
+      @if (visibleOptions(energyOptions).length) {
+        <app-dropdown
+          variant="nav"
+          [triggerLabel]="'nav.energySection' | translate"
+          [options]="visibleOptions(energyOptions)"
+          [value]="activeValue(visibleOptions(energyOptions))"
+        />
+      }
+
+      @if (visibleOptions(workplaceOptions).length) {
+        <app-dropdown
+          variant="nav"
+          [triggerLabel]="'nav.spaces' | translate"
+          [options]="visibleOptions(workplaceOptions)"
+          [value]="activeValue(visibleOptions(workplaceOptions))"
+        />
+      }
+
+      @if (visibleOptions(operationOptions).length) {
+        <app-dropdown
+          variant="nav"
+          [triggerLabel]="'nav.operation' | translate"
+          [options]="visibleOptions(operationOptions)"
+          [value]="activeValue(visibleOptions(operationOptions))"
+        />
+      }
+
+      @if (visibleOptions(alertsOptions).length) {
+        <app-dropdown
+          variant="nav"
+          [triggerLabel]="'nav.alertsSection' | translate"
+          [options]="visibleOptions(alertsOptions)"
+          [value]="activeValue(visibleOptions(alertsOptions))"
+        />
+      }
+
+      @if (visibleOptions(supportOptions).length) {
+        <app-dropdown
+          variant="nav"
+          [triggerLabel]="'nav.support' | translate"
+          [options]="visibleOptions(supportOptions)"
+          [value]="activeValue(visibleOptions(supportOptions))"
+        />
+      }
+    </nav>
+  }
+
+  <div class="topbar-actions">
+    <app-language-switcher />
+
+    <button
+      type="button"
+      class="theme-button"
+      [attr.aria-label]="isDarkMode ? 'Activar tema claro' : 'Activar tema oscuro'"
+      (click)="toggleTheme()"
+    >
+      @if (isDarkMode) {
+        <svg lucideSun aria-hidden="true"></svg>
+      } @else {
+        <svg lucideMoon aria-hidden="true"></svg>
+      }
+    </button>
+
+    @if (showPrivateNavigation) {
+      <button
+        type="button"
+        class="user-menu-button"
+        aria-label="Abrir panel de usuario"
+        (click)="toggleUserMenu()"
+      >
+        <span class="user-menu-avatar">
+          <svg lucideUserRound aria-hidden="true"></svg>
+          <span class="visually-hidden">{{ userInitial }}</span>
+        </span>
+      </button>
+    }
+  </div>
+</header>

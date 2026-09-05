@@ -1,0 +1,189 @@
+<section class="routines-page ec-page">
+  <header class="ec-page-heading">
+    <p class="ec-page-eyebrow">{{ 'nav.operation' | translate }}</p>
+    <h1 class="ec-page-title">{{ 'nav.routines' | translate }}</h1>
+    <p class="ec-page-description">
+      {{ 'routines.pageDescription' | translate }}
+    </p>
+  </header>
+
+  <section class="operation-summary">
+    <app-section-card size="small" [eyebrow]="'nav.routines' | translate" [title]="'routines.summary.scheduled' | translate">
+      <strong>{{ displayedRoutines.length }}</strong>
+      <p>{{ 'routines.summary.inActiveSite' | translate }}</p>
+    </app-section-card>
+
+    <app-section-card size="small" [eyebrow]="'history.status' | translate" [title]="'routines.active' | translate">
+      <strong>{{ activeRoutineCount }}</strong>
+      <p>{{ 'routines.summary.pausedCount' | translate: { count: inactiveRoutineCount } }}</p>
+    </app-section-card>
+
+    <app-section-card size="small" [eyebrow]="'routines.time' | translate" [title]="'routines.summary.newRoutine' | translate">
+      <strong>{{ time }}</strong>
+      <p>{{ targetLabel }} / {{ actionLabel }}</p>
+    </app-section-card>
+  </section>
+
+  <section class="operation-toolbar">
+    <div>
+      <p class="section-eyebrow">{{ 'routines.toolbar.eyebrow' | translate }}</p>
+      <h2>{{ 'routines.toolbar.title' | translate }}</h2>
+      <p>{{ 'routines.toolbar.description' | translate }}</p>
+    </div>
+
+    <app-button variant="create" (pressed)="openCreateModal()">
+      {{ 'routines.create' | translate }}
+    </app-button>
+  </section>
+
+  @if (deviceControlFacade.loading() && displayedRoutines.length === 0) {
+    <div class="loading-wrapper">
+      <app-loading-spinner />
+    </div>
+  } @else if (displayedRoutines.length === 0) {
+    <app-empty-state
+      [eyebrow]="'nav.routines' | translate"
+      [title]="'routines.emptyScheduledTitle' | translate"
+      [description]="'routines.emptyScheduledDescription' | translate"
+    />
+  } @else {
+    <section class="routines-list">
+      @for (routine of displayedRoutines; track routine.id) {
+        <div
+          class="routine-card-shell"
+          [class.routine-card-shell--removing]="isRoutineRemoving(routine.id)"
+        >
+          <app-routine-card
+            [routine]="routine"
+            [removing]="isRoutineRemoving(routine.id)"
+            (toggle)="toggleRoutine($event)"
+            (remove)="deleteRoutine($event)"
+          />
+        </div>
+      }
+    </section>
+  }
+
+  <app-modal-form-shell
+    [open]="createModalOpen"
+    [eyebrow]="'routines.summary.newRoutine' | translate"
+    [title]="'routines.addTitle' | translate"
+    [description]="'routines.form.description' | translate"
+    (closed)="closeCreateModal()"
+  >
+    <form class="routine-form" (ngSubmit)="createRoutine()">
+      <label class="field">
+        <span>{{ 'devices.name' | translate }}</span>
+        <input
+          type="text"
+          name="name"
+          [(ngModel)]="name"
+          [placeholder]="'routines.form.namePlaceholder' | translate"
+          required
+        />
+      </label>
+
+      <label class="field">
+        <span>{{ 'routines.form.target' | translate }}</span>
+        <app-dropdown
+          [options]="targetTypeOptions"
+          [value]="targetType"
+          [placeholder]="'routines.form.targetTypePlaceholder' | translate"
+          (valueChange)="selectTargetType($event)"
+        />
+      </label>
+
+      <label class="field">
+        <span>{{ targetLabel }}</span>
+        <app-dropdown
+          [options]="targetOptions"
+          [value]="targetValue"
+          [placeholder]="targetPlaceholder"
+          (valueChange)="selectTarget($event)"
+        />
+      </label>
+
+      <label class="field">
+        <span>{{ 'routines.action' | translate }}</span>
+        <app-dropdown
+          [options]="cleanActionOptions"
+          [value]="action"
+          [placeholder]="'routines.action' | translate"
+          (valueChange)="selectAction($event)"
+        />
+      </label>
+
+      <label class="field">
+        <span>{{ 'routines.form.repetition' | translate }}</span>
+        <app-dropdown
+          [options]="repeatOptions"
+          [value]="repeatType"
+          [placeholder]="'routines.form.repetition' | translate"
+          (valueChange)="selectRepeatType($event)"
+        />
+      </label>
+
+      <div class="field">
+        <app-time-picker
+          [label]="'routines.form.scheduledTime' | translate"
+          [value]="time"
+          (valueChange)="selectTime($event)"
+        />
+      </div>
+
+      @if (repeatType === 'WEEKLY') {
+        <section class="field routine-conditional routine-days">
+          <span>{{ 'routines.form.days' | translate }}</span>
+
+          <div class="day-picker" [attr.aria-label]="'routines.form.weeklyDaysAria' | translate">
+            @for (day of weekDays; track day.value) {
+              <app-button
+                type="button"
+                size="sm"
+                [variant]="isDaySelected(day.value) ? 'action' : 'ghost'"
+                (pressed)="toggleDay(day.value)"
+              >
+                {{ day.labelKey | translate }}
+              </app-button>
+            }
+          </div>
+        </section>
+      }
+
+      @if (repeatType === 'CUSTOM_INTERVAL') {
+        <section class="routine-conditional">
+          <app-number-stepper
+            [label]="'routines.form.everyDays' | translate"
+            [suffix]="'routines.form.daysSuffix' | translate"
+            [value]="intervalDays"
+            [min]="1"
+            [step]="1"
+            [allowEmpty]="false"
+            (valueChange)="onIntervalDaysChange($event)"
+          />
+        </section>
+      }
+
+      @if (repeatType === 'ONCE') {
+        <section class="routine-conditional">
+          <app-date-picker
+            [label]="'history.date' | translate"
+            [min]="minStartsOn"
+            [(value)]="startsOn"
+          />
+        </section>
+      }
+
+      <div class="form-actions">
+        <app-button variant="neutral" (pressed)="closeCreateModal()">{{ 'billing.cancelPayment' | translate }}</app-button>
+        <app-button
+          type="submit"
+          variant="create"
+          [disabled]="deviceControlFacade.loading() || !targetId || !name.trim()"
+        >
+          {{ 'routines.create' | translate }}
+        </app-button>
+      </div>
+    </form>
+  </app-modal-form-shell>
+</section>

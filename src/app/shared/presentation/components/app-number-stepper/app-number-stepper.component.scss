@@ -1,0 +1,97 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.number-stepper {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.number-stepper__label {
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.number-stepper__body {
+  min-height: 46px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 34px auto;
+  align-items: center;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  background: var(--field-bg);
+  box-shadow: var(--ec-inset-highlight);
+}
+
+.number-stepper__body:focus-within {
+  border-color: var(--border-strong);
+  box-shadow: var(--ec-focus-ring);
+}
+
+.number-stepper input {
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+  border: 0;
+  padding: 0 12px;
+  color: var(--text-primary);
+  background: transparent;
+  font: inherit;
+  font-weight: 900;
+  outline: none;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.number-stepper input::placeholder {
+  color: var(--text-muted);
+}
+
+.number-stepper input::-webkit-outer-spin-button,
+.number-stepper input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.number-stepper__buttons {
+  height: 44px;
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  align-self: stretch;
+  border-left: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+}
+
+.number-stepper__buttons button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  min-height: 22px;
+  height: auto;
+  border: 0;
+  padding: 0;
+  color: var(--accent-color);
+  background: var(--ec-ghost-bg);
+  cursor: pointer;
+  font-size: 0.62rem;
+  line-height: 1;
+}
+
+.number-stepper__buttons button:hover {
+  color: var(--text-primary);
+  background: var(--ec-ghost-bg-hover);
+}
+
+.number-stepper small {
+  min-width: 0;
+  padding: 0 10px;
+  color: var(--text-primary);
+  font-size: 0.72rem;
+  font-weight: 900;
+  white-space: nowrap;
+}

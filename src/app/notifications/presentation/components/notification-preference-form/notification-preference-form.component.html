@@ -1,0 +1,268 @@
+<form class="preference-form" (ngSubmit)="onSubmit()">
+  <section class="preference-block preference-block--hero">
+    <div class="block-heading">
+      <span>{{ 'notificationPreferences.sensitivity' | translate }}</span>
+      <h3>{{ 'notificationPreferences.weightedClassification' | translate }}</h3>
+      <p>{{ 'notificationPreferences.weightedClassificationDescription' | translate }}</p>
+    </div>
+
+    <div class="severity-workbench">
+      <div class="severity-rail-card">
+        <div
+          class="severity-rail"
+          [style.--stable-stop]="stableMax + '%'"
+          [style.--neutral-stop]="neutralMax + '%'"
+          [style.--warning-stop]="warningMax + '%'"
+        >
+          <span class="rail-marker rail-marker--stable" [style.bottom.%]="stableMax"></span>
+          <span class="rail-marker rail-marker--neutral" [style.bottom.%]="neutralMax"></span>
+          <span class="rail-marker rail-marker--warning" [style.bottom.%]="warningMax"></span>
+        </div>
+
+        <div class="severity-readout">
+          @for (band of visualSeverityBands; track band.level) {
+            <article [class]="'band-card ' + levelClass(band.level)">
+              <span>{{ bandLabel(band) }}</span>
+              <strong>{{ bandRangeLabel(band) }}</strong>
+            </article>
+          }
+        </div>
+      </div>
+
+      <div class="threshold-controls">
+        <label>
+          <span>{{ 'notificationPreferences.warningCeiling' | translate }}</span>
+          <strong>{{ warningMax }}%</strong>
+          <input
+            type="range"
+            min="15"
+            max="99"
+            [value]="warningMax"
+            (input)="updateWarningMax($any($event.target).value)"
+          />
+        </label>
+
+        <label>
+          <span>{{ 'notificationPreferences.neutralCeiling' | translate }}</span>
+          <strong>{{ neutralMax }}%</strong>
+          <input
+            type="range"
+            min="10"
+            max="96"
+            [value]="neutralMax"
+            (input)="updateNeutralMax($any($event.target).value)"
+          />
+        </label>
+
+        <label>
+          <span>{{ 'notificationPreferences.stableCeiling' | translate }}</span>
+          <strong>{{ stableMax }}%</strong>
+          <input
+            type="range"
+            min="5"
+            max="92"
+            [value]="stableMax"
+            (input)="updateStableMax($any($event.target).value)"
+          />
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <section class="preference-block">
+    <div class="block-heading">
+      <span>{{ 'notificationPreferences.preview' | translate }}</span>
+      <h3>{{ 'notificationPreferences.sensitiveResult' | translate }}</h3>
+      <p>{{ 'notificationPreferences.previewDescription' | translate }}</p>
+    </div>
+
+    <div class="preview-grid">
+      <label class="preview-field">
+        <span>{{ 'notificationPreferences.context' | translate }}</span>
+        <app-dropdown
+          [options]="previewSourceOptions"
+          [value]="previewSource"
+          (valueChange)="updatePreviewSource($event)"
+        />
+      </label>
+
+      <label class="preview-slider">
+        <span>{{ 'notificationPreferences.baseSignal' | translate }}</span>
+        <strong>{{ previewScore }}%</strong>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          [value]="previewScore"
+          (input)="updatePreviewScore($any($event.target).value)"
+        />
+      </label>
+
+      <article [class]="'preview-result ' + levelClass(previewLevel)">
+        <span>{{ 'notificationPreferences.finalCategory' | translate }}</span>
+        <strong>{{ previewLabel }}</strong>
+        <p>{{ 'notificationPreferences.weightedPercent' | translate: { value: previewWeightedScore } }}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="preference-block">
+    <div class="block-heading">
+      <span>{{ 'alerts.levels.success' | translate }}</span>
+      <h3>{{ 'notificationPreferences.positiveEvents' | translate }}</h3>
+      <p>{{ 'notificationPreferences.positiveEventsDescription' | translate }}</p>
+    </div>
+
+    <div class="toggle-grid toggle-grid--single">
+      <app-setting-toggle
+        [title]="'notificationPreferences.showSuccess' | translate"
+        [description]="'notificationPreferences.showSuccessDescription' | translate"
+        [checked]="allowedLevels.has('SUCCESS')"
+        (checkedChange)="toggleLevel('SUCCESS')"
+      />
+    </div>
+  </section>
+
+  <section class="preference-block">
+    <div class="block-heading">
+      <span>{{ 'notificationPreferences.visibleCategories' | translate }}</span>
+      <h3>{{ 'notificationPreferences.allowedLevels' | translate }}</h3>
+      <p>{{ 'notificationPreferences.allowedLevelsDescription' | translate }}</p>
+    </div>
+
+    <div class="toggle-grid toggle-grid--single">
+      <app-setting-toggle
+        [title]="'notificationPreferences.criticalOnlyLabel' | translate"
+        [description]="'notificationPreferences.criticalOnlyDescription' | translate"
+        [(checked)]="criticalOnly"
+      />
+    </div>
+
+    <label class="level-field">
+      <span>{{ 'notificationPreferences.minimumLevel' | translate }}</span>
+      <app-dropdown
+        [options]="levelOptions"
+        [value]="minimumLevel"
+        (valueChange)="updateMinimumLevel($event)"
+      />
+    </label>
+
+    <div class="chip-grid">
+      @for (level of riskLevels; track level) {
+        <app-button
+          [variant]="chipVariant(allowedLevels.has(level))"
+          size="sm"
+          (pressed)="toggleLevel(level)"
+        >
+          {{ levelLabel(level) }}
+        </app-button>
+      }
+    </div>
+  </section>
+
+  <section class="preference-block">
+    <div class="block-heading">
+      <span>{{ 'notificationPreferences.weighting' | translate }}</span>
+      <h3>{{ 'notificationPreferences.contextParameters' | translate }}</h3>
+      <p>{{ 'notificationPreferences.contextParametersDescription' | translate }}</p>
+    </div>
+
+    <div class="weight-list">
+      @for (signal of signalWeights; track signal.source) {
+        <article class="weight-row" [class.weight-row--disabled]="!sourceEnabled(signal.source)">
+          <button
+            type="button"
+            class="weight-row__toggle"
+            [class.weight-row__toggle--active]="sourceEnabled(signal.source)"
+            (click)="toggleSource(signal.source)"
+          >
+            <span>{{ signalLabel(signal) }}</span>
+            <small>{{ signalDescription(signal) }}</small>
+          </button>
+
+          <label>
+            <strong>{{ signal.weight }}%</strong>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              [value]="signal.weight"
+              (input)="updateSignalWeight(signal, $any($event.target).value)"
+            />
+          </label>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="preference-block">
+    <div class="block-heading">
+      <span>{{ 'notificationPreferences.output' | translate }}</span>
+      <h3>{{ 'notificationPreferences.channelsAndNoise' | translate }}</h3>
+      <p>{{ 'notificationPreferences.channelsAndNoiseDescription' | translate }}</p>
+    </div>
+
+    <div class="toggle-grid">
+      <app-setting-toggle [title]="'nav.inbox' | translate" [description]="'notificationPreferences.toggles.inAppDescription' | translate" [(checked)]="inAppEnabled" />
+      <app-setting-toggle [title]="'notificationPreferences.toggles.toastTitle' | translate" [description]="'notificationPreferences.toggles.toastDescription' | translate" [(checked)]="toastEnabled" />
+      <app-setting-toggle [title]="'notificationPreferences.toggles.dashboardTitle' | translate" [description]="'notificationPreferences.toggles.dashboardDescription' | translate" [(checked)]="dashboardEnabled" />
+      <app-setting-toggle [title]="'notificationPreferences.toggles.emailTitle' | translate" [description]="'notificationPreferences.toggles.emailDescription' | translate" [(checked)]="emailEnabled" />
+      <app-setting-toggle [title]="'notificationPreferences.toggles.pushTitle' | translate" [description]="'notificationPreferences.toggles.pushDescription' | translate" [(checked)]="pushEnabled" />
+      <app-setting-toggle [title]="'notificationPreferences.toggles.groupSimilarTitle' | translate" [description]="'notificationPreferences.toggles.groupSimilarDescription' | translate" [(checked)]="groupSimilarAlerts" />
+    </div>
+
+    <div class="control-grid">
+      <label class="level-field">
+        <span>{{ 'notificationPreferences.deliveryMode' | translate }}</span>
+        <app-dropdown
+          [options]="deliveryModeOptions"
+          [value]="defaultDeliveryMode"
+          (valueChange)="updateDeliveryMode($event)"
+        />
+      </label>
+
+      <label class="number-field">
+        <span>{{ 'notificationPreferences.cooldown' | translate }}</span>
+        <input name="cooldownMinutes" type="number" min="0" max="1440" [(ngModel)]="cooldownMinutes" />
+        <small>{{ 'notificationPreferences.minutes' | translate }}</small>
+      </label>
+
+      <label class="number-field">
+        <span>{{ 'notificationPreferences.maxPerHour' | translate }}</span>
+        <input name="maxAlertsPerHour" type="number" min="1" max="200" [(ngModel)]="maxAlertsPerHour" />
+        <small>{{ 'notificationPreferences.alertsUnit' | translate }}</small>
+      </label>
+    </div>
+  </section>
+
+  <section class="preference-block">
+    <div class="block-heading">
+      <span>{{ 'notificationPreferences.silences' | translate }}</span>
+      <h3>{{ 'notificationPreferences.scheduleAndExceptions' | translate }}</h3>
+      <p>{{ 'notificationPreferences.scheduleAndExceptionsDescription' | translate }}</p>
+    </div>
+
+    <div class="toggle-grid">
+      <app-setting-toggle [title]="'notificationPreferences.toggles.quietHoursTitle' | translate" [description]="'notificationPreferences.toggles.quietHoursDescription' | translate" [(checked)]="quietHoursEnabled" />
+      <app-setting-toggle [title]="'notificationPreferences.toggles.criticalBreaksTitle' | translate" [description]="'notificationPreferences.toggles.criticalBreaksDescription' | translate" [(checked)]="criticalBreaksQuietHours" />
+      <app-setting-toggle [title]="'notificationPreferences.toggles.remindersTitle' | translate" [description]="'notificationPreferences.toggles.remindersDescription' | translate" [(checked)]="remindersEnabled" />
+      <app-setting-toggle [title]="'notificationPreferences.toggles.nightRoutinesTitle' | translate" [description]="'notificationPreferences.toggles.nightRoutinesDescription' | translate" [(checked)]="routineNightSilence" />
+      <app-setting-toggle [title]="'notificationPreferences.toggles.goalDeadlineTitle' | translate" [description]="'notificationPreferences.toggles.goalDeadlineDescription' | translate" [(checked)]="goalDeadlineAlerts" />
+      <app-setting-toggle [title]="'nav.maintenanceTickets' | translate" [description]="'notificationPreferences.toggles.maintenanceDescription' | translate" [(checked)]="maintenanceDeviceAlerts" />
+      <app-setting-toggle [title]="'notificationPreferences.toggles.recommendationsTitle' | translate" [description]="'notificationPreferences.toggles.recommendationsDescription' | translate" [(checked)]="systemRecommendations" />
+      <app-setting-toggle [title]="'notificationPreferences.toggles.dailySummaryTitle' | translate" [description]="'notificationPreferences.toggles.dailySummaryDescription' | translate" [(checked)]="dailySummaryEnabled" />
+      <app-setting-toggle [title]="'notificationPreferences.toggles.weeklySummaryTitle' | translate" [description]="'notificationPreferences.toggles.weeklySummaryDescription' | translate" [(checked)]="weeklySummaryEnabled" />
+      <app-setting-toggle [title]="'notificationPreferences.toggles.monthlyReportTitle' | translate" [description]="'notificationPreferences.toggles.monthlyReportDescription' | translate" [(checked)]="monthlyReportEnabled" />
+    </div>
+
+    <div class="control-grid control-grid--compact">
+      <app-time-picker [label]="'notificationPreferences.quietStart' | translate" [(value)]="quietHoursStart" />
+
+      <app-time-picker [label]="'notificationPreferences.quietEnd' | translate" [(value)]="quietHoursEnd" />
+    </div>
+  </section>
+
+  <app-button type="submit" variant="create" size="lg" [block]="true">
+    {{ 'notificationPreferences.save' | translate }}
+  </app-button>
+</form>

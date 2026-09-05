@@ -1,0 +1,162 @@
+﻿<section class="reporting-page goals-page">
+  <header class="ec-page-heading goals-hero">
+    <p class="ec-page-eyebrow">
+      {{ 'reporting.goalsEyebrow' | translate }}
+    </p>
+
+    <h1 class="ec-page-title">
+      {{ 'reporting.goalsTitle' | translate }}
+    </h1>
+
+    <p class="ec-page-description">
+      {{ 'reporting.goalsSubtitle' | translate }}
+    </p>
+  </header>
+
+  <section class="summary-grid goals-summary">
+    <article>
+      <span>{{ 'reporting.totalGoals' | translate }}</span>
+      <strong>{{ reportingFacade.energyGoals().length }}</strong>
+      <small>{{ 'reporting.goals.summary.created' | translate }}</small>
+    </article>
+
+    <article>
+      <span>{{ 'reporting.activeGoals' | translate }}</span>
+      <strong>{{ reportingFacade.activeGoals().length }}</strong>
+      <small>{{ 'reporting.goals.summary.tracking' | translate }}</small>
+    </article>
+
+    <article>
+      <span>{{ 'reporting.goals.summary.atRisk' | translate }}</span>
+      <strong>{{ atRiskGoalsCount }}</strong>
+      <small>{{ 'reporting.goals.summary.needAttention' | translate }}</small>
+    </article>
+
+    <article>
+      <span>{{ 'reporting.goals.summary.averageCompliance' | translate }}</span>
+      <strong>{{ averageProgressPercentage | number: '1.0-1' }}%</strong>
+      <small>{{ projectedSavingsLabel }}</small>
+    </article>
+  </section>
+
+  <section class="goal-create-strip">
+    <div>
+      <h2>{{ 'reporting.goals.createStripTitle' | translate }}</h2>
+      <p>{{ 'reporting.goals.createStripDescription' | translate }}</p>
+    </div>
+
+    <app-button variant="create" (pressed)="openCreateGoalModal()">
+      {{ 'reporting.createGoal' | translate }}
+    </app-button>
+  </section>
+
+  <app-modal-form-shell
+    [eyebrow]="'reporting.goals.modalEyebrow' | translate"
+    [title]="'reporting.goals.createStripTitle' | translate"
+    [description]="'reporting.goals.modalDescription' | translate"
+    [open]="createModalOpen"
+    (closed)="closeCreateGoalModal()"
+  >
+    <form class="goal-form" (ngSubmit)="createGoal()">
+      <div class="field-block">
+        <span>{{ 'reporting.goals.scope' | translate }}</span>
+        <app-dropdown
+          [options]="scopeOptions"
+          [value]="scopeType"
+          [placeholder]="'reporting.goals.scopeTargetPlaceholders.general' | translate"
+          (valueChange)="onScopeChange($event)"
+        />
+      </div>
+
+      <div class="field-block">
+        <span>{{ scopeTargetLabel }}</span>
+        <app-dropdown
+          [options]="scopeTargetOptions"
+          [value]="scopeTargetId"
+          [placeholder]="scopeTargetPlaceholder"
+          (valueChange)="onScopeTargetChange($event)"
+        />
+      </div>
+
+      <label class="field-block field-block--title">
+        <span>{{ 'reporting.goals.goalName' | translate }}</span>
+        <input
+          type="text"
+          name="title"
+          [(ngModel)]="title"
+          [placeholder]="'reporting.goals.goalNamePlaceholder' | translate"
+          required
+        />
+      </label>
+
+      <div class="field-block">
+        <span>{{ 'reporting.goals.consumptionLimit' | translate }}</span>
+        <app-number-stepper
+          label=""
+          suffix="kWh"
+          placeholder="kWh"
+          [min]="0.1"
+          [step]="0.1"
+          [decimals]="2"
+          [allowEmpty]="true"
+          [(value)]="targetKilowattHours"
+        />
+      </div>
+
+      <app-time-picker
+        [label]="'reporting.from' | translate"
+        [(value)]="activeFrom"
+      />
+
+      <app-time-picker
+        [label]="'reporting.to' | translate"
+        [(value)]="activeTo"
+      />
+
+      <div class="field-block">
+        <span>{{ 'reporting.deadline' | translate }}</span>
+        <app-date-picker
+          label=""
+          [min]="minDeadline()"
+          [(value)]="deadline"
+        />
+      </div>
+    </form>
+
+    <div modal-actions class="goal-modal-actions">
+      <app-button variant="secondary" (pressed)="closeCreateGoalModal()">
+        {{ 'common.cancel' | translate }}
+      </app-button>
+
+      <app-button
+        variant="create"
+        [disabled]="!canCreateGoal"
+        (pressed)="createGoal()"
+      >
+        {{ 'reporting.createGoal' | translate }}
+      </app-button>
+    </div>
+  </app-modal-form-shell>
+
+  @if (reportingFacade.loading()) {
+    <div class="loading-wrapper">
+      <app-loading-spinner />
+    </div>
+  } @else {
+    <section class="list goals-list">
+      @for (goal of reportingFacade.energyGoals(); track goal.id) {
+        <app-goal-progress-card
+          [goal]="goal"
+          [insight]="getGoalInsight(goal)"
+          (remove)="deleteGoal($event)"
+        />
+      } @empty {
+        <app-empty-state
+          [eyebrow]="'reporting.goals.emptyEyebrow' | translate"
+          [title]="'reporting.emptyGoalsTitle' | translate"
+          [description]="'reporting.emptyGoalsContent' | translate"
+        />
+      }
+    </section>
+  }
+</section>

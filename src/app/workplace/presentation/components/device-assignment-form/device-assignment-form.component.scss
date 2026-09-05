@@ -1,0 +1,19 @@
+.assignment-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 12px;
+}
+
+app-dropdown {
+  width: 100%;
+}
+
+app-button {
+  align-self: stretch;
+}
+
+@media (max-width: 980px) {
+  .assignment-form {
+    grid-template-columns: 1fr;
+  }
+}

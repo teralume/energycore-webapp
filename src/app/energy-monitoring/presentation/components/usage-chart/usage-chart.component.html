@@ -1,0 +1,29 @@
+<section class="chart-card">
+  <div class="chart-heading">
+    <h2>{{ 'energy.chartTitle' | translate }}</h2>
+    <span>{{ readings.length }} {{ 'history.records' | translate }}</span>
+  </div>
+
+  @if (chartReadings.length > 0) {
+    <div class="chart ec-scrollbar">
+      @for (reading of chartReadings; track reading.id) {
+        <div class="bar-wrapper">
+          <div
+            class="bar"
+            [class.high]="reading.isHigh"
+            [style.height.px]="getHeight(reading.watts)"
+            [attr.aria-label]="reading.deviceName + ': ' + reading.watts + 'W'"
+          ></div>
+
+          <small>{{ reading.recordedAt | slice: 5 }}</small>
+        </div>
+      }
+    </div>
+  } @else {
+    <app-empty-state
+      [compact]="true"
+      [eyebrow]="'energy.chartTitle' | translate"
+      [title]="'energy.emptyReadings' | translate"
+    />
+  }
+</section>

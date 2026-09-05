@@ -1,0 +1,26 @@
+<label class="number-stepper">
+  @if (label) {
+    <span class="number-stepper__label">{{ label }}</span>
+  }
+
+  <span class="number-stepper__body">
+    <input
+      type="text"
+      [inputMode]="decimals > 0 ? 'decimal' : 'numeric'"
+      [value]="inputValue"
+      [placeholder]="placeholder"
+      (input)="onInput($event)"
+      (blur)="onBlur($event)"
+      (paste)="onPaste($event)"
+    />
+
+    <span class="number-stepper__buttons">
+      <button type="button" [attr.aria-label]="'shared.numberStepper.increase' | translate" (click)="increase()">+</button>
+      <button type="button" [attr.aria-label]="'shared.numberStepper.decrease' | translate" (click)="decrease()">-</button>
+    </span>
+
+    @if (suffix) {
+      <small>{{ suffix }}</small>
+    }
+  </span>
+</label>

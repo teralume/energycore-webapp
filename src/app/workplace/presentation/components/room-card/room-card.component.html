@@ -1,0 +1,57 @@
+<app-section-card class="room-card" size="medium">
+  <div class="room-card__identity">
+    <span>
+      @if (locationName) {
+        {{ locationName }}
+      } @else {
+        {{ statusLabelKey | translate }}
+      }
+    </span>
+    <h2>{{ room.name }}</h2>
+    <p>{{ statusLabelKey | translate }}</p>
+    <small>{{ 'workplace.rooms.card.createdAt' | translate }}: {{ formattedCreatedAt }}</small>
+  </div>
+
+  <div class="room-card__metrics">
+    <article>
+      <span>{{ 'nav.devices' | translate }}</span>
+      <strong>{{ deviceCount }}</strong>
+    </article>
+    <article>
+      <span>{{ 'workplace.rooms.card.activeDevices' | translate }}</span>
+      <strong>{{ activeDeviceCount }}</strong>
+    </article>
+    <article>
+      <span>{{ 'workplace.rooms.card.consumption' | translate }}</span>
+      <strong>{{ currentWatts }} W</strong>
+    </article>
+    <article>
+      <span>{{ 'nav.deviceGroups' | translate }}</span>
+      <strong>{{ groupCount }}</strong>
+    </article>
+  </div>
+
+  <div class="room-card__context">
+    @if (primaryGroupName) {
+      <p><span>{{ 'workplace.rooms.card.relatedGroup' | translate }}</span>{{ primaryGroupName }}</p>
+    } @else {
+      <p><span>{{ 'workplace.rooms.card.relatedGroup' | translate }}</span>{{ 'workplace.rooms.card.noLinkedGroup' | translate }}</p>
+    }
+
+    <p><span>{{ 'workplace.rooms.card.relatedRoutines' | translate }}</span>{{ routineCount }}</p>
+  </div>
+
+  <div class="room-card__actions">
+    <app-button
+      class="room-card__open-action"
+      variant="ghost"
+      size="sm"
+      [label]="'workplace.rooms.card.goToAssignments' | translate"
+      [link]="'/spaces/assignments'"
+      [ariaLabel]="'workplace.rooms.card.goToAssignmentsAria' | translate"
+    />
+    <app-button variant="danger" size="sm" (pressed)="onRemove()">
+      {{ 'common.delete' | translate }}
+    </app-button>
+  </div>
+</app-section-card>

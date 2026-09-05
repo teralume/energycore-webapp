@@ -1,0 +1,263 @@
+:host {
+  display: block;
+}
+
+.draggable-bar-carousel {
+  position: relative;
+  min-height: 440px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 16px 14px 18px;
+  background: var(--ec-card-highlight), var(--ec-surface-muted);
+  box-shadow: var(--ec-inset-highlight), var(--ec-shadow-panel);
+  cursor: grab;
+  perspective: 980px;
+  touch-action: none;
+  user-select: none;
+}
+
+.draggable-bar-carousel--dragging {
+  cursor: grabbing;
+}
+
+.draggable-bar-carousel__glow {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: min(360px, 62%);
+  height: 230px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at center, var(--ec-status-stable-bg), transparent 42%),
+    radial-gradient(circle at center, var(--ec-accent-soft), transparent 64%);
+  filter: blur(28px);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.draggable-bar-carousel__rail {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: 66px;
+  display: flex;
+  align-items: end;
+  gap: 42px;
+  width: max-content;
+  height: 304px;
+  transition: transform 360ms cubic-bezier(0.18, 0.9, 0.2, 1);
+  will-change: transform;
+}
+
+.draggable-bar-carousel--dragging .draggable-bar-carousel__rail,
+.draggable-bar-carousel--momentum .draggable-bar-carousel__rail,
+.draggable-bar-carousel--auto-advancing .draggable-bar-carousel__rail {
+  transition: none;
+}
+
+.draggable-bar-carousel__item {
+  position: relative;
+  flex: 0 0 126px;
+  width: 126px;
+  display: grid;
+  grid-template-rows: minmax(220px, 1fr) auto;
+  gap: 12px;
+  min-width: 0;
+  transform-origin: center;
+  transition:
+    opacity 180ms ease,
+    transform 300ms cubic-bezier(0.18, 0.9, 0.2, 1);
+  will-change: transform;
+}
+
+.draggable-bar-carousel--dragging .draggable-bar-carousel__item,
+.draggable-bar-carousel--momentum .draggable-bar-carousel__item,
+.draggable-bar-carousel--auto-advancing .draggable-bar-carousel__item {
+  transition: none;
+}
+
+.draggable-bar-carousel__track {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  width: 100%;
+  min-height: 224px;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 14px 12px 12px;
+  background: var(--ec-card-highlight), color-mix(in srgb, var(--surface-muted) 74%, transparent);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.draggable-bar-carousel__bar {
+  display: block;
+  width: min(46px, 68%);
+  min-height: 18px;
+  border-radius: 12px 12px 5px 5px;
+  background: var(--ec-action-bg);
+  box-shadow: 0 18px 34px rgba(22, 163, 74, 0.2);
+  transition: height 260ms ease;
+}
+
+.draggable-bar-carousel__bar--high {
+  background: var(--ec-danger-bg);
+  box-shadow: 0 18px 34px rgba(239, 68, 68, 0.18);
+}
+
+.draggable-bar-carousel__chip {
+  position: relative;
+  appearance: none;
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  width: max-content;
+  margin: 0;
+  min-width: 78px;
+  min-height: 44px;
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
+  padding: 8px 12px 7px;
+  color: var(--text-primary);
+  background: var(--ec-card-highlight), color-mix(in srgb, var(--surface-color) 86%, transparent);
+  cursor: pointer;
+  font: inherit;
+  box-shadow: var(--ec-shadow-soft);
+  line-height: 1.05;
+  text-align: center;
+  touch-action: none;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.draggable-bar-carousel__chip strong,
+.draggable-bar-carousel__chip small {
+  display: block;
+  max-width: 90px;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.draggable-bar-carousel__chip strong {
+  color: var(--text-primary);
+  font-size: 0.74rem;
+  font-weight: 950;
+}
+
+.draggable-bar-carousel__chip small {
+  margin-top: 4px;
+  color: var(--text-muted);
+  font-size: 0.66rem;
+  font-weight: 900;
+}
+
+.draggable-bar-carousel__item--active .draggable-bar-carousel__track {
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--border-strong);
+  background:
+    radial-gradient(circle at 50% 100%, var(--ec-accent-soft), transparent 48%),
+    color-mix(in srgb, var(--surface-muted) 80%, transparent);
+  box-shadow: var(--ec-action-shadow-hover);
+}
+
+.draggable-bar-carousel__item--active .draggable-bar-carousel__chip {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+}
+
+.draggable-bar-carousel__chip:hover,
+.draggable-bar-carousel__chip:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
+  box-shadow:
+    0 0 0 1px var(--ec-accent-soft),
+    var(--ec-shadow-soft);
+  outline: none;
+}
+
+.draggable-bar-carousel__tooltip {
+  position: absolute;
+  z-index: 30;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  display: grid;
+  gap: 4px;
+  width: min(220px, 76vw);
+  padding: 14px 15px;
+  border: 1px solid var(--border-strong);
+  border-radius: 18px;
+  background: var(--ec-modal-bg);
+  box-shadow: var(--ec-shadow-panel), var(--ec-inset-highlight);
+  opacity: 0;
+  pointer-events: none;
+  justify-items: center;
+  text-align: center;
+  transform: translateX(-50%) translateY(10px) scale(0.98);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.draggable-bar-carousel__chip:hover .draggable-bar-carousel__tooltip,
+.draggable-bar-carousel__chip:focus-visible .draggable-bar-carousel__tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.draggable-bar-carousel__tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  border-right: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--border-strong);
+  background: var(--surface-elevated-solid);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.draggable-bar-carousel__tooltip-emoji {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 2px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--ec-accent-soft);
+  font-size: 1.05rem;
+}
+
+.draggable-bar-carousel__tooltip strong,
+.draggable-bar-carousel__tooltip small {
+  display: block;
+}
+
+.draggable-bar-carousel__tooltip strong {
+  color: var(--text-primary);
+  font-size: 0.84rem;
+  font-weight: 950;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.draggable-bar-carousel__tooltip small {
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.draggable-bar-carousel__item:hover,
+.draggable-bar-carousel__item:focus-within {
+  z-index: 200 !important;
+}

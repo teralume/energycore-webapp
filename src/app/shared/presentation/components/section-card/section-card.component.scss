@@ -1,0 +1,87 @@
+.section-card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: var(--section-card-padding, 18px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--section-card-radius, 18px);
+  background:
+    var(--ec-card-highlight),
+    var(--ec-section-bg);
+  box-shadow:
+    var(--ec-inset-highlight),
+    var(--ec-shadow-soft);
+}
+
+.section-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent-color));
+  opacity: 0.62;
+  pointer-events: none;
+}
+
+.section-card--large {
+  --section-card-padding: clamp(22px, 4vw, 30px);
+  --section-card-radius: 20px;
+  gap: 16px;
+}
+
+.section-card--medium {
+  --section-card-padding: 20px;
+}
+
+.section-card--small {
+  --section-card-padding: 16px;
+  --section-card-radius: 16px;
+  gap: 9px;
+}
+
+.section-card--description {
+  --section-card-padding: 14px 16px;
+  --section-card-radius: 14px;
+  gap: 7px;
+  background: var(--surface-card);
+  box-shadow: var(--ec-inset-highlight);
+}
+
+.section-card span {
+  width: fit-content;
+  color: var(--accent-color);
+  font-size: 0.74rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.section-card h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: var(--section-card-title-size, 1.08rem);
+  font-weight: 950;
+  line-height: 1.16;
+}
+
+.section-card--large h3 {
+  --section-card-title-size: clamp(1.25rem, 3vw, 1.72rem);
+}
+
+.section-card--small h3,
+.section-card--description h3 {
+  --section-card-title-size: 0.98rem;
+}
+
+.section-card p {
+  max-width: 68ch;
+  margin: 0;
+  color: var(--ec-copy-color);
+  font-weight: var(--ec-copy-weight);
+  line-height: var(--ec-copy-line-height);
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EnergyCore</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="logo">⚡ EnergyCore</div>
+
+    <div class="menu-item active-menu" onclick="showSection('centro', this)">⚡ Centro Energético</div>
+    <div class="menu-item" onclick="showSection('analitica', this)">📊 Analítica</div>
+    <div class="menu-item" onclick="showSection('dispositivos', this)">🔌 Dispositivos</div>
+    <div class="menu-item" onclick="showSection('historial', this)">📜 Historial</div>
+    <div class="menu-item" onclick="showSection('insights', this)">💡 IA Energética</div>
+</div>
+
+<div class="main">
+
+    <!-- CENTRO -->
+    <div id="centro" class="section active">
+        <h1>Centro Energético</h1>
+
+        <div class="cards">
+            <div class="card stat"><h2>Consumo mensual</h2><p>320 kWh</p></div>
+            <div class="card stat"><h2>Gasto estimado</h2><p>S/ 145</p></div>
+            <div class="card stat"><h2>Ahorro</h2><p>18%</p></div>
+            <div class="card stat"><h2>Dispositivos</h2><p>6</p></div>
+        </div>
+
+        <div class="card big chart-wrapper"><canvas id="chart"></canvas></div>
+
+        <button class="btn-primary" onclick="openModal()">Agregar consumo</button>
+    </div>
+
+    <!-- ANALITICA -->
+    <div id="analitica" class="section">
+        <h1>Analítica Avanzada</h1>
+
+        <div class="cards">
+            <div class="card stat"><h2>Hora pico</h2><p>7 PM</p></div>
+            <div class="card stat"><h2>Día mayor consumo</h2><p>Martes</p></div>
+            <div class="card stat"><h2>Promedio diario</h2><p>10.5 kWh</p></div>
+            <div class="card stat"><h2>Predicción</h2><p>S/ 180</p></div>
+        </div>
+
+        <div class="card chart-wrapper"><canvas id="chartBar"></canvas></div>
+    </div>
+
+    <!-- DISPOSITIVOS -->
+    <div id="dispositivos" class="section">
+        <h1>Dispositivos</h1>
+
+        <div class="card">
+            <table>
+                <thead>
+                <tr><th>Dispositivo</th><th>Estado</th><th>Acción</th></tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Refrigeradora</td>
+                    <td id="estado-1" class="estado-activo">Activado</td>
+                    <td>
+                        <button id="btn-1" class="btn-danger" onclick="toggleDevice(1, 'btn-1')">
+                            Desactivar
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TV</td>
+                    <td id="estado-2" class="estado-activo">Activado</td>
+                    <td>
+                        <button id="btn-2" class="btn-danger" onclick="toggleDevice(2, 'btn-2')">
+                            Desactivar
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Aire acondicionado</td>
+                    <td id="estado-3" class="estado-inactivo">Desactivado</td>
+                    <td>
+                        <button id="btn-3" class="btn-success" onclick="toggleDevice(3, 'btn-3')">
+                            Activar
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- HISTORIAL -->
+    <div id="historial" class="section">
+        <h1>Historial</h1>
+
+        <div class="card">
+            <ul class="history-list">
+                <li><span>Hoy</span><strong>12 kWh</strong></li>
+                <li><span>Ayer</span><strong>10 kWh</strong></li>
+                <li><span>Lunes</span><strong>14 kWh</strong></li>
+                <li><span>Domingo</span><strong>9 kWh</strong></li>
+                <li><span>Sábado</span><strong>11 kWh</strong></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- INSIGHTS -->
+    <div id="insights" class="section">
+        <h1>IA Energética</h1>
+
+        <div class="insight">⚠️ Consumo elevado detectado en horas pico</div>
+        <div class="insight">💡 Reduce el aire acondicionado 2°C para ahorrar 12%</div>
+        <div class="insight">✅ Ahorro proyectado de S/ 35 este mes</div>
+        <div class="insight">🔋 Tu refrigeradora consume más que el promedio</div>
+    </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <h3>Nuevo Consumo</h3>
+        <input id="kwh-input" placeholder="kWh" type="number">
+        <div class="modal-actions">
+            <button class="btn-ghost" onclick="closeModal(false)">Cancelar</button>
+            <button class="btn-primary" onclick="closeModal(true)">Guardar</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast">Acción realizada</div>
+<div class="loader" id="loader"></div>
+
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>

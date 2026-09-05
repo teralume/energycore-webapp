@@ -1,0 +1,160 @@
+<section class="assignments-page ec-page">
+  <header class="ec-page-heading">
+    <p class="ec-page-eyebrow">{{ 'nav.spaces' | translate }}</p>
+    <h1 class="ec-page-title">{{ 'nav.assignments' | translate }}</h1>
+    <p class="ec-page-description">
+      {{ 'workplace.assignments.pageDescription' | translate }}
+    </p>
+  </header>
+
+  <section class="assignment-summary">
+    <app-section-card
+      size="small"
+      [eyebrow]="'workplace.assignments.summary.activeLocationEyebrow' | translate"
+      [title]="activeLocationName"
+    >
+      <strong>{{ activeRooms.length }}</strong>
+      <p>{{ 'workplace.assignments.summary.availableRooms' | translate }}</p>
+    </app-section-card>
+
+    <app-section-card
+      size="small"
+      [eyebrow]="'nav.assignments' | translate"
+      [title]="'workplace.assignments.summary.movableTitle' | translate"
+    >
+      <strong>{{ activeAssignments.length }}</strong>
+      <p>{{ 'workplace.assignments.summary.connectedDevices' | translate }}</p>
+    </app-section-card>
+
+    <app-section-card
+      size="small"
+      [eyebrow]="'workplace.assignments.summary.interactionEyebrow' | translate"
+      [title]="'workplace.assignments.summary.dragTitle' | translate"
+    >
+      <strong>{{ 'workplace.assignments.summary.directValue' | translate }}</strong>
+      <p>{{ 'workplace.assignments.summary.dragDescription' | translate }}</p>
+    </app-section-card>
+  </section>
+
+  <app-section-card class="movement-panel" size="large">
+    <div class="movement-panel__header">
+      <div>
+        <span class="movement-panel__section-tag">{{ 'workplace.assignments.movement.eyebrow' | translate }}</span>
+        <h2>{{ 'workplace.assignments.movement.title' | translate }}</h2>
+        <p>
+          {{ 'workplace.assignments.movement.description' | translate }}
+        </p>
+      </div>
+    </div>
+
+    <div class="movement-controls">
+      <label>
+        <span>{{ 'workplace.assignments.panels.roomOne' | translate }}</span>
+        <app-dropdown
+          [options]="roomOneDropdownOptions"
+          [value]="roomOneValue"
+          [placeholder]="'workplace.selectRoom' | translate"
+          (valueChange)="selectRoomOne($event)"
+        />
+      </label>
+
+      <label>
+        <span>{{ 'workplace.assignments.panels.roomTwo' | translate }}</span>
+        <app-dropdown
+          [options]="roomTwoDropdownOptions"
+          [value]="roomTwoValue"
+          [placeholder]="'workplace.selectRoom' | translate"
+          (valueChange)="selectRoomTwo($event)"
+        />
+      </label>
+    </div>
+  </app-section-card>
+
+  @if (workplaceFacade.loading() || deviceControlFacade.loading()) {
+    <div class="loading-wrapper">
+      <app-loading-spinner />
+    </div>
+  } @else if (activeRooms.length === 0) {
+    <app-empty-state
+      [eyebrow]="'nav.rooms' | translate"
+      [title]="'workplace.assignments.emptyRooms.title' | translate"
+      [description]="'workplace.assignments.emptyRooms.description' | translate"
+      [actionLabel]="'workplace.assignments.go' | translate"
+      actionLink="/spaces/rooms"
+    />
+  } @else if (activeAssignments.length === 0) {
+    <app-empty-state
+      [eyebrow]="'nav.assignments' | translate"
+      [title]="'workplace.assignments.emptyAssignments.title' | translate"
+      [description]="'workplace.assignments.emptyAssignments.description' | translate"
+      [actionLabel]="'workplace.assignments.go' | translate"
+      actionLink="/operation/devices"
+      actionVariant="neutral"
+    />
+  } @else {
+    <section class="movement-board">
+      @for (panel of roomPanels; track panel.labelKey) {
+        <app-section-card
+          class="movement-column"
+          [class.movement-column--drop-active]="activeDropRoomId === panel.room?.id"
+          size="medium"
+          (dragover)="handleRoomDragOver(panel.room?.id ?? null, $event)"
+          (drop)="handleRoomDrop(panel.room?.id ?? null, $event)"
+        >
+          <div class="movement-column__header">
+            <span>{{ panel.labelKey | translate }}</span>
+            <h2>{{ panel.room?.name ?? roomLabel(null) }}</h2>
+            <p>
+              @if (panel.room) {
+                {{ 'workplace.assignments.panelItemCount' | translate: { count: panel.assignments.length } }}
+              } @else {
+                {{ 'workplace.assignments.noSecondRoomAvailable' | translate }}
+              }
+            </p>
+          </div>
+
+          <div
+            class="movable-list room-drop-zone"
+            [class.room-drop-zone--active]="activeDropRoomId === panel.room?.id"
+          >
+            @if (panel.room) {
+              @for (assignment of panel.assignments; track assignment.id) {
+                <article
+                  class="movable-item"
+                  [class.movable-item--dragging]="draggedAssignmentId === assignment.id"
+                  draggable="true"
+                  (dragstart)="handleDragStart(assignment, $event)"
+                  (dragend)="handleDragEnd()"
+                >
+                  <span class="device-token" aria-hidden="true">
+                    {{ deviceIcon(deviceById(assignment.deviceId)) }}
+                  </span>
+
+                  <div class="assignment-device-copy">
+                    <strong>{{ deviceName(assignment.deviceId) }}</strong>
+                    <span>{{ devicePowerLabel(assignment.deviceId) }}</span>
+                    <small>{{ deviceStateLabel(deviceById(assignment.deviceId)) }}</small>
+                  </div>
+                </article>
+              } @empty {
+                <app-empty-state
+                  [compact]="true"
+                  [eyebrow]="panel.labelKey | translate"
+                  [title]="'workplace.assignments.emptyPanel.title' | translate"
+                  [description]="'workplace.assignments.emptyPanel.description' | translate"
+                />
+              }
+            } @else {
+              <app-empty-state
+                [compact]="true"
+                [eyebrow]="panel.labelKey | translate"
+                [title]="'workplace.assignments.unavailablePanel.title' | translate"
+                [description]="'workplace.assignments.unavailablePanel.description' | translate"
+              />
+            }
+          </div>
+        </app-section-card>
+      }
+    </section>
+  }
+</section>

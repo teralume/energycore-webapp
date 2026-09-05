@@ -1,0 +1,38 @@
+<article
+  class="ticket-card"
+  [class.urgent]="ticket.isUrgent"
+  [class.resolved]="ticket.isResolved"
+  [class.closed]="ticket.isClosed"
+>
+  <div class="ticket-card__content">
+    <div class="badges">
+      <app-ticket-status-badge
+        [value]="ticket.priority"
+        [label]="priorityLabel(ticket.priority)"
+      />
+      <app-ticket-status-badge
+        [value]="ticket.status"
+        [label]="statusLabel(ticket.status)"
+      />
+    </div>
+
+    <h2>{{ ticket.subject }}</h2>
+
+    <p>{{ ticket.description }}</p>
+
+    <small>{{ 'serviceManagement.createdOn' | translate: { date: formatDate(ticket.createdAt) } }}</small>
+  </div>
+
+  <div class="actions">
+    <app-dropdown
+      [options]="statusOptions"
+      [value]="ticket.status"
+      [placeholder]="'history.status' | translate"
+      (valueChange)="changeStatus($event)"
+    />
+
+    <app-button variant="danger" size="sm" (pressed)="onRemove()">
+      {{ 'common.delete' | translate }}
+    </app-button>
+  </div>
+</article>

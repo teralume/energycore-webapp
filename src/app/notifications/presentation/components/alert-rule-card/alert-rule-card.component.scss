@@ -1,0 +1,93 @@
+.rule-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top left, var(--ec-accent-soft), transparent 34%),
+    var(--surface-card);
+  transition:
+    border-color 0.18s ease,
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+
+.rule-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+.rule-card.disabled {
+  opacity: 0.58;
+}
+
+.rule-main {
+  display: grid;
+  gap: 8px;
+}
+
+.rule-heading,
+.actions,
+.rule-details {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.rule-heading span {
+  color: var(--accent-color);
+  font-size: 0.75rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.level {
+  width: fit-content;
+  margin: 0;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #422006;
+  background: #facc15;
+  font-size: 0.75rem;
+  font-weight: 950;
+}
+
+h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+}
+
+p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-weight: 850;
+}
+
+.rule-details span {
+  padding: 7px 10px;
+  border-radius: 999px;
+  color: var(--ec-status-info-text);
+  background: var(--ec-status-info-bg);
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+:host ::ng-deep .actions .app-button {
+  min-width: 112px;
+}
+
+@media (max-width: 720px) {
+  .rule-card {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    justify-content: flex-start;
+  }
+}

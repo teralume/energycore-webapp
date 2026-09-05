@@ -1,0 +1,130 @@
+<section class="about-page">
+  <header class="about-hero">
+    <div class="about-hero__copy">
+      <p class="eyebrow">{{ 'about.eyebrow' | translate }}</p>
+      <h1>{{ 'about.title' | translate }}</h1>
+      <p class="about-hero__subtitle">{{ 'about.subtitle' | translate }}</p>
+
+      <div class="about-actions" aria-label="About navigation">
+        <app-button variant="primary" size="lg" link="/home">
+          {{ 'about.actions.home' | translate }}
+        </app-button>
+        <app-button variant="secondary" size="lg" link="/spaces/sites">
+          {{ 'about.actions.spaces' | translate }}
+        </app-button>
+        <app-button variant="ghost" size="lg" link="/energy/consumption">
+          {{ 'about.actions.energy' | translate }}
+        </app-button>
+      </div>
+    </div>
+
+    <aside class="about-hero__panel" aria-label="EnergyCore focus">
+      @for (signalKey of heroSignalKeys; track signalKey) {
+        <div class="signal-card">
+          <span>{{ 'about.heroSignals.' + signalKey + '.label' | translate }}</span>
+          <strong>{{ 'about.heroSignals.' + signalKey + '.title' | translate }}</strong>
+          <p>{{ 'about.heroSignals.' + signalKey + '.description' | translate }}</p>
+        </div>
+      }
+    </aside>
+  </header>
+
+  <app-section-card
+    class="about-intro"
+    size="large"
+    [eyebrow]="'about.what.eyebrow' | translate"
+    [title]="'about.what.title' | translate"
+    [description]="'about.what.description' | translate"
+  >
+    <div class="about-intro__grid">
+      <span>{{ 'about.what.points.spaces' | translate }}</span>
+      <span>{{ 'about.what.points.control' | translate }}</span>
+      <span>{{ 'about.what.points.energy' | translate }}</span>
+      <span>{{ 'about.what.points.care' | translate }}</span>
+    </div>
+  </app-section-card>
+
+  <div class="value-grid">
+    @for (valueKey of valueKeys; track valueKey) {
+      <app-section-card
+        size="medium"
+        [eyebrow]="'about.values.' + valueKey + '.eyebrow' | translate"
+        [title]="'about.values.' + valueKey + '.title' | translate"
+        [description]="'about.values.' + valueKey + '.description' | translate"
+      />
+    }
+  </div>
+
+  <section class="about-band">
+    <div class="section-heading">
+      <p class="eyebrow">{{ 'about.daily.eyebrow' | translate }}</p>
+      <h2>{{ 'about.daily.title' | translate }}</h2>
+      <p>{{ 'about.daily.description' | translate }}</p>
+    </div>
+
+    <div class="daily-grid">
+      @for (itemKey of dailyUseKeys; track itemKey) {
+        <article class="daily-step">
+          <span>{{ $index + 1 }}</span>
+          <div>
+            <h3>{{ 'about.daily.items.' + itemKey + '.title' | translate }}</h3>
+            <p>{{ 'about.daily.items.' + itemKey + '.description' | translate }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="about-band about-band--split">
+    <div class="section-heading">
+      <p class="eyebrow">{{ 'about.recommendations.eyebrow' | translate }}</p>
+      <h2>{{ 'about.recommendations.title' | translate }}</h2>
+      <p>{{ 'about.recommendations.description' | translate }}</p>
+    </div>
+
+    <div class="recommendation-list">
+      @for (itemKey of recommendationKeys; track itemKey) {
+        <article>
+          <strong>{{ 'about.recommendations.items.' + itemKey + '.title' | translate }}</strong>
+          <p>{{ 'about.recommendations.items.' + itemKey + '.description' | translate }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="about-band">
+    <div class="section-heading">
+      <p class="eyebrow">{{ 'about.capabilities.eyebrow' | translate }}</p>
+      <h2>{{ 'about.capabilities.title' | translate }}</h2>
+      <p>{{ 'about.capabilities.description' | translate }}</p>
+    </div>
+
+    <div class="capability-grid">
+      @for (itemKey of capabilityKeys; track itemKey) {
+        <app-section-card
+          size="small"
+          [eyebrow]="'about.capabilities.items.' + itemKey + '.eyebrow' | translate"
+          [title]="'about.capabilities.items.' + itemKey + '.title' | translate"
+          [description]="'about.capabilities.items.' + itemKey + '.description' | translate"
+        />
+      }
+    </div>
+  </section>
+
+  <section class="about-band about-band--careful">
+    <div class="section-heading">
+      <p class="eyebrow">{{ 'about.careful.eyebrow' | translate }}</p>
+      <h2>{{ 'about.careful.title' | translate }}</h2>
+      <p>{{ 'about.careful.description' | translate }}</p>
+    </div>
+
+    <div class="careful-grid">
+      @for (itemKey of carefulUseKeys; track itemKey) {
+        <article>
+          <strong>{{ 'about.careful.items.' + itemKey + '.title' | translate }}</strong>
+          <p>{{ 'about.careful.items.' + itemKey + '.description' | translate }}</p>
+        </article>
+      }
+    </div>
+  </section>
+</section>

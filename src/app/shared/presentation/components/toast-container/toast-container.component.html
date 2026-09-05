@@ -1,0 +1,20 @@
+<section class="toast-stack" aria-live="polite" aria-label="Notificaciones del sistema">
+  @for (toast of toastService.toasts(); track toast.id) {
+    <div class="toast-slot" [class.toast-slot--leaving]="toast.leaving">
+      <article
+        class="toast"
+        [class]="'toast toast--' + toast.type"
+        [class.toast--leaving]="toast.leaving"
+      >
+        <div>
+          <span>{{ labelFor(toast.type) }}</span>
+          <p>{{ toast.message }}</p>
+        </div>
+
+        <button type="button" aria-label="Cerrar notificacion" (click)="toastService.dismiss(toast.id)">
+          x
+        </button>
+      </article>
+    </div>
+  }
+</section>

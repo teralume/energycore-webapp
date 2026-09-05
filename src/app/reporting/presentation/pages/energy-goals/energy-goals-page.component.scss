@@ -1,0 +1,201 @@
+.reporting-page,
+.list {
+  display: grid;
+}
+
+.reporting-page {
+  gap: 24px;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.summary-grid article {
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 22px;
+  background: var(--surface-color);
+}
+
+.summary-grid span {
+  color: var(--ec-copy-color);
+  font-weight: var(--ec-copy-weight);
+}
+
+.summary-grid strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.8rem;
+}
+
+.list {
+  gap: 14px;
+}
+
+.loading-wrapper {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+}
+
+.goals-page {
+  gap: 22px;
+}
+
+.goals-hero {
+  max-width: 860px;
+}
+
+.goals-summary {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.goals-summary article {
+  min-height: 112px;
+}
+
+.goals-summary small {
+  color: var(--ec-copy-color);
+  font-size: 0.78rem;
+  font-weight: var(--ec-copy-weight);
+  line-height: var(--ec-copy-line-height);
+}
+
+.goal-create-strip {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 20px;
+  background: var(--surface-color);
+}
+
+.goal-create-strip div {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.goal-create-strip h2,
+.goal-create-strip p {
+  margin: 0;
+}
+
+.goal-create-strip h2 {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+.goal-create-strip p {
+  color: var(--ec-copy-color);
+  font-weight: var(--ec-copy-weight);
+  line-height: var(--ec-copy-line-height);
+}
+
+.goal-builder {
+  gap: 18px;
+}
+
+.goal-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: end;
+}
+
+.field-block {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.field-block > span {
+  display: block;
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  font-weight: 950;
+}
+
+.field-block input {
+  width: 100%;
+  min-height: 62px;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 0 18px;
+  color: var(--text-primary);
+  background: var(--field-bg);
+  outline: none;
+  font: inherit;
+  font-weight: 850;
+}
+
+.field-block input::placeholder {
+  color: var(--text-muted);
+}
+
+.goal-form app-dropdown,
+.goal-form app-date-picker,
+.goal-form app-number-stepper,
+.goal-form app-time-picker {
+  min-width: 0;
+}
+
+:host ::ng-deep .goal-form .dropdown__trigger,
+:host ::ng-deep .goal-form .date-picker__trigger,
+:host ::ng-deep .goal-form .number-stepper__body {
+  min-height: 62px;
+  border-radius: 18px;
+}
+
+:host ::ng-deep .goal-form .number-stepper input {
+  height: 60px;
+}
+
+:host ::ng-deep .goal-form .number-stepper__buttons {
+  height: 60px;
+}
+
+.goals-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.goals-list app-empty-state {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.goal-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+}
+
+@media (max-width: 1180px) {
+  .goals-summary,
+  .goals-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .goal-create-strip {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 760px) {
+  .goals-summary,
+  .goals-list,
+  .goal-form {
+    grid-template-columns: 1fr;
+  }
+
+  .goal-modal-actions {
+    flex-direction: column-reverse;
+  }
+}

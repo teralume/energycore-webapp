@@ -1,0 +1,209 @@
+:host {
+  --accent-color: var(--ec-primary);
+  --ec-accent-strong: var(--ec-primary-strong);
+  --ec-accent-soft: var(--ec-primary-soft);
+  --ec-create-bg: linear-gradient(135deg, #4ade80 0%, #22c55e 48%, #15803d 100%);
+  --ec-create-bg-hover: linear-gradient(135deg, #22c55e 0%, #16a34a 52%, #166534 100%);
+  --ec-create-shadow: 0 18px 36px rgba(34, 197, 94, 0.24);
+  --ec-create-shadow-hover: 0 15px 30px rgba(34, 197, 94, 0.3);
+  display: block;
+}
+
+.auth-page {
+  position: relative;
+  min-height: max(68vh, 620px);
+  display: grid;
+  place-items: center;
+  padding: 30px 0;
+  isolation: isolate;
+}
+
+.auth-ambient {
+  position: absolute;
+  z-index: -1;
+  inset: 3% -12% -8%;
+  background:
+    linear-gradient(color-mix(in srgb, var(--ec-primary) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--ec-primary) 7%, transparent) 1px,
+      transparent 1px
+    ),
+    radial-gradient(circle at 28% 46%, var(--ec-primary-soft), transparent 30%),
+    radial-gradient(circle at 72% 42%, var(--ec-info-soft), transparent 28%);
+  background-size:
+    42px 42px,
+    42px 42px,
+    auto,
+    auto;
+  mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+  pointer-events: none;
+}
+
+.auth-card {
+  width: min(900px, 100%);
+  display: grid;
+  grid-template-columns: minmax(250px, 0.82fr) minmax(380px, 1.18fr);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--ec-primary-border) 70%, var(--border-color));
+  border-radius: 28px;
+  background: var(--surface-elevated);
+  box-shadow:
+    0 34px 90px rgba(2, 8, 4, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.auth-card__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px clamp(30px, 6vw, 64px);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 12px;
+  color: var(--ec-primary);
+  font-size: 0.76rem;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+}
+
+.eyebrow span {
+  width: 24px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: 0 0 12px var(--ec-primary);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.1rem, 5vw, 3.2rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.subtitle {
+  margin: 16px 0 22px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.auth-form {
+  display: grid;
+  gap: 17px;
+  margin-top: 8px;
+}
+
+label {
+  display: grid;
+  gap: 9px;
+  color: var(--text-primary);
+  font-weight: 800;
+}
+
+.field-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.field-label svg {
+  width: 16px;
+  height: 16px;
+  color: var(--ec-primary);
+}
+
+input {
+  width: 100%;
+  min-height: 50px;
+  padding: 13px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  color: var(--text-primary);
+  background: var(--field-bg);
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+input:hover {
+  background: var(--field-bg-hover);
+}
+
+input:focus-visible {
+  outline: 0;
+  border-color: var(--ec-primary);
+  box-shadow: var(--ec-pilot-focus-ring);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  border-color: var(--ec-primary-border);
+  caret-color: var(--text-primary);
+  box-shadow: 0 0 0 1000px var(--surface-elevated-solid) inset;
+  -webkit-text-fill-color: var(--text-primary);
+  transition: background-color 9999s ease-out 0s;
+}
+
+:host ::ng-deep app-button .app-button {
+  min-height: 50px;
+  gap: 9px;
+}
+
+:host ::ng-deep app-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+.links a {
+  color: var(--text-secondary);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.links a:hover {
+  color: var(--ec-primary);
+}
+
+.links a:focus-visible {
+  outline: 0;
+  border-radius: 6px;
+  box-shadow: var(--ec-pilot-focus-ring);
+}
+
+@media (max-width: 760px) {
+  .auth-page {
+    min-height: 0;
+    padding: 12px 0 26px;
+  }
+
+  .auth-card {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-card__content {
+    padding: 34px 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  input {
+    transition: none;
+  }
+}

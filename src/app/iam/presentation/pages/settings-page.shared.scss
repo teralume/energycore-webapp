@@ -1,0 +1,280 @@
+.settings-page {
+  display: grid;
+  gap: 24px;
+}
+
+h3,
+p {
+  margin: 0;
+}
+
+.compact-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.settings-form,
+.danger-form {
+  display: grid;
+  gap: 16px;
+}
+
+.settings-form {
+  width: 100%;
+}
+
+label {
+  display: grid;
+  gap: 8px;
+}
+
+label span,
+.compact-card > span,
+.account-details span {
+  color: var(--accent-color);
+  font-size: 0.75rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+input {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  color: var(--text-primary);
+  background: var(--field-bg);
+  font: inherit;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--border-strong);
+  box-shadow: var(--ec-focus-ring);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.account-panel {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.avatar {
+  width: 78px;
+  height: 78px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border-strong);
+  border-radius: 22px;
+  color: var(--text-on-action);
+  background: var(--ec-create-bg);
+  box-shadow: var(--ec-create-shadow);
+  font-size: 1.25rem;
+  font-weight: 950;
+}
+
+.avatar--small {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  font-size: 0.9rem;
+}
+
+.account-details,
+.insight-grid,
+.split-grid,
+.platform-grid,
+.access-user-list,
+.access-profile-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.account-details {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.account-details article,
+.compact-card,
+.language-field {
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  background: var(--surface-card);
+}
+
+.account-details article {
+  display: grid;
+  gap: 6px;
+  padding: 16px;
+}
+
+.account-details strong,
+.compact-card h3 {
+  min-width: 0;
+  color: var(--text-primary);
+  overflow-wrap: anywhere;
+}
+
+.compact-card h3 {
+  font-size: 1.1rem;
+  line-height: 1.25;
+}
+
+.access-profile-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.access-user-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(140px, 0.4fr) minmax(220px, 0.6fr);
+  gap: 14px;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  background: var(--surface-card);
+}
+
+.access-user-card__identity {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+
+.access-user-card__selector {
+  display: grid;
+  gap: 8px;
+}
+
+.access-profile-card {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  background: var(--surface-card);
+}
+
+.access-profile-card--active {
+  border-color: var(--border-strong);
+  box-shadow: var(--ec-focus-ring);
+}
+
+.access-profile-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.access-profile-card__header span,
+.permission-count {
+  color: var(--accent-color);
+  font-size: 0.75rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.access-profile-card__header strong {
+  padding: 6px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  color: var(--accent-color);
+  background: var(--ec-accent-soft);
+  font-size: 0.72rem;
+  font-weight: 950;
+}
+
+.access-profile-card h3 {
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+.access-profile-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.permission-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.permission-list li {
+  padding: 9px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-primary);
+  background: var(--field-bg);
+  font-size: 0.88rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.split-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.insight-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.compact-card {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  gap: 14px;
+  padding: 18px;
+}
+
+.compact-card > app-button,
+.danger-form {
+  align-self: end;
+}
+
+.compact-card > app-button,
+.danger-form app-button {
+  justify-self: start;
+}
+
+.compact-card--danger {
+  border-color: var(--ec-status-danger-border);
+}
+
+.platform-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+  align-items: start;
+}
+
+.language-field {
+  padding: 16px;
+}
+
+@media (max-width: 860px) {
+  .account-panel,
+  .account-details,
+  .insight-grid,
+  .split-grid,
+  .platform-grid,
+  .access-user-card,
+  .access-profile-grid {
+    grid-template-columns: 1fr;
+  }
+}

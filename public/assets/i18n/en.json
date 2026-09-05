@@ -1,0 +1,2468 @@
+{
+  "app": {
+    "name": "EnergyCore"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "userSettings": "Settings",
+    "devices": "Devices",
+    "routines": "Routines",
+    "energy": "Energy",
+    "history": "History",
+    "plans": "Plans",
+    "alerts": "Alerts",
+    "billing": "Billing",
+    "deviceGroups": "Groups",
+    "alertRules": "Alert rules",
+    "notificationPreferences": "Notifications",
+    "locations": "Sites",
+    "rooms": "Rooms",
+    "assignments": "Assignments",
+    "reports": "Reports",
+    "energyGoals": "Goals",
+    "supportTickets": "Support",
+    "maintenanceTickets": "Maintenance",
+    "operation": "Operation",
+    "energySection": "Energy",
+    "alertsSection": "Alerts",
+    "workplace": "Spaces",
+    "spaces": "Spaces",
+    "support": "Support",
+    "settings": "Settings",
+    "operationModes": "Modes",
+    "consumption": "Consumption",
+    "inbox": "Inbox",
+    "rules": "Rules",
+    "preferences": "Preferences"
+  },
+  "onboarding": {
+    "locationRequiredEyebrow": "Location required",
+    "locationRequiredTitle": "Create a location to start using this feature.",
+    "locationRequiredDescription": "You do not have a location configured yet. Create your first location to organize rooms, devices, routines, goals, alerts and reports.",
+    "createLocationAction": "Create location"
+  },
+  "auth": {
+    "loginEyebrow": "Welcome back",
+    "loginTitle": "Login",
+    "loginSubtitle": "Access your EnergyCore dashboard to manage devices, routines and energy consumption.",
+    "registerEyebrow": "Create access",
+    "registerTitle": "Register",
+    "registerSubtitle": "Create your EnergyCore account to start managing smart energy devices.",
+    "email": "Email",
+    "password": "Password",
+    "fullName": "Full name",
+    "signIn": "Sign In",
+    "signUp": "Create account",
+    "createAccount": "Create account",
+    "backToLogin": "Back to login",
+    "logout": "Logout",
+    "sessionExpired": "Your session expired due to inactivity.",
+    "signInError": "Could not sign in. Check your email and password.",
+    "signUpError": "Could not register the user.",
+    "emailAlreadyExists": "This email is already registered.",
+    "fullNameRequired": "Enter your full name.",
+    "invalidEmail": "Enter a valid email address.",
+    "invalidEmailProvider": "Only Gmail, Outlook or Hotmail emails are allowed.",
+    "passwordTooShort": "The password must be at least 8 characters long.",
+    "forgotPassword": "Forgot password?",
+    "recoverPasswordEyebrow": "Account recovery",
+    "recoverPasswordTitle": "Recover password",
+    "recoverPasswordSubtitle": "Enter your email and we will send you recovery instructions.",
+    "sendRecoveryEmail": "Send recovery email",
+    "recoverPasswordSent": "Recovery email sent successfully.",
+    "recoverPasswordError": "Could not send the recovery email.",
+    "resetPasswordEyebrow": "Account security",
+    "resetPasswordTitle": "Reset password",
+    "resetPasswordSubtitle": "Create a new password using the secure link you received.",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "resetPasswordAction": "Save new password",
+    "resetPasswordSuccess": "Password updated successfully.",
+    "resetPasswordError": "Could not reset the password.",
+    "resetPasswordTokenRequired": "The recovery link is not valid or is incomplete.",
+    "passwordsDoNotMatch": "Passwords do not match.",
+    "profileUpdated": "Profile updated successfully.",
+    "profileUpdateError": "Could not update the profile.",
+    "deleteAccountError": "Could not delete the account.",
+    "deleteAccountConfirmationError": "The confirmation text is not valid."
+  },
+  "home": {
+    "eyebrow": "Smart energy",
+    "title": "Control your energy with EnergyCore",
+    "content": "Monitor devices, automate routines and review energy consumption from a modern platform.",
+    "manageDevices": "Manage devices",
+    "viewEnergy": "View energy",
+    "cardDevices": "Devices",
+    "cardRoutines": "Routines",
+    "cardConsumption": "Current consumption",
+    "cardAlerts": "Alerts",
+    "activeDevices": "active devices",
+    "enabledRoutines": "enabled routines",
+    "averageConsumption": "Average",
+    "unreadAlerts": "unread alerts",
+    "energyOverview": "Energy overview",
+    "subscriptionOverview": "Subscription overview",
+    "alertOverview": "Alert overview",
+    "openEnergyDashboard": "Open energy dashboard",
+    "openPlans": "View plans",
+    "openAlerts": "View alerts",
+    "noPlanDescription": "Select a plan to activate EnergyCore benefits.",
+    "alertDescription": "Review consumption alerts, automation notices and important system events.",
+    "setupHint": "Select or create a site to focus Home.",
+    "setupEmpty": "Home activates when a site exists.",
+    "setupGuide": {
+      "ariaLabel": "Initial installation guide",
+      "eyebrow": "First use",
+      "title": "Installation guide",
+      "description": "Complete these steps so the account is ready with site, room, equipment, assignment and routine.",
+      "progressLabel": "complete",
+      "steps": {
+        "site": {
+          "title": "Create site",
+          "description": "Define the home, business or branch where operation will be measured."
+        },
+        "room": {
+          "title": "Create room",
+          "description": "Organize equipment by real rooms before assigning it."
+        },
+        "device": {
+          "title": "Connect equipment",
+          "description": "Register or pair a device to start control."
+        },
+        "assignment": {
+          "title": "Assign to room",
+          "description": "Link the equipment with an active site and room."
+        },
+        "routine": {
+          "title": "Activate routine",
+          "description": "Schedule an automatic action to validate the installation."
+        }
+      }
+    },
+    "operationalCenterTitle": "Operations center",
+    "operationalCenterDescription": "Summary view of the active site, its spaces, operation, consumption, alerts, and service.",
+    "loadingEyebrow": "Loading",
+    "loadingTitle": "Syncing operational information",
+    "loadingDescription": "We are reading sites, rooms, devices, energy, goals, alerts, and service.",
+    "mainSummaryAria": "Main summary",
+    "activeSiteEyebrow": "Active site",
+    "noActiveSite": "No active site",
+    "noRegisteredLocation": "No registered location",
+    "go": "Go",
+    "noSitesTitle": "No sites configured",
+    "noSitesDescription": "Create a site to organize rooms, devices, and consumption by context.",
+    "consumption": "Consumption",
+    "generalStatusEyebrow": "Overall status",
+    "siteSummaryTitle": "Site summary",
+    "noOperationalContextTitle": "No operational context",
+    "siteSummaryDescription": "Data calculated from the elements assigned to the active site.",
+    "missingSiteTitle": "A site is required",
+    "missingSiteDescription": "The operational summary needs an active site.",
+    "criticalAlerts": "Critical alerts",
+    "openSupport": "Open support",
+    "siteRoomsTitle": "Site rooms",
+    "roomsRegisteredDescription": "{{count}} room(s) registered in the active context.",
+    "noActiveSiteRoomsDescription": "Create or select a site to view rooms.",
+    "noRoomsTitle": "No rooms",
+    "noRoomsDescription": "Create rooms to place devices in real zones.",
+    "withDevices": "With devices",
+    "withoutDevices": "Without devices",
+    "averageDevicesShort": "Avg. dev.",
+    "assignedEquipmentTitle": "Assigned equipment",
+    "assignedEquipmentDescription": "Totals, active devices, and consumption come from devices linked to the site.",
+    "noAssignedDevicesTitle": "No assigned devices",
+    "noAssignedDevicesDescription": "Register or assign equipment to feed consumption, groups, and routines.",
+    "groupSetsTitle": "Sets",
+    "groupsDescription": "Devices grouped by use or zone.",
+    "noGroupsTitle": "No groups",
+    "noGroupsDescription": "Create groups to operate several devices together.",
+    "deviceCountShort": "{{count}} dev.",
+    "moreGroups": "+{{count}} more in groups",
+    "scheduledAlarmsTitle": "Scheduled alarms",
+    "scheduledAlarmsDescription": "Global actions enabled for the site.",
+    "noActiveRoutinesTitle": "No active routines",
+    "noActiveRoutinesDescription": "Schedule hourly actions for devices, groups, or rooms.",
+    "moreRoutines": "+{{count}} more in routines",
+    "activeModeTitle": "Active mode",
+    "activeModeDescription": "Site-specific operational configuration.",
+    "affectedDevices": "{{count}} affected device(s)",
+    "noActiveModeTitle": "No active mode",
+    "noActiveModeDescription": "Active site modes will appear here.",
+    "createMode": "Create mode",
+    "energyRecordedTitle": "Recorded energy",
+    "energyRecordedDescription": "Real readings associated with assigned devices.",
+    "noReadingsTitle": "No readings",
+    "noReadingsDescription": "When energy readings exist, the summary will appear here.",
+    "today": "Today",
+    "readings": "Readings",
+    "peak": "Peak",
+    "goalsEyebrow": "Goals",
+    "activeGoalsTitle": "Active goals",
+    "activeGoalsDescription": "Current goals filtered by site, room, group, or device.",
+    "noActiveGoalsTitle": "No active goals",
+    "noActiveGoalsDescription": "Create goals to compare consumption against real targets.",
+    "recentInboxTitle": "Recent inbox",
+    "recentInboxDescription": "Alerts related to the site and its elements.",
+    "noRecentAlertsTitle": "No recent alerts",
+    "noRecentAlertsDescription": "There are no alerts to show for this site.",
+    "criticalCount": "Critical: {{count}}",
+    "accountSupportTitle": "Account support",
+    "accountSupportDescription": "Open tickets and maintenance related to devices in the site.",
+    "noOpenTicketsTitle": "No open tickets",
+    "noOpenTicketsDescription": "Support or maintenance cases will appear here when they exist.",
+    "createSupport": "Create support",
+    "noRoom": "No room",
+    "roomNumber": "Room #{{id}}",
+    "deviceStatusOn": "ON",
+    "deviceStatusOff": "OFF",
+    "locationTypes": {
+      "home": "Home",
+      "business": "Business",
+      "branch": "Branch"
+    },
+    "alertLevels": {
+      "success": "Success",
+      "stable": "Stable",
+      "info": "Neutral",
+      "warning": "Warning",
+      "critical": "Critical"
+    }
+  },
+  "about": {
+    "eyebrow": "EnergyCore in context",
+    "title": "A platform for organizing energy, spaces and decisions",
+    "subtitle": "EnergyCore helps use energy with more clarity: organize sites and rooms, control devices, automate routines and modes, review consumption, goals, alerts, service, billing and preferences from one place.",
+    "actions": {
+      "home": "Go to Home",
+      "spaces": "Go to Spaces",
+      "energy": "Go to Energy"
+    },
+    "heroSignals": {
+      "order": {
+        "label": "Order",
+        "title": "Spaces before actions",
+        "description": "The platform works better when you first define real sites, rooms and assignments."
+      },
+      "control": {
+        "label": "Control",
+        "title": "Devices with context",
+        "description": "Devices, groups, routines and modes are easier to understand through the place and daily use they represent."
+      },
+      "clarity": {
+        "label": "Clarity",
+        "title": "Visible energy",
+        "description": "Consumption, reports and goals depend on real readings to guide better decisions."
+      }
+    },
+    "what": {
+      "eyebrow": "What it is",
+      "title": "EnergyCore connects spaces, devices and energy",
+      "description": "It is not a decorative screen or an isolated list of actions. It is a platform for managing spaces, controlling equipment, creating useful automations, reviewing consumption, receiving alerts and following service, maintenance, billing and preferences.",
+      "points": {
+        "spaces": "Sites, rooms and assignments as the base of the system.",
+        "control": "Devices, groups, routines and modes for daily operation.",
+        "energy": "Consumption, history, reports and goals based on available information.",
+        "care": "Alerts, rules, service and preferences to act with order."
+      }
+    },
+    "values": {
+      "mission": {
+        "eyebrow": "Mission",
+        "title": "Help use energy with order, control and clarity",
+        "description": "EnergyCore is designed for homes, small sites and medium spaces that need to know where their equipment is, how it is used and what decisions to make to consume better."
+      },
+      "vision": {
+        "eyebrow": "Vision",
+        "title": "An intelligent, ordered and preventive energy platform",
+        "description": "The vision is to grow as a tool that connects operation, consumption, alerts and service with increasing precision, while staying transparent about what is truly available."
+      }
+    },
+    "daily": {
+      "eyebrow": "Daily use",
+      "title": "A practical flow for operating EnergyCore",
+      "description": "The recommended use starts from the physical space and moves toward control, automation, energy review and follow-up.",
+      "items": {
+        "site": {
+          "title": "Choose or create an active site",
+          "description": "Work from a clear site so rooms, devices and actions have context."
+        },
+        "rooms": {
+          "title": "Organize rooms",
+          "description": "Use real rooms to place equipment and keep the operational map understandable."
+        },
+        "devices": {
+          "title": "Review devices",
+          "description": "Turn equipment on or off and validate its state from operation views."
+        },
+        "groups": {
+          "title": "Group by use",
+          "description": "Create semantic groups such as lighting, climate or critical equipment to act on sets."
+        },
+        "routines": {
+          "title": "Schedule repeatable routines",
+          "description": "Use routines for frequent schedules and avoid duplicating manual actions every day."
+        },
+        "mode": {
+          "title": "Apply complete modes",
+          "description": "Modes help activate full situations, such as saving, night or work, with internal routines."
+        },
+        "energy": {
+          "title": "Review consumption",
+          "description": "Use the dashboard and history to understand available energy behavior."
+        },
+        "goals": {
+          "title": "Compare goals",
+          "description": "Use energy goals to measure progress against targets defined by scope."
+        },
+        "alerts": {
+          "title": "Handle alerts",
+          "description": "Read visible alerts and use clear rules to prevent issues or out-of-range consumption."
+        },
+        "service": {
+          "title": "Follow service",
+          "description": "Register support or maintenance when you need a record and status progress."
+        },
+        "billing": {
+          "title": "Review billing and preferences",
+          "description": "Check plan, payments, profile and available preferences without assuming external functions that are not visible."
+        }
+      }
+    },
+    "recommendations": {
+      "eyebrow": "Real recommendations",
+      "title": "How to get value without overconfiguring",
+      "description": "EnergyCore works better when names, scopes and rules reflect the real operation.",
+      "items": {
+        "site": {
+          "title": "Create the site first",
+          "description": "The active site prevents the rest of the data from becoming loose or hard to read."
+        },
+        "rooms": {
+          "title": "Define rooms before operating",
+          "description": "A well-named room helps find devices, routines and maintenance."
+        },
+        "assignments": {
+          "title": "Assign devices carefully",
+          "description": "Correct assignment improves control and avoids confusion when there are many devices."
+        },
+        "groups": {
+          "title": "Use semantic groups",
+          "description": "Group by real function, not only by temporary convenience."
+        },
+        "routines": {
+          "title": "Routines for repeated schedules",
+          "description": "If an action happens often, a routine is usually better than repeating it manually."
+        },
+        "modes": {
+          "title": "Modes for complete situations",
+          "description": "A mode should represent a full operational scene, not a single isolated action."
+        },
+        "energy": {
+          "title": "Review energy and goals together",
+          "description": "Consumption explains the present; goals help decide what to change."
+        },
+        "alerts": {
+          "title": "Use alerts to prevent",
+          "description": "Alerts are more useful when reviewed on time and tied to a clear action."
+        },
+        "rules": {
+          "title": "Do not overdo rules",
+          "description": "A few well-defined rules are usually more useful than many rules that are hard to maintain."
+        },
+        "names": {
+          "title": "Clear names",
+          "description": "Avoid ambiguous names. A good name reduces errors in operation and follow-up."
+        }
+      }
+    },
+    "capabilities": {
+      "eyebrow": "What it already does well",
+      "title": "Capabilities connected in the experience",
+      "description": "These areas already exist in the platform and are presented as available functions, not future promises.",
+      "items": {
+        "spaces": {
+          "eyebrow": "Spaces",
+          "title": "Sites, rooms and assignments",
+          "description": "Organizes the physical base on which operation is controlled."
+        },
+        "control": {
+          "eyebrow": "Operation",
+          "title": "Devices, groups and routines",
+          "description": "Operates equipment, groups it and schedules repeatable actions."
+        },
+        "modes": {
+          "eyebrow": "Modes",
+          "title": "Situations with internal routines",
+          "description": "Organizes complete actions for concrete moments of the day."
+        },
+        "energy": {
+          "eyebrow": "Energy",
+          "title": "Consumption, history, reports and goals",
+          "description": "Reads available energy information and compares it with targets."
+        },
+        "alerts": {
+          "eyebrow": "Alerts",
+          "title": "Inbox, rules and visible preferences",
+          "description": "Reviews alerts and adjusts rules or visible preferences in the experience."
+        },
+        "service": {
+          "eyebrow": "Service",
+          "title": "Support and maintenance",
+          "description": "Creates requests and advances their state without adding unavailable actions."
+        },
+        "settings": {
+          "eyebrow": "Account",
+          "title": "Profile, billing and settings",
+          "description": "Reviews user information, plan, payments and available preferences."
+        }
+      }
+    },
+    "careful": {
+      "eyebrow": "Use with judgment",
+      "title": "Where transparency matters",
+      "description": "Some parts depend on real data, clear rules or information available by plan. That is why they are shown with honest scope.",
+      "items": {
+        "automation": {
+          "title": "Automations",
+          "description": "They should be created with clear schedules and scopes to avoid unexpected actions."
+        },
+        "alerts": {
+          "title": "Alerts and rules",
+          "description": "They work better with understandable ranges and a few rules that are easy to review."
+        },
+        "reports": {
+          "title": "Reports",
+          "description": "Report value depends on real readings and well-chosen filters."
+        },
+        "billing": {
+          "title": "Billing",
+          "description": "Visible information depends on the plan, payments and history available inside the platform."
+        }
+      }
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "content": "The route you entered does not exist or was moved.",
+    "goHome": "Go home"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  },
+  "devices": {
+    "eyebrow": "Device control",
+    "title": "Smart device control",
+    "subtitle": "Manage smart plugs, switches and lights from a centralized view.",
+    "total": "Total",
+    "active": "Active",
+    "currentWatts": "Current consumption",
+    "addTitle": "Add device",
+    "name": "Name",
+    "room": "Room",
+    "type": "Type",
+    "power": "Power in watts",
+    "create": "Create device",
+    "connect": "Connect equipment",
+    "rename": "Edit",
+    "renameTitle": "Edit device name",
+    "turnOn": "Turn on",
+    "turnOff": "Turn off",
+    "emptyTitle": "No devices yet",
+    "emptyContent": "Add your first smart plug, switch or light to get started.",
+    "loadError": "Could not load devices.",
+    "createError": "Could not create device.",
+    "pairError": "Could not connect equipment.",
+    "updateError": "Could not update device.",
+    "deleteError": "Could not delete device.",
+    "planLimitReached": "You have reached the device limit allowed by your plan.",
+    "createSuccess": "Device created successfully.",
+    "pageDescription": "Control the equipment assigned to the active site and register new operational devices by room.",
+    "activeSiteFallback": "active site",
+    "noRoom": "No room",
+    "go": "Go",
+    "summary": {
+      "assignedTitle": "Assigned",
+      "onTitle": "On",
+      "offDevices": "{{count}} off.",
+      "consumptionEyebrow": "Consumption",
+      "currentTitle": "Current",
+      "activePowerDescription": "Active power for this site."
+    },
+    "toolbar": {
+      "eyebrow": "Daily control",
+      "title": "Equipment by room",
+      "description": "Turn devices on, off, or delete them with real impact warnings."
+    },
+    "emptyRooms": {
+      "title": "No rooms in the active site",
+      "description": "Create a room before registering operational devices."
+    },
+    "emptyAssigned": {
+      "title": "No assigned devices",
+      "description": "Register a new device or review assignments for the active site."
+    },
+    "form": {
+      "eyebrow": "New device",
+      "description": "Register real equipment, its room, and nominal power.",
+      "namePlaceholder": "E.g. Main light",
+      "wattsLabel": "Device watts"
+    },
+    "pair": {
+      "eyebrow": "Pairing",
+      "description": "Enter the equipment code and EnergyCore will register it in the selected room.",
+      "code": "Equipment code",
+      "codePlaceholder": "EC-PLUG-100",
+      "alias": "Visible name",
+      "aliasPlaceholder": "E.g. Coffee maker plug",
+      "availableTitle": "Available equipment",
+      "options": {
+        "plug": "Smart plug",
+        "light": "Smart light",
+        "sensor": "Motion sensor",
+        "switch": "Smart switch"
+      }
+    },
+    "renameForm": {
+      "eyebrow": "Existing device",
+      "description": "Update the visible device name without changing its room, type or power."
+    },
+    "powerAdvice": {
+      "highTitle": "High consumption",
+      "normalTitle": "Controlled monitoring",
+      "highMessage": "For {{type}}, this value is considered high. If the device reports usage equal to or greater than {{watts}} W, EnergyCore should mark it as high consumption and may generate an alert.",
+      "normalMessage": "Enter only the nominal watts for {{type}}. EnergyCore calculates kWh and cost with those W and real on-time."
+    },
+    "status": {
+      "on": "On",
+      "off": "Off",
+      "maintenance": "Maintenance",
+      "removed": "Removed",
+      "unknown": "No status"
+    },
+    "card": {
+      "activeConsumption": "Active consumption",
+      "standby": "Standby",
+      "currentConsumptionDescription": "Current device consumption",
+      "noActiveConsumption": "No active consumption"
+    },
+    "validation": {
+      "nameRequired": "Enter the device name.",
+      "nameMinLength": "The device name must have at least 3 characters.",
+      "pairingCodeRequired": "Enter the equipment code.",
+      "roomRequired": "Select a room in the active site.",
+      "powerRequired": "Device power must be greater than 0 W.",
+      "roomRequiredBeforePreset": "Create a room in the active site before adding devices."
+    },
+    "toasts": {
+      "createdAndAssigned": "Device created and assigned to {{room}}.",
+      "createdWithoutAssignment": "Device created, but it could not be assigned to the active room.",
+      "pairedAndAssigned": "{{device}} connected and assigned to {{room}}.",
+      "pairedWithoutAssignment": "Equipment connected, but it could not be assigned to the active room.",
+      "presetCreatedAndAssigned": "{{device}} added and assigned to {{room}}.",
+      "presetCreatedWithoutAssignment": "{{device}} was created, but it could not be assigned to the active room.",
+      "presetCreateError": "Could not add {{device}}.",
+      "turnedOn": "Device turned on.",
+      "turnedOff": "Device turned off.",
+      "renamed": "Device name updated.",
+      "deletedHistoryKept": "Device deleted; history is kept.",
+      "removedRoutineSingular": "Its associated routine was also removed.",
+      "removedRoutinePlural": "{{count}} associated routines were also removed."
+    },
+    "deleteFallbackDevice": "This device",
+    "deleteWarnings": {
+      "groupsTitle": "Review groups",
+      "groupSingular": "{{device}} belongs to the group {{group}}. If you delete it, that group will lose this device.",
+      "groupPlural": "{{device}} belongs to {{count}} groups. If you delete it, those groups will lose this device.",
+      "routinesTitle": "Review routines",
+      "routineSingular": "{{device}} has one associated routine. If you delete {{device}}, its routine will disappear.",
+      "routinePlural": "{{device}} has {{count}} associated routines. If you delete {{device}}, its routines will disappear.",
+      "modesTitle": "Review modes",
+      "modeSingular": "{{device}} is related to an existing mode. Deleting it may affect that configuration.",
+      "modePlural": "{{device}} is related to {{count}} existing modes. Deleting it may affect those configurations.",
+      "deleteTitle": "Delete device",
+      "deleteMessage": "{{device}} will be deleted. This action does not affect already registered historical data."
+    }
+  },
+  "routines": {
+    "eyebrow": "Automation",
+    "title": "Automatic routines",
+    "subtitle": "Schedule actions to turn smart devices on or off based on defined times.",
+    "total": "Total",
+    "active": "Active",
+    "inactive": "Inactive",
+    "addTitle": "Create routine",
+    "name": "Name",
+    "device": "Device",
+    "selectDevice": "Select a device",
+    "action": "Action",
+    "time": "Time",
+    "create": "Create routine",
+    "enable": "Enable",
+    "disable": "Disable",
+    "emptyTitle": "No routines yet",
+    "emptyContent": "Create a routine to automate your devices.",
+    "loadError": "Could not load routines.",
+    "createError": "Could not create routine.",
+    "updateError": "Could not update routine.",
+    "deleteError": "Could not delete routine.",
+    "conflictError": "There is already an active routine for that device at the same time.",
+    "planLimitReached": "You have reached the routine limit allowed by your plan.",
+    "createSuccess": "Routine created successfully.",
+    "pageDescription": "Schedule operational alarms for devices, groups, rooms, or sites.",
+    "createOperationalSuccess": "Routine created as an operational alarm.",
+    "summary": {
+      "scheduled": "Scheduled",
+      "inActiveSite": "in the active site.",
+      "pausedCount": "{{count}} paused.",
+      "newRoutine": "New routine"
+    },
+    "toolbar": {
+      "eyebrow": "Scheduled alarms",
+      "title": "Global routines",
+      "description": "These routines are independent from internal mode routines."
+    },
+    "emptyScheduledTitle": "No scheduled routines",
+    "emptyScheduledDescription": "Create an operational alarm to turn targets on or off at a defined time.",
+    "targetTypes": {
+      "device": "Device",
+      "group": "Group",
+      "room": "Room",
+      "workplace": "Site"
+    },
+    "targetTypeDescriptions": {
+      "device": "Routine for a single device",
+      "group": "Routine for multiple devices",
+      "room": "Routine for the devices in one room",
+      "workplace": "Routine for a complete energy center"
+    },
+    "targetOptions": {
+      "deviceCount": "{{count}} devices"
+    },
+    "actions": {
+      "turnOn": "Turn on",
+      "turnOff": "Turn off"
+    },
+    "actionDescriptions": {
+      "turnOn": "Enable automatically",
+      "turnOff": "Disable automatically"
+    },
+    "repeat": {
+      "once": "Once",
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "customInterval": "Every X days"
+    },
+    "repeatDescriptions": {
+      "once": "Run only on the selected date",
+      "daily": "Repeat every day",
+      "weekly": "Choose specific days",
+      "customInterval": "Repeat by interval"
+    },
+    "weekDays": {
+      "mon": "Monday",
+      "tue": "Tuesday",
+      "wed": "Wednesday",
+      "thu": "Thursday",
+      "fri": "Friday",
+      "sat": "Saturday",
+      "sun": "Sunday",
+      "monShort": "Mon",
+      "tueShort": "Tue",
+      "wedShort": "Wed",
+      "thuShort": "Thu",
+      "friShort": "Fri",
+      "satShort": "Sat",
+      "sunShort": "Sun"
+    },
+    "placeholders": {
+      "device": "Select a device",
+      "group": "Select a group",
+      "room": "Select a room",
+      "workplace": "Select a site"
+    },
+    "form": {
+      "description": "Define target, action, schedule, and repetition as a global alarm.",
+      "namePlaceholder": "E.g. Turn off night lights",
+      "target": "Target",
+      "targetTypePlaceholder": "Target type",
+      "repetition": "Repetition",
+      "scheduledTime": "Scheduled time",
+      "days": "Days",
+      "weeklyDaysAria": "Weekly repetition days",
+      "everyDays": "Every how many days",
+      "daysSuffix": "days"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "paused": "Paused"
+    },
+    "card": {
+      "time": "Time",
+      "detailsAria": "Routine details",
+      "applicable": "Applicable",
+      "blocked": "Blocked",
+      "onceWithDate": "Once - {{date}}",
+      "everyDays": "Every {{count}} day(s)",
+      "weeklyWithDays": "Weekly - {{days}}",
+      "weeklyGeneric": "weekly",
+      "weeklyDaysText": "on {{days}}",
+      "waitingOnceDate": "Scheduled for {{date}} at {{time}}.",
+      "waitingOnce": "Scheduled for a one-time run at {{time}}.",
+      "waitingWeekly": "Will run {{days}} at {{time}}.",
+      "waitingInterval": "Will repeat every {{count}} day(s) at {{time}}.",
+      "waitingDaily": "Will repeat every day at {{time}}.",
+      "pausedOnceDate": "Paused. It will not run on {{date}}.",
+      "pausedWeekly": "Paused. Weekly repetition is suspended.",
+      "pausedInterval": "Paused. Interval repetition is suspended.",
+      "pausedDaily": "Paused. Daily repetition is suspended."
+    },
+    "validation": {
+      "activeSiteRequired": "Select an active site before creating routines.",
+      "weeklyDayRequired": "Select at least one day for the weekly routine."
+    },
+    "conflict": {
+      "title": "Review routine",
+      "message": "There is already an active routine with the same target, time, and action. You can continue if you want to repeat that schedule."
+    },
+    "delete": {
+      "title": "Delete routine",
+      "message": "{{name}} will be deleted. The schedule will stop running.",
+      "fallbackName": "this routine"
+    },
+    "toasts": {
+      "activated": "Routine activated.",
+      "paused": "Routine paused.",
+      "deleted": "Routine deleted."
+    },
+    "list": {
+      "empty": "You do not have routines yet.",
+      "groupFallback": "Group #{{id}}",
+      "deviceFallback": "Device #{{id}}"
+    }
+  },
+  "energy": {
+    "eyebrow": "Energy monitoring",
+    "title": "Energy consumption monitoring",
+    "subtitle": "Visualize your device consumption, filter history and export readings for analysis.",
+    "exportCsv": "Export CSV",
+    "totalWatts": "Total watts",
+    "averageWatts": "Average",
+    "highestReading": "Peak usage",
+    "startDate": "Start date",
+    "endDate": "End date",
+    "filter": "Filter",
+    "reset": "Reset",
+    "recommendationTitle": "Savings recommendation",
+    "analytics": "Analytics",
+    "chartTitle": "Consumption history",
+    "emptyReadings": "No energy readings available.",
+    "loadError": "Could not load energy readings.",
+    "noDataRecommendation": "There is not enough data yet to generate a recommendation.",
+    "highRecommendation": "Your energy consumption is high. Review your highest-consuming devices.",
+    "moderateRecommendation": "Your energy consumption is moderate. Review peak hours to improve savings.",
+    "lowRecommendation": "Your energy consumption remains low. Keep optimizing your routines.",
+    "exportNotAllowed": "Your current plan does not allow CSV report exports.",
+    "highReadings": "High readings",
+    "invalidDateRange": "The selected date range is not valid.",
+    "exportSuccess": "CSV exported successfully."
+  },
+  "history": {
+    "eyebrow": "Energy history",
+    "title": "Consumption history",
+    "subtitle": "Review registered readings, detect consumption peaks and export information for reports.",
+    "registeredReadings": "Registered readings",
+    "records": "records",
+    "device": "Device",
+    "watts": "Watts",
+    "date": "Date",
+    "status": "Status",
+    "high": "High",
+    "normal": "Normal",
+    "filterTitle": "Filter readings",
+    "filterDescription": "Select a date range to review registered energy consumption.",
+    "registeredReadingsDescription": "Energy reading history ordered by registration date.",
+    "advancedFiltersAria": "Advanced history filters",
+    "scope": {
+      "label": "Scope",
+      "active": "Active site",
+      "activeDescription": "Only readings from {{site}}",
+      "activeFallbackDescription": "Use the site selected on Home",
+      "global": "Global",
+      "globalDescription": "All readings kept for the user"
+    },
+    "scopeSummary": {
+      "global": "Global history across all your sites.",
+      "noActiveSite": "Select an active site to view its readings.",
+      "activeSite": "History isolated by active site: {{site}}."
+    },
+    "deviceNamePlaceholder": "Device name",
+    "deviceId": "Device ID",
+    "deviceIdPlaceholder": "E.g. 3",
+    "readingId": "Reading ID",
+    "readingIdPlaceholder": "E.g. 15",
+    "minWatts": "Min. watts",
+    "maxWatts": "Max. watts",
+    "sortBy": "Sort by",
+    "clearFilters": "Clear filters",
+    "emptyEyebrow": "No readings",
+    "emptyTitle": "No readings found",
+    "emptyDescription": "Adjust the filters to review other energy consumption records.",
+    "energy": "Energy",
+    "estimatedCost": "Estimated cost",
+    "time": "Time",
+    "interval": "Interval",
+    "readingMeta": "ID #{{deviceId}} - Reading #{{readingId}}",
+    "showing": "Showing",
+    "of": "of",
+    "readings": "readings",
+    "pageOf": "Page {{page}} of {{total}}",
+    "previous": "Previous",
+    "next": "Next",
+    "startDate": "Start date",
+    "endDate": "End date",
+    "reset": "Reset",
+    "statusOptions": {
+      "all": "All",
+      "normal": "Normal",
+      "high": "High"
+    },
+    "sortOptions": {
+      "newest": "Newest first",
+      "oldest": "Oldest first",
+      "wattsDesc": "Highest consumption",
+      "wattsAsc": "Lowest consumption",
+      "costDesc": "Highest cost"
+    },
+    "toasts": {
+      "exportSuccess": "History exported.",
+      "exportError": "Could not export history."
+    },
+    "emptyValues": {
+      "noDate": "No date",
+      "noTime": "No time",
+      "undefined": "Undefined"
+    }
+  },
+  "billing": {
+    "eyebrow": "Billing",
+    "title": "Service plans",
+    "subtitle": "Choose the plan that best fits your home, business or multiple locations. There is no free plan; all plans are oriented to real operation.",
+    "month": "month",
+    "subscribe": "Subscribe",
+    "selected": "Selected",
+    "currentPlan": "Current plan",
+    "activeSubscription": "Active subscription",
+    "noPlan": "No plan",
+    "cancel": "Cancel plan",
+    "loadError": "Could not load plan information.",
+    "subscribeError": "Could not process the subscription.",
+    "cancelError": "Could not cancel the subscription.",
+    "alreadySubscribed": "You are already subscribed to this plan.",
+    "paymentEyebrow": "Payment confirmation",
+    "paymentTitle": "Confirm payment method",
+    "selectedPlan": "Selected plan",
+    "amountToPay": "Amount to pay",
+    "holderName": "Cardholder name",
+    "cardNumber": "Card number",
+    "expirationDate": "Expiration date",
+    "cvv": "CVV",
+    "confirmPayment": "Confirm payment",
+    "cancelPayment": "Cancel",
+    "invalidCardNumber": "The card number is not valid.",
+    "invalidCvv": "The CVV is not valid.",
+    "invalidHolderName": "Enter the cardholder name.",
+    "lastPayment": "Last payment",
+    "recommended": "RECOMMENDED",
+    "choosePlan": "Choose plan",
+    "activePlanBadge": "Active plan",
+    "summaryStarterLabel": "Small homes",
+    "summaryStarterText": "Ideal to start with basic monitoring and simple alerts.",
+    "summaryProfessionalLabel": "Recommended",
+    "summaryProfessionalText": "The best option for advanced homes and small businesses.",
+    "summaryEnterpriseLabel": "Multiple locations",
+    "summaryEnterpriseText": "Built for teams, locations and business operations.",
+    "maxDevices": "Up to {{ count }} devices",
+    "maxRoutines": "Up to {{ count }} routines",
+    "reportExportEnabled": "Report export",
+    "planUsage": {
+      "STARTER": "For small homes",
+      "PROFESSIONAL": "For advanced homes and small businesses",
+      "ENTERPRISE": "For multiple business locations"
+    },
+    "planDescriptions": {
+      "STARTER": "Basic energy management for small homes.",
+      "PROFESSIONAL": "Advanced control for homes and small businesses.",
+      "ENTERPRISE": "Complete platform for multiple business locations."
+    },
+    "planFeatures": {
+      "STARTER": {
+        "devices": "Up to 5 smart devices",
+        "dashboard": "Basic energy dashboard",
+        "alerts": "Email alerts"
+      },
+      "PROFESSIONAL": {
+        "devices": "Up to 20 smart devices",
+        "analytics": "Advanced energy analytics",
+        "routines": "Automation routines",
+        "reports": "Monthly reports"
+      },
+      "ENTERPRISE": {
+        "locations": "Multiple business locations",
+        "accessProfiles": "Access profiles for staff",
+        "alerts": "Advanced alerts",
+        "support": "Priority support"
+      }
+    },
+    "historyEyebrow": "Billing history",
+    "historyTitle": "Billing history",
+    "historySubtitle": "Review your payments, invoices and current subscription status.",
+    "invoices": "Invoices",
+    "invoice": "Invoice",
+    "issuedAt": "Issued at",
+    "status": "Status",
+    "downloadInvoice": "Download invoice",
+    "emptyInvoicesTitle": "No invoices yet",
+    "emptyInvoicesContent": "Your invoices will appear here after your payments are processed.",
+    "subscribeSuccess": "Subscription activated successfully.",
+    "cancelSuccess": "Subscription cancelled successfully.",
+    "invalidExpirationDate": "The expiration date is not valid.",
+    "invoiceNotFound": "Invoice not found."
+  },
+  "alerts": {
+    "eyebrow": "Alert center",
+    "title": "System alerts",
+    "subtitle": "View important events, consumption alerts and operational notifications from EnergyCore.",
+    "total": "Total",
+    "unreadCount": "Unread",
+    "createTitle": "Create alert",
+    "alertTitle": "Title",
+    "message": "Message",
+    "level": "Level",
+    "create": "Create alert",
+    "unread": "Unread",
+    "markAsRead": "Mark as read",
+    "emptyTitle": "No alerts",
+    "emptyContent": "When an important event occurs, it will appear in this section.",
+    "loadError": "Could not load alerts.",
+    "createError": "Could not create alert.",
+    "markAsReadError": "Could not mark alert as read.",
+    "planLimitReached": "You have reached the alert limit allowed by your plan.",
+    "criticalCount": "Critical",
+    "createSuccess": "Alert created successfully.",
+    "deleteError": "Could not delete the alert.",
+    "inboxSubtitle": "Review active alerts, important events, and notifications allowed by your preferences.",
+    "summaryAria": "Visible alerts summary",
+    "refresh": "Refresh",
+    "hiddenByPreferences": "{{count}} alerts are outside the inbox because of your current preferences.",
+    "markAsReadSuccess": "Alert marked as read.",
+    "deleteSuccess": "Alert deleted.",
+    "dismissSuccess": "Alert silenced for {{minutes}} minutes.",
+    "dismissError": "Could not silence the alert.",
+    "read": "Read",
+    "dismissForMinutes": "Silence {{minutes}} min",
+    "severityCalibration": "Severity calibration",
+    "calibration": "Calibration",
+    "viewDetails": "View details",
+    "recommendedAction": "Suggested action",
+    "summary": {
+      "visibleInboxOnly": "Inbox-visible only",
+      "withoutSilenced": "Without silenced"
+    },
+    "toolbar": {
+      "title": "Real alerts",
+      "description": "Shows active alerts saved for your user and allowed by your output preferences."
+    },
+    "filters": {
+      "all": "All",
+      "unread": "Unread",
+      "stable": "Stable",
+      "success": "Achievements",
+      "info": "Informational",
+      "warning": "Attention",
+      "critical": "Critical"
+    },
+    "levels": {
+      "stable": "Stable",
+      "success": "Success",
+      "info": "Info",
+      "warning": "Attention",
+      "critical": "Critical"
+    },
+    "severityDescriptions": {
+      "stable": "Within range",
+      "success": "Low impact",
+      "info": "Normal follow-up",
+      "warning": "Preventive attention",
+      "critical": "Immediate attention",
+      "default": "Follow-up"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "saveChanges": "Save changes",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "keep": "Keep",
+    "ok": "OK"
+  },
+  "profile": {
+    "eyebrow": "User profile",
+    "title": "My profile",
+    "subtitle": "Manage your personal information and account settings.",
+    "personalData": "Personal data",
+    "saveChanges": "Save changes",
+    "deleteAccount": "Delete account",
+    "deleteAccountWarning": "This action is permanent and cannot be undone.",
+    "deleteConfirmation": "Type DELETE to confirm."
+  },
+  "deviceGroups": {
+    "eyebrow": "Device groups",
+    "title": "Device groups",
+    "subtitle": "Organize devices into groups and execute actions on them together.",
+    "addTitle": "Create device group",
+    "name": "Name",
+    "description": "Description",
+    "create": "Create group",
+    "createSuccess": "Device group created successfully.",
+    "createError": "Could not create the device group.",
+    "updateError": "Could not update the device group.",
+    "deleteError": "Could not delete the device group.",
+    "executeSuccess": "Group action executed successfully.",
+    "executeError": "Could not execute the group action.",
+    "pageDescription": "Organize devices by usage intention within the active site.",
+    "noSelection": "No selection",
+    "deleteSuccess": "Group deleted.",
+    "summary": {
+      "createdTitle": "Created",
+      "availableTitle": "Available",
+      "multiGroupDescription": "can belong to multiple groups.",
+      "selectionEyebrow": "Selection",
+      "selectedDevices": "{{count}} selected device(s)."
+    },
+    "toolbar": {
+      "eyebrow": "Semantic groups",
+      "title": "Control by intention",
+      "description": "A group can represent lighting, saving, night mode, or any real usage pattern."
+    },
+    "emptyDevices": {
+      "title": "No assigned devices",
+      "description": "Assign devices to the active site before creating groups."
+    },
+    "emptyGroups": {
+      "title": "No groups in this site",
+      "description": "Create a semantic group with devices from the same room."
+    },
+    "form": {
+      "eyebrow": "New group",
+      "description": "Select devices from the same room. A device can belong to multiple groups.",
+      "namePlaceholder": "E.g. Living room lighting",
+      "descriptionPlaceholder": "Group purpose",
+      "pickerDescription": "Mark equipment assigned to {{location}}.",
+      "selectedCount": "{{count}} selected",
+      "availableCount": "{{count}} available",
+      "alsoBelongsTo": "Also belongs to"
+    },
+    "selection": {
+      "select": "Select",
+      "selected": "Selected"
+    },
+    "state": {
+      "on": "On",
+      "off": "Off",
+      "mixed": "Mixed"
+    },
+    "card": {
+      "defaultDescription": "Semantic group to organize devices by usage intention.",
+      "assignedDevices": "Assigned devices",
+      "noAssignedDevices": "No assigned devices.",
+      "createdAt": "Created",
+      "noDate": "No registered date"
+    },
+    "validation": {
+      "sameRoom": "A group must belong to a single room. Select devices from the same room.",
+      "activeLocationRequired": "Select an active site before creating a group.",
+      "nameRequired": "Enter a group name before creating it.",
+      "deviceRequired": "Select at least one device to create the group."
+    },
+    "deleteFallbackGroup": "This group",
+    "deleteWarnings": {
+      "devicesTitle": "Review devices",
+      "devicesMessage": "{{group}} contains {{count}} device(s). If you delete the group, the devices will still exist.",
+      "routinesTitle": "Review routines",
+      "routineSingular": "{{group}} participates in one active routine. Review whether you want to continue.",
+      "routinePlural": "{{group}} participates in {{count}} active routines. Review whether you want to continue.",
+      "modesTitle": "Review modes",
+      "modeSingular": "{{group}} is related to an existing mode. Deleting it may affect that configuration.",
+      "modePlural": "{{group}} is related to {{count}} existing modes. Deleting it may affect those configurations.",
+      "deleteTitle": "Delete group",
+      "deleteMessage": "{{group}} will be deleted. Devices are not deleted."
+    }
+  },
+  "alertRules": {
+    "eyebrow": "Alert rules",
+    "title": "Alert rules",
+    "subtitle": "Configure automatic rules to generate alerts based on consumption thresholds.",
+    "total": "Total",
+    "enabled": "Enabled",
+    "createTitle": "Create alert rule",
+    "name": "Name",
+    "threshold": "Threshold",
+    "create": "Create rule",
+    "enable": "Enable",
+    "disable": "Disable",
+    "createSuccess": "Alert rule created successfully.",
+    "createError": "Could not create the alert rule.",
+    "updateError": "Could not update the alert rule.",
+    "deleteError": "Could not delete the alert rule.",
+    "pageDescription": "Define persistent criteria to classify operational events. Evaluation uses the active rules saved for your user.",
+    "summaryAria": "Rules summary",
+    "savedRules": "Saved rules",
+    "pausedCount": "{{count}} paused",
+    "activeWeight": "Active weight",
+    "usedWhenEvaluating": "Used during evaluation",
+    "realScoreRanges": "Real score ranges",
+    "realScoreRangesDescription": "These ranges come from Preferences. Stable starts at 0 and Critical ends at 100.",
+    "newRule": "New rule",
+    "createPersistentRule": "Create persistent rule",
+    "createPersistentRuleDescription": "The rule is saved and can participate in evaluation while it is active.",
+    "namePlaceholder": "E.g. Power peak in living room",
+    "metric": "Metric",
+    "condition": "Condition",
+    "scope": "Scope",
+    "criterion": "Criterion",
+    "weight": "Weight",
+    "savedRulesDescription": "Enabling, pausing, or deleting affects the persisted list and the next evaluation.",
+    "emptyTitle": "No saved rules",
+    "emptyDescription": "Create a rule so evaluation has persisted criteria.",
+    "evaluation": "Evaluation",
+    "testActiveRules": "Test active rules",
+    "testActiveRulesDescription": "The test uses the evaluation service and the saved active rules.",
+    "observedValue": "Observed value",
+    "evaluate": "Evaluate",
+    "testedNotification": "Tested notification",
+    "score": "Score",
+    "criteria": "Criteria",
+    "readingsValue": "{{count}} readings",
+    "validation": {
+      "nameRequired": "Enter a name for the rule."
+    },
+    "toasts": {
+      "paused": "Rule paused.",
+      "activated": "Rule activated.",
+      "deleted": "Rule deleted.",
+      "evaluateError": "Could not evaluate the rules.",
+      "evaluated": "Rules evaluated."
+    },
+    "metrics": {
+      "watts": "Instant power",
+      "highReadingCount": "High reading count",
+      "averageWatts": "Average watts"
+    },
+    "metricDescriptions": {
+      "watts": "Watts measured in the event.",
+      "highReadingCount": "Number of events marked as high in the evaluated period.",
+      "averageWatts": "Observed average for the period."
+    },
+    "conditions": {
+      "greaterOrEqual": "Reaches or exceeds",
+      "greaterThan": "Exceeds",
+      "greaterOrEqualLower": "reaches or exceeds",
+      "greaterThanLower": "exceeds"
+    },
+    "scopes": {
+      "general": "General"
+    },
+    "evaluators": {
+      "activePower": "Active power",
+      "dailyKwh": "Daily consumption",
+      "averageWatts": "Average watts",
+      "highReadingCount": "High reading count",
+      "sustainedConsumption": "Sustained consumption",
+      "deviceCount": "Device count",
+      "goalUsage": "Goal usage",
+      "goalDeadline": "Goal deadline",
+      "routineContext": "Routine context",
+      "costEstimate": "Estimated cost",
+      "configurationCoverage": "Configured coverage"
+    },
+    "severityRanges": {
+      "stableDescription": "Operation within the expected range.",
+      "infoDescription": "Useful event for follow-up, without urgency.",
+      "warningDescription": "Review before it escalates.",
+      "criticalDescription": "Requires immediate action."
+    }
+  },
+  "notificationPreferences": {
+    "eyebrow": "Notification preferences",
+    "title": "Notification preferences",
+    "subtitle": "Configure how and when you want to receive EnergyCore notifications.",
+    "emailEnabled": "Email notifications",
+    "pushEnabled": "Push notifications",
+    "criticalOnly": "Critical alerts only",
+    "minimumLevel": "Minimum level",
+    "save": "Save preferences",
+    "updateSuccess": "Notification preferences updated successfully.",
+    "updateError": "Could not update notification preferences.",
+    "sensitivityTitle": "Alert sensitivity",
+    "sensitivityDescription": "Adjust visible categories, noise, preliminary weights, and alert output for your user.",
+    "currentPreference": "Current preference",
+    "editorTitle": "Preliminary editor",
+    "editorDescription": "Channels, sources, and silences are saved; weights and ranges are ready for the next contract.",
+    "emptyTitle": "No preferences loaded",
+    "emptyDescription": "When the user preference is available, you will be able to edit inbox visibility.",
+    "summary": {
+      "rangesEyebrow": "Ranges",
+      "rangesTitle": "Stable to Critical",
+      "rangesDescription": "Limits remain contiguous to avoid overlaps.",
+      "successTitle": "Positive apart",
+      "successDescription": "Good events do not compete with risk.",
+      "parametersEyebrow": "Parameters",
+      "parametersTitle": "Weights and noise",
+      "parametersDescription": "Controls priority, repetition, schedules, and sources."
+    },
+    "sensitivity": "Sensitivity",
+    "weightedClassification": "Weighted classification",
+    "weightedClassificationDescription": "Success stays outside risk. Stable, Neutral, Warning, and Critical are calculated by contiguous ranges.",
+    "stableCeiling": "Stable cap",
+    "neutralCeiling": "Info cap",
+    "warningCeiling": "Warning cap",
+    "preview": "Preview",
+    "sensitiveResult": "Sensitive result",
+    "previewDescription": "The technical score does not need to appear in the inbox; here it only calibrates the category.",
+    "context": "Context",
+    "baseSignal": "Base signal",
+    "finalCategory": "Final category",
+    "weightedPercent": "{{value}}% weighted",
+    "positiveEvents": "Positive events",
+    "positiveEventsDescription": "Correct actions, recoveries, completed goals, and successful applications.",
+    "showSuccess": "Show Success",
+    "showSuccessDescription": "Keeps the good visible without mixing it with risk.",
+    "visibleCategories": "Visible categories",
+    "allowedLevels": "Allowed levels",
+    "allowedLevelsDescription": "The current contract stores these levels; Neutral persists as INFO.",
+    "criticalOnlyLabel": "Critical only",
+    "criticalOnlyDescription": "Reduces noise and lets only urgent events through.",
+    "weighting": "Weighting",
+    "contextParameters": "Parameters by context",
+    "contextParametersDescription": "These weights are preliminary: they adjust the preview and prepare the next contract.",
+    "weightDescription": "{{weight}}% weight",
+    "output": "Output",
+    "channelsAndNoise": "Channels and noise",
+    "channelsAndNoiseDescription": "These parameters are already saved in the current preference.",
+    "deliveryMode": "Delivery mode",
+    "cooldown": "Cooldown",
+    "minutes": "minutes",
+    "maxPerHour": "Maximum per hour",
+    "alertsUnit": "alerts",
+    "silences": "Silences",
+    "scheduleAndExceptions": "Schedule and exceptions",
+    "scheduleAndExceptionsDescription": "Critical can break silence if you allow it.",
+    "quietStart": "Silence start",
+    "quietEnd": "Silence end",
+    "levelDescriptions": {
+      "stable": "Show everything from stable state.",
+      "info": "Receive relevant events and above.",
+      "warning": "Receive only preventive and critical events.",
+      "critical": "Receive only urgent events."
+    },
+    "deliveryModes": {
+      "banner": "Banner",
+      "quiet": "Silent",
+      "inboxOnly": "Inbox only",
+      "muted": "Muted"
+    },
+    "deliveryModeDescriptions": {
+      "banner": "Normal visible output.",
+      "quiet": "No invasive noise.",
+      "inboxOnly": "No popup notice.",
+      "muted": "No invasive output."
+    },
+    "sources": {
+      "device": "Devices",
+      "group": "Groups",
+      "room": "Rooms",
+      "workplace": "Sites",
+      "routine": "Routines",
+      "goal": "Goals",
+      "report": "Reports",
+      "rule": "Rules",
+      "mode": "Modes",
+      "system": "System"
+    },
+    "sourceDescriptions": {
+      "device": "Status, response, and direct equipment consumption.",
+      "group": "Aggregated changes by usage intent.",
+      "routine": "Execution, failures, or automation silences.",
+      "goal": "Progress, risk of exceeding, or completion.",
+      "rule": "Automatic thresholds and active evaluations.",
+      "mode": "Application of operational profiles.",
+      "system": "Platform recommendations and own events."
+    },
+    "toggles": {
+      "inAppDescription": "Show alerts inside the app.",
+      "toastTitle": "Toast",
+      "toastDescription": "Popup notices during the session.",
+      "dashboardTitle": "Dashboard",
+      "dashboardDescription": "Reflect alerts in panels.",
+      "emailTitle": "Email",
+      "emailDescription": "Channel prepared for external notices.",
+      "pushTitle": "Push",
+      "pushDescription": "Channel prepared for device notices.",
+      "groupSimilarTitle": "Group similar",
+      "groupSimilarDescription": "Reduces repetition by alert thread.",
+      "quietHoursTitle": "Quiet schedule",
+      "quietHoursDescription": "Uses a noise-free window.",
+      "criticalBreaksTitle": "Critical breaks silence",
+      "criticalBreaksDescription": "Urgent events remain visible.",
+      "remindersTitle": "Reminders",
+      "remindersDescription": "Allows later notices.",
+      "nightRoutinesTitle": "Night routines",
+      "nightRoutinesDescription": "Reduces noise from night automation.",
+      "goalDeadlineTitle": "Dated goals",
+      "goalDeadlineDescription": "Prioritizes goals near the limit.",
+      "maintenanceDescription": "Includes equipment under review.",
+      "recommendationsTitle": "Recommendations",
+      "recommendationsDescription": "Shows system suggestions.",
+      "dailySummaryTitle": "Daily summary",
+      "dailySummaryDescription": "Groups daily activity.",
+      "weeklySummaryTitle": "Weekly summary",
+      "weeklySummaryDescription": "Groups weekly trends.",
+      "monthlyReportTitle": "Monthly report",
+      "monthlyReportDescription": "Generates and notifies the monthly report through the prepared email channel."
+    }
+  },
+  "workplace": {
+    "locationsEyebrow": "Workplace",
+    "locationsTitle": "Locations",
+    "locationsSubtitle": "Manage business locations where EnergyCore devices are installed.",
+    "roomsEyebrow": "Rooms",
+    "roomsTitle": "Rooms",
+    "roomsSubtitle": "Organize rooms within each location.",
+    "assignmentsEyebrow": "Device assignments",
+    "assignmentsTitle": "Device assignments",
+    "assignmentsSubtitle": "Assign devices to a location and room so they can participate in groups, routines, modes, goals and reports.",
+    "totalLocations": "Total locations",
+    "businessLocations": "Business locations",
+    "branchLocations": "Branch locations",
+    "totalRooms": "Total rooms",
+    "totalAssignments": "Total assignments",
+    "totalDevices": "Total devices",
+    "createLocation": "Create location",
+    "createRoom": "Create room",
+    "assignDevice": "Assign device",
+    "locationName": "Location name",
+    "roomName": "Room name",
+    "address": "Address",
+    "floor": "Floor",
+    "selectLocation": "Select location",
+    "selectRoom": "Select room",
+    "selectDevice": "Select device",
+    "create": "Create",
+    "loadError": "Could not load workplace information.",
+    "locationCreateSuccess": "Location created successfully.",
+    "locationCreateError": "Could not create the location.",
+    "locationUpdateSuccess": "Location updated successfully.",
+    "locationUpdateError": "Could not update the location.",
+    "locationDeleteError": "Could not delete the location.",
+    "roomCreateSuccess": "Room created successfully.",
+    "roomCreateError": "Could not create the room.",
+    "roomUpdateSuccess": "Room updated successfully.",
+    "roomUpdateError": "Could not update the room.",
+    "roomDeleteError": "Could not delete the room.",
+    "assignmentCreateSuccess": "Device assigned successfully.",
+    "assignmentCreateError": "Could not assign the device.",
+    "assignmentMoveSuccess": "Device assignment moved successfully.",
+    "assignmentMoveError": "Could not move the device assignment.",
+    "assignmentDeleteError": "Could not delete the device assignment.",
+    "deviceAlreadyAssigned": "This device is already assigned.",
+    "locationTypes": {
+      "home": "Home",
+      "business": "Business",
+      "branch": "Branch"
+    },
+    "locations": {
+      "pageDescription": "Manage the physical places where EnergyCore organizes rooms, devices, and consumption.",
+      "summary": {
+        "registeredTitle": "Registered",
+        "registeredDescription": "Homes, offices, or operational branches.",
+        "assignedTitle": "Assigned to site",
+        "unassignedDevices": "{{count}} device(s) without a site.",
+        "coverageEyebrow": "Coverage",
+        "unroomedDevices": "{{count}} device(s) without a room."
+      },
+      "toolbar": {
+        "eyebrow": "Site management",
+        "title": "Create and select operating centers",
+        "description": "The location can be stored as a written reference or approximate coordinates."
+      },
+      "empty": {
+        "title": "No sites yet",
+        "description": "Create a site to organize rooms, devices, groups, and consumption by physical place."
+      },
+      "form": {
+        "eyebrow": "New site",
+        "description": "Define the name, type, and reference location for this operating space.",
+        "namePlaceholder": "E.g. Main office",
+        "typeLabel": "Type",
+        "typePlaceholder": "Site type",
+        "addressLabel": "Address or reference",
+        "addressPlaceholder": "Address, reference, or coordinates"
+      },
+      "map": {
+        "title": "Approximate selector",
+        "description": "Drag the map, use the mouse wheel to zoom, or search an address to place the site marker.",
+        "iframeTitle": "OpenStreetMap reference map",
+        "surfaceLabel": "Select a point on the map",
+        "selectedLabel": "Selected location",
+        "selectedAddress": "Selected location ({{coordinates}})",
+        "searchingAddress": "Searching addresses...",
+        "zoomIn": "Zoom in",
+        "zoomOut": "Zoom out",
+        "locateMe": "Use my location",
+        "locationUnavailable": "Location is not available in this browser.",
+        "locationDenied": "Location permission was denied or could not be resolved."
+      },
+      "deleteTitle": "Delete site",
+      "deleteMessage": "You are about to delete {{name}}. Related rooms and assignments may stop appearing in Spaces.",
+      "deleteSuccess": "Site deleted.",
+      "card": {
+        "createdAt": "Created",
+        "noDate": "No registered date",
+        "activePower": "Active power",
+        "withoutRoom": "Without room",
+        "coverage": "Coverage",
+        "goToRooms": "Go",
+        "goToRoomsAria": "Go to this site rooms"
+      }
+    },
+    "rooms": {
+      "pageDescription": "Organize the active site by rooms to understand where devices are and how consumption is distributed.",
+      "activeLocationFallback": "active site",
+      "summary": {
+        "activeLocationEyebrow": "Active site",
+        "availableRooms": "room(s) available to organize movements.",
+        "registeredTitle": "Registered",
+        "registeredDescription": "Physical zones available for device assignment.",
+        "assignedTitle": "Assigned",
+        "linkedGroups": "{{count}} group(s) linked in the site."
+      },
+      "toolbar": {
+        "eyebrow": "Room management",
+        "title": "Add zones to {{location}}",
+        "description": "Rooms help move devices and review consumption by place."
+      },
+      "empty": {
+        "title": "No rooms in this site",
+        "description": "Create a room to locate devices and move them between real zones."
+      },
+      "form": {
+        "eyebrow": "New room",
+        "description": "The room will be added to the active site and become available for device movements.",
+        "namePlaceholder": "E.g. Main living room",
+        "siteLabel": "Site"
+      },
+      "status": {
+        "noDevices": "No devices",
+        "active": "With activity",
+        "idle": "No activity"
+      },
+      "card": {
+        "createdAt": "Created",
+        "noDate": "No registered date",
+        "activeDevices": "On",
+        "consumption": "Consumption",
+        "relatedGroup": "Related group",
+        "noLinkedGroup": "No linked group",
+        "relatedRoutines": "Related routines",
+        "goToAssignments": "Go",
+        "goToAssignmentsAria": "Go to this room assignments"
+      },
+      "toasts": {
+        "loadError": "Could not load rooms information.",
+        "locationRequired": "Create a site before creating rooms.",
+        "deleteSuccess": "Room deleted successfully."
+      },
+      "deleteTitle": "Delete room",
+      "deleteMessageWithDevices": "This room has {{count}} assigned device(s). If you delete it, those references may be left without a room.",
+      "deleteMessageEmpty": "You are about to delete this room from the active site."
+    },
+    "deviceTypes": {
+      "plug": "Plug",
+      "light": "Light",
+      "switch": "Switch",
+      "sensor": "Sensor",
+      "other": "Other"
+    },
+    "assignments": {
+      "pageDescription": "Drag devices between two rooms and confirm when the change affects groups, routines, or modes.",
+      "activeLocationFallback": "active site",
+      "noRoom": "No room",
+      "noSecondRoomOption": "No other room available",
+      "noSecondRoomAvailable": "No second room is available.",
+      "panelItemCount": "{{count}} item(s) in this room.",
+      "go": "Go",
+      "summary": {
+        "activeLocationEyebrow": "Active site",
+        "availableRooms": "room(s) available to organize movements.",
+        "movableTitle": "Movable",
+        "connectedDevices": "device(s) connected to this site.",
+        "interactionEyebrow": "Interaction",
+        "dragTitle": "Direct drag",
+        "directValue": "Direct",
+        "dragDescription": "drag devices between Room 1 and Room 2."
+      },
+      "movement": {
+        "eyebrow": "Movement between rooms",
+        "title": "New assignment",
+        "description": "Drag each device from one panel to the other. Group, routine, and mode confirmations appear before applying the change."
+      },
+      "panels": {
+        "roomOne": "Room 1",
+        "roomTwo": "Room 2"
+      },
+      "emptyRooms": {
+        "title": "No rooms",
+        "description": "Create rooms in the active site to move devices or groups."
+      },
+      "emptyAssignments": {
+        "title": "No assigned devices",
+        "description": "When a site has connected devices, you will be able to move them between rooms from this view."
+      },
+      "emptyPanel": {
+        "title": "No devices",
+        "description": "Drag a device here to move it to this room."
+      },
+      "unavailablePanel": {
+        "title": "Room unavailable",
+        "description": "Add another room to enable this panel."
+      },
+      "device": {
+        "noPowerInfo": "No power information",
+        "notAvailable": "Not available",
+        "on": "On",
+        "off": "Off",
+        "maintenance": "Maintenance"
+      },
+      "form": {
+        "operationalSite": "Operational site",
+        "siteOnly": "Assign only to the site",
+        "availableRoom": "Available room"
+      },
+      "toasts": {
+        "loadError": "Could not load assignments information.",
+        "moveSuccess": "Movement applied successfully.",
+        "moveError": "Could not complete the movement."
+      },
+      "warnings": {
+        "groupTitle": "Review group",
+        "groupMessage": "This device belongs to the group {{group}}. If you move it, that group may become incomplete.",
+        "routinesTitle": "Review routines",
+        "routinesMessage": "This device participates in active routines. Review whether you want to continue.",
+        "modesTitle": "Review modes",
+        "modesMessage": "This device is related to a mode. Moving it may affect that mode."
+      }
+    }
+  },
+  "reporting": {
+    "reportsEyebrow": "Reports",
+    "reportsTitle": "Consumption reports",
+    "reportsSubtitle": "Generate and review energy consumption reports.",
+    "goalsEyebrow": "Energy goals",
+    "goalsTitle": "Energy goals",
+    "goalsSubtitle": "Define savings goals and track your progress.",
+    "totalReports": "Total reports",
+    "totalGoals": "Total goals",
+    "activeGoals": "Active goals",
+    "completedGoals": "Completed goals",
+    "totalReportedWatts": "Total reported watts",
+    "averageReportedWatts": "Average reported watts",
+    "monthlyComparison": "Report comparison",
+    "monthlyComparisonSubtitle": "Compare reports from the same period:",
+    "createReport": "Create report",
+    "createGoal": "Create goal",
+    "reportTitle": "Report title",
+    "goalTitle": "Goal title",
+    "generate": "Generate",
+    "export": "Export",
+    "totalWatts": "Total watts",
+    "averageWatts": "Average watts",
+    "highestWatts": "Highest watts",
+    "targetWatts": "Target watts",
+    "deadline": "Deadline",
+    "createdAt": "Created at",
+    "generatedAt": "Generated at",
+    "emptyReportsTitle": "No reports yet",
+    "emptyReportsContent": "Generate your first consumption report to analyze your energy usage.",
+    "emptyGoalsTitle": "No goals yet",
+    "emptyGoalsContent": "Create an energy goal to start tracking savings.",
+    "loadError": "Could not load reporting information.",
+    "reportCreateSuccess": "Report created successfully.",
+    "reportCreateError": "Could not create the report.",
+    "reportDeleteError": "Could not delete the report.",
+    "exportNotAllowed": "Your current plan does not allow report exports.",
+    "reportNotFound": "Report not found.",
+    "goalCreateSuccess": "Energy goal created successfully.",
+    "goalCreateError": "Could not create the energy goal.",
+    "goalUpdateSuccess": "Energy goal updated successfully.",
+    "goalUpdateError": "Could not update the energy goal.",
+    "goalDeleteError": "Could not delete the energy goal.",
+    "createReportDescription": "Choose the report type and move the wheel to select the exact range.",
+    "period": "Period",
+    "periods": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "yearly": "Yearly"
+    },
+    "periodOptions": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "yearly": "Yearly"
+    },
+    "reportRangeEyebrow": "Report range",
+    "reportRangeHint": "Drag to the right to go into the past. The current range is the final limit.",
+    "rangeTitles": {
+      "daily": "Select the day",
+      "weekly": "Select the week",
+      "monthly": "Select the month",
+      "yearly": "Select the year"
+    },
+    "rangeLabels": {
+      "currentWeek": "Current week",
+      "currentYearCycle": "{{year}} - current",
+      "currentYear": "Current year",
+      "fullYear": "Full year"
+    },
+    "generatedReportsTitle": "Generated reports",
+    "generatedReportsDescription": "Review created reports and open each detail from its summary.",
+    "activityTitle": "Activity history",
+    "activityDescription": "Review recent actions recorded by the platform to keep operational traceability.",
+    "activityEmptyEyebrow": "No activity",
+    "activityEmptyTitle": "No events recorded yet",
+    "activityEmptyContent": "Important actions will appear here when you use account, control, energy, support, or billing.",
+    "activitySources": {
+      "account": "Account",
+      "billing": "Billing",
+      "control": "Control",
+      "workplace": "Spaces",
+      "energy": "Energy",
+      "support": "Support",
+      "general": "Operation"
+    },
+    "emptyReportsEyebrow": "No reports",
+    "from": "From",
+    "to": "To",
+    "generated": "Generated",
+    "emptyValue": "-",
+    "reportFallbackTitle": "Report",
+    "reportFallbackTitleWithId": "Report #{{id}}",
+    "averageDetail": "{{value}} average",
+    "reportChartAria": "{{title}}, {{total}}, {{start}} - {{end}}",
+    "reportNameRequired": "Enter the report name.",
+    "reportNameMinLength": "The report name must be at least 4 characters.",
+    "reportRangeRequired": "Select a date range for the report.",
+    "reportRangeInvalid": "The report range is not valid.",
+    "reportUpdateSuccess": "Report updated.",
+    "reportUnchanged": "That report already exists for the selected cycle.",
+    "reportExportSuccess": "Report exported.",
+    "reportExportError": "Could not export the report.",
+    "reportDeleteSuccess": "Report deleted.",
+    "duration": {
+      "hoursMinutes": "{{hours}}h {{minutes}}m",
+      "minutesOnly": "{{minutes}}m"
+    },
+    "invoice": {
+      "eyebrow": "Professional energy invoice",
+      "title": "EnergyCore report #{{id}}",
+      "close": "Close invoice",
+      "totalEnergy": "Total energy",
+      "exactReadings": "{{count}} exact readings within the range",
+      "totalToPay": "Total to pay",
+      "realKwhCalculation": "Calculated from real kWh per device",
+      "monitoredDuration": "{{duration}} monitored",
+      "technicalSummary": "Technical summary",
+      "averagePower": "Average power",
+      "detectedPeak": "Detected peak",
+      "criticalReadings": "Critical readings",
+      "costPerKwh": "Cost per kWh",
+      "billedEnergy": "Billed energy",
+      "energySubtotal": "Energy subtotal",
+      "measuredDevices": "Measured devices",
+      "totalOnTime": "Total ON time",
+      "topConsumption": "Top consumption",
+      "devicesCount": "{{count}} devices",
+      "noDevicesInRange": "No devices in this range.",
+      "deviceExactDetail": "Exact detail by device",
+      "readings": "Readings",
+      "onTime": "ON time",
+      "exactKwh": "Exact kWh",
+      "peak": "Peak",
+      "share": "Share",
+      "subtotal": "Subtotal",
+      "noReadingsForReport": "No readings for this report."
+    },
+    "goals": {
+      "summary": {
+        "created": "Goals created",
+        "tracking": "In tracking",
+        "atRisk": "Goals at risk",
+        "needAttention": "Need attention",
+        "averageCompliance": "Average compliance"
+      },
+      "createStripTitle": "Create smart goal",
+      "createStripDescription": "Define scope, limit, and tracking window with real data.",
+      "modalEyebrow": "Energy goal",
+      "modalDescription": "Select the tracking scope and define the energy limit.",
+      "scope": "Scope",
+      "goalName": "Goal name",
+      "goalNamePlaceholder": "E.g. Reduce main room consumption",
+      "consumptionLimit": "Consumption limit",
+      "emptyEyebrow": "No goals",
+      "generalOperation": "General operation",
+      "fullDay": "All day",
+      "deviceCountDescription": "{{count}} devices",
+      "availableKwh": "{{value}} kWh available",
+      "daysRemaining": "{{count}} days remaining",
+      "limitLabel": "Limit: {{value}} kWh",
+      "deadlineLabel": "Due: {{date}}",
+      "measured": "Measured",
+      "usedPercentage": "{{value}}% used",
+      "devices": "Devices",
+      "projection": "Projection",
+      "scopeOptions": {
+        "workplace": "A site",
+        "room": "A room",
+        "group": "A group",
+        "device": "A device"
+      },
+      "scopeDescriptions": {
+        "workplace": "Measures devices assigned to an energy site.",
+        "room": "Measures devices assigned to a room.",
+        "group": "Measures the devices included in a group.",
+        "device": "Measures only the readings from one device."
+      },
+      "scopeTargetLabels": {
+        "general": "Scope",
+        "workplace": "Site",
+        "room": "Room",
+        "device": "Device",
+        "group": "Group"
+      },
+      "scopeTargetPlaceholders": {
+        "general": "Select scope",
+        "workplace": "Select site",
+        "room": "Select room",
+        "device": "Select device",
+        "group": "Select group"
+      },
+      "status": {
+        "inControl": "In control",
+        "outOfGoal": "Out of goal",
+        "atRisk": "At risk",
+        "goodPace": "Good pace",
+        "noReadings": "No readings"
+      },
+      "recommendations": {
+        "inControl": "The goal is progressing at the expected pace.",
+        "outOfGoal": "Consumption exceeded the limit defined for this goal.",
+        "atRisk": "The current pace could exceed the limit. Review the most active devices.",
+        "goodPace": "You still have enough margin compared with the expected progress.",
+        "noReadings": "There are no readings within this goal period yet."
+      },
+      "toasts": {
+        "loadError": "Could not load energy goals information.",
+        "nameRequired": "Enter the goal name.",
+        "nameMinLength": "The goal name must be at least 4 characters.",
+        "targetRequired": "Define a consumption limit greater than 0 kWh.",
+        "deadlineRequired": "Select a deadline for the goal.",
+        "deadlinePast": "The deadline cannot be in the past.",
+        "timeWindowInvalid": "The time window must have different start and end times.",
+        "scopeTargetRequired": "Select the goal target.",
+        "deleteSuccess": "Energy goal deleted."
+      },
+      "deleteDialog": {
+        "title": "Delete energy goal",
+        "message": "This action will remove the goal from current tracking.",
+        "confirm": "Delete",
+        "cancel": "Keep"
+      }
+    }
+  },
+  "serviceManagement": {
+    "supportEyebrow": "Support",
+    "supportTitle": "Support",
+    "supportSubtitle": "Create and track user support requests.",
+    "maintenanceEyebrow": "Maintenance",
+    "maintenanceTitle": "Maintenance",
+    "maintenanceSubtitle": "Schedule and monitor device maintenance tasks.",
+    "totalSupportTickets": "Total support tickets",
+    "openTickets": "Open tickets",
+    "urgentTickets": "Urgent tickets",
+    "totalMaintenanceTickets": "Total maintenance tickets",
+    "pendingMaintenance": "Pending maintenance",
+    "scheduledMaintenance": "Scheduled maintenance",
+    "completedMaintenance": "Completed maintenance",
+    "createSupportTicket": "Create support ticket",
+    "createMaintenanceTicket": "Create maintenance ticket",
+    "subject": "Subject",
+    "description": "Description",
+    "scheduledDate": "Scheduled date",
+    "selectDevice": "Select device",
+    "create": "Create",
+    "emptySupportTitle": "No support tickets",
+    "emptySupportContent": "Support requests created by the user will appear here.",
+    "emptyMaintenanceTitle": "No maintenance tickets",
+    "emptyMaintenanceContent": "Scheduled maintenance tickets will appear here.",
+    "loadError": "Could not load service management information.",
+    "supportCreateSuccess": "Support ticket created successfully.",
+    "supportCreateError": "Could not create the support ticket.",
+    "supportUpdateSuccess": "Support ticket updated successfully.",
+    "supportUpdateError": "Could not update the support ticket.",
+    "supportDeleteError": "Could not delete the support ticket.",
+    "maintenanceCreateSuccess": "Maintenance ticket created successfully.",
+    "maintenanceCreateError": "Could not create the maintenance ticket.",
+    "maintenanceUpdateSuccess": "Maintenance ticket updated successfully.",
+    "maintenanceUpdateError": "Could not update the maintenance ticket.",
+    "maintenanceDeleteError": "Could not delete the maintenance ticket.",
+    "supportPageDescription": "Centralize user requests, prioritize open cases and keep follow-up with real statuses.",
+    "supportSummaryTitle": "Support summary",
+    "supportSummaryDescription": "Requests registered with traceability across the platform.",
+    "openTicketsShort": "Open",
+    "urgentTicketsShort": "Urgent",
+    "newSupportRequest": "New request",
+    "supportAttentionTitle": "Support attention",
+    "supportAttentionDescription": "Register a case with subject, description and priority so Service can handle it.",
+    "createSupportRequest": "Create request",
+    "cases": "Cases",
+    "supportCasesTitle": "Active and historical requests",
+    "emptySupportRequestsTitle": "No requests yet",
+    "emptySupportRequestsDescription": "When someone registers a support case, it will appear here with priority, status and date.",
+    "supportModalDescription": "Register a support case with a real priority.",
+    "supportSubjectPlaceholder": "E.g. Device not responding",
+    "supportDescriptionPlaceholder": "Describe what is happening, where it happens and what impact it has.",
+    "priority": "Priority",
+    "saveSupportRequest": "Save request",
+    "supportLoadError": "Could not load support information.",
+    "supportDeleteSuccess": "Support request deleted.",
+    "confirmDeleteSupportTitle": "Delete request",
+    "confirmDeleteSupportMessage": "This request will leave the support inbox. This action cannot be undone.",
+    "createdOn": "Created on {{date}}",
+    "maintenancePageDescription": "Schedule interventions for real devices and follow their status without inventing dates, equipment or tasks.",
+    "maintenanceSummaryTitle": "Maintenance summary",
+    "maintenanceSummaryDescription": "Orders created from Service for existing devices.",
+    "pendingMaintenanceShort": "Pending",
+    "completedMaintenanceShort": "Completed",
+    "scheduleEyebrow": "Schedule",
+    "technicalScheduleTitle": "Technical agenda",
+    "technicalScheduleDescription": "Select an existing device, reason and date to create an order.",
+    "scheduleMaintenance": "Schedule maintenance",
+    "goToDevices": "Go to devices",
+    "orders": "Orders",
+    "maintenanceAgendaTitle": "Maintenance agenda",
+    "emptyMaintenanceDescription": "When you schedule an intervention, it will appear here with device, date and status.",
+    "maintenanceModalDescription": "Use a real device and a valid date.",
+    "maintenanceType": "Maintenance type",
+    "reason": "Reason",
+    "maintenanceDescriptionPlaceholder": "Describe the required work or the reason for review.",
+    "saveMaintenance": "Save maintenance",
+    "maintenanceLoadError": "Could not load maintenance information.",
+    "maintenanceDeleteSuccess": "Maintenance deleted.",
+    "confirmCancelMaintenanceTitle": "Cancel maintenance",
+    "confirmCancelMaintenanceMessage": "The maintenance will be marked as canceled. Confirm only if it should no longer be executed.",
+    "cancelMaintenance": "Cancel maintenance",
+    "back": "Back",
+    "confirmDeleteMaintenanceTitle": "Delete maintenance",
+    "confirmDeleteMaintenanceMessage": "This schedule will leave the maintenance list. This action cannot be undone.",
+    "scheduledFor": "Scheduled for {{date}}",
+    "priorities": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "urgent": "Urgent"
+    },
+    "supportStatuses": {
+      "open": "Open",
+      "inProgress": "In progress",
+      "resolved": "Resolved",
+      "closed": "Closed"
+    },
+    "maintenanceTypes": {
+      "inspection": "Inspection",
+      "repair": "Repair",
+      "replacement": "Replacement",
+      "installation": "Installation"
+    },
+    "maintenanceStatuses": {
+      "pending": "Pending",
+      "scheduled": "Scheduled",
+      "completed": "Completed",
+      "canceled": "Canceled"
+    },
+    "validation": {
+      "supportSubjectRequired": "Enter the request subject.",
+      "supportSubjectMinLength": "The subject must have at least 4 characters.",
+      "supportDescriptionRequired": "Describe the problem or request.",
+      "descriptionMinLength": "The description must have at least 10 characters.",
+      "deviceRequiredBeforeMaintenance": "Register a device before scheduling maintenance.",
+      "maintenanceDeviceRequired": "Select a device for maintenance.",
+      "maintenanceDescriptionRequired": "Describe the required maintenance.",
+      "maintenanceDateRequired": "Select a maintenance date.",
+      "maintenanceDatePast": "The maintenance date cannot be in the past.",
+      "maintenanceDeviceUnknown": "Could not identify the selected device."
+    }
+  },
+  "security": {
+    "deleteAccount": "Delete account"
+  },
+  "energyDashboard": {
+    "eyebrow": "Energy monitoring",
+    "title": "Energy consumption",
+    "description": "Control real consumption from active devices, review kWh, estimated costs, and saving opportunities by equipment and room.",
+    "liveConsumptionEyebrow": "Live consumption",
+    "liveConsumptionTitle": "Cost calculated from power and real time",
+    "liveConsumptionDescription": "W is nominal power. The real cost comes from kWh, active seconds, and the energy tariff.",
+    "automaticRecord": "Automatic recording",
+    "secondsAbbr": "sec",
+    "apply": "Apply",
+    "sampleEveryPrefix": "A reading will be recorded every",
+    "sampleEveryValue": "{{seconds}} seconds",
+    "exportCsv": "Export CSV",
+    "loading": "Loading energy information...",
+    "consumptionEyebrow": "Consumption",
+    "readings": "readings",
+    "equipment": "devices",
+    "energy": "energy",
+    "cost": "cost",
+    "accumulatedUse": "accumulated use",
+    "period": "Period",
+    "noReadingsEyebrow": "No readings",
+    "noConsumptionTitle": "No consumption for this period",
+    "noConsumptionDescription": "When real readings exist inside the selected period, the chart will build automatically.",
+    "generalStatusEyebrow": "Overall status",
+    "operationalSummaryTitle": "Operational summary",
+    "normalReadings": "normal",
+    "highReadingsShort": "high",
+    "activeDevicesShort": "active",
+    "activeDevicesNowTitle": "Devices on now",
+    "costPerHourValue": "S/ {{cost}} per hour",
+    "moreActiveDevices": "+{{count}} more active",
+    "noActivityEyebrow": "No activity",
+    "noActiveDevicesTitle": "No devices are on",
+    "noActiveDevicesDescription": "Current consumption is zero because there are no devices ON.",
+    "rankingEyebrow": "Ranking",
+    "highestCostByDeviceTitle": "Highest cost by device",
+    "moreInRanking": "+{{count}} more in ranking",
+    "noCostEyebrow": "No cost",
+    "noDeviceConsumptionTitle": "No devices with consumption",
+    "noDeviceConsumptionDescription": "Readings with kWh will appear during use.",
+    "roomsEyebrow": "Rooms",
+    "consumptionByRoomTitle": "Consumption by room",
+    "activeDevicesValue": "{{count}} active",
+    "moreInRooms": "+{{count}} more in rooms",
+    "noRoomsEyebrow": "No rooms",
+    "noRoomDataTitle": "No room data",
+    "noRoomDataDescription": "Assign rooms to your devices to see this breakdown.",
+    "recentHighConsumptionEventsTitle": "Recent high-consumption events",
+    "moreInAlerts": "+{{count}} more in alerts",
+    "noAlertsEyebrow": "No alerts",
+    "noRecentEventsTitle": "No recent events",
+    "noRecentEventsDescription": "No high readings were detected in the visible period.",
+    "latestReadingsTitle": "Latest energy readings",
+    "power": "Power",
+    "moreInHistory": "+{{count}} more in history",
+    "noHistoryEyebrow": "No history",
+    "noReadingsAvailableTitle": "No readings available",
+    "noReadingsAvailableDescription": "When the system records consumption, you will see the latest readings here.",
+    "intervalValue": "Interval {{duration}}",
+    "chartItemAria": "{{energy}}, {{emoji}} {{device}}, {{watts}} W, {{date}}, interval {{duration}}",
+    "highConsumptionRegistered": "{{device}} recorded high consumption",
+    "noActiveAlerts": "No active alerts",
+    "selectActiveSiteRecommendation": "Select an active site to view its consumption.",
+    "noReadingsForSiteRecommendation": "There are no energy readings for {{site}} yet.",
+    "highReadingsForSiteRecommendation": "Review equipment in {{site}} with high readings.",
+    "stableConsumptionRecommendation": "Stable consumption in {{site}}.",
+    "noRoom": "No room",
+    "periods": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly"
+    },
+    "periodDescriptions": {
+      "daily": "Real readings recorded today.",
+      "weekly": "Real readings from the last 7 days.",
+      "monthly": "Real readings from the current month."
+    },
+    "chartTitles": {
+      "daily": "Daily consumption",
+      "weekly": "Weekly consumption",
+      "monthly": "Monthly consumption"
+    },
+    "chartSubtitles": {
+      "daily": "Real readings from today. Accumulated use adds time by device.",
+      "weekly": "Real readings from the last 7 days. Accumulated use adds time by device.",
+      "monthly": "Real readings from the current month. Accumulated use adds time by device."
+    },
+    "operationalStatus": {
+      "review": "Review consumption",
+      "attention": "Attention",
+      "optimal": "Optimal"
+    },
+    "metrics": {
+      "activePower": "Active power",
+      "energyToday": "Energy today",
+      "costToday": "Cost today",
+      "costPerHour": "Cost per hour",
+      "monthlyProjection": "Monthly projection",
+      "activeAlerts": "Active alerts"
+    },
+    "metricHints": {
+      "activePower": "Current base to calculate kWh while equipment is on.",
+      "energyToday": "Accumulated by real intervals recorded today.",
+      "costToday": "Estimated cost from real kWh.",
+      "costPerHour": "Projection if current consumption stays the same.",
+      "monthlyProjection": "Estimated from real kWh accumulated this month.",
+      "activeAlerts": "{{count}} critical - {{level}} - {{title}}"
+    },
+    "readingStatuses": {
+      "high": "High",
+      "normal": "Normal"
+    },
+    "toasts": {
+      "loadError": "Could not load energy information.",
+      "exportSuccess": "CSV exported successfully.",
+      "exportError": "Could not export the CSV.",
+      "intervalUpdated": "Interval updated to {{seconds}} seconds.",
+      "intervalUpdateError": "Could not update the recording interval.",
+      "samplingLoadFallback": "Could not load the recording interval. 15 seconds will be used.",
+      "refreshError": "Could not update energy information."
+    }
+  },
+  "shared": {
+    "numberStepper": {
+      "increase": "Increase value",
+      "decrease": "Decrease value"
+    },
+    "datePicker": {
+      "placeholder": "Select date",
+      "calendarAria": "Date picker",
+      "previousMonth": "Previous month",
+      "nextMonth": "Next month",
+      "clear": "Clear",
+      "today": "Today"
+    },
+    "timePicker": {
+      "panelAria": "Time picker",
+      "hoursAria": "Hours",
+      "minutesAria": "Minutes"
+    },
+    "modal": {
+      "closeForm": "Close form"
+    }
+  },
+  "operationModes": {
+    "pageDescription": "Configure modes with their own internal routines for a site or room.",
+    "site": "Site",
+    "internalRoutines": "Internal routines",
+    "summary": {
+      "context": "Context",
+      "availableDevices": "{{count}} available device(s).",
+      "saved": "Saved",
+      "hasActiveMode": "There is an active mode.",
+      "noActiveMode": "No active mode.",
+      "current": "Current",
+      "selectMode": "Select a mode."
+    },
+    "toolbar": {
+      "eyebrow": "Operational configuration",
+      "title": "Modes with their own routines",
+      "description": "A mode routine lives inside the mode and applies only when that mode is activated."
+    },
+    "actions": {
+      "create": "Create mode",
+      "reapply": "Reapply",
+      "archive": "Archive",
+      "add": "Add",
+      "remove": "Remove"
+    },
+    "empty": {
+      "title": "No modes in this site",
+      "description": "Create a mode with internal routines to apply a real operational configuration."
+    },
+    "impact": {
+      "title": "Impact",
+      "applicationTitle": "Mode application",
+      "affectedDevices": "{{count}} device(s)",
+      "ignored": "Ignored",
+      "emptyTitle": "Select a mode",
+      "emptyDescription": "Review which devices and internal routines it will apply before activating."
+    },
+    "form": {
+      "newMode": "New mode",
+      "description": "Define identity, application, schedule, and own internal routines.",
+      "identityTitle": "Identity",
+      "identityDescription": "Controlled name and description for the mode.",
+      "namePlaceholder": "E.g. Safe night",
+      "descriptionPlaceholder": "Operational use of the mode",
+      "applicationTitle": "Application",
+      "applicationDescription": "The mode can cover a complete site or a room.",
+      "selectSite": "Select site",
+      "selectRoom": "Select room",
+      "scheduleType": "Schedule type",
+      "end": "End",
+      "modeRoutinesTitle": "Mode routines",
+      "modeRoutinesDescription": "These routines belong only to this mode.",
+      "label": "Label",
+      "routineNamePlaceholder": "E.g. Turn off lights",
+      "selectTarget": "Select target",
+      "noTargetsInScope": "No targets are available in this scope.",
+      "noInternalRoutinesTitle": "No internal routines yet",
+      "noInternalRoutinesDescription": "Add at least one internal routine to save the mode."
+    },
+    "applicationOptions": {
+      "workplace": "Complete site",
+      "room": "Specific room"
+    },
+    "applicationDescriptions": {
+      "workplace": "The mode applies to the whole active site",
+      "room": "The mode applies only to one room"
+    },
+    "scheduleOptions": {
+      "allDay": "All day",
+      "custom": "Custom"
+    },
+    "scheduleDescriptions": {
+      "allDay": "The mode keeps its configuration without a time window",
+      "custom": "Define start and end"
+    },
+    "routineTargetTypes": {
+      "device": "Device",
+      "group": "Group"
+    },
+    "routineTargetDescriptions": {
+      "device": "Action over one device",
+      "group": "Action over one group"
+    },
+    "routineActionDescriptions": {
+      "turnOn": "Enable target",
+      "turnOff": "Disable target"
+    },
+    "routineTargets": {
+      "deviceCount": "{{count}} device(s)"
+    },
+    "goals": {
+      "description": "Reference real goals without promising extra control.",
+      "emptyTitle": "No applicable goals",
+      "emptyDescription": "The mode can be saved without associated goals.",
+      "fallback": "Goal {{id}}"
+    },
+    "alertsRules": {
+      "title": "Alerts/Rules",
+      "description": "Use existing rules and preferences."
+    },
+    "rules": {
+      "available": "Available rules",
+      "none": "No rules",
+      "noneDescription": "The mode will not apply rules"
+    },
+    "preferences": {
+      "current": "Current preference",
+      "useRegistered": "Use registered preference",
+      "noneRegistered": "No registered preference",
+      "numbered": "Preference {{id}}",
+      "applyThis": "Apply this preference"
+    },
+    "toggles": {
+      "applyRulesTitle": "Apply rules",
+      "applyRulesDescription": "Use existing rules.",
+      "applyPreferencesTitle": "Apply preferences",
+      "applyPreferencesDescription": "Use existing preferences.",
+      "criticalSoundTitle": "Critical sound",
+      "criticalSoundDescription": "Respect critical alerts when applicable."
+    },
+    "validation": {
+      "siteRequired": "Select a site before creating the mode.",
+      "nameRequired": "Enter a name for the mode.",
+      "roomRequired": "Select a room for the mode.",
+      "noTargets": "No devices or groups are available in the selected scope.",
+      "routineRequired": "Add an internal routine or complete the routine being edited.",
+      "routineDraftRequired": "Complete the mode routine name and target.",
+      "minimumRequired": "Define site, name, and at least one internal routine."
+    },
+    "confirm": {
+      "replaceTitle": "Replace active mode",
+      "replaceMessage": "There is already an active mode in this site. If you activate this mode, the previous one will be disabled.",
+      "archiveTitle": "Archive mode",
+      "archiveMessage": "{{name}} will be archived. Its internal routines will stop acting."
+    },
+    "toasts": {
+      "createError": "Could not create the mode.",
+      "createSuccess": "Mode created with internal routines.",
+      "activateError": "Could not activate the mode.",
+      "archived": "Mode archived."
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "archived": "Archived"
+    },
+    "fallbacks": {
+      "noSelectedSite": "No site selected",
+      "siteUnavailable": "Site unavailable",
+      "operationalSite": "Operational site",
+      "roomUnavailable": "Room unavailable",
+      "groupUnavailable": "Group unavailable",
+      "deviceUnavailable": "Device unavailable",
+      "noDescription": "No description registered."
+    }
+  },
+  "settings": {
+    "shell": {
+      "ariaLabel": "Account settings",
+      "eyebrow": "Account",
+      "description": "Real user and platform preferences."
+    },
+    "nav": {
+      "profile": "Profile",
+      "profileDescription": "Personal data",
+      "account": "Account",
+      "accountDescription": "Identity and status",
+      "security": "Security",
+      "securityDescription": "Access and recovery",
+      "billing": "Billing",
+      "billingDescription": "Plan, payments and invoices",
+      "access": "Access",
+      "accessDescription": "Profiles and permissions",
+      "platform": "Platform",
+      "platformDescription": "Local preferences"
+    },
+    "common": {
+      "email": "Email",
+      "notAvailable": "Not available"
+    },
+    "profile": {
+      "title": "Personal data",
+      "pageDescription": "Manage the name and email saved in your EnergyCore account.",
+      "basicInfoTitle": "Basic information",
+      "basicInfoDescription": "This data is saved in your EnergyCore account.",
+      "saveProfile": "Save profile",
+      "previewEyebrow": "Preview",
+      "dataUsageTitle": "How this data is used",
+      "dataUsageDescription": "Quick reference for how name and email appear inside EnergyCore.",
+      "visibleName": "Visible name",
+      "visibleNameDescription": "Used to identify your account in the side panel and user views.",
+      "accountEmail": "Account email",
+      "accountEmailDescription": "Used as the reference for access recovery and main profile data.",
+      "unsavedChanges": "Unsaved changes",
+      "noPendingChanges": "No pending changes",
+      "statusDescription": "Save the profile to sync data with the current session.",
+      "updateSuccess": "Profile updated.",
+      "updateError": "Could not update the profile."
+    },
+    "account": {
+      "title": "Account status",
+      "pageDescription": "Review identity, role and general status for the authenticated user.",
+      "identityDescription": "Compact summary of the authenticated user.",
+      "role": "Role",
+      "userFallback": "User",
+      "createdAt": "Created",
+      "contextEyebrow": "Context",
+      "operationalReadingTitle": "Operational reading",
+      "operationalReadingDescription": "Elements that help understand account scope without mixing sensitive actions.",
+      "session": "Session",
+      "active": "Active",
+      "sessionDescription": "This view is shown only for a user authenticated by the access guard.",
+      "editableData": "Editable data",
+      "separatedInProfile": "Separated in Profile",
+      "editableDataDescription": "Name and email are updated from Profile to keep this page as an account summary.",
+      "sensitiveActions": "Sensitive actions",
+      "separatedInSecurity": "Separated in Security",
+      "sensitiveActionsDescription": "Recovery and account deletion live on a separate screen to reduce mistakes."
+    },
+    "security": {
+      "title": "Access and recovery",
+      "pageDescription": "Manage sensitive access actions with available real calls.",
+      "accessActionsTitle": "Access actions",
+      "accessActionsDescription": "Only actions with an available real call are shown.",
+      "recovery": "Recovery",
+      "sendRecoveryTitle": "Send link to current email",
+      "sendRecoveryDescription": "Use the real access recovery flow for the email saved in the profile.",
+      "sendRecoveryButton": "Send recovery",
+      "dangerZone": "Delicate zone",
+      "deleteAccountDescription": "Opens a strict confirmation before deleting the current account.",
+      "protectionsEyebrow": "Protections",
+      "securityStatusTitle": "Security status",
+      "securityStatusDescription": "Summary of active controls before executing sensitive actions.",
+      "recoveryEmail": "Recovery email",
+      "recoveryEmailDescription": "The recovery link is requested for the current email of the authenticated account.",
+      "writtenConfirmation": "Written confirmation",
+      "writtenConfirmationDescription": "Deletion remains blocked until the confirmation text matches exactly.",
+      "finalConfirmation": "Final confirmation",
+      "dialogRequired": "Dialog required",
+      "finalConfirmationDescription": "The account is deleted only after accepting the danger confirmation dialog.",
+      "noRecoveryEmail": "No email is registered for access recovery.",
+      "recoverySent": "Recovery request sent.",
+      "recoveryError": "Could not send recovery.",
+      "deleteDialogTitle": "Permanently delete your account",
+      "deleteDialogMessage": "This action deletes your EnergyCore account, closes your session and cannot be undone from the interface.",
+      "deleteDialogDetail": "Before continuing, verify that you do not need access to data, invoices or preferences associated with this account.",
+      "deleteDialogConfirm": "Permanently delete account",
+      "deleteDialogCancel": "Do not delete",
+      "requiredTextLabel": "To confirm, type exactly this word:",
+      "requiredTextHint": "The delete button will remain blocked until the confirmation matches exactly.",
+      "deleteAccountError": "Could not delete the account."
+    },
+    "access": {
+      "title": "Access profiles",
+      "pageDescription": "Review which actions each profile can execute inside EnergyCore.",
+      "currentProfileEyebrow": "Current profile",
+      "currentProfileTitle": "Account scope",
+      "currentProfileDescription": "The assigned profile controls the routes, actions and sections available for this session.",
+      "profile": "Profile",
+      "currentProfileBadge": "Assigned",
+      "assignmentEyebrow": "Users",
+      "assignmentTitle": "Profile assignment",
+      "assignmentDescription": "Change each user's scope to share access with administrators, members or guests.",
+      "status": "Status",
+      "profileSelector": "Select profile",
+      "matrixEyebrow": "Permissions",
+      "matrixTitle": "Profile matrix",
+      "matrixDescription": "Real IAM profile catalog used to evidence access control.",
+      "permissionCount": "{{count}} permissions enabled",
+      "emptyEyebrow": "No data",
+      "emptyTitle": "No profiles available",
+      "emptyDescription": "The profile catalog will appear when the IAM service responds.",
+      "usersEmptyEyebrow": "No users",
+      "usersEmptyTitle": "No users available",
+      "usersEmptyDescription": "Active users will appear here when your account can manage access.",
+      "loadError": "Could not load access profiles.",
+      "loadUsersError": "Could not load users.",
+      "assignError": "Could not change the user's profile.",
+      "statuses": {
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "profiles": {
+        "owner": {
+          "title": "Owner",
+          "description": "Manages the full account, billing, users and operational settings."
+        },
+        "admin": {
+          "title": "Administrator",
+          "description": "Operates sites, devices, routines, alerts, support and reports without managing billing."
+        },
+        "member": {
+          "title": "Member",
+          "description": "Uses the daily platform with operational control and energy and report reading."
+        },
+        "guest": {
+          "title": "Guest",
+          "description": "Accesses only the home view and authorized basic controls."
+        }
+      },
+      "permissions": {
+        "VIEW_HOME": "View home",
+        "CONTROL_DEVICES": "Control devices",
+        "MANAGE_DEVICES": "Manage devices",
+        "MANAGE_ROUTINES": "Manage routines and modes",
+        "MANAGE_SPACES": "Manage sites and rooms",
+        "VIEW_ENERGY": "View energy",
+        "VIEW_REPORTS": "View reports",
+        "MANAGE_ALERTS": "Manage alerts",
+        "MANAGE_SUPPORT": "Manage support",
+        "MANAGE_BILLING": "Manage billing",
+        "MANAGE_ACCESS": "Manage access"
+      }
+    },
+    "platform": {
+      "title": "Local preferences",
+      "pageDescription": "Adjust EnergyCore appearance and language in this browser.",
+      "browserExperienceTitle": "Browser experience",
+      "browserExperienceDescription": "Applied in this browser and synced with your account.",
+      "darkMode": "Dark mode",
+      "lightMode": "Light mode",
+      "darkModeDescription": "Change the interface appearance in this browser.",
+      "language": "Language",
+      "languages": {
+        "es": "Spanish",
+        "esDescription": "Local interface language.",
+        "en": "English",
+        "enDescription": "Local interface language.",
+        "pt": "Portuguese",
+        "ptDescription": "Local interface language."
+      },
+      "languageApplied": "Language applied in this browser.",
+      "appearanceApplied": "Appearance applied in this browser.",
+      "localStatusEyebrow": "Account status",
+      "preferencesSummaryTitle": "Preferences summary",
+      "preferencesSummaryDescription": "Confirm how the experience is configured in this browser.",
+      "appearance": "Appearance",
+      "appearanceDescription": "The visual preference applies to the shell and shared interface components.",
+      "activeLanguage": "Active language",
+      "activeLanguageDescription": "The selected language is saved to your account to maintain consistent navigation.",
+      "scope": "Scope",
+      "local": "Account",
+      "scopeDescription": "These settings are stored in your account and reflected in this browser."
+    },
+    "billing": {
+      "title": "Plan and payments",
+      "pageDescription": "Manage your active subscription, review registered payments and download invoices issued for your account.",
+      "subscriptionEyebrow": "Subscription",
+      "planStatusTitle": "Plan status",
+      "planStatusDescription": "Real information for the active plan, operational limits and payment activity.",
+      "perMonth": "per month",
+      "choosePlanDescription": "Choose a plan to activate the full platform.",
+      "exports": "Exports",
+      "activeExports": "Active",
+      "notIncluded": "Not included",
+      "cycleStarted": "Cycle started",
+      "nextBillingDate": "Next billing",
+      "cycleEnded": "Cycle ended",
+      "viewPlans": "View plans",
+      "lastPayment": "Last payment",
+      "noPaymentsRegistered": "No registered payments.",
+      "payments": "Payments",
+      "registeredMovements": "Registered movements",
+      "registeredMovementsDescription": "Payments received from the real subscription flow.",
+      "paymentNumber": "Payment #{{id}}",
+      "method": "Method",
+      "noPaymentsTitle": "No payments",
+      "noPaymentsDescription": "Payments will appear when you activate or renew a plan.",
+      "issuedDocuments": "Issued documents",
+      "issuedDocumentsDescription": "Download only invoices that exist in your account.",
+      "invoiceNumber": "Invoice #{{id}}",
+      "issuedOn": "Issued on {{date}}",
+      "download": "Download",
+      "noInvoicesTitle": "No invoices",
+      "noInvoicesDescription": "When an invoice is issued for your account, it will appear here.",
+      "loadError": "Could not load billing history.",
+      "invoiceNotFound": "Invoice not found.",
+      "downloadSuccess": "Invoice downloaded successfully.",
+      "downloadError": "Could not download the invoice.",
+      "cancelPlanTitle": "Cancel plan",
+      "cancelPlanMessage": "Your active subscription will be canceled. Confirm only if you no longer want to continue with the plan.",
+      "cancelPlanConfirm": "Cancel plan",
+      "keepPlan": "Keep plan",
+      "cancelSuccess": "Plan canceled.",
+      "cancelError": "Could not cancel the plan.",
+      "unlimited": "Unlimited",
+      "noActivePlan": "No active plan",
+      "subscriptionStatuses": {
+        "active": "Active",
+        "cancelled": "Canceled",
+        "expired": "Expired"
+      },
+      "paymentStatuses": {
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "pending": "Pending"
+      },
+      "invoiceIssued": "Issued",
+      "invoiceRegistered": "Registered",
+      "goToPlans": "Go to plans"
+    }
+  }
+}

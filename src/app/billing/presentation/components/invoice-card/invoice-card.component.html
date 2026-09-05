@@ -1,0 +1,20 @@
+<article class="invoice-card">
+  <div>
+    <p class="eyebrow">{{ invoice.invoiceNumber }}</p>
+    <h2>{{ 'billing.invoice' | translate }} #{{ invoice.id }}</h2>
+
+    <p>
+      {{ 'billing.issuedAt' | translate }}:
+      <strong>{{ invoice.issuedAt }}</strong>
+    </p>
+  </div>
+
+  <div class="amount">
+    <span>{{ invoice.currency === 'PEN' ? 'S/' : invoice.currency }}</span>
+    <strong>{{ invoice.totalAmount }}</strong>
+  </div>
+
+  <app-button variant="secondary" size="sm" (pressed)="onDownload()">
+    {{ 'billing.downloadInvoice' | translate }}
+  </app-button>
+</article>

@@ -1,0 +1,243 @@
+<section class="alert-rules-page ec-page">
+  <header class="ec-page-heading">
+    <p class="ec-page-eyebrow">{{ 'nav.rules' | translate }}</p>
+    <h1 class="ec-page-title">{{ 'alertRules.title' | translate }}</h1>
+    <p class="ec-page-description">
+      {{ 'alertRules.pageDescription' | translate }}
+    </p>
+  </header>
+
+  <section class="rules-summary" [attr.aria-label]="'alertRules.summaryAria' | translate">
+    <article>
+      <span>{{ 'devices.total' | translate }}</span>
+      <strong>{{ rules.length }}</strong>
+      <small>{{ 'alertRules.savedRules' | translate }}</small>
+    </article>
+
+    <article>
+      <span>{{ 'routines.active' | translate }}</span>
+      <strong>{{ activeRules.length }}</strong>
+      <small>{{ 'alertRules.pausedCount' | translate: { count: inactiveRules.length } }}</small>
+    </article>
+
+    <article>
+      <span>{{ 'alertRules.activeWeight' | translate }}</span>
+      <strong>{{ totalWeight }}</strong>
+      <small>{{ 'alertRules.usedWhenEvaluating' | translate }}</small>
+    </article>
+  </section>
+
+  <app-settings-section
+    [eyebrow]="'alerts.classification' | translate"
+    [title]="'alertRules.realScoreRanges' | translate"
+    [description]="'alertRules.realScoreRangesDescription' | translate"
+  >
+    <div class="severity-stack">
+      @for (range of severityRanges; track range.label) {
+        <article class="severity-row" [class]="'severity-row severity-row--' + range.tone">
+          <div>
+            <strong>{{ severityRangeLabel(range) }}</strong>
+            <p>{{ severityRangeDescription(range) }}</p>
+          </div>
+          <span>{{ range.from }}% - {{ range.to }}%</span>
+        </article>
+      }
+    </div>
+  </app-settings-section>
+
+  <app-settings-section
+    [eyebrow]="'alertRules.newRule' | translate"
+    [title]="'alertRules.createPersistentRule' | translate"
+    [description]="'alertRules.createPersistentRuleDescription' | translate"
+  >
+    <form class="rule-form" (ngSubmit)="createRule()">
+      <label class="text-field">
+        <span>{{ 'devices.name' | translate }}</span>
+        <input
+          type="text"
+          name="newRuleName"
+          [(ngModel)]="newRuleName"
+          [placeholder]="'alertRules.namePlaceholder' | translate"
+        />
+      </label>
+
+      <label class="setting-field">
+        <span>{{ 'alertRules.metric' | translate }}</span>
+        <app-dropdown
+          [options]="metricOptions"
+          [value]="newRuleMetric"
+          (valueChange)="updateMetric($event)"
+        />
+      </label>
+
+      <label class="setting-field">
+        <span>{{ 'alertRules.condition' | translate }}</span>
+        <app-dropdown
+          [options]="conditionOptions"
+          [value]="newRuleCondition"
+          (valueChange)="updateCondition($event)"
+        />
+      </label>
+
+      <label class="setting-field">
+        <span>{{ 'alerts.level' | translate }}</span>
+        <app-dropdown
+          [options]="levelOptions"
+          [value]="newRuleLevel"
+          (valueChange)="updateLevel($event)"
+        />
+      </label>
+
+      <label class="setting-field">
+        <span>{{ 'alertRules.scope' | translate }}</span>
+        <app-dropdown
+          [options]="scopeOptions"
+          [value]="newRuleScope"
+          (valueChange)="updateScope($event)"
+        />
+      </label>
+
+      <label class="setting-field">
+        <span>{{ 'alertRules.criterion' | translate }}</span>
+        <app-dropdown
+          [options]="evaluatorOptions"
+          [value]="newRuleEvaluator"
+          (valueChange)="updateEvaluator($event)"
+        />
+      </label>
+
+      <app-number-stepper
+        [label]="'alertRules.threshold' | translate"
+        [value]="newRuleThreshold"
+        [min]="0"
+        [step]="newRuleMetric === 'HIGH_READING_COUNT' ? 1 : 25"
+        [decimals]="newRuleMetric === 'HIGH_READING_COUNT' ? 0 : 2"
+        [allowEmpty]="false"
+        (valueChange)="newRuleThreshold = $event ?? 0"
+      />
+
+      <app-number-stepper
+        [label]="'alertRules.weight' | translate"
+        [value]="newRuleWeight"
+        [min]="1"
+        [max]="100"
+        [step]="1"
+        [allowEmpty]="false"
+        (valueChange)="newRuleWeight = $event ?? 1"
+      />
+
+      <app-button type="submit" variant="create" size="lg">
+        {{ 'alertRules.create' | translate }}
+      </app-button>
+    </form>
+  </app-settings-section>
+
+  <app-settings-section
+    [eyebrow]="'nav.rules' | translate"
+    [title]="'alertRules.savedRules' | translate"
+    [description]="'alertRules.savedRulesDescription' | translate"
+  >
+    @if (notificationsFacade.loading()) {
+      <div class="loading-wrapper">
+        <app-loading-spinner />
+      </div>
+    } @else {
+      <div class="rules-list">
+        @for (rule of rules; track rule.id) {
+          <app-alert-rule-card
+            [rule]="rule"
+            (toggle)="toggleRule($event)"
+            (remove)="deleteRule($event)"
+          />
+        } @empty {
+          <app-empty-state
+            [eyebrow]="'nav.rules' | translate"
+            [title]="'alertRules.emptyTitle' | translate"
+            [description]="'alertRules.emptyDescription' | translate"
+            [compact]="true"
+          />
+        }
+      </div>
+    }
+  </app-settings-section>
+
+  <app-settings-section
+    [eyebrow]="'alertRules.evaluation' | translate"
+    [title]="'alertRules.testActiveRules' | translate"
+    [description]="'alertRules.testActiveRulesDescription' | translate"
+  >
+    <div class="evaluation-panel">
+      <app-number-stepper
+        [label]="'alertRules.observedValue' | translate"
+        [value]="observedValue"
+        [min]="0"
+        [step]="1"
+        [allowEmpty]="false"
+        (valueChange)="observedValue = $event ?? 0"
+      />
+
+      <app-button
+        variant="primary"
+        size="lg"
+        [disabled]="!activeRules.length"
+        (pressed)="evaluateRules()"
+      >
+        {{ 'alertRules.evaluate' | translate }}
+      </app-button>
+    </div>
+
+    @if (evaluationResult; as result) {
+      <article
+        class="evaluation-result"
+        [class]="'evaluation-result evaluation-result--' + result.level.toLowerCase()"
+        [class.evaluation-result--dismissing]="isEvaluationResultDismissing"
+      >
+        <div class="evaluation-result__body">
+          <div class="evaluation-result__header">
+            <div class="evaluation-result__mark" aria-hidden="true">
+              <span></span>
+            </div>
+            <div>
+              <span class="evaluation-result__eyebrow">{{ 'alertRules.testedNotification' | translate }}</span>
+              <h3>{{ levelLabel(result.level) }}</h3>
+              <p>{{ result.explanation }}</p>
+            </div>
+            <div class="evaluation-result__score">
+              <span>{{ 'alertRules.score' | translate }}</span>
+              <strong>{{ result.severityScore }}</strong>
+            </div>
+          </div>
+
+          <div class="result-metrics">
+            <span>
+              <span>{{ 'alertRules.criteria' | translate }}</span>
+              <strong>{{ result.activeEvaluatorCount }}</strong>
+            </span>
+            <span>
+              <span>{{ 'alertRules.weight' | translate }}</span>
+              <strong>{{ result.totalWeight }}</strong>
+            </span>
+            <span>
+              <span>{{ 'alertRules.scope' | translate }}</span>
+              <strong>{{ result.scopeType }}</strong>
+            </span>
+          </div>
+
+          <p class="result-evidence">{{ result.evidence }}</p>
+        </div>
+
+        <footer class="evaluation-result__footer">
+          <p class="result-action">{{ result.recommendedAction }}</p>
+          <app-button
+            type="button"
+            variant="ghost"
+            size="sm"
+            (pressed)="dismissEvaluationResult()"
+          >
+            {{ 'operationModes.actions.remove' | translate }}
+          </app-button>
+        </footer>
+      </article>
+    }
+  </app-settings-section>
+</section>

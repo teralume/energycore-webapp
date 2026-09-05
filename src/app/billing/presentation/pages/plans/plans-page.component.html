@@ -1,0 +1,68 @@
+<section class="plans-page">
+  <section class="plan-summary-strip" aria-label="Plan comparison summary">
+    <article>
+      <span>{{ 'billing.summaryStarterLabel' | translate }}</span>
+      <strong>{{ 'billing.summaryStarterText' | translate }}</strong>
+    </article>
+
+    <article class="highlighted">
+      <span>{{ 'billing.summaryProfessionalLabel' | translate }}</span>
+      <strong>{{ 'billing.summaryProfessionalText' | translate }}</strong>
+    </article>
+
+    <article>
+      <span>{{ 'billing.summaryEnterpriseLabel' | translate }}</span>
+      <strong>{{ 'billing.summaryEnterpriseText' | translate }}</strong>
+    </article>
+  </section>
+
+  @if (billingFacade.loading()) {
+    <div class="loading-wrapper">
+      <app-loading-spinner />
+    </div>
+  } @else {
+    @if (billingFacade.activePlan()) {
+      <section class="current-plan">
+        <div>
+          <span>{{ 'billing.currentPlan' | translate }}</span>
+          <strong>{{ billingFacade.activePlan()?.name }}</strong>
+        </div>
+
+        <app-button
+          variant="danger"
+          size="sm"
+          [disabled]="billingFacade.loading()"
+          (pressed)="cancelSubscription()"
+        >
+          {{ 'billing.cancel' | translate }}
+        </app-button>
+      </section>
+    } @else {
+      <section class="current-plan empty">
+        <div>
+          <span>{{ 'billing.currentPlan' | translate }}</span>
+          <strong>{{ 'billing.noPlan' | translate }}</strong>
+        </div>
+      </section>
+    }
+
+    <section class="plans-grid">
+      @for (plan of billingFacade.plans(); track plan.id) {
+        <app-plan-card
+          [plan]="plan"
+          [activePlanCode]="billingFacade.activePlanCode()"
+          (selected)="openPayment($event)"
+        />
+      }
+    </section>
+  }
+
+  @if (selectedPlan) {
+    <app-payment-form
+      [plan]="selectedPlan"
+      [loading]="billingFacade.loading()"
+      (confirmed)="confirmPayment($event)"
+      (canceled)="closePayment()"
+    />
+  }
+</section>

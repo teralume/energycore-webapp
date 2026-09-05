@@ -1,0 +1,234 @@
+.devices-page {
+  display: grid;
+  gap: 24px;
+}
+
+.operation-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+
+  strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--text-color);
+    font-size: clamp(1.65rem, 3vw, 2.25rem);
+    line-height: 1;
+  }
+
+  p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-weight: 700;
+  }
+}
+
+.operation-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 22px;
+  background: var(--surface-color);
+
+  h2,
+  p {
+    margin: 0;
+  }
+
+  h2 {
+    color: var(--text-color);
+    font-size: 1.3rem;
+  }
+
+  p:not(.section-eyebrow) {
+    margin-top: 6px;
+    color: var(--text-secondary);
+    font-weight: 700;
+  }
+}
+
+.toolbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.section-eyebrow {
+  margin: 0 0 6px;
+  color: var(--accent-color);
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.loading-wrapper {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+}
+
+.modal-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+
+  span {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 900;
+  }
+}
+
+input {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 13px 14px;
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--surface-color) 84%, var(--app-bg));
+  box-sizing: border-box;
+  font: inherit;
+  outline: none;
+}
+
+input:focus {
+  border-color: color-mix(in srgb, var(--accent-color) 70%, var(--border-color));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-color) 12%, transparent);
+}
+
+.power-advice,
+.pairing-options,
+.form-actions {
+  grid-column: 1 / -1;
+}
+
+.rename-form {
+  grid-template-columns: 1fr;
+}
+
+.pair-form {
+  align-items: start;
+}
+
+.pairing-options {
+  display: grid;
+  gap: 10px;
+
+  > span {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 900;
+  }
+}
+
+.pairing-option-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.pairing-option {
+  display: grid;
+  gap: 6px;
+  min-height: 74px;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 12px;
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--surface-color) 86%, var(--app-bg));
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  strong {
+    font-size: 0.86rem;
+    line-height: 1.1;
+  }
+
+  small {
+    color: var(--text-secondary);
+    font-size: 0.76rem;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+}
+
+.pairing-option.selected,
+.pairing-option:focus-visible {
+  border-color: color-mix(in srgb, var(--accent-color) 70%, var(--border-color));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-color) 12%, transparent);
+  outline: none;
+}
+
+.power-advice {
+  display: grid;
+  gap: 8px;
+  border: 1px solid color-mix(in srgb, var(--accent-color) 22%, var(--border-color));
+  border-radius: 18px;
+  padding: 15px;
+  background: color-mix(in srgb, var(--accent-color) 7%, var(--surface-color));
+
+  span {
+    width: fit-content;
+    border-radius: 999px;
+    padding: 5px 10px;
+    color: var(--accent-color);
+    background: color-mix(in srgb, var(--accent-color) 12%, transparent);
+    font-size: 0.76rem;
+    font-weight: 900;
+  }
+
+  p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-weight: 700;
+    line-height: 1.5;
+  }
+}
+
+.power-advice.high {
+  border-color: var(--ec-status-danger-border);
+  background: color-mix(in srgb, var(--ec-status-danger-bg) 72%, var(--surface-color));
+
+  span {
+    color: var(--ec-status-danger-text);
+    background: var(--ec-status-danger-bg);
+  }
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 860px) {
+  .operation-summary,
+  .modal-form {
+    grid-template-columns: 1fr;
+  }
+
+  .operation-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .toolbar-actions,
+  .pairing-option-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+}

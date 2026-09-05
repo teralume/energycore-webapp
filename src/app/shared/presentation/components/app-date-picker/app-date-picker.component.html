@@ -1,0 +1,88 @@
+<div class="date-picker">
+  @if (label) {
+    <span class="date-picker__label">{{ label }}</span>
+  }
+
+  <button
+    #dateTrigger
+    type="button"
+    class="date-picker__trigger"
+    aria-haspopup="dialog"
+    [attr.aria-expanded]="shouldRenderCalendar"
+    (click)="toggleCalendar()"
+  >
+    <span [class.placeholder]="!value">
+      @if (value) {
+        {{ displayValue }}
+      } @else {
+        {{ 'shared.datePicker.placeholder' | translate }}
+      }
+    </span>
+
+    <span class="date-picker__icon">v</span>
+  </button>
+
+  @if (shouldRenderCalendar) {
+    <section
+      #calendarPanel
+      class="calendar-panel"
+      [class.closing]="isClosing"
+      [attr.aria-label]="'shared.datePicker.calendarAria' | translate"
+      popover="manual"
+    >
+      <header class="calendar-panel__header">
+        <button
+          type="button"
+          class="nav-btn"
+          [attr.aria-label]="'shared.datePicker.previousMonth' | translate"
+          (click)="previousMonth()"
+        >
+          <span aria-hidden="true">&#8249;</span>
+        </button>
+
+        <strong>{{ currentMonthLabel }}</strong>
+
+        <button
+          type="button"
+          class="nav-btn"
+          [attr.aria-label]="'shared.datePicker.nextMonth' | translate"
+          (click)="nextMonth()"
+          [disabled]="!canGoNextMonth()"
+        >
+          <span aria-hidden="true">&#8250;</span>
+        </button>
+      </header>
+
+      <div class="calendar-weekdays">
+        @for (weekDay of weekDays; track weekDay) {
+          <span>{{ weekDay }}</span>
+        }
+      </div>
+
+      <div class="calendar-grid">
+        @for (day of days; track day.value) {
+          <button
+            type="button"
+            class="day-btn"
+            [class.outside]="!day.isCurrentMonth"
+            [class.today]="day.isToday"
+            [class.selected]="day.isSelected"
+            [disabled]="day.isDisabled"
+            (click)="selectDate(day)"
+          >
+            {{ day.day }}
+          </button>
+        }
+      </div>
+
+      <footer class="calendar-panel__footer">
+        <button type="button" class="footer-btn" (click)="clear()">
+          {{ 'shared.datePicker.clear' | translate }}
+        </button>
+        <button type="button" class="footer-btn primary" (click)="selectToday()">
+          {{ 'shared.datePicker.today' | translate }}
+        </button>
+      </footer>
+    </section>
+  }
+</div>

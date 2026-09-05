@@ -1,0 +1,435 @@
+<section class="operation-modes-page ec-page">
+  <header class="ec-page-heading">
+    <p class="ec-page-eyebrow">{{ 'nav.operation' | translate }}</p>
+    <h1 class="ec-page-title">{{ 'nav.operationModes' | translate }}</h1>
+    <p class="ec-page-description">
+      {{ 'operationModes.pageDescription' | translate }}
+    </p>
+  </header>
+
+  <section class="mode-summary">
+    <app-section-card size="small" [eyebrow]="'home.activeSiteEyebrow' | translate" [title]="'operationModes.summary.context' | translate">
+      <strong>{{ selectedLocationName }}</strong>
+      <p>{{ 'operationModes.summary.availableDevices' | translate: { count: availableDevices.length } }}</p>
+    </app-section-card>
+
+    <app-section-card size="small" [eyebrow]="'nav.operationModes' | translate" [title]="'operationModes.summary.saved' | translate">
+      <strong>{{ modesInActiveWorkplace.length }}</strong>
+      <p>{{ (activeMode ? 'operationModes.summary.hasActiveMode' : 'operationModes.summary.noActiveMode') | translate }}</p>
+    </app-section-card>
+
+    <app-section-card size="small" [eyebrow]="'operationModes.internalRoutines' | translate" [title]="'operationModes.summary.current' | translate">
+      <strong>{{ selectedMode?.internalRoutines?.length ?? 0 }}</strong>
+      <p>{{ selectedMode ? selectedMode.name : ('operationModes.summary.selectMode' | translate) }}</p>
+    </app-section-card>
+  </section>
+
+  <section class="operation-toolbar">
+    <div>
+      <p class="section-eyebrow">{{ 'operationModes.toolbar.eyebrow' | translate }}</p>
+      <h2>{{ 'operationModes.toolbar.title' | translate }}</h2>
+      <p>{{ 'operationModes.toolbar.description' | translate }}</p>
+    </div>
+
+    <app-button variant="create" (pressed)="openCreateModal()">
+      {{ 'operationModes.actions.create' | translate }}
+    </app-button>
+  </section>
+
+  @if (modesInActiveWorkplace.length === 0) {
+    <app-empty-state
+      [eyebrow]="'nav.operationModes' | translate"
+      [title]="'operationModes.empty.title' | translate"
+      [description]="'operationModes.empty.description' | translate"
+    />
+  } @else {
+    <section class="mode-grid">
+      @for (mode of modesInActiveWorkplace; track mode.id) {
+        <app-section-card class="mode-card" size="medium">
+          <article class="mode-card__body" [class.mode-card__body--active]="mode.status === 'ACTIVE'">
+            <header class="mode-card__header">
+              <div>
+                <p>{{ getModeRoomName(mode) }}</p>
+                <h3>{{ mode.name }}</h3>
+              </div>
+
+              <app-severity-badge [level]="mode.status === 'ACTIVE' ? 'SUCCESS' : 'STABLE'" />
+            </header>
+
+            <p class="mode-card__description">
+              {{ mode.description || ('operationModes.fallbacks.noDescription' | translate) }}
+            </p>
+
+            <dl class="mode-card__facts">
+              <div>
+                <dt>{{ 'routines.time' | translate }}</dt>
+                <dd>{{ getModeScheduleLabel(mode) }}</dd>
+              </div>
+              <div>
+                <dt>{{ 'nav.routines' | translate }}</dt>
+                <dd>{{ mode.internalRoutines.length }}</dd>
+              </div>
+              <div>
+                <dt>{{ 'history.status' | translate }}</dt>
+                <dd>{{ getModeStatusLabel(mode) }}</dd>
+              </div>
+            </dl>
+
+            <div class="mode-card__actions">
+              <app-button variant="neutral" size="sm" (pressed)="selectMode(mode)">{{ 'operationModes.impact.title' | translate }}</app-button>
+              <app-button variant="action" size="sm" (pressed)="activateMode(mode)">
+                {{ (mode.status === 'ACTIVE' ? 'operationModes.actions.reapply' : 'routines.enable') | translate }}
+              </app-button>
+              <app-button variant="danger" size="sm" (pressed)="archiveMode(mode)">{{ 'operationModes.actions.archive' | translate }}</app-button>
+            </div>
+          </article>
+        </app-section-card>
+      }
+    </section>
+  }
+
+  <app-section-card [eyebrow]="'operationModes.impact.title' | translate" [title]="'operationModes.impact.applicationTitle' | translate">
+    @if (selectedMode && preview) {
+      <section class="impact-panel">
+        <header>
+          <div>
+            <h3>{{ selectedMode.name }}</h3>
+            <p>{{ preview.evidence }}</p>
+          </div>
+          <strong>{{ 'operationModes.impact.affectedDevices' | translate: { count: preview.affectedDeviceIds.length } }}</strong>
+        </header>
+
+        <div class="impact-grid">
+          <article>
+            <span>{{ 'operationModes.site' | translate }}</span>
+            <strong>{{ preview.locationName }}</strong>
+          </article>
+          <article>
+            <span>{{ 'operationModes.internalRoutines' | translate }}</span>
+            <strong>{{ selectedMode.internalRoutines.length }}</strong>
+          </article>
+          <article>
+            <span>{{ 'operationModes.impact.ignored' | translate }}</span>
+            <strong>{{ preview.ignoredRemovedDeviceIds.length + preview.ignoredMaintenanceDeviceIds.length }}</strong>
+          </article>
+        </div>
+
+        <div class="routine-readout">
+          @for (routine of selectedMode.internalRoutines; track routine.name + routine.targetId + routine.triggerTime) {
+            <article>
+              <span>{{ routine.triggerTime }}</span>
+              <strong>{{ routine.name }}</strong>
+              <p>{{ getInternalRoutineActionLabel(routine) }} - {{ getInternalRoutineTargetName(routine) }}</p>
+            </article>
+          }
+        </div>
+
+        <p class="impact-note">{{ preview.recommendedAction }}</p>
+      </section>
+    } @else {
+      <app-empty-state
+        [eyebrow]="'operationModes.impact.title' | translate"
+        [title]="'operationModes.impact.emptyTitle' | translate"
+        [description]="'operationModes.impact.emptyDescription' | translate"
+        [compact]="true"
+      />
+    }
+  </app-section-card>
+
+  <app-modal-form-shell
+    [open]="createModalOpen"
+    [eyebrow]="'operationModes.form.newMode' | translate"
+    [title]="'operationModes.actions.create' | translate"
+    [description]="'operationModes.form.description' | translate"
+    (closed)="closeCreateModal()"
+  >
+    <form class="mode-form" (ngSubmit)="createMode()">
+      <section class="form-section">
+        <header>
+          <span>1</span>
+          <div>
+            <h3>{{ 'operationModes.form.identityTitle' | translate }}</h3>
+            <p>{{ 'operationModes.form.identityDescription' | translate }}</p>
+          </div>
+        </header>
+
+        <div class="form-grid">
+          <label class="field">
+            <span>{{ 'devices.name' | translate }}</span>
+            <input name="name" [(ngModel)]="name" [placeholder]="'operationModes.form.namePlaceholder' | translate" required />
+          </label>
+
+          <label class="field field--wide">
+            <span>{{ 'devices.form.description' | translate }}</span>
+            <textarea
+              name="description"
+              rows="3"
+              [(ngModel)]="description"
+              [placeholder]="'operationModes.form.descriptionPlaceholder' | translate"
+            ></textarea>
+          </label>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <header>
+          <span>2</span>
+          <div>
+            <h3>{{ 'operationModes.form.applicationTitle' | translate }}</h3>
+            <p>{{ 'operationModes.form.applicationDescription' | translate }}</p>
+          </div>
+        </header>
+
+        <div class="form-grid">
+          <label class="field">
+            <span>{{ 'operationModes.site' | translate }}</span>
+            <app-dropdown
+              [options]="locationOptions"
+              [value]="locationValue"
+              [placeholder]="'operationModes.form.selectSite' | translate"
+              (valueChange)="selectLocation($event)"
+            />
+          </label>
+
+          <label class="field">
+            <span>{{ 'operationModes.form.applicationTitle' | translate }}</span>
+            <app-dropdown
+              [options]="applicationOptions"
+              [value]="applicationScope"
+              [placeholder]="'operationModes.form.applicationTitle' | translate"
+              (valueChange)="selectApplication($event)"
+            />
+          </label>
+
+          @if (applicationScope === 'ROOM') {
+            <label class="field field--reveal">
+              <span>{{ 'devices.room' | translate }}</span>
+              <app-dropdown
+                [options]="roomOptions"
+                [value]="roomValue"
+                [placeholder]="'operationModes.form.selectRoom' | translate"
+                (valueChange)="selectRoom($event)"
+              />
+            </label>
+          }
+        </div>
+      </section>
+
+      <section class="form-section">
+        <header>
+          <span>3</span>
+          <div>
+            <h3>{{ 'routines.time' | translate }}</h3>
+            <p>{{ modeWindowLabel }}</p>
+          </div>
+        </header>
+
+        <div class="form-grid">
+          <label class="field">
+            <span>{{ 'operationModes.form.scheduleType' | translate }}</span>
+            <app-dropdown
+              [options]="scheduleOptions"
+              [value]="schedule"
+              [placeholder]="'routines.time' | translate"
+              (valueChange)="selectSchedule($event)"
+            />
+          </label>
+
+          @if (schedule === 'CUSTOM') {
+            <div class="field field--reveal">
+              <app-time-picker [label]="'nav.home' | translate" [(value)]="startsAt" />
+            </div>
+            <div class="field field--reveal">
+              <app-time-picker [label]="'operationModes.form.end' | translate" [(value)]="endsAt" />
+            </div>
+          }
+        </div>
+      </section>
+
+      <section class="form-section">
+        <header>
+          <span>4</span>
+          <div>
+            <h3>{{ 'operationModes.form.modeRoutinesTitle' | translate }}</h3>
+            <p>{{ 'operationModes.form.modeRoutinesDescription' | translate }}</p>
+          </div>
+        </header>
+
+        <div class="routine-builder">
+          <label class="field">
+            <span>{{ 'operationModes.form.label' | translate }}</span>
+            <input name="routineName" [(ngModel)]="routineName" [placeholder]="'operationModes.form.routineNamePlaceholder' | translate" />
+          </label>
+
+          <label class="field">
+            <span>{{ 'routines.form.target' | translate }}</span>
+            <app-dropdown
+              [options]="routineTargetTypeOptions"
+              [value]="routineTargetType"
+              [placeholder]="'devices.type' | translate"
+              (valueChange)="selectRoutineTargetType($event)"
+            />
+          </label>
+
+          <label class="field">
+            <span>{{ getRoutineTargetTypeLabel() }}</span>
+            <app-dropdown
+              [options]="routineTargetOptions"
+              [value]="routineTargetId ? '' + routineTargetId : null"
+              [placeholder]="'operationModes.form.selectTarget' | translate"
+              (valueChange)="selectRoutineTarget($event)"
+            />
+            @if (routineTargetOptions.length === 0) {
+              <small class="field__hint">
+                {{ 'operationModes.form.noTargetsInScope' | translate }}
+              </small>
+            }
+          </label>
+
+          <label class="field">
+            <span>{{ 'routines.action' | translate }}</span>
+            <app-dropdown
+              [options]="routineActionOptions"
+              [value]="routineAction"
+              [placeholder]="'routines.action' | translate"
+              (valueChange)="selectRoutineAction($event)"
+            />
+          </label>
+
+          <div class="field routine-builder__time">
+            <app-time-picker [label]="'routines.card.time' | translate" [(value)]="routineTime" />
+          </div>
+
+          <div class="field routine-builder__action">
+            <span aria-hidden="true">{{ 'operationModes.actions.add' | translate }}</span>
+            <app-button
+              type="button"
+              variant="create"
+              [block]="true"
+              (pressed)="addInternalRoutine()"
+            >
+              {{ 'operationModes.actions.add' | translate }}
+            </app-button>
+          </div>
+        </div>
+
+        @if (internalRoutines.length === 0) {
+          <app-empty-state
+            [eyebrow]="'nav.routines' | translate"
+            [title]="'operationModes.form.noInternalRoutinesTitle' | translate"
+            [description]="'operationModes.form.noInternalRoutinesDescription' | translate"
+            [compact]="true"
+          />
+        } @else {
+          <div class="routine-draft-list">
+            @for (routine of internalRoutines; track routine.clientId) {
+              <article>
+                <span class="routine-draft-list__icon" aria-hidden="true">&#9200;</span>
+
+                <div class="routine-draft-list__content">
+                  <strong>{{ routine.name }}</strong>
+                  <p>{{ getInternalRoutineActionLabel(routine) }} - {{ getInternalRoutineTargetName(routine) }}</p>
+                </div>
+
+                <div class="routine-draft-list__time">
+                  <span>{{ 'routines.card.time' | translate }}</span>
+                  <strong>{{ routine.triggerTime }}</strong>
+                </div>
+
+                <app-button
+                  class="routine-draft-list__action"
+                  variant="danger"
+                  size="sm"
+                  (pressed)="removeInternalRoutine(routine.clientId)"
+                >
+                  {{ 'operationModes.actions.remove' | translate }}
+                </app-button>
+              </article>
+            }
+          </div>
+        }
+      </section>
+
+      <section class="form-section">
+        <header>
+          <span>5</span>
+          <div>
+            <h3>{{ 'about.capabilities.items.energy.eyebrow' | translate }}</h3>
+            <p>{{ 'operationModes.goals.description' | translate }}</p>
+          </div>
+        </header>
+
+        @if (availableGoals.length === 0) {
+          <app-empty-state
+            [eyebrow]="'reporting.goals' | translate"
+            [title]="'operationModes.goals.emptyTitle' | translate"
+            [description]="'operationModes.goals.emptyDescription' | translate"
+            [compact]="true"
+          />
+        } @else {
+          <div class="chip-grid">
+            @for (goal of availableGoals; track goal.id) {
+              <app-button
+                type="button"
+                size="sm"
+                [variant]="selectedGoalIds.has(goal.id) ? 'action' : 'ghost'"
+                (pressed)="toggleGoal(goal.id)"
+              >
+                {{ goal.title }}
+              </app-button>
+            }
+          </div>
+        }
+      </section>
+
+      <section class="form-section">
+        <header>
+          <span>6</span>
+          <div>
+            <h3>{{ 'operationModes.alertsRules.title' | translate }}</h3>
+            <p>{{ 'operationModes.alertsRules.description' | translate }}</p>
+          </div>
+        </header>
+
+        <div class="form-grid">
+          <label class="field">
+            <span>{{ 'nav.rules' | translate }}</span>
+            <app-dropdown
+              [options]="ruleOptions"
+              [value]="ruleProfileValue"
+              [placeholder]="'nav.rules' | translate"
+              (valueChange)="selectRuleProfile($event)"
+            />
+          </label>
+
+          <label class="field">
+            <span>{{ 'nav.preferences' | translate }}</span>
+            <app-dropdown
+              [options]="preferenceOptions"
+              [value]="preferenceValue"
+              [placeholder]="'nav.preferences' | translate"
+              (valueChange)="selectPreference($event)"
+            />
+          </label>
+        </div>
+
+        <div class="toggle-grid">
+          <app-setting-toggle [title]="'operationModes.toggles.applyRulesTitle' | translate" [description]="'operationModes.toggles.applyRulesDescription' | translate" [(checked)]="applyRules" />
+          <app-setting-toggle [title]="'operationModes.toggles.applyPreferencesTitle' | translate" [description]="'operationModes.toggles.applyPreferencesDescription' | translate" [(checked)]="applyPreferences" />
+          <app-setting-toggle [title]="'operationModes.toggles.criticalSoundTitle' | translate" [description]="'operationModes.toggles.criticalSoundDescription' | translate" [(checked)]="preserveCriticalSound" />
+        </div>
+      </section>
+
+      <footer class="form-actions">
+        @if (createDisabledReason) {
+          <p class="form-actions__hint">{{ createDisabledReason }}</p>
+        }
+
+        <div class="form-actions__buttons">
+          <app-button type="button" variant="neutral" (pressed)="closeCreateModal()">{{ 'billing.cancelPayment' | translate }}</app-button>
+          <app-button type="submit" variant="create" [disabled]="createDisabled">{{ 'operationModes.actions.create' | translate }}</app-button>
+        </div>
+      </footer>
+    </form>
+  </app-modal-form-shell>
+</section>

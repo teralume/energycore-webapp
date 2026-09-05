@@ -1,0 +1,18 @@
+<button
+  type="button"
+  class="setting-toggle"
+  [class.setting-toggle--active]="checked"
+  [disabled]="disabled"
+  (click)="toggle()"
+>
+  <span class="setting-toggle__content">
+    <strong>{{ title }}</strong>
+    @if (description) {
+      <small>{{ description }}</small>
+    }
+  </span>
+
+  <span class="setting-toggle__switch" aria-hidden="true">
+    <span></span>
+  </span>
+</button>

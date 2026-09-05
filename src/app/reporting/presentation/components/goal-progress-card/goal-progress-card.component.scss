@@ -1,0 +1,200 @@
+.goal-card {
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+  border: 1px solid var(--border-color);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at top left, var(--ec-accent-soft), transparent 34%),
+    var(--surface-card);
+  box-shadow: var(--ec-inset-highlight);
+}
+
+.goal-card.completed {
+  border-color: var(--ec-status-success-border);
+}
+
+.goal-card.warning {
+  border-color: var(--ec-status-warning-border);
+}
+
+.goal-card.failed,
+.goal-card.danger {
+  border-color: var(--ec-status-danger-border);
+}
+
+.goal-card__header {
+  display: grid;
+  gap: 10px;
+}
+
+.badge {
+  width: fit-content;
+  margin: 0;
+  padding: 7px 11px;
+  border-radius: 999px;
+  color: var(--ec-status-info-text);
+  background: var(--ec-status-info-bg);
+  border: 1px solid var(--ec-status-info-border);
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.completed .badge {
+  color: var(--ec-status-success-text);
+  background: var(--ec-status-success-bg);
+  border-color: var(--ec-status-success-border);
+}
+
+.warning .badge {
+  color: var(--ec-status-warning-text);
+  background: var(--ec-status-warning-bg);
+  border-color: var(--ec-status-warning-border);
+}
+
+.danger .badge,
+.failed .badge {
+  color: var(--ec-status-danger-text);
+  background: var(--ec-status-danger-bg);
+  border-color: var(--ec-status-danger-border);
+}
+
+h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.24rem;
+  font-weight: 950;
+}
+
+.goal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.goal-meta span {
+  padding: 7px 10px;
+  border-radius: 999px;
+  color: var(--ec-status-info-text);
+  background: var(--ec-surface-subtle);
+  border: 1px solid var(--border-color);
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.goal-progress {
+  display: grid;
+  gap: 10px;
+}
+
+.progress-text,
+.progress-scale {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 850;
+}
+
+.progress-text strong,
+.progress-scale strong {
+  color: var(--text-primary);
+}
+
+.progress-bar {
+  position: relative;
+  height: 16px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--ec-surface-strong);
+  border: 1px solid var(--border-color);
+}
+
+.progress-bar__actual {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--ec-slider-track);
+  box-shadow: 0 0 24px var(--ec-accent-soft);
+}
+
+.danger .progress-bar__actual,
+.failed .progress-bar__actual {
+  background: var(--ec-danger-bg);
+}
+
+.warning .progress-bar__actual {
+  background: linear-gradient(90deg, var(--ec-status-warning-bg), var(--ec-status-danger-bg));
+}
+
+.progress-bar i {
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  width: 2px;
+  border-radius: 999px;
+  background: var(--text-primary);
+  box-shadow: 0 0 12px var(--ec-accent-soft);
+}
+
+.goal-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(118px, 1fr));
+  gap: 10px;
+}
+
+.goal-facts div {
+  display: grid;
+  gap: 6px;
+  min-height: 72px;
+  padding: 12px;
+  border-radius: 16px;
+  background: var(--ec-surface-subtle);
+  border: 1px solid var(--border-color);
+}
+
+.goal-facts span {
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.goal-facts strong {
+  color: var(--text-primary);
+  font-size: 0.96rem;
+  font-weight: 950;
+}
+
+.goal-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.goal-card__footer p {
+  margin: 0;
+  color: var(--ec-copy-color);
+  font-weight: var(--ec-copy-weight);
+  line-height: var(--ec-copy-line-height);
+}
+
+.danger-action {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 860px) {
+  .goal-facts {
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+  }
+
+  .goal-card__footer,
+  .progress-text,
+  .progress-scale {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

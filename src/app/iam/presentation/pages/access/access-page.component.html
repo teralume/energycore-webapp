@@ -1,0 +1,121 @@
+<section class="settings-page">
+  <header class="ec-page-heading">
+    <p class="ec-page-eyebrow">{{ 'settings.nav.access' | translate }}</p>
+    <h1 class="ec-page-title">{{ 'settings.access.title' | translate }}</h1>
+    <p class="ec-page-description">
+      {{ 'settings.access.pageDescription' | translate }}
+    </p>
+  </header>
+
+  <app-settings-section
+    [eyebrow]="'settings.access.currentProfileEyebrow' | translate"
+    [title]="'settings.access.currentProfileTitle' | translate"
+    [description]="'settings.access.currentProfileDescription' | translate"
+    [stackedHeader]="true"
+  >
+    <div class="account-panel">
+      <div class="avatar" aria-hidden="true">
+        {{ iamFacade.currentUser()?.accessProfileName?.charAt(0) || 'A' }}
+      </div>
+
+      <div class="account-details">
+        <article>
+          <span>{{ 'settings.access.profile' | translate }}</span>
+          <strong>{{ iamFacade.currentUser()?.accessProfileName || ('settings.common.notAvailable' | translate) }}</strong>
+        </article>
+
+        <article>
+          <span>{{ 'settings.common.email' | translate }}</span>
+          <strong>{{ iamFacade.currentUser()?.email || ('settings.common.notAvailable' | translate) }}</strong>
+        </article>
+      </div>
+    </div>
+  </app-settings-section>
+
+  <app-settings-section
+    [eyebrow]="'settings.access.assignmentEyebrow' | translate"
+    [title]="'settings.access.assignmentTitle' | translate"
+    [description]="'settings.access.assignmentDescription' | translate"
+    [stackedHeader]="true"
+  >
+    <div class="access-user-list">
+      @for (user of iamFacade.users(); track user.id) {
+        <article class="access-user-card">
+          <div class="access-user-card__identity">
+            <span class="avatar avatar--small" aria-hidden="true">
+              {{ user.initials || 'EC' }}
+            </span>
+
+            <div>
+              <strong>{{ user.fullName }}</strong>
+              <small>{{ user.email }}</small>
+            </div>
+          </div>
+
+          <div class="access-user-card__meta">
+            <span>{{ 'settings.access.status' | translate }}</span>
+            <strong>{{ userStatusLabelKey(user) | translate }}</strong>
+          </div>
+
+          <label class="access-user-card__selector">
+            <span>{{ 'settings.access.profileSelector' | translate }}</span>
+            <app-dropdown
+              [options]="profileOptions()"
+              [value]="profileValue(user)"
+              [placeholder]="'settings.access.profileSelector' | translate"
+              (valueChange)="onProfileSelected(user, $event)"
+            />
+          </label>
+        </article>
+      } @empty {
+        <article class="compact-card">
+          <span>{{ 'settings.access.usersEmptyEyebrow' | translate }}</span>
+          <h3>{{ 'settings.access.usersEmptyTitle' | translate }}</h3>
+          <p>{{ 'settings.access.usersEmptyDescription' | translate }}</p>
+        </article>
+      }
+    </div>
+  </app-settings-section>
+
+  <app-settings-section
+    [eyebrow]="'settings.access.matrixEyebrow' | translate"
+    [title]="'settings.access.matrixTitle' | translate"
+    [description]="'settings.access.matrixDescription' | translate"
+    [stackedHeader]="true"
+  >
+    <div class="access-profile-grid">
+      @for (profile of iamFacade.accessProfiles(); track profile.id) {
+        <article
+          class="access-profile-card"
+          [class.access-profile-card--active]="isCurrentProfile(profile)"
+        >
+          <div class="access-profile-card__header">
+            <span>{{ 'settings.access.profile' | translate }}</span>
+            @if (isCurrentProfile(profile)) {
+              <strong>{{ 'settings.access.currentProfileBadge' | translate }}</strong>
+            }
+          </div>
+
+          <h3>{{ profileLabelKey(profile) | translate }}</h3>
+          <p>{{ profileDescriptionKey(profile) | translate }}</p>
+
+          <div class="permission-count">
+            {{ permissionCount(profile) }}
+          </div>
+
+          <ul class="permission-list">
+            @for (permission of profile.permissions; track permission) {
+              <li>{{ permissionLabelKey(permission) | translate }}</li>
+            }
+          </ul>
+        </article>
+      } @empty {
+        <article class="compact-card">
+          <span>{{ 'settings.access.emptyEyebrow' | translate }}</span>
+          <h3>{{ 'settings.access.emptyTitle' | translate }}</h3>
+          <p>{{ 'settings.access.emptyDescription' | translate }}</p>
+        </article>
+      }
+    </div>
+  </app-settings-section>
+</section>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">EnergyCore mascot</title>
+  <desc id="desc">A friendly energy robot with a lightning reactor</desc>
+  <defs>
+    <linearGradient id="shell" x1="13" y1="8" x2="51" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1e2a21"/>
+      <stop offset="1" stop-color="#080d09"/>
+    </linearGradient>
+    <linearGradient id="energy" x1="18" y1="10" x2="46" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4ade80"/>
+      <stop offset="1" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="spark" x1="35" y1="43" x2="28" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff7d6"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+    <filter id="glow" x="-70%" y="-70%" width="240%" height="240%">
+      <feGaussianBlur stdDeviation="1.6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <path d="m17 17-9-13 2 12-6 3 13 8Z" fill="url(#energy)" stroke="#86efac" stroke-linejoin="round"/>
+  <path d="m47 17 9-13-2 12 6 3-13 8Z" fill="url(#energy)" stroke="#86efac" stroke-linejoin="round"/>
+  <rect x="7" y="10" width="50" height="39" rx="15" fill="url(#shell)" stroke="#4ade80" stroke-width="2"/>
+  <rect x="11" y="14" width="42" height="31" rx="12" fill="#07130b" stroke="#166534"/>
+  <path d="M18 25c2-3 5-3 7 0M39 25c2-3 5-3 7 0" fill="none" stroke="#4ade80" stroke-linecap="round" stroke-width="2.4"/>
+  <ellipse cx="22" cy="31" rx="3.2" ry="4.4" fill="#f4f7f5" filter="url(#glow)"/>
+  <ellipse cx="42" cy="31" rx="3.2" ry="4.4" fill="#f4f7f5" filter="url(#glow)"/>
+  <path d="M27 37c3.2 3.4 6.8 3.4 10 0" fill="none" stroke="#4ade80" stroke-linecap="round" stroke-width="2.4"/>
+  <circle cx="32" cy="51" r="10" fill="url(#shell)" stroke="#f59e0b" stroke-width="1.5"/>
+  <circle cx="32" cy="51" r="7" fill="#0b2514" stroke="#4ade80"/>
+  <path d="m34.5 43.5-7 9h4.5l-2 6 7-9h-4.5Z" fill="url(#spark)" stroke="#fff7d6" stroke-linejoin="round" stroke-width=".8" filter="url(#glow)"/>
+</svg>

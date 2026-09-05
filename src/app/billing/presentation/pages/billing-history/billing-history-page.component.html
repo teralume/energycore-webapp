@@ -1,0 +1,216 @@
+<section class="settings-page billing-settings-page">
+  <header class="ec-page-heading">
+    <p class="ec-page-eyebrow">{{ 'settings.nav.billing' | translate }}</p>
+    <h1 class="ec-page-title">{{ 'settings.billing.title' | translate }}</h1>
+    <p class="ec-page-description">
+      {{ 'settings.billing.pageDescription' | translate }}
+    </p>
+  </header>
+
+  @if (billingFacade.loading()) {
+    <div class="loading-wrapper">
+      <app-loading-spinner />
+    </div>
+  } @else {
+    <app-settings-section
+      [eyebrow]="'settings.billing.subscriptionEyebrow' | translate"
+      [title]="'settings.billing.planStatusTitle' | translate"
+      [description]="'settings.billing.planStatusDescription' | translate"
+      [stackedHeader]="true"
+    >
+      <section class="billing-overview">
+        <article class="plan-card">
+          <header class="plan-card__header">
+            <div>
+              <span>{{ 'billing.currentPlan' | translate }}</span>
+              <h2>{{ billingFacade.activePlan()?.name || ('settings.billing.noActivePlan' | translate) }}</h2>
+            </div>
+
+            <strong class="status-pill">
+              {{ subscriptionStatusLabel(billingFacade.activeSubscription()?.status) }}
+            </strong>
+          </header>
+
+          <div class="plan-card__price">
+            @if (billingFacade.activePlan()) {
+              <strong>
+                {{ formatMoney(
+                  billingFacade.activePlan()?.monthlyPrice,
+                  billingFacade.activePlan()?.currency
+                ) }}
+              </strong>
+              <span>{{ 'settings.billing.perMonth' | translate }}</span>
+            } @else {
+              <strong>-</strong>
+              <span>{{ 'settings.billing.choosePlanDescription' | translate }}</span>
+            }
+          </div>
+
+          <dl class="plan-facts">
+            <div>
+              <dt>{{ 'nav.devices' | translate }}</dt>
+              <dd>{{ formatLimit(billingFacade.activePlan()?.maxDevices) }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'nav.routines' | translate }}</dt>
+              <dd>{{ formatLimit(billingFacade.activePlan()?.maxRoutines) }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'nav.alerts' | translate }}</dt>
+              <dd>{{ formatLimit(billingFacade.activePlan()?.maxAlerts) }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'settings.billing.exports' | translate }}</dt>
+              <dd>
+                @if (billingFacade.activePlan()?.reportExportEnabled) {
+                  {{ 'settings.billing.activeExports' | translate }}
+                } @else {
+                  {{ 'settings.billing.notIncluded' | translate }}
+                }
+              </dd>
+            </div>
+            <div>
+              <dt>{{ 'settings.billing.cycleStarted' | translate }}</dt>
+              <dd>{{ formatDate(billingFacade.activeSubscription()?.startDate ?? undefined) }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'settings.billing.nextBillingDate' | translate }}</dt>
+              <dd>{{ formatDate(billingFacade.activeSubscription()?.nextBillingDate ?? undefined) }}</dd>
+            </div>
+            @if (billingFacade.activeSubscription()?.endDate) {
+              <div>
+                <dt>{{ 'settings.billing.cycleEnded' | translate }}</dt>
+                <dd>{{ formatDate(billingFacade.activeSubscription()?.endDate ?? undefined) }}</dd>
+              </div>
+            }
+          </dl>
+
+          <div class="plan-actions">
+            <div class="plan-actions__left">
+              <app-button
+                variant="create"
+                link="/plans"
+                [label]="'settings.billing.goToPlans' | translate"
+              />
+            </div>
+
+            <div class="plan-actions__right">
+              @if (billingFacade.hasActiveSubscription()) {
+                <app-button
+                  variant="danger"
+                  [disabled]="billingFacade.loading()"
+                  (pressed)="cancelSubscription()"
+                  [label]="'settings.billing.cancelPlanConfirm' | translate"
+                />
+              }
+            </div>
+          </div>
+        </article>
+
+        <aside class="billing-side">
+          <article class="summary-card summary-card--payment">
+            <span>{{ 'settings.billing.lastPayment' | translate }}</span>
+            @if (billingFacade.lastPayment()) {
+              <strong>
+                {{ formatMoney(
+                  billingFacade.lastPayment()?.amount,
+                  billingFacade.lastPayment()?.currency
+                ) }}
+              </strong>
+              <p>{{ paymentStatusLabel(billingFacade.lastPayment()?.status) }}</p>
+            } @else {
+              <strong>-</strong>
+              <p>{{ 'settings.billing.noPaymentsRegistered' | translate }}</p>
+            }
+          </article>
+
+          <article class="summary-grid">
+            <div>
+              <span>{{ 'settings.billing.payments' | translate }}</span>
+              <strong>{{ billingFacade.payments().length }}</strong>
+            </div>
+            <div>
+              <span>{{ 'billing.invoices' | translate }}</span>
+              <strong>{{ billingFacade.invoices().length }}</strong>
+            </div>
+          </article>
+        </aside>
+      </section>
+    </app-settings-section>
+
+    <app-settings-section
+      [eyebrow]="'settings.billing.payments' | translate"
+      [title]="'settings.billing.registeredMovements' | translate"
+      [description]="'settings.billing.registeredMovementsDescription' | translate"
+      [stackedHeader]="true"
+    >
+      <div class="record-list">
+        @for (payment of billingFacade.payments(); track payment.id) {
+          <article class="record-card payment-card">
+            <div class="record-card__main">
+              <span>{{ 'settings.billing.paymentNumber' | translate: { id: payment.id } }}</span>
+              <strong>{{ formatMoney(payment.amount, payment.currency) }}</strong>
+            </div>
+
+            <div class="record-card__meta">
+              <span>{{ 'settings.billing.method' | translate }}</span>
+              <strong>{{ payment.paymentMethod }}</strong>
+            </div>
+
+            <strong class="state-pill">
+              {{ paymentStatusLabel(payment.status) }}
+            </strong>
+          </article>
+        } @empty {
+          <app-empty-state
+            [eyebrow]="'settings.billing.payments' | translate"
+            [title]="'settings.billing.noPaymentsTitle' | translate"
+            [description]="'settings.billing.noPaymentsDescription' | translate"
+          >
+            <app-button variant="create" size="sm" link="/plans">
+              {{ 'settings.billing.viewPlans' | translate }}
+            </app-button>
+          </app-empty-state>
+        }
+      </div>
+    </app-settings-section>
+
+    <app-settings-section
+      [eyebrow]="'billing.invoices' | translate"
+      [title]="'settings.billing.issuedDocuments' | translate"
+      [description]="'settings.billing.issuedDocumentsDescription' | translate"
+      [stackedHeader]="true"
+    >
+      <div class="record-list">
+        @for (invoice of billingFacade.invoices(); track invoice.id) {
+          <article class="record-card invoice-card">
+            <div class="record-card__main">
+              <span>{{ invoice.invoiceNumber }}</span>
+              <strong>{{ 'settings.billing.invoiceNumber' | translate: { id: invoice.id } }}</strong>
+              <p>{{ 'settings.billing.issuedOn' | translate: { date: formatDate(invoice.issuedAt) } }}</p>
+            </div>
+
+            <div class="record-card__meta">
+              <span>{{ invoiceStateLabel(invoice) }}</span>
+              <strong>{{ formatMoney(invoice.totalAmount, invoice.currency) }}</strong>
+            </div>
+
+            <app-button
+              variant="secondary"
+              size="sm"
+              (pressed)="downloadInvoice(invoice.id)"
+            >
+              {{ 'settings.billing.download' | translate }}
+            </app-button>
+          </article>
+        } @empty {
+          <app-empty-state
+            [eyebrow]="'billing.invoices' | translate"
+            [title]="'settings.billing.noInvoicesTitle' | translate"
+            [description]="'settings.billing.noInvoicesDescription' | translate"
+          />
+        }
+      </div>
+    </app-settings-section>
+  }
+</section>

@@ -1,0 +1,61 @@
+<section class="wheel-selector">
+  @if (eyebrow || title || summary) {
+    <div class="wheel-selector__heading">
+      <div>
+        @if (eyebrow) {
+          <span>{{ eyebrow }}</span>
+        }
+
+        @if (title) {
+          <strong>{{ title }}</strong>
+        }
+      </div>
+
+      @if (summary) {
+        <p>{{ summary }}</p>
+      }
+    </div>
+  }
+
+  <div class="wheel-selector__wrap">
+    <div
+      class="wheel-selector__wheel"
+      [class.wheel-selector__wheel--dragging]="isWheelDragging"
+      (pointerdown)="onWheelPointerDown($event)"
+      (pointermove)="onWheelPointerMove($event)"
+      (pointerup)="onWheelPointerUp($event)"
+      (pointercancel)="onWheelPointerCancel($event)"
+      (pointerleave)="onWheelPointerCancel($event)"
+    >
+      <div class="wheel-selector__glow"></div>
+      <div class="wheel-selector__line"></div>
+
+      @for (option of visibleOptionsList; track option.index) {
+        <button
+          type="button"
+          class="wheel-selector-option"
+          [class.wheel-selector-option--active]="isOptionActive(option.index)"
+          [style.transform]="optionTransform(option.index)"
+          [style.opacity]="optionOpacity(option.index)"
+          [style.z-index]="optionZIndex(option.index)"
+          (click)="onOptionClick(option.index, $event)"
+        >
+          <span
+            class="wheel-selector-option__shade"
+            [style.opacity]="optionShade(option.index)"
+          ></span>
+
+          <strong>{{ option.label }}</strong>
+
+          @if (option.sublabel) {
+            <small>{{ option.sublabel }}</small>
+          }
+        </button>
+      }
+    </div>
+  </div>
+
+  @if (hint) {
+    <p class="wheel-selector__hint">{{ hint }}</p>
+  }
+</section>

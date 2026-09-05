@@ -1,0 +1,54 @@
+@if (open) {
+  <div class="confirm-backdrop" [class.closing]="closing" (click)="cancel()">
+    <section
+      class="confirm-dialog"
+      [class.confirm-dialog--danger]="tone === 'danger'"
+      [class.confirm-dialog--info]="tone === 'info'"
+      [class.closing]="closing"
+      (click)="$event.stopPropagation()"
+    >
+      <span class="confirm-dialog__mark" aria-hidden="true">!</span>
+
+      <div class="confirm-dialog__content">
+        <h2>{{ title }}</h2>
+        <p>{{ message }}</p>
+        @if (detail) {
+          <p class="confirm-dialog__detail">{{ detail }}</p>
+        }
+      </div>
+
+      @if (requiresTypedConfirmation) {
+        <label class="confirm-dialog__typed-check">
+          <span>{{ requiredTextLabel || 'Escribe la confirmacion exacta' }}</span>
+          <strong>{{ requiredText }}</strong>
+          <input
+            type="text"
+            name="confirmDialogText"
+            [value]="confirmationText"
+            (input)="onConfirmationTextInput($event)"
+            autocomplete="off"
+            [attr.aria-label]="requiredTextLabel || 'Confirmacion requerida'"
+          />
+          @if (requiredTextHint) {
+            <small>{{ requiredTextHint }}</small>
+          }
+        </label>
+      }
+
+      <div class="confirm-dialog__actions">
+        <app-button type="button" variant="ghost" size="sm" (pressed)="cancel()">
+          {{ cancelLabel }}
+        </app-button>
+        <app-button
+          type="button"
+          [variant]="confirmVariant"
+          size="sm"
+          [disabled]="!canConfirm"
+          (pressed)="confirm()"
+        >
+          {{ confirmLabel }}
+        </app-button>
+      </div>
+    </section>
+  </div>
+}

@@ -1,0 +1,59 @@
+@if (routines.length === 0) {
+  <div class="empty-routines">
+    {{ 'routines.list.empty' | translate }}
+  </div>
+} @else {
+  <section class="routine-list">
+    @for (routine of routines; track routine.id) {
+      <article class="routine-item">
+        <div class="routine-item__icon">
+          {{ getTargetIcon(routine) }}
+        </div>
+
+        <div class="routine-item__content">
+          <div class="routine-item__top">
+            <h3>{{ routine.name }}</h3>
+
+            <span class="routine-status" [class.enabled]="routine.enabled">
+              {{ getStatusLabelKey(routine) | translate }}
+            </span>
+          </div>
+
+          <p>
+            {{ getActionLabelKey(routine) | translate }}
+            <strong>{{ getTargetTypeLabelKey(routine) | translate }}</strong>
+          </p>
+
+          <div class="routine-item__meta">
+            <span>
+              {{ getTargetTypeLabelKey(routine) | translate }}:
+              {{ getTargetName(routine) }}
+            </span>
+
+            <span>
+              {{ 'routines.card.time' | translate }}: {{ routine.time }}
+            </span>
+          </div>
+        </div>
+
+        <div class="routine-item__actions">
+          <app-button
+            class="routine-action"
+            variant="action"
+            (pressed)="onToggle(routine)"
+          >
+            {{ getToggleLabelKey(routine) | translate }}
+          </app-button>
+
+          <app-button
+            class="routine-action"
+            variant="danger"
+            (pressed)="onRemove(routine.id)"
+          >
+            {{ 'common.delete' | translate }}
+          </app-button>
+        </div>
+      </article>
+    }
+  </section>
+}

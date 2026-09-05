@@ -1,0 +1,42 @@
+<app-section-card
+  class="report-comparison-card"
+  [title]="'reporting.monthlyComparison' | translate"
+  size="large"
+>
+  <p class="chart-description">
+    {{ 'reporting.monthlyComparisonSubtitle' | translate }}
+    <strong>{{ selectedPeriodLabel() }}</strong>.
+  </p>
+
+  <div class="chart-controls">
+    <span>
+      {{ chartReports.length }}
+      {{ 'history.records' | translate }}
+    </span>
+
+    <app-dropdown
+      class="chart-period-dropdown"
+      [options]="periodOptions"
+      [value]="selectedPeriod"
+      [placeholder]="'reporting.period' | translate"
+      (valueChange)="onPeriodChange($event)"
+    />
+  </div>
+
+  @if (chartReports.length > 0) {
+    <app-draggable-bar-carousel
+      class="report-carousel"
+      [items]="chartItems"
+      [selectable]="true"
+      [followLatest]="true"
+      (itemSelected)="selectCarouselItem($event)"
+    />
+  } @else {
+    <app-empty-state
+      [compact]="true"
+      [eyebrow]="'reporting.monthlyComparison' | translate"
+      [title]="'reporting.emptyReportsTitle' | translate"
+      [description]="'reporting.emptyReportsContent' | translate"
+    />
+  }
+</app-section-card>

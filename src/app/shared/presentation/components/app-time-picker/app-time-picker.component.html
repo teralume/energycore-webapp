@@ -1,0 +1,38 @@
+<div class="time-picker">
+  @if (label) {
+    <span class="time-picker__label">{{ label }}</span>
+  }
+
+  <button #timeTrigger type="button" class="time-picker__trigger" (click)="togglePanel()">
+    <span>{{ displayValue }}</span>
+    <span class="time-picker__icon" aria-hidden="true"></span>
+  </button>
+
+  @if (isOpen) {
+    <section #timePanel class="time-panel" [attr.aria-label]="'shared.timePicker.panelAria' | translate" popover="manual">
+      <div class="time-panel__column" [attr.aria-label]="'shared.timePicker.hoursAria' | translate">
+        @for (hour of hours; track hour) {
+          <button
+            type="button"
+            [class.selected]="hour === selectedHour"
+            (click)="selectHour(hour)"
+          >
+            {{ hour }}
+          </button>
+        }
+      </div>
+
+      <div class="time-panel__column" [attr.aria-label]="'shared.timePicker.minutesAria' | translate">
+        @for (minute of minutes; track minute) {
+          <button
+            type="button"
+            [class.selected]="minute === selectedMinute"
+            (click)="selectMinute(minute)"
+          >
+            {{ minute }}
+          </button>
+        }
+      </div>
+    </section>
+  }
+</div>

@@ -1,0 +1,436 @@
+<section class="energy-dashboard-page ec-page">
+  <header class="ec-page-heading">
+    <p class="ec-page-eyebrow">{{ 'energyDashboard.eyebrow' | translate }}</p>
+
+    <h1 class="ec-page-title">{{ 'energyDashboard.title' | translate }}</h1>
+
+    <p class="ec-page-description">
+      {{ 'energyDashboard.description' | translate }}
+    </p>
+  </header>
+
+  <app-section-card
+    class="dashboard-toolbar"
+    [eyebrow]="'energyDashboard.liveConsumptionEyebrow' | translate"
+    [title]="'energyDashboard.liveConsumptionTitle' | translate"
+    [description]="'energyDashboard.liveConsumptionDescription' | translate"
+    size="large"
+  >
+    <div class="dashboard-toolbar__grid">
+      <div class="sampling-panel">
+        <span class="live-pill">
+          <svg lucideActivity aria-hidden="true"></svg>
+          {{ 'energyDashboard.automaticRecord' | translate }}
+        </span>
+
+        <app-number-stepper
+          class="dashboard-sample-stepper"
+          label=""
+          [value]="sampleSeconds()"
+          [min]="5"
+          [max]="3600"
+          [step]="5"
+          [suffix]="'energyDashboard.secondsAbbr' | translate"
+          [allowEmpty]="false"
+          (valueChange)="onSampleSecondsChange($event)"
+        />
+
+        <app-button variant="secondary" size="sm" (pressed)="saveSamplingSeconds()">
+          {{ 'energyDashboard.apply' | translate }}
+        </app-button>
+      </div>
+
+      <div class="toolbar-copy">
+        <span>
+          {{ 'energyDashboard.sampleEveryPrefix' | translate }}
+          <strong>{{
+            'energyDashboard.sampleEveryValue' | translate: { seconds: sampleSeconds() }
+          }}</strong
+          >.
+        </span>
+      </div>
+
+      <app-button variant="primary" (pressed)="exportCsv()">
+        <svg lucideDownload aria-hidden="true"></svg>
+        {{ 'energyDashboard.exportCsv' | translate }}
+      </app-button>
+    </div>
+  </app-section-card>
+
+  @if (energyMonitoringFacade.loading()) {
+    <section class="loading-panel">
+      <app-loading-spinner />
+      <p>{{ 'energyDashboard.loading' | translate }}</p>
+    </section>
+  } @else {
+    @let currentChartSummary = chartSummary();
+
+    <app-section-card
+      class="consumption-chart-card"
+      [eyebrow]="'energyDashboard.consumptionEyebrow' | translate"
+      [title]="chartTitle()"
+      [description]="chartSubtitle()"
+      size="large"
+    >
+      <div class="chart-toolbar">
+        <div class="chart-summary-strip">
+          <span>
+            <strong>{{ currentChartSummary.readings }}</strong>
+            {{ 'energyDashboard.readings' | translate }}
+          </span>
+          <span>
+            <strong>{{ currentChartSummary.devices }}</strong>
+            {{ 'energyDashboard.equipment' | translate }}
+          </span>
+          <span>
+            <strong>{{ formatEnergy(currentChartSummary.totalKilowattHours) }}</strong>
+            {{ 'energyDashboard.energy' | translate }}
+          </span>
+          <span>
+            <strong>S/ {{ formatMoney(currentChartSummary.estimatedCost) }}</strong>
+            {{ 'energyDashboard.cost' | translate }}
+          </span>
+          <span>
+            <strong>{{ formatDuration(currentChartSummary.totalSeconds) }}</strong>
+            {{ 'energyDashboard.accumulatedUse' | translate }}
+          </span>
+        </div>
+
+        <app-dropdown
+          class="period-dropdown"
+          [options]="periodOptions"
+          [value]="selectedPeriod()"
+          [placeholder]="'energyDashboard.period' | translate"
+          (valueChange)="onPeriodChange($event)"
+        />
+      </div>
+
+      @if (consumptionChart().length > 0) {
+        <app-energy-trend-chart [items]="consumptionTrendItems()" [ariaLabel]="chartTitle()" />
+      } @else {
+        <app-empty-state
+          [eyebrow]="'energyDashboard.noReadingsEyebrow' | translate"
+          [title]="'energyDashboard.noConsumptionTitle' | translate"
+          [description]="'energyDashboard.noConsumptionDescription' | translate"
+          [compact]="true"
+        />
+      }
+    </app-section-card>
+
+    <section class="metrics-grid">
+      @for (metric of metricCards(); track metric.label) {
+        <app-section-card
+          class="metric-card"
+          [class.metric-card--accent]="metric.tone === 'accent'"
+          [class.metric-card--warning]="metric.tone === 'warning'"
+          [eyebrow]="metric.label"
+          size="small"
+        >
+          <strong>{{ metric.value }}</strong>
+          <p>{{ metric.hint }}</p>
+        </app-section-card>
+      }
+    </section>
+
+    <section class="energy-grid">
+      <app-section-card
+        class="dashboard-preview-card dashboard-preview-card--health"
+        [eyebrow]="'energyDashboard.generalStatusEyebrow' | translate"
+        [title]="'energyDashboard.operationalSummaryTitle' | translate"
+        [description]="dashboardRecommendation()"
+        size="medium"
+      >
+        <div class="health-block">
+          <div class="health-block__heading">
+            <svg lucideGauge aria-hidden="true"></svg>
+            <div>
+              <strong>{{ efficiencyScore() }}%</strong>
+              <span>{{ operationalStatus() }}</span>
+            </div>
+          </div>
+
+          <div class="health-progress">
+            <span [style.width.%]="efficiencyScore()"></span>
+          </div>
+        </div>
+
+        <div class="mini-stats">
+          <span>
+            <strong>{{ normalReadingsCount() }}</strong>
+            {{ 'energyDashboard.normalReadings' | translate }}
+          </span>
+          <span>
+            <strong>{{ highReadingsCount() }}</strong>
+            {{ 'energyDashboard.highReadingsShort' | translate }}
+          </span>
+          <span>
+            <strong>{{ activeDevicesCount() }}</strong>
+            {{ 'energyDashboard.activeDevicesShort' | translate }}
+          </span>
+        </div>
+      </app-section-card>
+
+      <app-section-card
+        class="dashboard-preview-card dashboard-preview-card--list"
+        [eyebrow]="'devices.active' | translate"
+        [title]="'energyDashboard.activeDevicesNowTitle' | translate"
+        size="medium"
+      >
+        @if (activeDeviceDetails().length > 0) {
+          <div
+            class="dashboard-list-preview"
+            [class.dashboard-list-preview--has-more]="hiddenActiveDeviceDetailsCount() > 0"
+            [style.--dashboard-list-fade-opacity]="
+              listFadeOpacity(visibleActiveDeviceDetails().length)
+            "
+          >
+            <div class="compact-table">
+              @for (device of visibleActiveDeviceDetails(); track device.deviceId) {
+                <article>
+                  <div>
+                    <strong>{{ device.name }}</strong>
+                    <span>{{ device.room }}</span>
+                  </div>
+
+                  <div>
+                    <strong>{{ formatNumber(device.watts, 0) }} W</strong>
+                    <span>{{
+                      'energyDashboard.costPerHourValue'
+                        | translate: { cost: formatNumber(device.costPerHour) }
+                    }}</span>
+                  </div>
+                </article>
+              }
+            </div>
+
+            @if (hiddenActiveDeviceDetailsCount() > 0) {
+              <p class="dashboard-more-note">
+                {{
+                  'energyDashboard.moreActiveDevices'
+                    | translate: { count: hiddenActiveDeviceDetailsCount() }
+                }}
+              </p>
+            }
+          </div>
+        } @else {
+          <app-empty-state
+            [eyebrow]="'energyDashboard.noActivityEyebrow' | translate"
+            [title]="'energyDashboard.noActiveDevicesTitle' | translate"
+            [description]="'energyDashboard.noActiveDevicesDescription' | translate"
+            [compact]="true"
+          />
+        }
+      </app-section-card>
+    </section>
+
+    <section class="energy-grid">
+      <app-section-card
+        class="dashboard-preview-card dashboard-preview-card--list"
+        [eyebrow]="'energyDashboard.rankingEyebrow' | translate"
+        [title]="'energyDashboard.highestCostByDeviceTitle' | translate"
+        size="medium"
+      >
+        @if (topDevices().length > 0) {
+          <div
+            class="dashboard-list-preview dashboard-list-preview--ranking"
+            [class.dashboard-list-preview--has-more]="hiddenTopDevicesCount() > 0"
+            [style.--dashboard-list-fade-opacity]="listFadeOpacity(visibleTopDevices().length)"
+          >
+            <div class="compact-table">
+              @for (device of visibleTopDevices(); track device.deviceId; let index = $index) {
+                <article
+                  class="ranking-row"
+                  [style.--ranking-share]="rankingPercentage(device.kilowattHours) + '%'"
+                >
+                  <span class="ranking-position">{{ index + 1 }}</span>
+
+                  <div>
+                    <strong>{{ device.name }}</strong>
+                    <span>{{ device.room }}</span>
+                  </div>
+
+                  <div>
+                    <strong>{{ formatEnergy(device.kilowattHours) }}</strong>
+                    <span>S/ {{ formatNumber(device.estimatedCost) }}</span>
+                  </div>
+                </article>
+              }
+            </div>
+
+            @if (hiddenTopDevicesCount() > 0) {
+              <p class="dashboard-more-note">
+                {{
+                  'energyDashboard.moreInRanking' | translate: { count: hiddenTopDevicesCount() }
+                }}
+              </p>
+            }
+          </div>
+        } @else {
+          <app-empty-state
+            [eyebrow]="'energyDashboard.noCostEyebrow' | translate"
+            [title]="'energyDashboard.noDeviceConsumptionTitle' | translate"
+            [description]="'energyDashboard.noDeviceConsumptionDescription' | translate"
+            [compact]="true"
+          />
+        }
+      </app-section-card>
+
+      <app-section-card
+        class="dashboard-preview-card dashboard-preview-card--list"
+        [eyebrow]="'energyDashboard.roomsEyebrow' | translate"
+        [title]="'energyDashboard.consumptionByRoomTitle' | translate"
+        size="medium"
+      >
+        @if (roomConsumption().length > 0) {
+          <div
+            class="dashboard-list-preview"
+            [class.dashboard-list-preview--has-more]="hiddenRoomConsumptionCount() > 0"
+            [style.--dashboard-list-fade-opacity]="listFadeOpacity(visibleRoomConsumption().length)"
+          >
+            <div class="compact-table">
+              @for (room of visibleRoomConsumption(); track room.room) {
+                <article>
+                  <div>
+                    <strong>{{ room.room }}</strong>
+                    <span>{{
+                      'energyDashboard.activeDevicesValue'
+                        | translate: { count: room.activeDevices }
+                    }}</span>
+                  </div>
+
+                  <div>
+                    <strong>{{ formatEnergy(room.kilowattHours) }}</strong>
+                    <span>S/ {{ formatNumber(room.estimatedCost) }}</span>
+                  </div>
+                </article>
+              }
+            </div>
+
+            @if (hiddenRoomConsumptionCount() > 0) {
+              <p class="dashboard-more-note">
+                {{
+                  'energyDashboard.moreInRooms' | translate: { count: hiddenRoomConsumptionCount() }
+                }}
+              </p>
+            }
+          </div>
+        } @else {
+          <app-empty-state
+            [eyebrow]="'energyDashboard.noRoomsEyebrow' | translate"
+            [title]="'energyDashboard.noRoomDataTitle' | translate"
+            [description]="'energyDashboard.noRoomDataDescription' | translate"
+            [compact]="true"
+          />
+        }
+      </app-section-card>
+    </section>
+
+    <section class="energy-grid">
+      <app-section-card
+        class="dashboard-preview-card dashboard-preview-card--list"
+        [eyebrow]="'nav.alerts' | translate"
+        [title]="'energyDashboard.recentHighConsumptionEventsTitle' | translate"
+        size="medium"
+      >
+        @if (recentAlerts().length > 0) {
+          <div
+            class="dashboard-list-preview"
+            [class.dashboard-list-preview--has-more]="hiddenRecentAlertsCount() > 0"
+            [style.--dashboard-list-fade-opacity]="listFadeOpacity(visibleRecentAlerts().length)"
+          >
+            <div class="alert-list">
+              @for (alert of visibleRecentAlerts(); track alert.id) {
+                <article>
+                  <div>
+                    <strong>{{ alert.deviceName }}</strong>
+                    <span>{{ formatDateTime(alert.recordedAt) }}</span>
+                  </div>
+
+                  <span>{{ formatNumber(alert.watts, 0) }} W</span>
+                </article>
+              }
+            </div>
+
+            @if (hiddenRecentAlertsCount() > 0) {
+              <p class="dashboard-more-note">
+                {{
+                  'energyDashboard.moreInAlerts' | translate: { count: hiddenRecentAlertsCount() }
+                }}
+              </p>
+            }
+          </div>
+        } @else {
+          <app-empty-state
+            [eyebrow]="'energyDashboard.noAlertsEyebrow' | translate"
+            [title]="'energyDashboard.noRecentEventsTitle' | translate"
+            [description]="'energyDashboard.noRecentEventsDescription' | translate"
+            [compact]="true"
+          />
+        }
+      </app-section-card>
+
+      <app-section-card
+        class="dashboard-preview-card dashboard-preview-card--history"
+        [eyebrow]="'nav.history' | translate"
+        [title]="'energyDashboard.latestReadingsTitle' | translate"
+        size="medium"
+      >
+        @if (latestReadings().length > 0) {
+          <div
+            class="dashboard-list-preview dashboard-list-preview--table"
+            [class.dashboard-list-preview--has-more]="hiddenLatestReadingsCount() > 0"
+            [style.--dashboard-list-fade-opacity]="listFadeOpacity(visibleLatestReadings().length)"
+          >
+            <div class="readings-table-wrapper ec-scrollbar">
+              <table class="readings-table">
+                <thead>
+                  <tr>
+                    <th>{{ 'routines.device' | translate }}</th>
+                    <th>{{ 'energyDashboard.power' | translate }}</th>
+                    <th>{{ 'about.capabilities.items.energy.eyebrow' | translate }}</th>
+                    <th>{{ 'energyDashboard.cost' | translate }}</th>
+                    <th>{{ 'history.date' | translate }}</th>
+                    <th>{{ 'history.status' | translate }}</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  @for (reading of visibleLatestReadings(); track reading.id) {
+                    <tr>
+                      <td>{{ reading.deviceName }}</td>
+                      <td>{{ formatNumber(reading.watts, 0) }} W</td>
+                      <td>{{ formatEnergy(reading.kilowattHours) }}</td>
+                      <td>S/ {{ formatMoney(reading.estimatedCost) }}</td>
+                      <td>{{ formatDateTime(reading.recordedAt) }}</td>
+                      <td>
+                        <span class="status-pill" [class.status-pill--high]="reading.isHigh">
+                          {{ readingStatusLabel(reading) }}
+                        </span>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+
+            @if (hiddenLatestReadingsCount() > 0) {
+              <p class="dashboard-more-note">
+                {{
+                  'energyDashboard.moreInHistory'
+                    | translate: { count: hiddenLatestReadingsCount() }
+                }}
+              </p>
+            }
+          </div>
+        } @else {
+          <app-empty-state
+            [eyebrow]="'energyDashboard.noHistoryEyebrow' | translate"
+            [title]="'energyDashboard.noReadingsAvailableTitle' | translate"
+            [description]="'energyDashboard.noReadingsAvailableDescription' | translate"
+            [compact]="true"
+          />
+        }
+      </app-section-card>
+    </section>
+  }
+</section>

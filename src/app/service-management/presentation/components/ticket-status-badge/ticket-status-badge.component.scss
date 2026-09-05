@@ -1,0 +1,43 @@
+.ticket-status-badge {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: var(--text-on-action);
+  background: var(--accent-color);
+  font-size: 0.75rem;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.open,
+.pending,
+.medium {
+  background: var(--ec-status-warning-bg);
+  color: var(--ec-status-warning-text);
+}
+
+.in-progress,
+.scheduled,
+.high {
+  background: var(--ec-action-bg);
+}
+
+.resolved,
+.completed,
+.low {
+  background: var(--ec-status-success-solid);
+}
+
+.closed,
+.canceled {
+  background: var(--text-muted);
+}
+
+.urgent {
+  background: var(--ec-danger-bg);
+}

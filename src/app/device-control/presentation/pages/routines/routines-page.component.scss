@@ -1,0 +1,172 @@
+.routines-page {
+  display: grid;
+  gap: 24px;
+}
+
+.operation-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+
+  strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--text-color);
+    font-size: clamp(1.55rem, 3vw, 2.15rem);
+    line-height: 1;
+  }
+
+  p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-weight: 700;
+  }
+}
+
+.operation-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 22px;
+  background: var(--surface-color);
+
+  h2,
+  p {
+    margin: 0;
+  }
+
+  h2 {
+    color: var(--text-color);
+    font-size: 1.3rem;
+  }
+
+  p:not(.section-eyebrow) {
+    margin-top: 6px;
+    color: var(--text-secondary);
+    font-weight: 700;
+  }
+}
+
+.section-eyebrow {
+  margin: 0 0 6px;
+  color: var(--accent-color);
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.routine-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+
+  span {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 900;
+  }
+}
+
+input {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 13px 14px;
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--surface-color) 84%, var(--app-bg));
+  box-sizing: border-box;
+  font: inherit;
+  outline: none;
+}
+
+.routine-conditional,
+.routine-days,
+.form-actions {
+  grid-column: 1 / -1;
+}
+
+.routine-conditional {
+  animation: routine-field-reveal 0.24s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.day-picker {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 8px;
+  background: color-mix(in srgb, var(--surface-color) 90%, var(--app-bg));
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.routines-list {
+  display: grid;
+  gap: 16px;
+}
+
+.routine-card-shell {
+  max-height: 520px;
+  opacity: 1;
+  overflow: hidden;
+  transition:
+    max-height 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+    margin 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.routine-card-shell--removing {
+  max-height: 0;
+  margin-top: -16px;
+  transition-delay: 0.42s;
+}
+
+.loading-wrapper {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+}
+
+@keyframes routine-field-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 860px) {
+  .operation-summary,
+  .routine-form {
+    grid-template-columns: 1fr;
+  }
+
+  .operation-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .day-picker {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

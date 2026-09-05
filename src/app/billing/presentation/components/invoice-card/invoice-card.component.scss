@@ -1,0 +1,62 @@
+.invoice-card {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 18px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 22px;
+  background: var(--surface-color);
+}
+
+.eyebrow {
+  width: fit-content;
+  margin: 0 0 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: var(--text-on-action);
+  background: var(--ec-action-bg);
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+h2 {
+  margin: 0 0 8px;
+}
+
+p {
+  margin: 4px 0;
+  color: var(--text-secondary);
+}
+
+.amount {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.amount span {
+  color: var(--text-secondary);
+  font-weight: 800;
+}
+
+.amount strong {
+  font-size: 2rem;
+}
+
+button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 16px;
+  color: var(--text-on-action);
+  background: var(--ec-action-bg);
+  cursor: pointer;
+  font-weight: 900;
+}
+
+@media (max-width: 760px) {
+  .invoice-card {
+    grid-template-columns: 1fr;
+  }
+}

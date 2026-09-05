@@ -1,0 +1,69 @@
+<section class="alerts-page">
+  <header class="ec-page-heading alert-hero">
+    <p class="ec-page-eyebrow">{{ 'alerts.eyebrow' | translate }}</p>
+    <h1 class="ec-page-title">{{ 'nav.inbox' | translate }}</h1>
+    <p class="ec-page-description">{{ 'alerts.inboxSubtitle' | translate }}</p>
+  </header>
+
+  <section class="summary-grid" [attr.aria-label]="'alerts.summaryAria' | translate">
+    <article>
+      <span>{{ 'alerts.total' | translate }}</span>
+      <strong>{{ visibleAlertsCount }}</strong>
+      <small>{{ activeFilterLabel }}</small>
+    </article>
+
+    <article>
+      <span>{{ 'alerts.unreadCount' | translate }}</span>
+      <strong>{{ visibleUnreadCount }}</strong>
+      <small>{{ 'alerts.summary.visibleInboxOnly' | translate }}</small>
+    </article>
+
+    <article>
+      <span>{{ 'alerts.criticalCount' | translate }}</span>
+      <strong>{{ visibleCriticalCount }}</strong>
+      <small>{{ 'alerts.summary.withoutSilenced' | translate }}</small>
+    </article>
+  </section>
+
+  <section class="alerts-toolbar">
+    <div>
+      <span>{{ 'nav.inbox' | translate }}</span>
+      <h2>{{ 'alerts.toolbar.title' | translate }}</h2>
+      <p>
+        {{ 'alerts.toolbar.description' | translate }}
+      </p>
+    </div>
+
+    <div class="alert-filters">
+      <app-dropdown
+        [options]="filterOptions"
+        [value]="selectedFilter"
+        tone="info"
+        (valueChange)="selectFilter($event)"
+      />
+
+      <app-button variant="secondary" size="sm" (pressed)="refresh()">
+        {{ 'alerts.refresh' | translate }}
+      </app-button>
+    </div>
+  </section>
+
+  @if (hiddenByPreferencesCount > 0) {
+    <p class="preference-note">
+      {{ 'alerts.hiddenByPreferences' | translate: { count: hiddenByPreferencesCount } }}
+    </p>
+  }
+
+  @if (notificationsFacade.loading()) {
+    <div class="loading-wrapper">
+      <app-loading-spinner />
+    </div>
+  } @else {
+    <app-alert-list
+      [alerts]="enrichedFilteredAlerts"
+      (markAsRead)="markAsRead($event)"
+      (remove)="deleteAlert($event)"
+      (dismissForTenMinutes)="dismissAlert($event)"
+    />
+  }
+</section>

@@ -1,0 +1,78 @@
+<figure class="trend-chart" [attr.aria-label]="ariaLabel()">
+  <div class="trend-chart__viewport ec-scrollbar">
+    <svg
+      class="trend-chart__canvas"
+      viewBox="0 0 960 320"
+      preserveAspectRatio="none"
+      role="img"
+      [attr.aria-label]="ariaLabel()"
+    >
+      <defs>
+        <linearGradient id="energyTrendArea" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--ec-info)" stop-opacity="0.34"></stop>
+          <stop offset="100%" stop-color="var(--ec-info)" stop-opacity="0.02"></stop>
+        </linearGradient>
+        <linearGradient id="energyTrendLine" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="var(--ec-primary)"></stop>
+          <stop offset="100%" stop-color="var(--ec-info)"></stop>
+        </linearGradient>
+      </defs>
+
+      @for (line of gridLines; track line.key) {
+        <line
+          class="trend-chart__grid-line"
+          x1="28"
+          x2="942"
+          [attr.y1]="line.y"
+          [attr.y2]="line.y"
+        ></line>
+      }
+
+      <line class="trend-chart__baseline" x1="28" x2="942" y1="272" y2="272"></line>
+      <polygon class="trend-chart__area" [attr.points]="areaPoints()"></polygon>
+      <polyline class="trend-chart__line" [attr.points]="linePoints()"></polyline>
+
+      @for (point of plottedPoints(); track point.item.key) {
+        <circle
+          class="trend-chart__point"
+          [class.trend-chart__point--warning]="point.item.tone === 'warning'"
+          [attr.cx]="point.x"
+          [attr.cy]="point.y"
+          r="4"
+        >
+          <title>{{ point.item.ariaLabel }}</title>
+        </circle>
+      }
+
+      @for (label of axisLabels(); track label.key) {
+        <text class="trend-chart__axis-label" [attr.x]="label.x" y="304">{{ label.label }}</text>
+      }
+    </svg>
+  </div>
+
+  <table class="trend-chart__data-table">
+    <caption>
+      {{
+        ariaLabel()
+      }}
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Dispositivo</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Consumo</th>
+        <th scope="col">Potencia</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of items(); track item.key) {
+        <tr>
+          <th scope="row">{{ item.title }}</th>
+          <td>{{ item.detail }}</td>
+          <td>{{ item.valueLabel }}</td>
+          <td>{{ item.subtitle }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</figure>

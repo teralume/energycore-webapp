@@ -1,0 +1,271 @@
+<section class="devices-page ec-page">
+  <header class="ec-page-heading">
+    <p class="ec-page-eyebrow">{{ 'nav.operation' | translate }}</p>
+    <h1 class="ec-page-title">{{ 'nav.devices' | translate }}</h1>
+    <p class="ec-page-description">
+      {{ 'devices.pageDescription' | translate }}
+    </p>
+  </header>
+
+  <section class="operation-summary">
+    <app-section-card
+      size="small"
+      [eyebrow]="'nav.devices' | translate"
+      [title]="'devices.summary.assignedTitle' | translate"
+    >
+      <strong>{{ assignedDevices.length }}</strong>
+      <p>{{ activeLocationName }}</p>
+    </app-section-card>
+
+    <app-section-card
+      size="small"
+      [eyebrow]="'history.status' | translate"
+      [title]="'devices.summary.onTitle' | translate"
+    >
+      <strong>{{ assignedActiveDevices.length }}</strong>
+      <p>{{ 'devices.summary.offDevices' | translate: { count: assignedDevices.length - assignedActiveDevices.length } }}</p>
+    </app-section-card>
+
+    <app-section-card
+      size="small"
+      [eyebrow]="'devices.summary.consumptionEyebrow' | translate"
+      [title]="'devices.summary.currentTitle' | translate"
+    >
+      <strong>{{ assignedCurrentWatts }} W</strong>
+      <p>{{ 'devices.summary.activePowerDescription' | translate }}</p>
+    </app-section-card>
+  </section>
+
+  <section class="operation-toolbar">
+    <div>
+      <p class="section-eyebrow">{{ 'devices.toolbar.eyebrow' | translate }}</p>
+      <h2>{{ 'devices.toolbar.title' | translate }}</h2>
+      <p>{{ 'devices.toolbar.description' | translate }}</p>
+    </div>
+
+    @if (canCreateAssignedDevices) {
+      <div class="toolbar-actions">
+        <app-button
+          variant="neutral"
+          [disabled]="activeRooms.length === 0"
+          (pressed)="openPairModal()"
+        >
+          {{ 'devices.connect' | translate }}
+        </app-button>
+        <app-button
+          variant="create"
+          [disabled]="activeRooms.length === 0"
+          (pressed)="openCreateModal()"
+        >
+          {{ 'devices.create' | translate }}
+        </app-button>
+      </div>
+    }
+  </section>
+
+  @if (showInitialLoading) {
+    <div class="loading-wrapper">
+      <app-loading-spinner />
+    </div>
+  } @else if (activeRooms.length === 0) {
+    <app-empty-state
+      [eyebrow]="'nav.rooms' | translate"
+      [title]="'devices.emptyRooms.title' | translate"
+      [description]="'devices.emptyRooms.description' | translate"
+      [actionLabel]="canManageSpaces ? ('devices.go' | translate) : ''"
+      [actionLink]="canManageSpaces ? '/spaces/rooms' : null"
+    />
+  } @else if (assignedDevices.length > 0) {
+    <app-device-list
+      [devices]="assignedDevices"
+      [locationName]="activeLocationName"
+      [roomNamesByDeviceId]="assignedRoomNamesByDeviceId"
+      [removingDeviceIds]="removingDeviceIds"
+      [canControlDevices]="canControlDevices"
+      [canManageDevices]="canManageDevices"
+      (toggle)="toggleDevice($event)"
+      (rename)="openRenameModal($event)"
+      (remove)="deleteDevice($event)"
+    />
+  } @else {
+    <app-empty-state
+      [eyebrow]="'nav.devices' | translate"
+      [title]="'devices.emptyAssigned.title' | translate"
+      [description]="'devices.emptyAssigned.description' | translate"
+      [actionLabel]="canManageSpaces ? ('devices.go' | translate) : ''"
+      [actionLink]="canManageSpaces ? '/spaces/assignments' : null"
+      actionVariant="neutral"
+    />
+  }
+
+  <app-modal-form-shell
+    [open]="createModalOpen"
+    [eyebrow]="'devices.form.eyebrow' | translate"
+    [title]="'devices.create' | translate"
+    [description]="'devices.form.description' | translate"
+    (closed)="closeCreateModal()"
+  >
+    <form class="modal-form" (ngSubmit)="createDevice()">
+      <label class="field">
+        <span>{{ 'devices.name' | translate }}</span>
+        <input
+          type="text"
+          name="name"
+          [(ngModel)]="name"
+          [placeholder]="'devices.form.namePlaceholder' | translate"
+          required
+        />
+      </label>
+
+      <label class="field">
+        <span>{{ 'devices.room' | translate }}</span>
+        <app-dropdown
+          [options]="roomOptions"
+          [value]="roomValue"
+          [placeholder]="'devices.room' | translate"
+          (valueChange)="selectRoom($event)"
+        />
+      </label>
+
+      <label class="field">
+        <span>{{ 'devices.type' | translate }}</span>
+        <app-dropdown
+          [options]="deviceTypeOptions"
+          [value]="type"
+          [placeholder]="'devices.type' | translate"
+          (valueChange)="selectDeviceType($event)"
+        />
+      </label>
+
+      <div class="field">
+        <app-number-stepper
+          [label]="'devices.form.wattsLabel' | translate"
+          suffix="W"
+          [value]="powerWatts"
+          [min]="currentPowerConfig.min"
+          [max]="currentPowerConfig.max"
+          [step]="currentPowerConfig.step"
+          [allowEmpty]="false"
+          (valueChange)="onPowerWattsChange($event)"
+        />
+      </div>
+
+      <div class="power-advice" [class.high]="isHighPowerSelection">
+        <span>{{ powerAdviceTitle }}</span>
+        <p>{{ powerAdviceMessage }}</p>
+      </div>
+
+      <div class="form-actions">
+        <app-button variant="neutral" (pressed)="closeCreateModal()">{{ 'common.cancel' | translate }}</app-button>
+        <app-button
+          type="submit"
+          variant="create"
+          [disabled]="deviceControlFacade.loading() || activeRooms.length === 0"
+        >
+          {{ 'devices.create' | translate }}
+        </app-button>
+      </div>
+    </form>
+  </app-modal-form-shell>
+
+  <app-modal-form-shell
+    [open]="pairModalOpen"
+    [eyebrow]="'devices.pair.eyebrow' | translate"
+    [title]="'devices.connect' | translate"
+    [description]="'devices.pair.description' | translate"
+    (closed)="closePairModal()"
+  >
+    <form class="modal-form pair-form" (ngSubmit)="pairDevice()">
+      <label class="field">
+        <span>{{ 'devices.pair.code' | translate }}</span>
+        <input
+          type="text"
+          name="pairingCode"
+          [(ngModel)]="pairingCode"
+          [placeholder]="'devices.pair.codePlaceholder' | translate"
+          required
+        />
+      </label>
+
+      <label class="field">
+        <span>{{ 'devices.pair.alias' | translate }}</span>
+        <input
+          type="text"
+          name="pairAlias"
+          [(ngModel)]="pairAlias"
+          [placeholder]="'devices.pair.aliasPlaceholder' | translate"
+        />
+      </label>
+
+      <label class="field">
+        <span>{{ 'devices.room' | translate }}</span>
+        <app-dropdown
+          [options]="roomOptions"
+          [value]="roomValue"
+          [placeholder]="'devices.room' | translate"
+          (valueChange)="selectRoom($event)"
+        />
+      </label>
+
+      <div class="pairing-options">
+        <span>{{ 'devices.pair.availableTitle' | translate }}</span>
+        <div class="pairing-option-grid">
+          @for (option of pairingCodeOptions; track option.code) {
+            <button
+              type="button"
+              class="pairing-option"
+              [class.selected]="isSelectedPairingCode(option.code)"
+              (click)="selectPairingCode(option.code)"
+            >
+              <strong>{{ option.code }}</strong>
+              <small>{{ option.labelKey | translate }}</small>
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <app-button variant="neutral" (pressed)="closePairModal()">{{ 'common.cancel' | translate }}</app-button>
+        <app-button
+          type="submit"
+          variant="create"
+          [disabled]="deviceControlFacade.loading() || activeRooms.length === 0"
+        >
+          {{ 'devices.connect' | translate }}
+        </app-button>
+      </div>
+    </form>
+  </app-modal-form-shell>
+
+  <app-modal-form-shell
+    [open]="renameModalOpen"
+    [eyebrow]="'devices.renameForm.eyebrow' | translate"
+    [title]="'devices.renameTitle' | translate"
+    [description]="'devices.renameForm.description' | translate"
+    (closed)="closeRenameModal()"
+  >
+    <form class="modal-form rename-form" (ngSubmit)="renameDevice()">
+      <label class="field">
+        <span>{{ 'devices.name' | translate }}</span>
+        <input
+          type="text"
+          name="renameDeviceName"
+          [(ngModel)]="renameDeviceName"
+          [placeholder]="'devices.form.namePlaceholder' | translate"
+          required
+        />
+      </label>
+
+      <div class="form-actions">
+        <app-button variant="neutral" (pressed)="closeRenameModal()">{{ 'common.cancel' | translate }}</app-button>
+        <app-button
+          type="submit"
+          variant="create"
+          [disabled]="deviceControlFacade.loading() || !renamingDevice"
+        >
+          {{ 'common.saveChanges' | translate }}
+        </app-button>
+      </div>
+    </form>
+  </app-modal-form-shell>
+</section>

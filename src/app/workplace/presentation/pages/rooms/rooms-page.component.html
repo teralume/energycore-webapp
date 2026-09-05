@@ -1,0 +1,116 @@
+<section class="rooms-page ec-page">
+  <header class="ec-page-heading">
+    <p class="ec-page-eyebrow">{{ 'nav.spaces' | translate }}</p>
+    <h1 class="ec-page-title">{{ 'nav.rooms' | translate }}</h1>
+    <p class="ec-page-description">
+      {{ 'workplace.rooms.pageDescription' | translate }}
+    </p>
+  </header>
+
+  <section class="rooms-summary">
+    <app-section-card
+      class="rooms-summary-card"
+      size="small"
+      [eyebrow]="'workplace.rooms.summary.activeLocationEyebrow' | translate"
+      [title]="activeLocationName"
+    >
+      <strong>{{ activeRooms.length }}</strong>
+      <p>{{ 'workplace.rooms.summary.availableRooms' | translate }}</p>
+    </app-section-card>
+
+    <app-section-card
+      class="rooms-summary-card"
+      size="small"
+      [eyebrow]="'nav.rooms' | translate"
+      [title]="'workplace.rooms.summary.registeredTitle' | translate"
+    >
+      <strong>{{ activeRooms.length }}</strong>
+      <p>{{ 'workplace.rooms.summary.registeredDescription' | translate }}</p>
+    </app-section-card>
+
+    <app-section-card
+      class="rooms-summary-card"
+      size="small"
+      [eyebrow]="'nav.devices' | translate"
+      [title]="'workplace.rooms.summary.assignedTitle' | translate"
+    >
+      <strong>{{ activeDeviceCount }}</strong>
+      <p>{{ 'workplace.rooms.summary.linkedGroups' | translate: { count: activeGroupCount } }}</p>
+    </app-section-card>
+  </section>
+
+  <section class="rooms-toolbar">
+    <div>
+      <p class="section-eyebrow">{{ 'workplace.rooms.toolbar.eyebrow' | translate }}</p>
+      <h2>{{ 'workplace.rooms.toolbar.title' | translate: { location: activeLocationName } }}</h2>
+      <p>{{ 'workplace.rooms.toolbar.description' | translate }}</p>
+    </div>
+
+    <app-button variant="create" [disabled]="!activeLocationId" (pressed)="openCreateModal()">
+      {{ 'workplace.createRoom' | translate }}
+    </app-button>
+  </section>
+
+  @if (workplaceFacade.loading()) {
+    <div class="loading-wrapper">
+      <app-loading-spinner />
+    </div>
+  } @else {
+    <section class="rooms-list">
+      @for (room of activeRooms; track room.id) {
+        <app-room-card
+          [room]="room"
+          [locationName]="activeLocationName"
+          [deviceCount]="getRoomDeviceCount(room)"
+          [activeDeviceCount]="getRoomActiveDeviceCount(room)"
+          [groupCount]="getRoomGroupCount(room)"
+          [routineCount]="getRoomRoutineCount(room)"
+          [currentWatts]="getRoomCurrentWatts(room)"
+          [primaryGroupName]="getRoomPrimaryGroupName(room)"
+          (remove)="deleteRoom($event)"
+        />
+      } @empty {
+        <app-empty-state
+          [eyebrow]="'nav.rooms' | translate"
+          [title]="'workplace.rooms.empty.title' | translate"
+          [description]="'workplace.rooms.empty.description' | translate"
+          [actionLabel]="'workplace.createRoom' | translate"
+          actionLink="/spaces/rooms"
+        />
+      }
+    </section>
+  }
+
+  <app-modal-form-shell
+    [open]="createModalOpen"
+    [eyebrow]="'workplace.rooms.form.eyebrow' | translate"
+    [title]="'workplace.createRoom' | translate"
+    [description]="'workplace.rooms.form.description' | translate"
+    (closed)="closeCreateModal()"
+  >
+    <form class="modal-form" (ngSubmit)="createRoom()">
+      <label>
+        <span>{{ 'workplace.roomName' | translate }}</span>
+        <input
+          type="text"
+          name="name"
+          [(ngModel)]="name"
+          [placeholder]="'workplace.rooms.form.namePlaceholder' | translate"
+          required
+        />
+      </label>
+
+      <p class="form-context">
+        {{ 'workplace.rooms.form.siteLabel' | translate }}:
+        <strong>{{ activeLocationName }}</strong>
+      </p>
+
+      <div class="form-actions">
+        <app-button variant="neutral" (pressed)="closeCreateModal()">{{ 'common.cancel' | translate }}</app-button>
+        <app-button type="submit" variant="create" [disabled]="workplaceFacade.loading() || !activeLocationId">
+          {{ 'workplace.createRoom' | translate }}
+        </app-button>
+      </div>
+    </form>
+  </app-modal-form-shell>
+</section>

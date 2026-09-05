@@ -1,0 +1,368 @@
+.operation-modes-page {
+  display: grid;
+  gap: 24px;
+}
+
+.mode-summary,
+.mode-grid,
+.impact-grid,
+.form-grid,
+.routine-builder,
+.toggle-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.mode-summary {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.operation-toolbar,
+.mode-card__header,
+.impact-panel header,
+.form-actions__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mode-card__header,
+.impact-panel header,
+.form-actions__buttons {
+  gap: 16px;
+}
+
+.operation-toolbar {
+  gap: 18px;
+  padding: 22px;
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  background: var(--surface-color);
+}
+
+.mode-card h3,
+.impact-panel h3,
+.form-section h3 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.mode-card p,
+.impact-panel p,
+.form-section p,
+.routine-draft-list p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+.operation-toolbar h2,
+.operation-toolbar p {
+  margin: 0;
+}
+
+.operation-toolbar h2 {
+  color: var(--text-color);
+  font-size: 1.3rem;
+}
+
+.operation-toolbar p:not(.section-eyebrow) {
+  margin-top: 6px;
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.operation-toolbar .section-eyebrow {
+  margin: 0 0 6px;
+  color: var(--accent-color);
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.section-eyebrow,
+.mode-card__header p,
+.impact-grid span,
+.form-section header > span,
+.field > span,
+.routine-draft-list span,
+.routine-readout span,
+:host ::ng-deep .mode-form .time-picker__label {
+  color: var(--accent-color);
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mode-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.mode-card__body {
+  display: grid;
+  gap: 14px;
+  min-height: 100%;
+}
+
+.mode-card__description {
+  display: -webkit-box;
+  min-height: 42px;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.mode-card__facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.mode-card__facts div,
+.impact-grid article,
+.routine-readout article,
+.routine-draft-list article {
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background: var(--ec-surface-subtle);
+  padding: 12px;
+}
+
+.mode-card__facts dt,
+.mode-card__facts dd {
+  margin: 0;
+}
+
+.mode-card__facts dt {
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.mode-card__facts dd,
+.impact-grid strong,
+.impact-panel header strong,
+.routine-readout strong,
+.routine-draft-list strong {
+  color: var(--text-primary);
+  font-weight: 950;
+}
+
+.mode-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.impact-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.impact-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.routine-readout,
+.routine-draft-list {
+  display: grid;
+  gap: 10px;
+}
+
+.routine-readout {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.impact-note {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--ec-accent-soft);
+}
+
+.mode-form,
+.form-section,
+.field {
+  display: grid;
+}
+
+.mode-form {
+  gap: 14px;
+  --time-picker-trigger-height: 48px;
+}
+
+.form-section {
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  background: var(--ec-surface-subtle);
+}
+
+.form-section header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.form-section header > span {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--ec-accent-soft);
+}
+
+.form-grid,
+.routine-builder {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.routine-builder {
+  align-items: end;
+}
+
+.field {
+  gap: 8px;
+  min-width: 0;
+}
+
+.field__hint,
+.form-actions__hint {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.field--wide {
+  grid-column: span 2;
+}
+
+.field--reveal {
+  animation: revealField 180ms ease both;
+}
+
+.mode-form input,
+.mode-form textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: var(--field-bg);
+  color: var(--text-primary);
+  font: inherit;
+  font-weight: 750;
+  padding: 12px 13px;
+  outline: none;
+}
+
+:host ::ng-deep .routine-builder__action .app-button {
+  width: 100%;
+}
+
+.routine-draft-list article {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 14px;
+}
+
+.routine-draft-list__icon,
+.routine-draft-list__time {
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--ec-accent-soft);
+}
+
+.routine-draft-list__icon {
+  width: 42px;
+  height: 42px;
+  font-size: 1.18rem;
+}
+
+.routine-draft-list__time {
+  min-width: 74px;
+  padding: 8px 10px;
+}
+
+.mode-form textarea {
+  resize: vertical;
+  max-height: 120px;
+}
+
+.chip-grid,
+.toggle-grid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.form-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  padding-top: 6px;
+}
+
+.form-actions__hint {
+  justify-self: start;
+}
+
+.form-actions__buttons {
+  justify-content: flex-end;
+}
+
+@keyframes revealField {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1100px) {
+  .mode-summary,
+  .impact-grid,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field--wide {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .operation-toolbar,
+  .mode-card__header,
+  .impact-panel header,
+  .routine-draft-list article,
+  .form-actions__buttons {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .form-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .mode-card__facts {
+    grid-template-columns: 1fr;
+  }
+
+  .routine-builder,
+  .routine-draft-list article,
+  .toggle-grid {
+    grid-template-columns: 1fr;
+  }
+}

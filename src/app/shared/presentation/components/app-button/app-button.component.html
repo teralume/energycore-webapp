@@ -1,0 +1,33 @@
+@if (link) {
+  <a
+    [routerLink]="link"
+    [class]="className"
+    [attr.aria-label]="ariaLabel || null"
+    [attr.aria-disabled]="disabled"
+    (click)="onPressed($event)"
+  >
+    <span class="app-button__content">
+      @if (label) {
+        {{ label }}
+      } @else {
+        <ng-content></ng-content>
+      }
+    </span>
+  </a>
+} @else {
+  <button
+    [type]="type"
+    [disabled]="disabled"
+    [class]="className"
+    [attr.aria-label]="ariaLabel || null"
+    (click)="onPressed($event)"
+  >
+    <span class="app-button__content">
+      @if (label) {
+        {{ label }}
+      } @else {
+        <ng-content></ng-content>
+      }
+    </span>
+  </button>
+}

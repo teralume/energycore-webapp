@@ -1,0 +1,9 @@
+@use '../support-ticket-card/support-ticket-card.component.scss';
+
+.ticket-card.completed {
+  border-color: rgba(34, 197, 94, 0.48);
+}
+
+.ticket-card.canceled {
+  opacity: 0.72;
+}

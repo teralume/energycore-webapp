@@ -1,0 +1,50 @@
+<app-section-card class="location-card" size="medium">
+  <div class="location-card__identity">
+    <span class="location-card__type">{{ typeLabelKey | translate }}</span>
+    <h2>{{ location.name }}</h2>
+    <p>{{ location.address }}</p>
+    <small>{{ 'workplace.locations.card.createdAt' | translate }}: {{ formattedCreatedAt }}</small>
+  </div>
+
+  <div class="location-card__metrics">
+    <article>
+      <span>{{ 'nav.rooms' | translate }}</span>
+      <strong>{{ roomCount }}</strong>
+    </article>
+    <article>
+      <span>{{ 'nav.devices' | translate }}</span>
+      <strong>{{ deviceCount }}</strong>
+    </article>
+    <article>
+      <span>{{ 'nav.deviceGroups' | translate }}</span>
+      <strong>{{ groupCount }}</strong>
+    </article>
+    <article>
+      <span>{{ 'workplace.locations.card.activePower' | translate }}</span>
+      <strong>{{ activeWatts }} W</strong>
+    </article>
+    <article>
+      <span>{{ 'workplace.locations.card.withoutRoom' | translate }}</span>
+      <strong>{{ unroomedDeviceCount }}</strong>
+    </article>
+    <article>
+      <span>{{ 'workplace.locations.card.coverage' | translate }}</span>
+      <strong>{{ coverage }}%</strong>
+    </article>
+  </div>
+
+  <div class="location-card__actions">
+    <app-button
+      class="location-card__open-action"
+      variant="ghost"
+      size="sm"
+      [label]="'workplace.locations.card.goToRooms' | translate"
+      [link]="'/spaces/rooms'"
+      [ariaLabel]="'workplace.locations.card.goToRoomsAria' | translate"
+      (pressed)="onOpen()"
+    />
+    <app-button variant="danger" size="sm" (pressed)="onRemove()">
+      {{ 'common.delete' | translate }}
+    </app-button>
+  </div>
+</app-section-card>

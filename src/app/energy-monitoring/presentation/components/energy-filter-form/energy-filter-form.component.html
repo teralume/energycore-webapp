@@ -1,0 +1,20 @@
+<div class="filter-form">
+  <app-date-picker
+    [label]="'history.startDate' | translate"
+    [(value)]="startDate"
+    [max]="today"
+    (valueChange)="onDateChange()"
+  />
+
+  <app-date-picker
+    [label]="'history.endDate' | translate"
+    [(value)]="endDate"
+    [min]="startDate"
+    [max]="today"
+    (valueChange)="onDateChange()"
+  />
+
+  <app-button variant="secondary" size="sm" (pressed)="onReset()">
+    {{ 'history.reset' | translate }}
+  </app-button>
+</div>

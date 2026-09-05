@@ -1,0 +1,41 @@
+.severity-badge {
+  width: fit-content;
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0 10px;
+  font-size: 0.72rem;
+  font-weight: 950;
+}
+
+.severity-badge--stable {
+  border-color: var(--ec-status-stable-border);
+  color: var(--ec-status-stable-text);
+  background: var(--ec-status-stable-bg);
+}
+
+.severity-badge--success {
+  border-color: var(--ec-status-success-border);
+  color: var(--ec-status-success-text);
+  background: var(--ec-status-success-bg);
+}
+
+.severity-badge--info {
+  border-color: var(--ec-status-info-border);
+  color: var(--ec-status-info-text);
+  background: var(--ec-status-info-bg);
+}
+
+.severity-badge--warning {
+  border-color: var(--ec-status-warning-border);
+  color: var(--ec-status-warning-text);
+  background: var(--ec-status-warning-bg);
+}
+
+.severity-badge--critical {
+  border-color: var(--ec-status-danger-border);
+  color: var(--ec-status-danger-text);
+  background: var(--ec-status-danger-bg);
+}

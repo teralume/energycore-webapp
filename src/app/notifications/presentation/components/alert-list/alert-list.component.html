@@ -1,0 +1,123 @@
+<section class="alert-list">
+  @for (alert of alerts; track alert.id) {
+    <article
+      class="alert-card"
+      [class.stable]="displayLevel(alert) === 'STABLE'"
+      [class.info]="displayLevel(alert) === 'INFO'"
+      [class.success]="displayLevel(alert) === 'SUCCESS'"
+      [class.warning]="displayLevel(alert) === 'WARNING'"
+      [class.critical]="displayLevel(alert) === 'CRITICAL'"
+      [class.unread]="alert.isUnread"
+      [class.entering]="isEntering(alert)"
+      [class.marking-read]="isMarkingAsRead(alert)"
+      [class.removing]="isRemoving(alert)"
+    >
+      <div class="alert-content">
+        <div class="alert-heading">
+          <app-severity-badge [level]="displayLevel(alert)" />
+
+          @if (alert.sourceLabel) {
+            <span>{{ alert.sourceLabel }}</span>
+          }
+        </div>
+
+        <h2>{{ alert.title }}</h2>
+        <p>{{ alert.message }}</p>
+
+        @if (alert.explanation) {
+          <div class="dynamic-context">
+            <span>{{ alert.explanation }}</span>
+          </div>
+        }
+
+        <div class="severity-meter" [attr.aria-label]="'alerts.severityCalibration' | translate">
+          <div class="severity-meter__header">
+            <span>{{ 'alerts.calibration' | translate }}</span>
+            <strong>{{ severityPercentLabel(alert) }}% - {{ severityDescription(alert) }}</strong>
+          </div>
+
+          <div class="severity-meter__track">
+            <i [style.left.%]="severityScore(alert)"></i>
+          </div>
+
+          <div class="severity-meter__legend">
+            <span>{{ 'alerts.levels.stable' | translate }}</span>
+            <span>{{ 'alerts.levels.info' | translate }}</span>
+            <span>{{ 'alerts.levels.warning' | translate }}</span>
+            <span>{{ 'alerts.levels.critical' | translate }}</span>
+          </div>
+        </div>
+
+        @if (alert.evidenceLabel) {
+          <p class="evidence-label">
+            {{ alert.evidenceLabel }}
+          </p>
+        }
+
+        @if (alert.contextItems?.length) {
+          <div class="detail-select">
+            <span>{{ 'alerts.viewDetails' | translate }}</span>
+
+            <app-dropdown
+              [options]="contextOptions(alert)"
+              [value]="selectedDetail(alert)?.label ?? null"
+              [tone]="detailTone(alert)"
+              (valueChange)="selectDetailByLabel(alert, $event)"
+            />
+          </div>
+
+          @if (selectedDetail(alert); as detail) {
+            <div class="detail-panel">
+              <span>{{ detail.label }}</span>
+              <p>{{ detail.value }}</p>
+            </div>
+          }
+        }
+
+        @if (alert.recommendedAction) {
+          <p class="recommended-action">
+            <b>{{ 'alerts.recommendedAction' | translate }}:</b> {{ alert.recommendedAction }}
+          </p>
+        }
+
+        <small>{{ alert.createdAt }}</small>
+      </div>
+
+      <div class="actions">
+        <app-button
+          [variant]="alert.isUnread ? 'primary' : 'neutral'"
+          size="sm"
+          [disabled]="!alert.isUnread || isMarkingAsRead(alert) || isRemoving(alert)"
+          (pressed)="requestMarkAsRead(alert)"
+        >
+          {{ alert.isUnread ? ('alerts.markAsRead' | translate) : ('alerts.read' | translate) }}
+        </app-button>
+
+        <app-button
+          variant="secondary"
+          size="sm"
+          [disabled]="isRemoving(alert)"
+          (pressed)="dismissForTenMinutes.emit(alert)"
+        >
+          {{ 'alerts.dismissForMinutes' | translate: { minutes: 10 } }}
+        </app-button>
+
+        <app-button
+          variant="danger"
+          size="sm"
+          [disabled]="isRemoving(alert)"
+          (pressed)="requestRemove(alert)"
+        >
+          {{ 'common.delete' | translate }}
+        </app-button>
+      </div>
+    </article>
+  } @empty {
+    <app-empty-state
+      [eyebrow]="'nav.inbox' | translate"
+      [title]="'alerts.emptyTitle' | translate"
+      [description]="'alerts.emptyContent' | translate"
+      [compact]="true"
+    />
+  }
+</section>

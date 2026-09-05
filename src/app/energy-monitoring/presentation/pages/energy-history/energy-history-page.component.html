@@ -1,0 +1,239 @@
+﻿<section class="history-page ec-page">
+  <header class="ec-page-heading">
+    <p class="ec-page-eyebrow">{{ 'history.eyebrow' | translate }}</p>
+
+    <h1 class="ec-page-title">
+      {{ 'history.title' | translate }}
+    </h1>
+
+    <p class="ec-page-description">
+      {{ 'history.subtitle' | translate }}
+    </p>
+  </header>
+
+  <section class="filter-card">
+    <div class="filter-card__heading">
+      <div>
+        <h2>{{ 'history.filterTitle' | translate }}</h2>
+        <p>
+          {{ 'history.filterDescription' | translate }}
+        </p>
+      </div>
+
+      <app-button variant="primary" (pressed)="exportCsv()">
+        {{ 'energy.exportCsv' | translate }}
+      </app-button>
+    </div>
+
+    <app-energy-filter-form
+  (rangeChanged)="onDateRangeChange($event)"
+  (reset)="resetFilter()"
+/>
+  </section>
+
+  @if (energyMonitoringFacade.loading()) {
+    <div class="loading-wrapper">
+      <app-loading-spinner />
+    </div>
+  } @else {
+    <section class="table-card">
+  <div class="table-heading">
+    <div>
+      <h2>{{ 'history.registeredReadings' | translate }}</h2>
+      <p>{{ 'history.registeredReadingsDescription' | translate }}</p>
+    </div>
+
+    <span class="count-pill" aria-live="polite">
+      <strong>{{ filteredHistoryReadings().length }}</strong>
+      <span>{{ 'history.records' | translate }}</span>
+    </span>
+  </div>
+
+  <section class="advanced-filters" [attr.aria-label]="'history.advancedFiltersAria' | translate">
+  <div class="filter-field scope-field">
+    <span>{{ 'history.scope.label' | translate }}</span>
+
+    <app-dropdown
+      [options]="historyScopeOptions()"
+      [value]="historyScope()"
+      [placeholder]="'history.scope.label' | translate"
+      (valueChange)="onHistoryScopeChange($event)"
+    />
+  </div>
+
+  <label class="filter-field search-field">
+    {{ 'history.device' | translate }}
+    <input
+      type="search"
+      [value]="deviceNameFilter()"
+      [placeholder]="'history.deviceNamePlaceholder' | translate"
+      (input)="onDeviceNameFilterChange($any($event.target).value)"
+    />
+  </label>
+
+  <app-number-stepper
+    [label]="'history.deviceId' | translate"
+    [value]="deviceIdFilter()"
+    [min]="1"
+    [step]="1"
+    [placeholder]="'history.deviceIdPlaceholder' | translate"
+    (valueChange)="onDeviceIdFilterChange($event)"
+  />
+
+  <app-number-stepper
+    [label]="'history.readingId' | translate"
+    [value]="readingIdFilter()"
+    [min]="1"
+    [step]="1"
+    [placeholder]="'history.readingIdPlaceholder' | translate"
+    (valueChange)="onReadingIdFilterChange($event)"
+  />
+
+  <div class="filter-field">
+  <span>{{ 'history.status' | translate }}</span>
+
+  <app-dropdown
+    [options]="statusOptions"
+    [value]="statusFilter()"
+    [placeholder]="'history.status' | translate"
+    (valueChange)="onStatusFilterChange($event)"
+  />
+</div>
+
+  <app-number-stepper
+    [label]="'history.minWatts' | translate"
+    [value]="minWatts()"
+    [min]="0"
+    [step]="5"
+    suffix="W"
+    placeholder="0"
+    (valueChange)="onMinWattsChange($event)"
+  />
+
+  <app-number-stepper
+    [label]="'history.maxWatts' | translate"
+    [value]="maxWatts()"
+    [min]="0"
+    [step]="5"
+    suffix="W"
+    placeholder="1000"
+    (valueChange)="onMaxWattsChange($event)"
+  />
+
+  <div class="filter-field">
+  <span>{{ 'history.sortBy' | translate }}</span>
+
+  <app-dropdown
+    [options]="sortOptions"
+    [value]="sortOption()"
+    [placeholder]="'history.sortBy' | translate"
+    (valueChange)="onSortOptionChange($event)"
+  />
+</div>
+
+  <app-button variant="secondary" (pressed)="clearAdvancedFilters()">
+    {{ 'history.clearFilters' | translate }}
+  </app-button>
+</section>
+
+  <p class="scope-summary">{{ historyScopeSummary() }}</p>
+
+  @if (energyMonitoringFacade.loading()) {
+    <div class="loading-wrapper">
+      <app-loading-spinner />
+    </div>
+  } @else {
+    @if (paginatedReadings().length === 0) {
+      <app-empty-state
+        [eyebrow]="'history.emptyEyebrow' | translate"
+        [title]="'history.emptyTitle' | translate"
+        [description]="'history.emptyDescription' | translate"
+        [compact]="true"
+      />
+    } @else {
+    <div class="table-wrapper ec-scrollbar">
+      <table>
+        <thead>
+          <tr>
+            <th>{{ 'history.device' | translate }}</th>
+            <th>{{ 'history.watts' | translate }}</th>
+            <th>{{ 'history.energy' | translate }}</th>
+            <th>{{ 'history.estimatedCost' | translate }}</th>
+            <th>{{ 'history.date' | translate }}</th>
+            <th>{{ 'history.time' | translate }}</th>
+            <th>{{ 'history.interval' | translate }}</th>
+            <th>{{ 'history.status' | translate }}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (reading of paginatedReadings(); track trackReading($index, reading)) {
+            <tr>
+              <td>
+                <div class="device-cell">
+                  <strong>{{ reading.deviceName }}</strong>
+                  <small>{{ readingMeta(reading) }}</small>
+                </div>
+              </td>
+
+              <td>
+                <strong>{{ formatWatts(reading.watts) }}</strong>
+              </td>
+
+              <td>{{ formatKilowattHours(reading.kilowattHours) }}</td>
+
+              <td>{{ formatEstimatedCost(reading.estimatedCost) }}</td>
+
+              <td>{{ formatDate(reading.recordedAt) }}</td>
+
+              <td>{{ formatTime(reading.recordedAt) }}</td>
+
+              <td>{{ formatSampleSeconds(reading.sampleSeconds) }}</td>
+
+              <td>
+                <span class="status" [class.high]="reading.isHigh">
+                  {{ readingStatusLabel(reading) }}
+                </span>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    }
+
+    <footer class="pagination-bar">
+      <p>
+        {{ 'history.showing' | translate }}
+        <strong>{{ pageStart() }}-{{ pageEnd() }}</strong>
+        {{ 'history.of' | translate }}
+        <strong>{{ filteredHistoryReadings().length }}</strong>
+        {{ 'history.readings' | translate }}
+      </p>
+
+      <div class="pagination-actions">
+        <app-button
+          variant="secondary"
+          size="sm"
+          [disabled]="currentPage() === 1"
+          (pressed)="previousPage()"
+        >
+          {{ 'history.previous' | translate }}
+        </app-button>
+
+        <span>{{ 'history.pageOf' | translate: { page: currentPage(), total: totalPages() } }}</span>
+
+        <app-button
+          variant="secondary"
+          size="sm"
+          [disabled]="currentPage() === totalPages()"
+          (pressed)="nextPage()"
+        >
+          {{ 'history.next' | translate }}
+        </app-button>
+      </div>
+    </footer>
+  }
+</section>
+  }
+</section>

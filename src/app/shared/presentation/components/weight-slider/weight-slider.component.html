@@ -1,0 +1,16 @@
+<label class="weight-slider" [class.weight-slider--off]="!active">
+  <span class="weight-slider__header">
+    <strong>{{ label }}</strong>
+    <small>{{ value }} pts · {{ percent }}%</small>
+  </span>
+
+  <input
+    type="range"
+    [value]="value"
+    [min]="min"
+    [max]="max"
+    [step]="step"
+    [disabled]="!active"
+    (input)="update($event)"
+  />
+</label>

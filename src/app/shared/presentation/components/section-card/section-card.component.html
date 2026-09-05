@@ -1,0 +1,12 @@
+<article [class]="className">
+  @if (eyebrow) {
+    <span>{{ eyebrow }}</span>
+  }
+  @if (title) {
+    <h3>{{ title }}</h3>
+  }
+  @if (description) {
+    <p>{{ description }}</p>
+  }
+  <ng-content />
+</article>

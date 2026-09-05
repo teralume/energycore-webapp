@@ -1,0 +1,10 @@
+<div class="language-switcher" aria-label="Language selector">
+  @for (language of languages; track language.code) {
+    <button
+      type="button"
+      [class.active]="uiPreferences.currentLanguage() === language.code"
+      (click)="changeLanguage(language.code)">
+      {{ language.label }}
+    </button>
+  }
+</div>
