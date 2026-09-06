@@ -3,10 +3,10 @@ param()
 
 $ErrorActionPreference = 'Continue'
 
-$projectId = 'university-energycore'
+$projectId = 'university-energycorp'
 $region = 'us-east1'
 $service = 'energycore-platform'
-$frontendUrl = 'https://university-energycore.web.app'
+$frontendUrl = 'https://university-energycorp.web.app'
 $backendUrl = 'https://energycore-platform-vfvqevfzvq-ue.a.run.app'
 $backendApiUrl = "$backendUrl/api/v1"
 $oldRenderUrl = 'https://energycore-platform.onrender.com'
