@@ -8,8 +8,9 @@ $region = 'us-east1'
 $service = 'energycore-platform'
 $firebaseToolsVersion = '15.15.0'
 $frontendUrl = 'https://university-energycorp.web.app'
-$backendUrl = 'https://energycore-platform-vfvqevfzvq-ue.a.run.app'
-$backendApiUrl = "$backendUrl/api/v1"
+$apiBaseUrlPlaceholder = '__ENERGYCORE_API_BASE_URL__'
+$backendUrl = $null
+$backendApiUrl = $null
 $oldRenderUrl = 'https://energycore-platform.onrender.com'
 $webappRoot = Split-Path -Parent $PSScriptRoot
 $distDirectory = Join-Path $webappRoot 'dist\energycore-webapp\browser'
@@ -69,6 +70,21 @@ $testPassword = ConvertTo-PlainText -SecureValue $testPasswordSecure
 try {
     Set-Location -LiteralPath $webappRoot
 
+    $backendUrl = (
+        gcloud run services describe $service `
+            --project=$projectId `
+            --region=$region `
+            --format='value(status.url)'
+    ).Trim()
+
+    Assert-NativeCommand 'No se pudo obtener la URL activa de Cloud Run.'
+
+    if ([string]::IsNullOrWhiteSpace($backendUrl)) {
+        throw 'Cloud Run no devolvió una URL activa.'
+    }
+
+    $backendApiUrl = "$backendUrl/api/v1"
+
     npm test -- --watch=false
     Assert-NativeCommand 'Las pruebas del frontend fallaron.'
 
@@ -88,6 +104,21 @@ try {
 
     if ($javascriptFiles.Count -eq 0) {
         throw 'La compilación no produjo archivos JavaScript.'
+    }
+
+    $utf8WithoutBom = New-Object Text.UTF8Encoding($false)
+    $placeholderReplaced = $false
+    foreach ($javascriptFile in $javascriptFiles) {
+        $bundle = [IO.File]::ReadAllText($javascriptFile.FullName)
+        if ($bundle.Contains($apiBaseUrlPlaceholder)) {
+            $bundle = $bundle.Replace($apiBaseUrlPlaceholder, $backendApiUrl)
+            [IO.File]::WriteAllText($javascriptFile.FullName, $bundle, $utf8WithoutBom)
+            $placeholderReplaced = $true
+        }
+    }
+
+    if (-not $placeholderReplaced) {
+        throw 'No se encontró el marcador de API productiva en el bundle Angular.'
     }
 
     $cloudRunUrlEmbedded = $null -ne (
@@ -110,6 +141,19 @@ try {
 
     if (-not $cloudRunUrlEmbedded) {
         throw 'El bundle no contiene la URL productiva de Cloud Run.'
+    }
+
+    $placeholderEmbedded = $null -ne (
+        Select-String `
+            -LiteralPath $javascriptFiles.FullName `
+            -SimpleMatch `
+            -Pattern $apiBaseUrlPlaceholder `
+            -List |
+        Select-Object -First 1
+    )
+
+    if ($placeholderEmbedded) {
+        throw 'El bundle todavía contiene el marcador de API sin resolver.'
     }
 
     if ($oldRenderUrlEmbedded) {
