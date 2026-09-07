@@ -3,12 +3,12 @@ param()
 
 $ErrorActionPreference = 'Continue'
 
-$projectId = 'university-energycore'
+$projectId = 'university-energycorp'
 $region = 'us-east1'
 $service = 'energycore-platform'
-$frontendUrl = 'https://university-energycore.web.app'
-$backendUrl = 'https://energycore-platform-vfvqevfzvq-ue.a.run.app'
-$backendApiUrl = "$backendUrl/api/v1"
+$frontendUrl = 'https://university-energycorp.web.app'
+$backendUrl = $null
+$backendApiUrl = $null
 $oldRenderUrl = 'https://energycore-platform.onrender.com'
 $webappRoot = Split-Path -Parent $PSScriptRoot
 $distDirectory = Join-Path $webappRoot 'dist\energycore-webapp\browser'
@@ -45,6 +45,19 @@ $testPasswordSecure = Read-Host 'Contraseña del usuario de prueba' -AsSecureStr
 $testPassword = ConvertTo-PlainText -SecureValue $testPasswordSecure
 
 try {
+    $backendUrl = (
+        gcloud run services describe $service `
+            --project=$projectId `
+            --region=$region `
+            --format='value(status.url)'
+    ).Trim()
+
+    if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($backendUrl)) {
+        throw 'No se pudo obtener la URL activa de Cloud Run.'
+    }
+
+    $backendApiUrl = "$backendUrl/api/v1"
+
     $frontendResponse = $null
     $lastFrontendError = $null
     $frontendDeadline = (Get-Date).AddMinutes(5)
