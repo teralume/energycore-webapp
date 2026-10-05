@@ -44,6 +44,20 @@ To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use th
 ng test
 ```
 
+The CI suite also includes domain unit tests and an HttpClient integration
+test for the shared authentication contract:
+
+```bash
+npm ci
+npm run test:ci
+npm run build
+```
+
+Every `push` and Pull Request executes these gates and publishes the tested
+production build as a GitHub Actions artifact. A commit integrated into `main`
+deploys to Firebase when `FIREBASE_DEPLOY_ENABLED` is `true` and the encrypted
+`FIREBASE_SERVICE_ACCOUNT_UNIVERSITY_ENERGYCORP` secret is configured.
+
 ## Running end-to-end tests
 
 For end-to-end (e2e) testing, run:

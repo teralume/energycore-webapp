@@ -1,0 +1,49 @@
+name: Web application CI and delivery
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci
+      - name: Unit and API integration tests
+        run: npm run test:ci
+      - name: Production build and system contract
+        run: npm run build
+      - name: Publish tested web application
+        uses: actions/upload-artifact@v7
+        with:
+          name: energycore-webapp-${{ github.sha }}
+          path: dist/energycore-webapp/browser
+          if-no-files-found: error
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && vars.FIREBASE_DEPLOY_ENABLED == 'true'
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Deploy live Firebase web application
+        uses: FirebaseExtended/action-hosting-deploy@v0.11.0
+        with:
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_UNIVERSITY_ENERGYCORP }}
+          projectId: university-energycorp
+          channelId: live
